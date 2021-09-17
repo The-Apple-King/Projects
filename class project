@@ -1,3 +1,5 @@
+(*classwork on 9/17*)
+
 let empty lst: (int list) : int list =
 match lst with
 | [] -> true

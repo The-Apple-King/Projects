@@ -1,0 +1,57 @@
+(*classwork on 9/17*)
+
+let empty lst: (int list) : int list =
+match lst with
+| [] -> true
+|x:: -> false
+
+
+let head: (int list) : int =
+match lst with 
+|[] -> []
+| x :: rest -> x
+
+
+(*classwork on 9/20*)
+let empty lst: (int list) : int list =
+match lst with
+| [] -> true
+| X:: -> false
+
+let empty lst: (int list) : int =
+match lst with 
+|[] -> []
+| x::rest -> x
+
+
+let rec dropval l =
+
+
+match l with
+[]->[]
+hd::tl when hd = to_drop -> drop_value to drop tl
+hd:: tl -> hd:: drop_value to_drop tl
+
+
+let first of three (triple: int int int) =
+match triple with
+| (x, y, z) 
+x
+
+
+type fraction = int *int
+let add ((n1,d1) : fraction (n2,d2): fraction) :fraction)
+n1*d2+n2*d1,d1*d2
+
+
+let rec lookup_all (v: 'a) (dictionary: ('a*'b) list) : 'b list =
+match dictionary with
+| []->[]
+| (name, value) :: rest->
+let more = lookup_all v rest
+in if v= name then value :: more else more
+
+Let rec fib = function
+| 0->0
+1-> 1
+|X -> fib (x-1) +fib (x-2)

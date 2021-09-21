@@ -1,7 +1,7 @@
-let rec sum (xs: float list) =
+let rec sum xs =
 match xs with
-| [] -> []
-| x :: rest -> x +. sumf rest
+| [] -> 0.0
+| x :: rest -> x +. sum rest
 
 let rec square (vs: float list)=
 match vs with
@@ -10,7 +10,7 @@ match vs with
 
 let rec exclamify (ps: string list): string list =
 match ps with
-| [] -> ["!"]
+| [] -> []
 | p :: rest -> (p ^ "!") :: exclamify rest
 
 
@@ -20,8 +20,9 @@ match xs with
 |x:: rest -> if x mod 2 = 0 then x :: remove_odds rest else remove_odds rest
 
 
-(*let remove_caps (xs: string list) =
+(*
+let remove_caps (xs: string list) =
 match xs with
 |[] -> []
-|x :: rest -> if (equal (uppercase_ascii (get x 0)) (get x 0)) then exclamify rest
- *)
+|x :: rest -> if (compare (capitalize_ascii x) x) = 0 then remove_caps rest
+*)

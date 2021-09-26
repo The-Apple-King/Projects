@@ -1,19 +1,19 @@
 open Char
 open String 
-let rec sum xs =
+let rec sum_of_floats xs =
 match xs with
 | [] -> 0.0
-| x :: rest -> x +. sum rest
+| x :: rest -> x +. sum_of_floats rest
 
-let rec square (vs: float list)=
+let rec square_floats (vs: float list)=
 match vs with
 | [] -> []
-| v :: rest -> (v*.v)::square rest
+| v :: rest -> (v*.v)::square_floats rest
 
-let rec exclamify (ps: string list): string list =
+let rec exclaimify (ps: string list): string list =
 match ps with
 | [] -> []
-| p :: rest -> (p ^ "!") :: exclamify rest
+| p :: rest -> (p ^ "!") :: exclaimify rest
 
 
 let rec remove_odds (xs: int list) =
@@ -26,4 +26,4 @@ match xs with
 let rec remove_caps (xs: string list) =
 match xs with
 |[] -> []
-|x :: rest -> if (compare (uppercase_ascii (sub x 0 1)) (sub x 0 1)) = 0 then remove_caps rest else x :: remove_caps rest
+|x :: rest -> if (sub x 0 1) >= "A" && (sub x 0 1) <= "Z"  then remove_caps rest else x :: remove_caps rest

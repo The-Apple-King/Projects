@@ -1,0 +1,10 @@
+
+
+let all_suffixes (w: 'a list) : 'a list list =
+  raise (Failure "all_suffixes not implemented.")
+
+let all_prefixes (w: 'a list) : 'a list list =
+  raise (Failure "all_preixes not implemented.")
+
+let all_parts (w: 'a list) : ('a list * 'a list) list =
+  raise (Failure "all_parts not implemented.")

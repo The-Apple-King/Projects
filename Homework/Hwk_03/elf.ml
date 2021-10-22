@@ -34,18 +34,33 @@ let t3 : int elf_tree =
 
 let t4 : 'a elf_tree = Empty
 
-let rec reduce _ = raise (Failure "complete this") 
+let max l r = if l > r then l else r
 
-let size _ = raise (Failure "complete this") 
+let rec reduce t (func) (x) = 
+match t with 
+| Empty -> x
+| Leaf p -> func p (reduce Empty (func) x) (reduce Empty (func) x)
+| Fork (n,l,r) -> func n (reduce l func x) (reduce r func x)
 
-let sum _ = raise (Failure "complete this") 
+let rec reduces t (func) (x: bool) = 
+match t with 
+| Empty -> x
+| Leaf p -> x
+| Fork (n,l,r) -> func l r (reduces l func x) (reduces r func x)
 
-let product _ = raise (Failure "complete this") 
+let size t = reduce t (fun _ l r-> 1 + l + r) 0
 
-let char_count _ = raise (Failure "complete this") 
+let sum t = reduce t ( fun n l r->  n + l + r) 0
 
-let height _ = raise (Failure "complete this") 
+let product t = reduce t ( fun n l r->  n * l * r) 1
 
-let perfect_balance _ = raise (Failure "complete this") 
+let char_count t = reduce t ( fun n left right->  String.length n +  left +  right) 0
 
-let maximum _ = raise (Failure "complete this") 
+let height t = reduce t ( fun _ l r -> 1 + max l r) 0 
+
+let perfect_balance t = reduces t (fun l r la ra -> height l = height r && la && ra) true
+
+let maximum t = match t with 
+| Empty -> None
+| Fork (n,l,r)-> Some (max (reduce l ( fun n l r -> max n (max l r)) n) (reduce r ( fun n l r -> max n (max l r)) n))
+| Leaf p -> Some p

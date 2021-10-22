@@ -25,21 +25,31 @@ let t3 : char rose_tree =
 
 let t4 : int rose_tree = Rose (4, [])
 
-let rec reduce t (func) (x) = 
-match t with 
-| Rose (n , [r]  ) -> func n (reduce r func x) 
-|_ -> x
+let rec reduce func t =
+  match t with
+  | Rose (n, lst) -> func n (List.map (reduce func) lst)
 
-let size t = reduce t (fun _ r-> 1 + r) 0
+  let red t =
+  match t with 
+  | Rose (n, lst) -> lst
 
-let sum _ = raise (Failure "complete this") 
+let size t = reduce (fun n ss-> 1 + (List.fold_right (fun init n -> init + 1) ss 0) )t
 
-let product _ = raise (Failure "complete this") 
+let sum t = reduce (fun n ss-> n + (List.fold_right (fun init n -> init + n) ss 0) )t
 
-let char_count _ = raise (Failure "complete this") 
+let product t =  reduce (fun n ss-> n * (List.fold_right (fun init n -> init * n) ss 1) )t
 
-let height _ = raise (Failure "complete this") 
+let char_count t = String.length( reduce (fun c ss ->  c ^ (String.concat "" ss)) t)
 
-let perfect_balance _ = raise (Failure "complete this") 
+let height t = 1 + reduce (fun _ ss-> (List.fold_right (fun init _ -> init + 1) ss 0) )t
 
-let maximum _ = raise (Failure "complete this") 
+let equal lst =
+match lst with
+|[] -> true
+|x::xs -> List.memq x xs
+
+let rec perfect_balance t =  equal (List.map height (red t)) 
+
+let max l r = if l>r then l else r
+
+let maximum t =  Some(reduce (fun n ss-> max (List.fold_right (max) ss n) n )t)

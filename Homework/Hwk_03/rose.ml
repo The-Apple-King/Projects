@@ -33,7 +33,7 @@ let rec reduce func t =
   match t with 
   | Rose (n, lst) -> lst
 
-let size t = reduce (fun n ss-> 1 + (List.fold_right (fun init n -> init + 1) ss 0) )t
+let size t = reduce (fun n ss-> 1 + (List.fold_right (fun init n -> init + n) ss 0) )t
 
 let sum t = reduce (fun n ss-> n + (List.fold_right (fun init n -> init + n) ss 0) )t
 

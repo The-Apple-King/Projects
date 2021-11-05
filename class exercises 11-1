@@ -1,0 +1,25 @@
+(*list reverse*)
+reverse (l1 @ l2) = reverse l2 @ reverse 11
+
+let rec reverse l = match l with 
+|[] -> []
+| x::xs -> reverse xs @ [x]
+base case l1 = []
+
+reverse([] @l2) = reverse l2 
+reverse l2 @reverse l1 = reverse l2 ::[] or reverse l2
+
+inductive case l1 = x::xs
+reverse (x::xs @ ls) = reverse l2 @ reverse x::xs
+given 
+reverse (xs@l2) = reverse l2 @ reverse xs
+reverse (xs @l2) = reverse l2@ reverse xs
+
+reverse (x::xs @l2)=
+reverse x::( xs@l2)=
+reverse (xs@l2) @ [x]
+by definition of reverse 
+reverse l2 @ reverse xs @ [x]
+by inductive hyp
+reverse l2 @ reverse x::xs
+by definition of reverse

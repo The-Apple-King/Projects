@@ -27,13 +27,31 @@ module TreeM : TreeS = struct
 
   let empty = Leaf
 
-  let insert _ = raise (Failure "complete this")
+  let rec insert (x: 'a) (t: 'a tree): 'a tree = 
+    match t with
+      | Leaf -> Fork (Leaf, x, Leaf)
+      | Fork(l,n,r) -> if x = n then t
+         else if x < n then Fork (insert x l, n,  r)
+                        else Fork (l, n, insert x r)
 
-  let elem _ = raise (Failure "complete this")
+  let rec elem (ele: 'a) (t: 'a tree): bool = match t with 
+    | Leaf -> false
+    | Fork(l,n,r) -> ele = n || if ele < n then elem ele l else elem ele r
 
-  let height _ = raise (Failure "complete this")
 
-  let size _ = raise (Failure "complete this")
+ let rec h t counter =
+   match t with
+     | Fork (left, n, right) -> max (h left (counter +1)) (h right ( counter +1))
+     | Leaf -> counter+1
+
+ let rec height t = 
+  h t 0
+
+let rec size t = 
+  match t with 
+    | Fork (left, n, right) -> 1 + size left + size right
+    | Leaf -> 0
+
 
 end
 

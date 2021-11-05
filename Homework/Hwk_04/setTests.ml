@@ -7,6 +7,8 @@ module SetTests (S: Set.SetS) = struct
 
   let evens_set = List.fold_right insert [2;4;6;8;10] empty
 
+  let test x = insert 4 (insert 8 x) 
+
   let some_tests = [
       check_test (fun () -> 
           elem 4 empty = false)
@@ -16,6 +18,14 @@ module SetTests (S: Set.SetS) = struct
       check_test (fun () ->
           elem 4 (insert 4 empty))
          "elem 4 (insert 4 empty)";
+
+      check_test (fun () ->
+          elem 8 (List.fold_right insert [2;4;6;8;10] empty))
+         "elem 8 (copied evens set code into the call)";
+
+         check_test (fun () ->
+          elem 8 (test empty))
+         "elem 8 (calls another function using insert but not a list)";
 
       check_test (fun () ->
           elem 8 evens_set)

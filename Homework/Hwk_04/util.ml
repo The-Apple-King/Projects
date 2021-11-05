@@ -34,7 +34,18 @@ module UtilM : UtilS = struct
         _ -> [] 
     in read_chars ic
 
-  let split_by _ = raise (Failure "complete this")   
+  let rec split (func: 'a -> bool) (wordlst: 'a list) (output: 'a list list) (temp: 'a list) = 
+    match wordlst with
+     | [] -> output
+     (*final check adds last element if it is correct *)
+     | x::[] -> if List.exists func wordlst then output @[temp] else output @[temp @  wordlst]
+      (*checks if tests if func is true for x if it is then separate *)
+     | x::rest -> if func x then split func rest (match temp with 
+       | [] -> output
+       |x::rest -> output @ [temp]) [] else split func rest output (temp@[x])
+
+  let rec split_by (func: 'a -> bool) (wordlst: 'a list) : 'a list list = 
+   split func wordlst [] []
 
   let read_words (file_name: string) : string list =
     let is_whitespace c = match c with

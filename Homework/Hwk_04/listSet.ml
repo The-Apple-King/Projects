@@ -6,8 +6,10 @@ module ListM : SetS = struct
 
   let empty = []
 
-  let insert _ = raise (Failure "complete this")
+  let insert (x: 'a) (set: 'a list): 'a list = set @ [x]
 
-  let elem _ = raise (Failure "complete this")
+  let rec elem (ele: 'a) (set: 'a list): bool = match set with 
+  | [] -> false
+  | x::xs -> ele = x || elem ele xs
 
 end

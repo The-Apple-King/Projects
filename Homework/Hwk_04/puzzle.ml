@@ -11,7 +11,7 @@ end
 module PuzzleF (S: SetS) : PuzzleS = struct
 
     (*check if the word is in the dictionary and returns it in a list*)
-    let rec check_dict originalword (word: string)(dict) : string list=
+    let rec check_dict originalword (word: string)(dict: S.) : string list=
       if  S.elem word dict && originalword <> word then [word] else []
 
 
@@ -35,10 +35,10 @@ module PuzzleF (S: SetS) : PuzzleS = struct
 
 
   (*creates set dictionary*)
-  let create_dict (word_list: 'a list) (dict) =
+  let rec create_dict (word_list: 'a list) (dict) =
     match word_list with
       | [] -> dict
-      |x::xs -> S.insert x dict
+      |x::xs -> create_dict xs (S.insert x dict)
 
 
   (*call for answers but keeps dictionary the same*)

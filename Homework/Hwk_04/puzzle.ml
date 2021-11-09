@@ -54,3 +54,4 @@ module PuzzleF (S: SetS) : PuzzleS = struct
       
 
 end
+(*simplify funcions and collapse them down*)

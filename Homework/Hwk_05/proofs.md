@@ -5,9 +5,9 @@ by, Owen Swearingen
 # Problem 1
 
 ## given
-let rec prod (lst: int list) : int = match lst with  
-| [] -> 1  
-| y::ys -> y * prod ys
+    let rec prod (lst: int list) : int = match lst with  
+    | [] -> 1  
+    | y::ys -> y * prod ys
 
 ## prove
 ### base case
@@ -43,16 +43,16 @@ let rec prod (lst: int list) : int = match lst with
 # Problem 2
 ## given
 
-let rec foldr (f: 'a -> 'b -> 'b) (lst: 'a list) (base: 'b) : 'b =  
-match lst with  
-| [] -> base  
-| x::xs -> f x (foldr f xs base)  
+    let rec foldr (f: 'a -> 'b -> 'b) (lst: 'a list) (base: 'b) : 'b =  
+    match lst with  
+    | [] -> base  
+    | x::xs -> f x (foldr f xs base)  
 
-let prod_fold (lst: int list) : int = foldr ( * ) lst 1  
+    let prod_fold (lst: int list) : int = foldr ( * ) lst 1  
 
-let rec prod (lst: int list) : int = match lst with  
-| [] -> 1  
-| y::ys -> y * prod ys  
+    let rec prod (lst: int list) : int = match lst with  
+    | [] -> 1  
+    | y::ys -> y * prod ys  
 
 ## prove
 ### base case
@@ -87,15 +87,15 @@ let rec prod (lst: int list) : int = match lst with
 
 # Problem 3
 ## given
-type nat = Zero | Succ of nat  
-  
-let rec maximum (lst: nat list) : nat = match lst with  
-| [] -> Zero  
-| n::ns -> maxnat n (maximum ns)  
+    type nat = Zero | Succ of nat  
+    
+    let rec maximum (lst: nat list) : nat = match lst with  
+    | [] -> Zero  
+    | n::ns -> maxnat n (maximum ns)  
 
-maxnat Zero n = n  
+    maxnat Zero n = n  
 
-maxnat a (maxnat b c) = maxnat (maxnat a b) c  
+    maxnat a (maxnat b c) = maxnat (maxnat a b) c  
 
 ## prove
  ### base case 

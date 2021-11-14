@@ -50,3 +50,4 @@ module PuzzleF (S: SetS) : PuzzleS = struct
     Daniel Kong
     there was one other kid but i didn't get his name*)
 end
+(*simplify funcions and collapse them down*)

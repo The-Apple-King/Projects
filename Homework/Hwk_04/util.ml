@@ -1,4 +1,3 @@
-
 module type UtilS = sig
   val implode: char list -> string
 
@@ -34,19 +33,18 @@ module UtilM : UtilS = struct
         _ -> [] 
     in read_chars ic
 
-  let rec split (func: 'a -> bool) (wordlst: 'a list) (output: 'a list list) (temp: 'a list) = 
-    match wordlst with
-     | [] -> output
-     (*final check adds last element if it is correct *)
-     | x::[] -> if List.exists func wordlst then output @[temp] else output @[temp @  wordlst]
-      (*checks if tests if func is true for x if it is then separate *)
-     | x::rest -> if func x then split func rest (match temp with 
-       | [] -> output
-       |x::rest -> output @ [temp]) [] else split func rest output (temp@[x])
-
-  let rec split_by (func: 'a -> bool) (wordlst: 'a list) : 'a list list = 
-   split func wordlst [] []
-
+  let split_by (func: 'a -> bool) (wordlst: 'a list) : 'a list list = 
+    let rec split (func: 'a -> bool) (wordlst: 'a list) (output: 'a list list) (temp: 'a list) = 
+      match wordlst with
+      | [] -> if List.exists func wordlst then output @[temp] else output @[temp @  wordlst]
+        (*checks if tests if func is true for x if it is then separate *)
+      | char::rest -> if func char then split func rest (match temp with 
+        | [] -> raise (Failure "should not be called")
+        |x::restoftemp -> output @ [temp]) [] else split func rest output (temp@[char])
+    in split func wordlst [] []
+    (*rename variables remove extra case
+    Daniel Kong
+    there was one other kid but i didn't get his name*)
   let read_words (file_name: string) : string list =
     let is_whitespace c = match c with
       | ' ' | '\t' | '\n' | '\r' -> true

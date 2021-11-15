@@ -5,44 +5,43 @@ by, Owen Swearingen
 # Problem 1
 
 ## given
+``` Ocaml
     let rec prod (lst: int list) : int = match lst with  
     | [] -> 1  
     | y::ys -> y * prod ys
+```
 
-## prove
-### base case
-    - prod (l1 @ l2) = prod l1 * prod l2
+## prove: prod (l1 @ l2) = prod l1 * prod l2
 
-    - base case l1 = []
+## base case: base case l1 = []
     - prod [] @ l2 = prod l2 
-      - by properties of list and append  
-       
-    - show prod []@l2 = prod [] * prod l2
-    - prod l2 = 1 * prod l2  
-      -by identity  
+        -by properties of list and append 
+
+    - prod l2 = 1 * prodl2 
+        -by identity property
 
     - prod [] * prod l2 = prod l2  
-      -by definition of prod
+        -by definition of prod
 
-### inductive case l1 = x::xs
+## inductive case l1 = x::xs
     - prod (x::xs)@l2 = prod x @ xs @ l2  
-      -by properties of lists  
+        -by properties of lists  
 
     - x* prod xs@l2  
-      -by definition of prod  
+        -by definition of prod  
 
     - x* prod xs * prod l2  
-      -by inductive hypothesis  
+        -by inductive hypothesis  
 
     - = prod (x::xs) * prod l2  
-      -by definition of prod
+        -by definition of prod
 
 
 <!-- Barrier which makes it easier for me to read and edit -->
 
 # Problem 2
 ## given
-
+``` Ocaml
     let rec foldr (f: 'a -> 'b -> 'b) (lst: 'a list) (base: 'b) : 'b =  
     match lst with  
     | [] -> base  
@@ -53,31 +52,32 @@ by, Owen Swearingen
     let rec prod (lst: int list) : int = match lst with  
     | [] -> 1  
     | y::ys -> y * prod ys  
+```
 
-## prove
-### base case
-    - prod lst = prod_fold lst   
+## prove: prod lst = prod_fold lst
+## base case: lst = []
+       
     - prod [] = prod_fold []
     - prod [] = 1  
-      by properties of prod
+        -by properties of prod
     - prod_fold [] = 1 
-    - by properties of prod_fold
+        -by properties of prod_fold
     - prod [] = prod_fold []
     - 1 = 1
 
-### inductive case 
-    - lst = x::xs
+## inductive case: lst = x::xs
     - prod [x::xs] = x * prod [xs] 
-    - by inductive hypothesis  
+        -by inductive hypothesis  
    
     - prod_fold [x::xs] = foldr ( * ) [x::xs] 1  
-      -by properties of prod_fold  
+        -by properties of prod_fold  
 
     - foldr ( * ) [x::xs] 1 = x * foldr ( * ) xs 1  
-      -by inductive hypothesis  
+        -by inductive hypothesis  
 
-    - x * prod [xs] = x * foldr ( * ) xs 1  
-      -by definitions of prod and foldr
+    - x * prod [xs] = x * foldr ( * ) xs 1
+      or x*prod xs = x * prod_fold xs  
+        -by definitions of prod and prod_fold
 
 
 
@@ -87,6 +87,7 @@ by, Owen Swearingen
 
 # Problem 3
 ## given
+``` Ocaml
     type nat = Zero | Succ of nat  
     
     let rec maximum (lst: nat list) : nat = match lst with  
@@ -96,29 +97,26 @@ by, Owen Swearingen
     maxnat Zero n = n  
 
     maxnat a (maxnat b c) = maxnat (maxnat a b) c  
+```
 
-## prove
- ### base case 
-    - maximum (l1 @ l2) = maxnat (maximum l1) (maximum l2)
-    
-    - l1 = []
+## prove: maximum (l1 @ l2) = maxnat (maximum l1) (maximum l2)
+ ## base case: l1 = []
     - maximum [] @ l2 = maximum l2
-    - by properties of list and append
+        -by properties of list and append
     - show maximum []@l2 = maximum zero::l2
-    - by identity
+        -by identity
     - maximum zero::l2 = maxnat zero maximum l2
-    - by definition of maximum
+        -by definition of maximum
 
- ### inductive case  
-    - l1 = [x]
+ ## inductive case: l1 = [x]
     - maximum [x]@l2 = maximum x @ l2
-    - by properties of lists 
+        -by properties of lists 
     - maximum [x]@l2 = maxnat x (maximum (l2))
-    - by definition of maximum
+        -by definition of maximum
     - maxnat ([x]) (maximum l2) 
-    - by inductive hypothesis
+        -by inductive hypothesis
     - maximum ([x]@l2) = maxnat x maximum l2
-    - by definition of maximum
+        -by definition of maximum
 
 
 
@@ -127,25 +125,28 @@ by, Owen Swearingen
 
 # Problem 4
 ## part 1
+``` Ocaml
     type 'a tree   
       = Leaf  
       | Fork of 'a tree * 'a * 'a tree  
-    
+```
       the principle of induction for this type is: for all t : 'a tree, P(t) holds if  
       P(Leaf), and  
     P(t1), and P(t2) implies P(Node(t1, v, t2) (for any value v of type 'a).  
 
 ## part 2
+``` Ocaml
     type 'a rose_tree = Rose of 'a * 'a rose_tree list  
-    
+```
     the principle of induction for this type is: for all Rose: rose_tree, P(t) holds if  
     P(rose) implies P(Rose(v, rose_tree list)) for any value v of type 'a  
 
 ## part 3
+``` Ocaml
     type 'a elf_tree = Empty  
     | Leaf of 'a  
     | Fork of 'a * 'a elf_tree * 'a elf_tree  
-
+```
     the principle of induction for this type is: for all t : 'a tree, P(t) holds if  
     P(Leaf), and  
     P(t1), and P(t2) implies P(Node(v, t1, t2) (for any value v of type 'a).  
@@ -156,6 +157,7 @@ by, Owen Swearingen
 
 # Problem 5
 ## given
+``` Ocaml
     let rec height_rec (t: 'a elf_tree) : int = match t with
     | Empty -> 0
     | Leaf _ -> 1
@@ -169,38 +171,29 @@ by, Owen Swearingen
 
 
     let height t = reduce t ( fun _ l r -> 1 + max l r) 0 
-    prove
-    height t = height rect t
+```
 
-## base case 
-    - t = leaf v
-    - height (leaf v) = reduce leaf v ( fun _ l r -> 1 + max l r) 0 
-    - by induction
-    - reduce leaf v ( fun _ l r -> 1 + max l r) 0 = func p (reduce Empty (func) x) (reduce Empty (func) x)
-    - by induction
-    - func p (reduce Empty (func) x) (reduce Empty (func) x) = func p 0 0
-    - by induction
-    - fun p 0 0 = 1 + max 0 0= 1 + 0 = 1
-    - by properties of fun
-    - height leaf v = 1
- 
-    - height_rec leaf v = 1
-    -  by definition of height rec
-    -  height leaf v = height rec leaf v
+## prove: height t = height rect t
 
-## inductive case 
-    - t = Fork(v, leaf1, leaf2)
-    - height Fork(v, leaf1 leaf2) = reduce Fork(v, leaf1 leaf2) ( fun _ l r -> 1 + max l r) 0  
-      -by induction
-    - reduce Fork(v, leaf1 leaf2) ( fun _ l r -> 1 + max l r) 0 = 1 + max (reduce Leaf1 fun 0) (reduce    - Leaf2 fun 0)
-    - (reduce Leaf1 fun 0)  = 1 as shown in base case so
-    - 1 + max (reduce Leaf1 fun 0) (reduce Leaf2 fun 0) = 1 + max 1 1 = 1 + 1
-    - height Fork(v,leaf1,leaf2) = 2
-     
+
+## base case: t = leaf v
+    - height_rec (leaf v) = 1
+        -by definition of height_rec
+
+    - height (leaf v) = height_rec (leaf v) 
+        -as proven when height was tested
+
+## inductive case: t = Fork(v, leaf1, leaf2)
+
     - height_rec Fork(v, leaf1, leaf2) = 1 + max height_rec leaf1 height rec leaf2
-    - height_rec leaf = 1 as shown in base case
+    - height_rec leaf = 1 
+        -as shown in base case
+
     - 1+max height_rec leaf1 height rec leaf2 = 1+ max 1 1
-      -by induction
+        -by properties of height_rec
+
     - 1+ max 1 1 = 1 + 1 = 2
-      -by properties of max
+        -by properties of max
+
     - height Fork(v, leaf1, leaf2) = height_rec Fork(v, leaf1, leaf2)
+        -as shown when height was originally tested

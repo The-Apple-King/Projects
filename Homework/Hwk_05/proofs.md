@@ -60,8 +60,10 @@ by, Owen Swearingen
     - prod [] = prod_fold []
     - prod [] = 1  
         -by properties of prod
-    - prod_fold [] = 1 
-        -by properties of prod_fold
+    - prod_fold [] = foldr ( * ) [] 1 
+        -by definition of prod_fold
+    - foldr ( * ) [] 1 = 1
+        -by definition of foldr
     - prod [] = prod_fold []
     - 1 = 1
 

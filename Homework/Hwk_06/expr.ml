@@ -32,10 +32,10 @@ and expr
   | Lam of string * expr
 
 (* These 2 are for part 3, uncomment them when you start that part *)
-(*
+
   | LetRec of string * expr * expr
   | If of expr * expr * expr
-*)
+
 
 (* These 5 are for part 4, uncomment them when you start that part *)
 (*
@@ -54,28 +54,68 @@ and expr
 let rec serialize_value (v: value) : string =
   match v with
   | Int i -> "Int " ^ string_of_int i
+  | Bool i -> if (i = true) then "Bool true" else "Bool false"
+
 
 let rec serialize_expr (e: expr) : string =
   match e with
   | Val v -> "Val (" ^ (serialize_value v) ^ ")"
 
   | Add (e1, e2) -> "Add (" ^ serialize_expr e1 ^ ", " ^ serialize_expr e2 ^ ")"
-
+  | Sub (e1, e2) -> "Sub (" ^ serialize_expr e1 ^ ", " ^ serialize_expr e2 ^ ")"
+  | Mul (e1, e2) -> "Mul (" ^ serialize_expr e1 ^ ", " ^ serialize_expr e2 ^ ")"
+  | Div (e1, e2) -> "Div (" ^ serialize_expr e1 ^ ", " ^ serialize_expr e2 ^ ")"
+  | Not (e1) -> "Not (" ^ serialize_expr e1 ^ ")"
+  | Let (str, e1, e2) -> "Let (" ^ "\"" ^ str ^ "\""^ ", " ^ serialize_expr e1 ^ ", " ^ serialize_expr e2 ^ ")"
+  | Lt (e1, e2) -> "Lt (" ^ serialize_expr e1 ^ ", " ^ serialize_expr e2 ^ ")"
+  | Lam (str, e1) -> "Lam (" ^ "\"" ^ str ^ "\"" ^ ", " ^ serialize_expr e1 ^ ")"
+  | Eq (e1, e2) -> "Eq (" ^ serialize_expr e1 ^ ", " ^ serialize_expr e2 ^ ")"
+  | And (e1, e2) -> "And (" ^ serialize_expr e1 ^ ", " ^ serialize_expr e2 ^ ")"
+  | Id (e1) -> "Id " ^ "\"" ^ e1 ^ "\""
+  | App (e1, e2) -> "App (" ^ serialize_expr e1 ^ ", " ^ serialize_expr e2 ^ ")"
+  | LetRec (str, e1, e2) -> "LetRec (" ^ "\"" ^ str ^ "\", " ^ serialize_expr e1 ^ ", " ^ serialize_expr e2 ^ ")"
+  | If (e1, e2, e3) -> "If (" ^ serialize_expr e1 ^ ", " ^ serialize_expr e2 ^ ", " ^ serialize_expr e3 ^ ")"
 
 (* Part 2: Free Variables
    ----------------------
  *)
 
 
+
 let rec freevars (e: expr) : string list =
   match e with
   | Val _ -> []
- 
+
+  | Let (str, e1, e2) -> freevars e1 @ List.filter (fun v -> v <> str) (freevars e2)
+    | Lam (str, e1) -> List.filter (fun v -> v <> str) (freevars e1)
+  | LetRec (str, e1, e2) -> List.filter (fun v -> v <> str) (freevars e1) @ List.filter (fun v -> v <> str) (freevars e2)
+
+  | Add (e1, e2) -> (freevars e1)@(freevars e2)
+  | Sub (e1, e2) -> (freevars e1)@(freevars e2)
+  | Mul (e1, e2) -> (freevars e1)@(freevars e2)
+  | Div (e1, e2) -> (freevars e1)@(freevars e2)
+  | Not (e1) -> (freevars e1)
+  | Lt (e1, e2) -> (freevars e1)@(freevars e2)
+  | Eq (e1, e2) -> (freevars e1)@(freevars e2)
+  | And (e1, e2) -> (freevars e1)@(freevars e2)
+  | App (e1, e2) -> (freevars e1)@(freevars e2)
+
+  | Id (e1) -> [e1] 
+  
+  | If (e1, e2, e3) ->(freevars e1)@(freevars e2)@(freevars e3)
+
+
 
 
 (* Part 3: Evaluation 
    ------------------
  *)
+ 
+
+ 
+
+  
+
 
 
 exception DivisionByZero of expr
@@ -102,14 +142,82 @@ let serialize_excp (e: exn) : string =
 
   | _ -> "Unexpected Exception"
 
+    let rec lookup name env = 
+      match env with
+      | [] -> []
+      | (str, x)::rest -> if name = str then [x] else lookup name rest
 
-let rec eval (env: value_environment) (e:expr) : value =
-  match e with
-  | Val v -> v
-
-  | Add (e1, e2) ->
+  let rec eval (env: value_environment) (e:expr) : value =
+    match e with
+    | Val v -> v
+    
+    | Add (e1, e2) ->
+       ( match eval env e1, eval env e2 with
+         | Int v1, Int v2 -> Int (v1 + v2)
+         | _ -> raise (IncorrectType e)
+       )
+  
+    | Sub (e1, e2) ->
+      ( match eval env e1, eval env e2 with
+        | Int v1, Int v2 -> Int (v1 - v2)
+        | _ -> raise (IncorrectType e)
+      )
+  
+    | Mul (e1, e2) ->
+      ( match eval env e1, eval env e2 with
+        | Int v1, Int v2 -> Int (v1 * v2)
+        | _ -> raise (IncorrectType e)
+      )
+  
+   | Div (e1, e2) ->
      ( match eval env e1, eval env e2 with
-       | Int v1, Int v2 -> Int (v1 + v2)
+       | Int v1, Int v2 -> if v2 <> 0 then Int (v1 / v2) else raise (DivisionByZero e)
+       | _ -> raise (IncorrectType e)
+     )
+   | And (e1, e2) ->
+     ( match eval env e1, eval env e2 with
+       | Bool v1, Bool v2 -> Bool (v1 && v2)
        | _ -> raise (IncorrectType e)
      )
 
+   | Eq (e1, e2) ->
+     ( match eval env e1, eval env e2 with
+       | Bool v1, Bool v2 -> Bool (v1 = v2)
+       | Int v1, Int v2 -> Bool (v1 = v2)
+       | _ -> raise (IncorrectType e)
+     )
+
+   | Lt (e1, e2) -> 
+       ( match eval env e1, eval env e2 with
+         | Int v1, Int v2 -> Bool(v1 < v2) 
+         | _ -> raise (IncorrectType e)
+       )
+
+   | Let (str, e1, e2) ->
+      ( match str, eval env e1, e2 with
+      | (s, e1, e2) -> eval ((s, e1)::env) e2
+      )
+          
+   | Id (str) ->
+      ( match lookup str env with
+       | []  -> raise (UnboundVariable e)
+       | x::xs -> x
+      )
+
+   | Lam (str, e1) -> Closure (str, e1, env)
+    
+
+   | App (e1, e2) ->
+    ( match eval env e1, e2 with
+        | Closure(str, ex1, env2), v -> eval (env2@[(str, eval env v)]) ex1
+        | _ -> raise (IncorrectType e)
+    )
+
+   | LetRec (str, e1, e2) -> eval (env@[(str, eval env e1)]) e2
+
+   | If (e1, e2, e3) -> 
+   ( match eval env e1, eval env e2, eval env e3 with
+   |  Bool s1, s2, s3 -> if s1 then s2 else s3
+   | _ -> raise(IncorrectType e)
+   )
+   

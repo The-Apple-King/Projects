@@ -14,32 +14,32 @@ let some_tests =
         serialize_expr (Add (Val (Int 3), Val (Int 5))),
        "Add (Val (Int 3), Val (Int 5))"  )
        "serialize_expr (Add (Val (Int 3), Val (Int 5)))"
-        id;
+        id serialize_excp;
 
     eval_test (fun () ->
         serialize_expr (Add (Val (Int 3), Val (Bool true))),
        "Add (Val (Int 3), Val (Bool true))"  )
        "serialize_expr (Add (Val (Int 3), Val (Bool true)))"
-       id;
+       id serialize_excp;
 
     eval_test (fun () ->
         serialize_expr (Not (Val (Bool true))),
        "Not (Val (Bool true))"  )
        "serialize_expr (Not (Val (Bool true)))"
-       id;
+       id serialize_excp;
 
     eval_test (fun () ->
         serialize_expr (Let ("x", Add (Val (Int 3), Val (Int 4)),
                         Lt (Id "x", Val (Int 5)))),
        "Let (\"x\", Add (Val (Int 3), Val (Int 4)), Lt (Id \"x\", Val (Int 5)))"   )
        "serialize_expr (Let (\"x\", Add (Val (Int 3), Val (Int 4)), Lt (Id \"x\", Val (Int 5))))"
-        id;
+        id serialize_excp;
 
     eval_test (fun () ->
         serialize_expr (Lam ("n", Add (Id "n", Val (Int 1)))),
        "Lam (\"n\", Add (Id \"n\", Val (Int 1)))"   )
        "serialize_expr (Lam (\"n\", Add (Id \"n\", Val (Int 1))))"
-       id;
+       id serialize_excp;
     
   ]
 

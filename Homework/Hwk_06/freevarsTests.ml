@@ -11,40 +11,40 @@ let some_tests =
     eval_test (fun () ->
         freevars (Add (Val (Int 3), Val (Int 5))), [] )
        "freevars (Add (Val (Int 3), Val (Int 5)))"
-        show_freevars;
+        show_freevars serialize_excp;
 
     eval_test (fun () ->
         freevars (Add (Id "a", Id "b")), ["a"; "b"] )
        "freevars (Add (Id \"a\", Id \"b\"))"
-        show_freevars;
+        show_freevars serialize_excp;
 
     eval_test (fun () ->
         freevars (Let ("x", Add (Val (Int 3), Val (Int 4)),
                         Lt (Id "x", Val (Int 5)))),  [] )
        "freevars (Let (\"x\", Add (Val (Int 3), Val (Int 4)), Lt (Id \"x\", Val (Int 5))))"
-        show_freevars;
+        show_freevars serialize_excp;
 
     eval_test (fun () ->
         freevars (Let ("x", Add (Val (Int 3), Id "x"),
                         Lt (Id "x", Val (Int 5)))),  ["x"] )
        "freevars (Let (\"x\", Add (Val (Int 3), Id \"x\"), Lt (Id \"x\", Val (Int 5))))"
-        show_freevars;
+        show_freevars serialize_excp;
 
     eval_test (fun () ->
         freevars (Let ("x", Add (Val (Int 3), Id "x"),
                         Lt (Id "y", Val (Int 5)))),  ["x"; "y"] )
        "freevars (Let (\"x\", Add (Val (Int 3), Id \"x\"), Lt (Id \"y\", Val (Int 5))))"
-        show_freevars;
+        show_freevars serialize_excp;
 
     eval_test (fun () ->
         freevars (Lam ("n", Add (Id "n", Val (Int 1)))), [] )
        "freevars (Lam (\"n\", Add (Id \"n\", Val (Int 1))))"
-       show_freevars;
+       show_freevars serialize_excp;
 
     eval_test (fun () ->
         freevars (Lam ("n", Add (Id "m", Val (Int 1)))), ["m"] )
        "freevars (Lam (\"n\", Add (Id \"m\", Val (Int 1))))"
-       show_freevars;
+       show_freevars serialize_excp;
 
   ]
 

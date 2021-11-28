@@ -3,7 +3,7 @@ type test = unit -> unit
 
 
 let eval_test (f: unit -> ('a * 'a)) (expr_str: string)
-      (show: 'a -> string) : test =
+      (show: 'a -> string) (show_exn: exn -> string) : test =
   fun () ->
   (try
      let expr, expected = f ()
@@ -17,14 +17,14 @@ let eval_test (f: unit -> ('a * 'a)) (expr_str: string)
      else
        let msg = "FAILED:\n    `" ^ expr_str ^ 
                    "`\n  inccorrectly evaluates to\n    `" ^
-                     show expected ^ "`\n  but should have evaluated to\n    `" ^
-                       show expr ^ "`."
+                     show expr ^ "`\n  but should have evaluated to\n    `" ^
+                     show expected ^ "`."
        in
        print_endline msg
    with
-   | _ ->
+   | e ->
       let msg = "FAILED:\n    `" ^ expr_str ^ 
-                   "`\n  raised an unexpected exception."
+                   "`\n  raised the exception `" ^ show_exn e ^ "`."
        in
        print_endline msg
   )

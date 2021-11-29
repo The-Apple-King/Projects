@@ -5,8 +5,9 @@
    Any furter changes happened in repo-solutions.
  *)
 
- type value 
+ type value  
  = Int of int
+ | Ref of value ref
  | Bool of bool
  | Closure of string * expr * value_environment
 
@@ -221,7 +222,7 @@ let serialize_excp (e: exn) : string =
        | _ -> raise (IncorrectType e)
    )
 
-  | LetRec (str, e1, e2) -> closure(str, e1, env::(str, Int 0))
+  | LetRec (str, e1, e2) -> eval env@[(str, Ref(Closure(str, e1, env@[(str, 0)])))] e2
   
 
   | If (e1, e2, e3) -> 

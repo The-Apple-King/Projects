@@ -83,6 +83,7 @@ let rec serialize_expr (e: expr) : string =
 
 
 
+
 let rec freevars (e: expr) : string list =
  match e with
  | Val _ -> []
@@ -104,6 +105,24 @@ let rec freevars (e: expr) : string list =
  | Id (e1) -> [e1] 
  
  | If (e1, e2, e3) ->(freevars e1)@(freevars e2)@(freevars e3)
+
+  | Let (str, e1, e2) -> freevars e1 @ List.filter (fun v -> v <> str) (freevars e2)
+    | Lam (str, e1) -> List.filter (fun v -> v <> str) (freevars e1)
+  | LetRec (str, e1, e2) -> List.filter (fun v -> v <> str) (freevars e1) @ List.filter (fun v -> v <> str) (freevars e2)
+
+  | Add (e1, e2) -> (freevars e1)@(freevars e2)
+  | Sub (e1, e2) -> (freevars e1)@(freevars e2)
+  | Mul (e1, e2) -> (freevars e1)@(freevars e2)
+  | Div (e1, e2) -> (freevars e1)@(freevars e2)
+  | Not (e1) -> (freevars e1)
+  | Lt (e1, e2) -> (freevars e1)@(freevars e2)
+  | Eq (e1, e2) -> (freevars e1)@(freevars e2)
+  | And (e1, e2) -> (freevars e1)@(freevars e2)
+  | App (e1, e2) -> (freevars e1)@(freevars e2)
+
+  | Id (e1) -> [e1] 
+  
+  | If (e1, e2, e3) ->(freevars e1)@(freevars e2)@(freevars e3)
 
 
 
@@ -225,6 +244,12 @@ let serialize_excp (e: exn) : string =
 
    | _ -> raise(IncorrectType e)
    )
+   (*
+   let c1 = match eval env e1 with Ref f -> !f | Closure(s,e1,envc) -> Closure(s,e1,envc)
+   in match c1, eval env e2 with
+      | Closure(str, ex1, env2), v2 -> eval ((str,v2)::env2) ex1
+      | _ -> raise(IncorrectType e1)
+      *)
 
 
   | LetRec (str, e1, e2) -> 

@@ -23,13 +23,7 @@ let some_tests = [
 
   eval_test (fun () ->
     freevars 
-      (LetRec ("sumToN", 
-               Lam ("n", 
-                    If (Eq (Id "n", Val (Int 0)),
-                        Val (Int 0),
-                        Add (Id "n",
-                             App (Id "sumToN",
-                                  Sub (Id "n", Val (Int 1))
+      (LetRec ("sumToN", Lam ("n", If (Eq (Id "n",Val (Int 0)),            Val (Int 0)         ,Add (Id "n",App (Id "sumToN",Sub (Id "n", Val (Int 1))
                                  )
                             )
                        )

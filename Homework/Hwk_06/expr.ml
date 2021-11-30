@@ -214,15 +214,19 @@ let serialize_excp (e: exn) : string =
      lookup str env 
     
   | Lam (str, e1) -> Closure (str, e1, (createvars (freevars (Lam(str, e1))) env []))
-  
+
 
   | App (e1, e2) ->
    ( match eval env e1, e2 with
        | Closure(str, ex1, env2), v -> eval (env2@[(str, eval env v)]) ex1
-       | _ -> raise (IncorrectType e)
+       | _ -> Int 7
    )
 
-  | LetRec (str, e1, e2) -> eval env@[(str, Ref(Closure(str, e1, env@[(str, 0)])))] e2
+  | LetRec (str, e1, e2) -> 
+      let recRef = ref(Int 999) in
+        let c = eval (env@[(str, Ref(recRef))]) e1 in
+        let () = recRef := c in eval ((str,c)::env) e2
+  
   
 
   | If (e1, e2, e3) -> 

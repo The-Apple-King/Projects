@@ -150,7 +150,7 @@ let serialize_excp (e: exn) : string =
 
      let rec createvars vars env accum =
       match vars with
-      | [] -> env@[]
+      | [] -> accum
       | x::xs -> createvars xs env accum@[(x, (lookup x env))] 
 
    let rec valuevars name v env accum =
@@ -216,16 +216,21 @@ let serialize_excp (e: exn) : string =
   | Lam (str, e1) -> Closure (str, e1, (createvars (freevars (Lam(str, e1))) env []))
 
 
-  | App (e1, e2) ->
+   | App (e1, e2) ->
    ( match eval env e1, e2 with
-       | Closure(str, ex1, env2), v -> eval (env2@[(str, eval env v)]) ex1
-       | _ -> Int 7
+   | Closure(str, ex1, env2), v -> eval (env2@[(str, eval env v)]) ex1
+   | Ref(x), v -> (match !x with
+        | Closure(str, ex1, env2) ->  eval ((str, eval env v)::env2) ex1 
+        |_ -> raise(IncorrectType e))
+
+   | _ -> raise(IncorrectType e)
    )
+
 
   | LetRec (str, e1, e2) -> 
       let recRef = ref(Int 999) in
-        let c = eval (env@[(str, Ref(recRef))]) e1 in
-        let () = recRef := c in eval ((str,c)::env) e2
+        let c = eval ((str, Ref(recRef))::env) e1 in
+        let () = recRef := c in eval ((str, Ref(recRef))::env) e2
   
   
 

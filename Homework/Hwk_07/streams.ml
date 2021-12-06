@@ -59,15 +59,19 @@ let nats = from 1
 let cube n = n*n*n
 
 let rec cubes_from n = 
-  Cons ( (cube n), delay ( fun () -> cubes_from (n+1) ) )
+  Cons ( (n), delay ( fun () -> cubes_from (n+1) ) )
 
-let cubes_from_zip =
-  zip (fun x1 x2 -> x1+x2) nats (zip (fun x1 x2 -> x1+x2) nats nats)
+let cubes_from_zip n =
+  zip (fun x1 x2 -> x1*x2*x1) (from n) (from n)
 
-let cubes_from_map = 
-  map (cube) nats
+let cubes_from_map n = 
+  map (cube) (from n)
 
-  let drop n stream =
+(*
+  let rec from n =
+    Cons ( n, delay ( fun () -> from (n+1) ) )
+
+  let rec drop n stream =
     if n > 0 then(
       match stream with 
       Cons(h,t) -> drop (n-1) demand t)
@@ -84,18 +88,16 @@ let drop_until func stream =
   else ( match stream with
   Cons(h,t) -> drop_until func Cons(h, demand t))
 
+*)
+
+let rec arith_help n incr runs = 
+  Cons ( (n), delay ( fun () -> cubes_from (n+1) ) )
+let arith_seq n incr = arith_help n incr 0
 
 
-let arith_seq n incr =
-  let rec arith_help n incr runs = 
-  Cons ( n + runs*incr , delay ( fun () -> pp n incr runs+1 ) )
-  in arith_help n incr 0
 
-
-let sieve n = 
-  sieve_help n map (fun x -> if n mod x = 0 then [] else x ) nats
-let sieve_help n stream =
-  sieve_help n map (fun x -> if n mod x = 0 then [] else x ) stream
-  in sieve_help n
+let sieve stream = 
+sieve (map (fun x n -> if n mod x = 0 then [] else x ) stream)
 
 let primes = sieve (from 2)
+

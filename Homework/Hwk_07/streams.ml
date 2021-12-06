@@ -59,7 +59,7 @@ let nats = from 1
 let cube n = n*n*n
 
 let rec cubes_from n = 
-  Cons ( (n), delay ( fun () -> cubes_from (n+1) ) )
+  Cons ( cube (n), delay ( fun () -> cubes_from (n+1) ) )
 
 let cubes_from_zip n =
   zip (fun x1 x2 -> x1*x2*x1) (from n) (from n)
@@ -92,7 +92,6 @@ let arith_seq n incr = arith_help n incr 0
 let rec sieve stream = 
 match stream with 
 | Cons (h,t) -> Cons (h,(delay (fun () ->  sieve (filter (fun x -> if h mod x = 0 && h<> x then true else false) (demand t)))))
-| _ -> stream
 
 let primes = sieve (from 2)
 

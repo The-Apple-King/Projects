@@ -67,37 +67,32 @@ let cubes_from_zip n =
 let cubes_from_map n = 
   map (cube) (from n)
 
-(*
-  let rec from n =
-    Cons ( n, delay ( fun () -> from (n+1) ) )
+
 
   let rec drop n stream =
-    if n > 0 then(
-      match stream with 
-      Cons(h,t) -> drop (n-1) demand t)
-    else
-      (match stream with
-      Cons(h,t) -> drop 0 Cons(h, demand t))
+    match n with 
+    | 0 -> stream
+    | _ -> match stream with 
+    | Cons (h,t) -> drop (n-1) (demand t)
 
 
 
-let drop_until func stream =
-  if func = false 
-  then (match stream with
-    Cons(h,t) -> drop_until func demand t)
-  else ( match stream with
-  Cons(h,t) -> drop_until func Cons(h, demand t))
+let rec drop_until func stream =
+  match stream with 
+  | Cons (h,t) -> if func h = false then drop_until func (demand t) else stream
 
-*)
+
 
 let rec arith_help n incr runs = 
-  Cons ( (n), delay ( fun () -> cubes_from (n+1) ) )
+  Cons ( (n + (incr * runs)), delay ( fun () -> arith_help n incr (runs+1) ) )
 let arith_seq n incr = arith_help n incr 0
 
 
 
-let sieve stream = 
-sieve (map (fun x n -> if n mod x = 0 then [] else x ) stream)
+let rec sieve stream = 
+match stream with 
+| Cons (h,t) -> Cons (h,(delay (fun () ->  sieve (filter (fun x -> if h mod x = 0 && h<> x then true else false) (demand t)))))
+| _ -> stream
 
 let primes = sieve (from 2)
 

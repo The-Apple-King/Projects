@@ -50,26 +50,52 @@ let rec from n =
 
 let nats = from 1
 
+
+
+
 (* The code below is from Owen Swearingen *)
 
-let rec from_by_2 n =
-  Cons ( n, delay ( fun () -> from_by_2 (n+2) ) )
+(*using cubes a lot a function to do so makes it easier*)
+let cube n = n*n*n
 
-let evens = 
-  from_by_2 2
+let rec cubes_from n = 
+  Cons ( (cube n), delay ( fun () -> cubes_from (n+1) ) )
 
-let evens_filter =
-  filter (fun n -> (n mod 2 = 0))  nats
- 
-let rec evens_map =
-  map (fun n -> n*2) nats
+let cubes_from_zip =
+  zip (fun x1 x2 -> x1+x2) nats (zip (fun x1 x2 -> x1+x2) nats nats)
 
-let evens_zip =
-  zip (fun x1 x2 -> x1+x2) nats nats
+let cubes_from_map = 
+  map (cube) nats
 
-  let rec pp nats = match nats with 
-  |Cons(h,t) -> match demand t with 
-      |Cons(h2,t2) -> Cons(h2, delay (fun () -> pp (demand t2)) )
+  let drop n stream =
+    if n > 0 then(
+      match stream with 
+      Cons(h,t) -> drop (n-1) demand t)
+    else
+      (match stream with
+      Cons(h,t) -> drop 0 Cons(h, demand t))
 
-let evens_pick =
-  pp nats
+
+
+let drop_until func stream =
+  if func = false 
+  then (match stream with
+    Cons(h,t) -> drop_until func demand t)
+  else ( match stream with
+  Cons(h,t) -> drop_until func Cons(h, demand t))
+
+
+
+let arith_seq n incr =
+  let rec arith_help n incr runs = 
+  Cons ( n + runs*incr , delay ( fun () -> pp n incr runs+1 ) )
+  in arith_help n incr 0
+
+
+let sieve n = 
+  sieve_help n map (fun x -> if n mod x = 0 then [] else x ) nats
+let sieve_help n stream =
+  sieve_help n map (fun x -> if n mod x = 0 then [] else x ) stream
+  in sieve_help n
+
+let primes = sieve (from 2)

@@ -1,0 +1,15 @@
+Csci
+List errors:
+Null pointer
+Syntax
+Divide by zero
+Wrong variable type
+404 
+Out of bounds 
+
+Write 
+Find all by :a' bool -> 'a list ->'a list
+Let rec find_all_by (f: 'a ->bool) (lst: 'a list : 'a list =
+|[] -> []
+| X::xs when f x -> x::!(find_all_by f xs)
+|x::xs -> find_all_by f xs

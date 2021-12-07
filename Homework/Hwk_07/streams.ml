@@ -56,48 +56,42 @@ let nats = from 1
 (* The code below is from Owen Swearingen *)
 
 (*using cubes a lot a function to do so makes it easier*)
-let cube n = n*n*n
+let cube (n: int): int = n*n*n
 
-let rec cubes_from n = 
-  Cons ( (n), delay ( fun () -> cubes_from (n+1) ) )
+let rec cubes_from (n: int): 'a stream  = 
+  Cons ( (cube n), delay ( fun () -> cubes_from (n+1) ) )
 
-let cubes_from_zip n =
+let cubes_from_zip (n: int): 'a stream  =
   zip (fun x1 x2 -> x1*x2*x1) (from n) (from n)
 
-let cubes_from_map n = 
+let cubes_from_map (n: int): 'a stream  = 
   map (cube) (from n)
 
-(*
-  let rec from n =
-    Cons ( n, delay ( fun () -> from (n+1) ) )
 
-  let rec drop n stream =
-    if n > 0 then(
-      match stream with 
-      Cons(h,t) -> drop (n-1) demand t)
-    else
-      (match stream with
-      Cons(h,t) -> drop 0 Cons(h, demand t))
+  let rec drop (n: int) (stream: 'a stream): 'a stream =
+    match n with
+    | 0 -> stream
+    | _ -> match stream with 
+        | Cons (h,t) -> drop (n-1) (demand t)
 
 
 
-let drop_until func stream =
-  if func = false 
-  then (match stream with
-    Cons(h,t) -> drop_until func demand t)
-  else ( match stream with
-  Cons(h,t) -> drop_until func Cons(h, demand t))
-
-*)
-
-let rec arith_help n incr runs = 
-  Cons ( (n), delay ( fun () -> cubes_from (n+1) ) )
-let arith_seq n incr = arith_help n incr 0
+let rec drop_until (func) (stream: 'a stream): 'a stream =
+  match stream with 
+  | Cons(h,t) -> if func h = false 
+  then drop_until func (demand t)
+  else stream
 
 
 
-let sieve stream = 
-sieve (map (fun x n -> if n mod x = 0 then [] else x ) stream)
+
+let rec arith_seq (n:int) (incr:int): 'a stream = 
+Cons (n, delay ( fun () -> arith_seq (n+incr) (incr) ))
+
+
+let rec sieve (stream: 'a stream): 'a stream  = 
+  match stream with 
+  | Cons(h,t) -> Cons(h, delay (fun () -> sieve (demand (delay (fun () -> filter ( fun (x) -> x mod h <> 0 ) (demand t))))))
 
 let primes = sieve (from 2)
 

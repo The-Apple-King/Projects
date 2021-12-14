@@ -16,54 +16,72 @@ andr l = foldr and l true
 ## andl (true::false::true::true::[])
 
 ### call by value
-- fold l and true l
-- accum = true
-- and = if accum = true then (true::restl) else false
-- accum = true
-- and true (false::restl)
-- and = if accum = true then (false::restl) else false
-- accum = false
-- and false (true::restl)
-- and = if accum = true then true::restl else false
-- and false true
-- and = if accum = true then true else false
+- andl l = foldl and true l
+- foldl and true (firstl::restl) (firstl = true)
+- foldl and accum (firstl::restl) (firstl = true) (accum = true)
+- foldl if accum = true then accum = firstl else accum = false (firstl = true) (accum = true)
+- foldl and accum restl (accum = true)
+- foldl and true restl
+- foldl and accum (firstl::restl) (firstl = false) (accum = true)
+- foldl if accum = true then accum = firstl else accum = false (firstl = false) (accum = true)
+- foldl and false restl
+- foldl and false (firstl::restl) (firstl = true)
+- foldl and accum (firstl::restl) (firstl = true) (accum = false)
+- foldl if accum = true then accum = firstl else accum = false (firstl = true) (accum = false)
+- foldl and false restl
+- foldl and false restl
+- foldl and false (firstl::restl) (firstl = true)
+- foldl and accum (firstl::restl) (firstl = true) (accum = false)
+- foldl if accum = true then accum = firstl else accum = false (firstl = true) (accum = false)
+- foldl and false []
+- foldl = false
+- andl l = false
 - false
 
 ### call by name
-fold l and true l
-- accum = true
-- and = if accum = true then (true::restl) else false
-- accum = true
-- and true (false::restl)
-- and = if accum = true then (false::restl) else false
-- accum = false
-- false
-<br>
-and b1 b2 = if b1 then b2 else false 
+- andl l = foldl and l true
+- foldl and true l 
+- foldl and accum (firstl::restl) (firstl = true) (accum = true)
+- and = if accum = true then accum = firstl else accum = false (firstl = true) (accum = true)
+- foldl and true restl
+- foldl and accum (firstl::restl) (firstl = false) (accum = true)
+- and = if accum = true then accum = firstl else accum = false (firstl = false) (accum = false)
+- foldl and false restl
+- foldl = false 
+- andl l = false
 
 ## andr (true::false::true::true::[])
-
 ### call by value
-foldr and l true
-- and l true = if l then true else false
-- accum =true
-- if (true::restl) then accum else false
-- restl = (false::restl) & accum = true
-- if (false::restl) = true then accum else false
-- restl = (true::restl) & accum = false
-- if (true::restl) = true then accum else false
-- restl = (true::[]) accum = false
-- if true::[] = true then accum else false
-- foldr accum = false
+- andr l = foldr and l true
+- foldr and (firstl::restl) true (firstl = true)
+- foldr and (firstl::restl) accum (firstl = true) (accum = true)
+- foldr if firstl = true then accum = firstl else accum = false (firstl = true) (accum = true)
+- foldr and restl accum (accum = true)
+- foldr and restl true
+- foldr and (firstl::restl) accum (firstl = false) (accum = true)
+- foldr if firstl = true then accum = firstl else accum = false (firstl = false) (accum = true)
+- foldr and restl false
+- foldr and (firstl::restl) false  (firstl = true)
+- foldr and (firstl::restl) accum (firstl = true) (accum = false)
+- foldr if firstl = true then accum = firstl else accum = false (firstl = true) (accum = false)
+- foldr and restl false
+- foldr and (firstl::restl) false (firstl = true)
+- foldr and (firstl::restl) accum (firstl = true) (accum = false)
+- foldr if firstl = true then accum = firstl else accum = false (firstl = true) (accum = false)
+- foldr and [] false
+- foldr = false
+- andl l = false
 - false
 
 ### call by name
-foldr and l true
-- and l true = if l then true else false
-- accum =true
-- if (true::restl) then accum else false
-- restl = (false::restl) & accum = true
-- if (false::restl) = true then accum else false
-- restl = (true::restl) & accum = false
-- foldr [] accum = false
+- andr l = foldr and true l
+- foldr and l true
+- foldr and (firstl::restl) accum (firstl = true) (accum = true)
+- and = if firstl = true then accum = firstl else accum = false (firstl = true) (accum = true)
+- foldr and restl true
+- foldr and (firstl::restl) accum (firstl = false) (accum = true)
+- and = if firstl = true then accum = firstl else accum = false (firstl = false) (accum = false)
+- foldr and restl false
+- foldr = false 
+- andr l = false
 - false

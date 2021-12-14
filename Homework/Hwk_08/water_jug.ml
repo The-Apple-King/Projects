@@ -29,23 +29,6 @@ let final_state ((x,y): state) : bool = x = 2
 let valid_state ((x,y): state) : bool 
   = x >= 0 && x <= 4 && y >= 0 && y <= 3
 
-(*uses the output of if statements to create a list of steps based on the current state *)
-let accumulate state accum = 
-  match state with
-  | (x, y) -> if x = 0 then accum := !accum@[(Fill4GallonJugFromTap)];
-  if y = 0 then accum := !accum@[(Fill3GallonJugFromTap)];
-  if x < 4 && x > 0 then accum := !accum@[(Fill4GallonJugFromTap)]@[(Empty4GallonJugOnGround)];
-  if y < 3 && y > 0 then accum := !accum@[(Fill3GallonJugFromTap)]@[(Empty3GallonJugOnGround)];
-  if x = 4 then accum := !accum@[(Empty4GallonJugOnGround)];
-  if y = 3 then accum := !accum@[(Empty3GallonJugOnGround)];
-  if (4-x) >= y then accum := !accum@[(Empty3GallonJugInto4GallonJug)];
-  if (4-x) < y then accum := !accum@[(Fill4GallonJugFrom3GallonJug)];
-  if (3-y) >= x then accum := !accum@[(Empty4GallonJugInto3GallonJug)];
-  if (3-y) < x then accum := !accum@[(Fill3GallonJugFrom4GallonJug)];
-  !accum
-
-let possible_steps state =
-accumulate state (ref([]))
 
 (*the outcomes of each option *)
 let runsolutions (op,state) =
@@ -83,35 +66,57 @@ match op with
   | (x,y) -> ((x-(3-y)), (y+(3-y))))
 
 
+(*uses the output of if statements to create a list of steps based on the current state *)
+let accumulate state accum = 
+  match state with
+  | (x, y) -> if x = 0 then accum := !accum@[(Fill4GallonJugFromTap, runsolutions (Fill4GallonJugFromTap, state))];
+  if y = 0 then accum := !accum@[(Fill3GallonJugFromTap, runsolutions (Fill3GallonJugFromTap, state))];
+  if x < 4 && x > 0 then accum := !accum@[(Fill4GallonJugFromTap, runsolutions (Fill4GallonJugFromTap, state))]@[(Empty4GallonJugOnGround, runsolutions (Empty4GallonJugOnGround, state))];
+  if y < 3 && y > 0 then accum := !accum@[(Fill3GallonJugFromTap, runsolutions (Fill3GallonJugFromTap, state))]@[(Empty3GallonJugOnGround, runsolutions (Empty3GallonJugOnGround, state))];
+  if x = 4 then accum := !accum@[(Empty4GallonJugOnGround, runsolutions (Empty4GallonJugOnGround, state))];
+  if y = 3 then accum := !accum@[(Empty3GallonJugOnGround, runsolutions (Empty3GallonJugOnGround, state))];
+  if (4-x) >= y then accum := !accum@[(Empty3GallonJugInto4GallonJug, runsolutions (Empty3GallonJugInto4GallonJug, state))];
+  if (4-x) < y then accum := !accum@[(Fill4GallonJugFrom3GallonJug, runsolutions (Fill4GallonJugFrom3GallonJug, state))];
+  if (3-y) >= x then accum := !accum@[(Empty4GallonJugInto3GallonJug, runsolutions (Empty4GallonJugInto3GallonJug, state))];
+  if (3-y) < x then accum := !accum@[(Fill3GallonJugFrom4GallonJug, runsolutions (Fill3GallonJugFrom4GallonJug, state))];
+  !accum
+
+let possible_steps state =
+accumulate state (ref([]))
+
+(*playhelp increments max in order to search for the smallest number of steps*)
 let rec playhelp max initial_state = 
+  (*go_from searches each possible step increments path and tests each possible outcome to find a solution
+  toolong tests the current location in the loop
+  max is the maximum amount of loops allowed which will increase each time it fails *)
   let rec go_from max toolong (state: state) (path)=
       if final_state state
       then Some path
       else if state = initial_state && toolong > 2 || toolong = max then None else 
   match possible_steps state with 
-  | [a;b] -> (match go_from max (toolong+1) (runsolutions (a, state)) (path @ [(a, (runsolutions (a, state)))]) with
-                 | None -> go_from max (toolong+1) (runsolutions (b, state)) (path @ [(b, (runsolutions (b, state)))])
+  | [(a, state);(b, state1)] -> (match go_from max (toolong+1) state (path @ [(a, state)]) with
+                 | None -> go_from max (toolong+1) state1 (path @ [(b,  state)])
                  | Some path' -> Some path'
                  )
-  | [a;b;c] ->(match go_from max (toolong+1) (runsolutions (a, state)) (path @ [(a, (runsolutions (a, state)))]) with
-                 | None -> (match go_from max (toolong+1) (runsolutions (b, state)) (path @ [(b, (runsolutions (b, state)))]) with
-                    | None -> go_from max (toolong+1) (runsolutions (c, state)) (path @ [(c, (runsolutions (c, state)))])
+  | [(a, state);(b, state1);(c, state2)] ->(match go_from max (toolong+1) state (path @ [(a, state)]) with
+                 | None -> (match go_from max (toolong+1) state1 (path @ [(b,state)]) with
+                    | None -> go_from max (toolong+1) state2 (path @ [(b, state2)])
                     | Some path' -> Some path')
                  | Some path'' -> Some path''
                  )
-  | [a;b;c;d] ->(match go_from max (toolong+1) (runsolutions (a, state)) (path @ [(a, (runsolutions (a, state)))]) with
-                 | None -> (match go_from max (toolong+1) (runsolutions (b, state)) (path @ [(b, (runsolutions (b, state)))]) with
-                    | None -> (match go_from max (toolong+1) (runsolutions (c, state)) (path @ [(c, (runsolutions (c, state)))]) with
-                      | None -> go_from max (toolong+1) (runsolutions (d, state)) (path @ [(d, (runsolutions (d, state)))])
+  | [(a, state);(b, state1);(c, state2);(d, state3)] ->(match go_from max (toolong+1) state (path @ [(a, state)]) with
+                 | None -> (match go_from max (toolong+1) state1 (path @ [(b, state1)]) with
+                    | None -> (match go_from max (toolong+1) state2 (path @ [(b, state2)]) with
+                      | None -> go_from max (toolong+1) state3 (path @ [(d, state3)])
                       | Some path' -> Some path')
                     | Some path'' -> Some path'')
                  | Some path''' -> Some path'''
                  )
-  | [a;b;c;d;e] ->(match go_from max (toolong+1) (runsolutions (a, state)) (path @ [(a, (runsolutions (a, state)))]) with
-                 | None -> (match go_from max (toolong+1) (runsolutions (b, state)) (path @ [(b, (runsolutions (b, state)))]) with
-                    | None -> (match go_from max (toolong+1) (runsolutions (c, state)) (path @ [(c, (runsolutions (c, state)))]) with
-                      | None -> (match go_from max (toolong+1) (runsolutions (d, state)) (path @ [(d, (runsolutions (d, state)))]) with
-                         | None -> go_from max (toolong+1) (runsolutions (e, state)) (path @ [(e, (runsolutions (e, state)))])
+  | [(a, state);(b, state1);(c, state2);(d, state3);(e, state4)] ->(match go_from max (toolong+1) state (path @ [(a, state)]) with
+                 | None -> (match go_from max (toolong+1) state1 (path @ [(b, state1)]) with
+                    | None -> (match go_from max (toolong+1) state2 (path @ [(b, state2)]) with
+                      | None -> (match go_from max (toolong+1) state3 (path @ [(d, state3)]) with
+                         | None -> go_from max (toolong+1) state4 (path @ [(d, state4)])
                          | Some path' -> Some path')
                       | Some path'' -> Some path'')
                     | Some path''' -> Some path''')

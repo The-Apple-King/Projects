@@ -95,18 +95,18 @@ let rec playhelp max initial_state =
       else if state = initial_state && toolong > 2 || toolong = max then None else 
   match possible_steps state with 
   | [(a, state);(b, state1)] -> (match go_from max (toolong+1) state (path @ [(a, state)]) with
-                 | None -> go_from max (toolong+1) state1 (path @ [(b,  state)])
+                 | None -> go_from max (toolong+1) state1 (path @ [(b,  state1)])
                  | Some path' -> Some path'
                  )
   | [(a, state);(b, state1);(c, state2)] ->(match go_from max (toolong+1) state (path @ [(a, state)]) with
-                 | None -> (match go_from max (toolong+1) state1 (path @ [(b,state)]) with
+                 | None -> (match go_from max (toolong+1) state1 (path @ [(b,state1)]) with
                     | None -> go_from max (toolong+1) state2 (path @ [(b, state2)])
                     | Some path' -> Some path')
                  | Some path'' -> Some path''
                  )
   | [(a, state);(b, state1);(c, state2);(d, state3)] ->(match go_from max (toolong+1) state (path @ [(a, state)]) with
                  | None -> (match go_from max (toolong+1) state1 (path @ [(b, state1)]) with
-                    | None -> (match go_from max (toolong+1) state2 (path @ [(b, state2)]) with
+                    | None -> (match go_from max (toolong+1) state2 (path @ [(c, state2)]) with
                       | None -> go_from max (toolong+1) state3 (path @ [(d, state3)])
                       | Some path' -> Some path')
                     | Some path'' -> Some path'')
@@ -114,9 +114,9 @@ let rec playhelp max initial_state =
                  )
   | [(a, state);(b, state1);(c, state2);(d, state3);(e, state4)] ->(match go_from max (toolong+1) state (path @ [(a, state)]) with
                  | None -> (match go_from max (toolong+1) state1 (path @ [(b, state1)]) with
-                    | None -> (match go_from max (toolong+1) state2 (path @ [(b, state2)]) with
+                    | None -> (match go_from max (toolong+1) state2 (path @ [(c, state2)]) with
                       | None -> (match go_from max (toolong+1) state3 (path @ [(d, state3)]) with
-                         | None -> go_from max (toolong+1) state4 (path @ [(d, state4)])
+                         | None -> go_from max (toolong+1) state4 (path @ [(e, state4)])
                          | Some path' -> Some path')
                       | Some path'' -> Some path'')
                     | Some path''' -> Some path''')

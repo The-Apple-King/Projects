@@ -1,0 +1,10 @@
+(*classwork 10/13*)
+let minlist (lst:'a list) : 'a option =
+let rec minNonEmpty lst =
+match lst with 
+|[] -> raise (Failure "no empty list")
+| x::xs -> min x (minNonEmpty xs)
+in
+match lst with
+| [] -> None
+| _-> Some (minNonEmpty lst)

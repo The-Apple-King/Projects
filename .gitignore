@@ -1,3 +1,4 @@
 *.mli
 *.byte
 **/_build
+Class exercises/*

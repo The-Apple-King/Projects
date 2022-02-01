@@ -1,0 +1,12 @@
+(*classwork 9/29)
+Let fold f v lst =
+Match xs with 
+|[] ->v
+| x :: xs ->  v f x && fold f (v f x) xs
+
+let partition f lst =
+foldr (fun ( yess, nos) x ->
+if f x
+Then (x :: yess, nos)
+Else. (yess, x :: nos) )
+([],[]) lst

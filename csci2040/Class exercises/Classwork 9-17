@@ -1,0 +1,12 @@
+(*classwork on 9/17*)
+
+let empty lst: (int list) : int list =
+match lst with
+| [] -> true
+|x:: -> false
+
+
+let head: (int list) : int =
+match lst with 
+|[] -> []
+| x :: rest -> x

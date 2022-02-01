@@ -1,0 +1,158 @@
+(*classwork on 9/17*)
+
+let empty lst: (int list) : int list =
+match lst with
+| [] -> true
+|x:: -> false
+
+
+let head: (int list) : int =
+match lst with 
+|[] -> []
+| x :: rest -> x
+
+
+(*classwork on 9/20*)
+let empty lst: (int list) : int list =
+match lst with
+| [] -> true
+| X:: -> false
+
+let empty lst: (int list) : int =
+match lst with 
+|[] -> []
+| x::rest -> x
+
+
+let rec dropval l =
+
+
+match l with
+[]->[]
+hd::tl when hd = to_drop -> drop_value to drop tl
+hd:: tl -> hd:: drop_value to_drop tl
+
+
+let first of three (triple: int int int) =
+match triple with
+| (x, y, z) 
+x
+
+
+type fraction = int *int
+let add ((n1,d1) : fraction (n2,d2): fraction) :fraction)
+n1*d2+n2*d1,d1*d2
+
+
+let rec lookup_all (v: 'a) (dictionary: ('a*'b) list) : 'b list =
+match dictionary with
+| []->[]
+| (name, value) :: rest->
+let more = lookup_all v rest
+in if v= name then value :: more else more
+
+Let rec fib = function
+| 0->0
+1-> 1
+|X -> fib (x-1) +fib (x-2)
+
+Csci
+Let empty lst: (int list) : int list =
+Match lst with
+| [] -> true
+| X:: -> false
+
+Let empty lst: (int list) : int =
+Match lst with 
+|[] -> []
+| x::rest -> x
+
+
+Let rec dropval l =
+
+
+Match l with
+[]->[]
+Hd::tl when hd = to_drop -> drop_value to drop tl
+Hd:: tl -> hd:: drop_value to_drop tl
+
+
+Let first of three (triple: int int int) =
+Match triple with
+| (X, y, z)
+Return x
+
+
+Type fraction = int *int
+Let add ((n1,d1) : fraction (n2,D2): fraction) :fraction)
+N1*D2+n2*d1,d1*D2
+
+
+Let rec lookup_all (v: 'a) (dictionary: ('a*'b) list) : 'b list =
+Match dictionary with
+|[]->[]
+| (Name, value) :: rest->
+Let more = lookup_all v rest
+In if v= name then value :: more else more
+
+Let rec fib = function
+| 0->0
+1-> 1
+|X -> fib (x-1) +fib (x-2)
+
+
+Write 
+Find all by :a' bool -> 'a list ->'a list
+Let rec find_all_by (f: 'a ->bool) (lst: 'a list : 'a list =
+|[] -> []
+| X::xs when f x -> x::!(find_all_by f xs)
+|x::xs -> find_all_by f xs
+
+
+
+
+Map 
+Filter
+Fold
+
+let rec map f lst
+Match lst with
+| []->[]
+| x::xs-> f x :: map f xs
+
+
+Let rec filter f lst =
+Match lst with 
+| [] -> []
+| x :: xs when f x -> x:: filter f rest
+|_::rest -> filter f rest
+
+Let rec fold f x lst =
+Match lst with
+| [] -> base
+| x :: xs -> f x (fold f bass xs)
+
+9/29
+Let fold f v lst =
+Match xs with 
+|[] ->v
+| x :: xs ->  v f x && fold f (v f x) xs
+
+let partition f lst =
+foldr (fun ( yess, nos) x ->
+if f x
+Then (x :: yess, nos)
+Else. (yess, x :: nos) )
+([],[]) lst
+
+10/8/21
+let rec to_list (t: 'a better) : 'a list =
+match t with
+| Empty -> []
+| Node (left, v, right)-> to_list left @ (v:: to_list right)
+
+
+let rec tree_map (f: 'a -> 'b) (t: 'a btree) : 'btree =
+Match btree with
+| Empty -> Empty
+| Node (left, v, right) -> Node (tree_map left

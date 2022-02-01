@@ -1,8 +1,0 @@
-accent
-convex
-boat
-canoe
-convey
-manor
-accident
-major

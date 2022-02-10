@@ -14,10 +14,13 @@ def oldest_friend(file):
     days_dict = {}
     reader = csv.DictReader(open(file))
     for row in reader:
-        if(friends_dict.get(row["Name1"], 0) < int(row["friendship_days"])):
-            friends_dict.update({row["Name1"]: int(row["friendship_days"])})
-        if(friends_dict.get(row["Name2"], 0) < int(row["friendship_days"])):
-            friends_dict.update({row["Name2"]: int(row["friendship_days"])})
+        if(days_dict.get(row["Name1"], 0) < int(row["friendship_days"])):
+            days_dict.update({row["Name1"]: int(row["friendship_days"])})
+            friends_dict[row["Name1"]] = row["Name2"]
+        if(days_dict.get(row["Name2"], 0) < int(row["friendship_days"])):
+            days_dict.update({row["Name2"]: int(row["friendship_days"])})
+            friends_dict[row["Name2"]] = row["Name1"]
+            
     return friends_dict
 
 def oldest_people(file):
@@ -33,9 +36,9 @@ def oldest_people(file):
                 maxAge = int(row["Age2"])
                 Age.clear()
                 Age.add(row["Name2"])
-            elif(row["Age1"] == maxAge):
+            if(int(row["Age1"]) == maxAge):
                 Age.add(row["Name1"])
-            elif(row["Age2"] == maxAge):
+            if(int(row["Age2"]) == maxAge):
                 Age.add(row["Name2"])
     return Age
         

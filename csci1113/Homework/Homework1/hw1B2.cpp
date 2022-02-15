@@ -18,11 +18,13 @@ int main() {
             sum += num[i - 1] - '0';
         }
     }
-    //tests if the sum is divisible by 11
+
+
+    //tests if divisible by 11 and outputs result
     if(sum%11 == 0){
-        cout << num << " is divisible by 11";
+        cout << num << " is divisible by 11.";
     }
     else{
-        cout << num << " is not divisible by 11";
+        cout << num << " is not divisible by 11.";
     }
 }

@@ -1,4 +1,5 @@
-*.mli
-*.byte
+**/*.mli
+**/*.byte
+**/*.exe
 **/_build
 Class exercises/*

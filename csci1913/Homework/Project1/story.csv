@@ -1,0 +1,12 @@
+variable,replacement
+Start,Story .
+Story,Phrase
+Story,Phrase and Story
+Phrase,the Noun Verb the Noun
+Noun,girl
+Verb,bit
+Verb,chased
+Verb,kissed
+Noun,boy
+Noun,cat
+Noun,dog

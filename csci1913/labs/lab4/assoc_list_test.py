@@ -90,18 +90,21 @@ print(empty)                                    # [('dog', 'apple')]
 
 bin_list = [(13, 'cat'), (3, 'crow'), (52, 'dog'), (56, 'emu'), (2, 'fish'), (49, 'raven'), (11.3, 'whale'), (41, 'zebra')]
 sorted_put(bin_list, "cat", 99)
+
 print(sorted_get(bin_list, "cat", "no"))        # 99
 print(len(bin_list))                            # 8
 print(bin_list[0])                              # (99, 'cat')
 
 bin_list = [(13, 'cat'), (3, 'crow'), (52, 'dog'), (56, 'emu'), (2, 'fish'), (49, 'raven'), (11.3, 'whale'), (41, 'zebra')]
 sorted_put(bin_list, "zebra", 99)
+
 print(sorted_get(bin_list, "zebra", "no"))      # 99
 print(len(bin_list))                            # 8
 print(bin_list[7])                              # (99, 'zebra')
 
 bin_list = [(13, 'cat'), (3, 'crow'), (52, 'dog'), (56, 'emu'), (2, 'fish'), (49, 'raven'), (11.3, 'whale'), (41, 'zebra')]
 sorted_put(bin_list, "dog", 99)
+
 print(sorted_get(bin_list, "dog", "no"))        # 99
 print(len(bin_list))                            # 8
 print(bin_list[2])                              # (99, 'dog')

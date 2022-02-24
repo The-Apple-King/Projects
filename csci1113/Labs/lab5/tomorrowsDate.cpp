@@ -2,16 +2,7 @@
 #include <string>
 using namespace std;
 
-bool leapYear(int year){
-    if (year % 4 == 0 || (year % 100 == 0 && year % 400 != 0))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-}
+bool leapYear(int year);
 
 int main()
 {
@@ -22,21 +13,37 @@ int main()
     while (cont == 'Y')
     {
         cout << "\nenter month and year value: ";
-        cin >> day >> month >> year;
+        cin >> month >> day >> year;
         if(leapYear(year) && month == 2 && day == 28){
             cout << "The next day is 2 29 " << year << "\n";
         }
         else{
-            if (day == daysInMonth[month])
+            if (day >= daysInMonth[month-1])
             {
-                cout << "next day is: 1 " << (month + 1) << " " << year << "\n";
+                if(month < 12){
+                cout << "next day is: " << (month + 1) << " 1 " << year << "\n";
+                }
+                else{
+                    cout << "next day is: 1 1 " << (year+1) << "\n";
+                }
             }
             else{
-                cout << "next day is: " << (day + 1) << " " << month << " " << year << "\n";
+                cout << "next day is: " << month << " " << (day + 1) << " " << year << "\n";
             }
         }
         cout << "continue? (y/n)";
         cin >> cont;
         cont = toupper(cont);
     }
+}
+
+bool leapYear(int year){
+    if (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
 }

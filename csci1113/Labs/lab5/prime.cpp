@@ -1,16 +1,9 @@
 #include <iostream>
 #include <string>
+#include <cmath>
 using namespace std;
 
-bool isPrime(int num){
-    for (size_t i = 2; i < (num/2); i++)
-    {
-        if(num%i == 0){
-            return true;
-        }
-    }
-    return false;
-}
+bool isPrime(int num);
 
 int main()
 {
@@ -18,7 +11,7 @@ int main()
     cout << "please enter a number: ";
     cin >> num;
 
-    if(isPrime){
+    if(isPrime(num)){
         cout << num << " is a prime number";
     }
     else{
@@ -26,4 +19,14 @@ int main()
     }
 
 
+}
+
+bool isPrime(int num){
+    for (size_t i = 2; i <= sqrt(num); i++)
+    {
+        if(num%i == 0 && num !=1){
+            return false;
+        }
+    }
+    return true;
 }

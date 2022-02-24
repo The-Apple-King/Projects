@@ -2,6 +2,8 @@
 #include <string>
 using namespace std;
 
+bool leapYear(int year);
+
 int main()
 {
 
@@ -11,7 +13,7 @@ int main()
     {
         cout << "\nenter a year value: ";
         cin >> year;
-        if (year % 4 == 0 || (year % 100 == 0 && year % 400 != 0))
+        if (leapYear(year))
         {
             cout << year << " is a leap year \n";
         }
@@ -23,4 +25,15 @@ int main()
         cin >> cont;
         cont = toupper(cont);
     }
+}
+
+bool leapYear(int year){
+    if (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
 }

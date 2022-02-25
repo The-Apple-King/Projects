@@ -8,9 +8,6 @@
 # Not too different, its still the same algorithm, they just did it using less memory than I did
 # (Which leads to a slightly harder to understand piece of code)
 
-from __future__ import annotations
-from tkinter.messagebox import RETRY
-
 
 def selection_sort(numbers):
     comparisons = 0
@@ -50,8 +47,7 @@ def insertion_sort(numbers):
             j = j - 1
     return comparisons
 
-def merge(numbers, i, j, k):
-    comparison = 0
+def merge(numbers, i, j, k, comparison = 0):
     """ Given two sorted sub-lists create one sorted list. This is done in-place, 
 meaning we are given one list
     and expected to modify the list to be sorted. Furthermore, this operates on 
@@ -94,24 +90,21 @@ with i to j being one sorted list, and j+1 to k being another."""
         merge_pos = merge_pos + 1
     return comparison
 
-def merge_sort_recursive(numbers, i, k, comparison):
+def merge_sort_recursive(numbers, i, k, comparison = 0):
     """ Sort the sub-list in numbers from position i to k (inclusive)"""
-    comparison += 1
     if i < k:
         j = (i + k) // 2  #  Find the midpoint in the partition
         #  Recursively sort left and right partitions
-        merge_sort_recursive(numbers, i, j, comparison)
-        merge_sort_recursive(numbers, j + 1, k, comparison)
+        comparison = merge_sort_recursive(numbers, i, j, comparison)
+        comparison = merge_sort_recursive(numbers, j + 1, k, comparison)
         #  Merge left and right partition in sorted order
-        merge(numbers, i, j, k)
-        return comparison
+        return merge(numbers, i, j, k, comparison)
+    return comparison
 
 def merge_sort(numbers):
-    comparison = 0
     """ Sort a list of numbers
     This function is added on-top of the textbook's code to simply start the 
 recursive process with the
     appropriate parameters. This also gives us a consistent sorting interface over 
 the three sorts."""
-    comparison += merge_sort_recursive(numbers, 0, len(numbers)-1, comparison)
-    return comparison
+    return merge_sort_recursive(numbers, 0, len(numbers)-1)

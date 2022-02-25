@@ -17,6 +17,12 @@ int main()
     }
 }
 
+//*************************************************
+//finds the height given a time and original speed
+//time is the amount of time that has passed
+//velocity is the original speed
+//*************************************************
+
 int height(int time, double velocity)
 {
     return (velocity * time) - (.5 * 9.8 * (time * time));

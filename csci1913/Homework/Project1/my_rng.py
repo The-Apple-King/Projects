@@ -53,5 +53,5 @@ def main():
             print(random_choice(lst))
         elif(choice.upper() == 'C' ):
             print('goodbye!')
-
-main()
+if __name__ == "__main__":
+    main()

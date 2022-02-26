@@ -1,8 +1,5 @@
 # Lab 5, list partners here!
-# NAME HERE
-# NAME HERE
-# NAME HERE
-# NAME HERE
+# Owen Swearingen
 
 # Selection, Insertion, and Merge sorts -- taken from ZyBooks.
 # Not too different, its still the same algorithm, they just did it using less memory than I did

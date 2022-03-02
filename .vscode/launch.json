@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "Launch NimTester",
+            "request": "launch",
+            "mainClass": "NimTester",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
             "name": "g++.exe - Build and debug active file",
             "type": "cppdbg",
             "request": "launch",

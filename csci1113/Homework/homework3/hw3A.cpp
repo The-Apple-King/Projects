@@ -2,18 +2,18 @@
 #include <string>
 using namespace std;
 
-int height(int time, int velocity);
+int height(int, double);
 
 int main()
 {
 
-    double velocity = 60;
-
-    cout << " projectile launched straight up at " << velocity << " m/s";
-    cout << "Time \t\t Height";
+    double velocity;
+    cin >> velocity;
+    cout << " projectile launched straight up at " << velocity << "m/s\n";
+    cout << "Time \t Height\n";
     for (size_t i = 0; height(i, velocity) >= 0; i++)
     {
-        cout << i << "\t\t" << height(i, velocity);
+        cout << i << "\t" << height(i, velocity) << "\n";
     }
 }
 
@@ -25,5 +25,5 @@ int main()
 
 int height(int time, double velocity)
 {
-    return (velocity * time) - (.5 * 9.8 * (time * time));
+    return double((velocity * time) - (.5 * 9.8 * (time * time)));
 }

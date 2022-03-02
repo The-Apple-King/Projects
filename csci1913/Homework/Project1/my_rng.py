@@ -9,14 +9,15 @@ def set_seed(new_seed):
 def next():
     global seed
     seed = (math.pow(7, 5)*seed)%(math.pow(2, 31) -1)
+    return seed
 
 def next_int(min, max):
-    global seed
-    next()
-    return (seed%(max-min))+min
+    for i in range(100):
+        global seed
+        return (next()%(max-min+1))+min
 
 def random_choice(seq):
-    return seq[int(next_int(0,(len(seq))))]
+    return seq[int(next_int(0,(len(seq)-1)))]
 
 def main():
     choice = ''

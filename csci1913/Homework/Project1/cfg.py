@@ -11,26 +11,30 @@ def new_grammar():
 #param dictionary, key, text
 #adds a list of all the words in the text separated by spaces to the dictionary with key left
 def add_rule(grammar, left, right):
-    for i in right:
-        if left in grammar:
-            grammar[left].append(i.split())
-        else:
-            grammar[left] = [i.split()]
-        
+    if left in grammar:
+        grammar[left].append(right)
+    else:
+        grammar[left] = [right]
 
 
 
 #param dictionary
 #runs through a list sentence and replaces all replaceable words in the right spot
 def generate(grammar):
+    if grammar is None:
+        return []
     sentence = ['Start']
-    while "Start" in sentence or "Story" in sentence or "Phrase" in sentence or "Noun" in sentence or "verb" in sentence:
+    modified = True
+    while modified:
+        modified = False
         for i in range(len(sentence)):
             if(sentence[i] in grammar): #checks if the thing needs to be replaced
+                modified = True 
                 temp = my_rng.random_choice(grammar[sentence[i]])
+                #temp = my_rng.random_choicem grammar[sentence[i]]
                 sentence.pop(i)
                 for x in range(len(temp)):
-                    sentence.insert(i+x, temp[x]) 
+                    sentence.insert(i+x, temp[x])
     return sentence
 
 #param string of filename
@@ -40,4 +44,3 @@ def grammar_from_file(filename):
     reader = csv.DictReader(open(filename))
     for row in reader:
         add_rule(grammar, row["variable"], [row["replacement"]])
-    print(grammar)

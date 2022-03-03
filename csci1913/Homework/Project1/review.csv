@@ -1,0 +1,41 @@
+variable,replacement
+Start,Thesis . Body . Conclusion .
+Thesis,this movie was a Valence film!
+Valence,good
+Valence,great
+Valence,bad
+Valence,horrible
+Valence,tedious
+Valence,mundane
+Valence,fantastic
+Valence,memorable
+Valence,bold
+Valence,bombastic
+Valence,forgettable
+Body,Opinion
+Body,Opinion . Body
+Opinion,the Property was Valence
+Conclusion,all in all Rating
+Conclusion,Rating
+Conclusion,I would watch it again. Rating
+Conclusion,Don’t waste your time. Rating
+Rating,Number stars
+Rating,Number out of Number stars
+Rating,Number / Number stars
+Number,0
+Number,no
+Number,1
+Number,2
+Number,3
+Number,4
+Number,5
+Number,yes
+Property,acting
+Property,writing
+Property,directing
+Property,music
+Property,dancing
+Property,popcorn
+Property,drama
+Property,romance
+Property,scary part

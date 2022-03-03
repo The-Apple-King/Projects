@@ -9,4 +9,4 @@ print(g)
 cfg.add_rule(g, "Start", "A b B")
 
 print(g)'''
-cfg.grammar_from_file("story.csv")
+print(cfg.grammar_from_file("story.csv"))

@@ -1,3 +1,9 @@
+'''
+  CSCI 1913
+  Project 1
+  Author: Owen Swearingen
+'''
+
 import time
 import math
 seed = 0

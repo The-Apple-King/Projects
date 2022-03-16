@@ -124,7 +124,7 @@ gog = 0
 cat = 0
 unexpected = 0
 for i in range(10000):
-    seq = generate(G3)
+    seq = generate(G4)
     if len(seq) != 3:
         unexpected += 1
     elif seq[0] == 'd' and seq[1] == 'o' and seq[2] == 'd':

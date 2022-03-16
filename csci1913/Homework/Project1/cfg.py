@@ -1,3 +1,9 @@
+'''
+  CSCI 1913
+  Project 1
+  Author: Owen Swearingen
+'''
+
 import csv
 import my_rng
 import time
@@ -12,17 +18,20 @@ def new_grammar():
 #adds a list of all the words in the text separated by spaces to the dictionary with key left
 def add_rule(grammar, left, right):
     if left in grammar:
-        grammar[left].append(right)
+        grammar[left].append(flatten(right))
     else:
-        grammar[left] = [right]
+        grammar[left] = [flatten(right)]
 
-
+def flatten(lst):
+    output =[]
+    for sentence in lst:
+        for word in sentence.split():
+            output.append(word)
+    return output
 
 #param dictionary
 #runs through a list sentence and replaces all replaceable words in the right spot
 def generate(grammar):
-    if grammar is None:
-        return []
     sentence = ['Start']
     modified = True
     while modified:
@@ -44,3 +53,4 @@ def grammar_from_file(filename):
     reader = csv.DictReader(open(filename))
     for row in reader:
         add_rule(grammar, row["variable"], [row["replacement"]])
+    return grammar

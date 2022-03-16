@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch DrawFigure",
+            "request": "launch",
+            "mainClass": "DrawFigure",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
+            "name": "Launch ShapeUtilsTester",
+            "request": "launch",
+            "mainClass": "ShapeUtilsTester",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
             "name": "Launch NimTester",
             "request": "launch",
             "mainClass": "NimTester",

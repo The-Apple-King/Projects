@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch CraftingLibraryTest",
+            "request": "launch",
+            "mainClass": "CraftingLibraryTest",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
+            "name": "Launch CraftingItemTest",
+            "request": "launch",
+            "mainClass": "CraftingItemTest",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
             "name": "Launch DrawFigure",
             "request": "launch",
             "mainClass": "DrawFigure",

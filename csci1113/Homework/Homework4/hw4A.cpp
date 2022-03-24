@@ -1,5 +1,6 @@
 // Owen Swearingen
 //Homework 4A
+//Ecode a string using a key and return the string 
 
 #include <iostream>
 #include <string>

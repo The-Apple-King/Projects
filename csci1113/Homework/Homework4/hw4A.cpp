@@ -46,7 +46,7 @@ int main(){
  * @return char returns modified phrase
  */
 char encryptChar(char phrase, char key, char letters[26]){
-    return letters[(indexOf(phrase, letters)+indexOf(key, letters)%26)];
+    return letters[((indexOf(phrase, letters)+indexOf(key, letters))%26)];
 }
 
 /**

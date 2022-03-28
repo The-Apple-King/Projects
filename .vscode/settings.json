@@ -50,8 +50,9 @@
         "list": "cpp"
     },
     "java.project.sourcePaths": [
+        "csci1913/labs/lab8",
         "csci1913/labs/lab7",
         "csci1913/labs/lab6",
-        "csci1913/labs/lab8"
+        "csci1913/Homework/Project2"
     ]
 }

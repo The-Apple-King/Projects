@@ -6,6 +6,34 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch CardPileTest",
+            "request": "launch",
+            "mainClass": "CardPileTest",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
+            "name": "Launch HandTest",
+            "request": "launch",
+            "mainClass": "HandTest",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
+            "name": "Launch DeckTest",
+            "request": "launch",
+            "mainClass": "DeckTest",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
+            "name": "Launch CardTest",
+            "request": "launch",
+            "mainClass": "CardTest",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
             "name": "Launch CraftingLibraryTest",
             "request": "launch",
             "mainClass": "CraftingLibraryTest",

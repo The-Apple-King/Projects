@@ -17,7 +17,7 @@ int main(){
     string keyword;
     char letters[26] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
     
-    cout << "Enter the phrase: ";
+    cout << "Encrypted phrase: ";
     cin >> phrase;
     cout << "Enter the keyword: ";
     cin >> keyword;
@@ -32,7 +32,7 @@ int main(){
     }
 
     //output data
-    cout << "Decrypted phrase: " + phrase;
+    cout << "The message: " + phrase;
     
 }
 
@@ -48,7 +48,7 @@ int main(){
  * @return char returns modified phrase
  */
 char encryptChar(char phrase, char key, char letters[26]){
-    return letters[(indexOf(phrase, letters)+indexOf(key, letters)%26)];
+    return letters[((indexOf(phrase, letters)+indexOf(key, letters))%26)];
 }
 
 
@@ -62,7 +62,13 @@ char encryptChar(char phrase, char key, char letters[26]){
  * @return char returns the decrypted char array
  */
 char decryptChar(char phrase, char key, char letters[26]){
-    return letters[(indexOf(phrase, letters)-indexOf(key, letters)%26)];
+    if ((indexOf(phrase, letters)-indexOf(key, letters)) >= 0)
+    {
+        return letters[indexOf(phrase, letters)-indexOf(key, letters)];
+    }
+    else{
+    return letters[26+ indexOf(phrase, letters)-indexOf(key, letters)];
+    }
 }
 
 

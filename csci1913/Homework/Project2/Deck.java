@@ -11,6 +11,7 @@ public class Deck {
             }
         }
     }
+    
 
     public void shuffle() {
         for (int i = 0; i < deck.length; i++) {
@@ -22,6 +23,10 @@ public class Deck {
         deckSize = 52;
     }
 
+    /**
+     * returns card decrements deckSize
+     * @return card from the top of the deck
+     */
     public Card draw() {
         if (deckSize > 0) {
             deckSize--;
@@ -33,10 +38,18 @@ public class Deck {
         }
     }
 
+    /**
+     * 
+     * @return deckSize
+     */
     public int cardsRemaining() {
         return deckSize;
     }
 
+    /**
+     * 
+     * @return true if empty else false
+     */
     public boolean isEmpty() {
         if (deckSize == 0) {
             return true;

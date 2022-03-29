@@ -22,14 +22,25 @@ public class Card {
         }
     }
 
+    /**
+     * 
+     * @return number corresponding to the rank
+     */
     public int getRankNum() {
         return cardRank;
     }
-
+    /**
+     * 
+     * @return returns the name of the card that corresponds to the rank number
+     */
     public String getRankName() {
         return rankkey[cardRank-1];
     }
 
+    /**
+     * 
+     * @return returns the name of the suit 
+     */
     public String getSuitName() {
         return suitkey[cardSuit-1];
     }

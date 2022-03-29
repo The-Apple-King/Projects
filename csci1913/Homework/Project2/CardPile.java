@@ -7,6 +7,11 @@ public class CardPile {
         this.topCard = topCard;
     }
 
+    /**
+     * 
+     * @param card checks if the current card can be played
+     * @return true if card can be played
+     */
     public boolean canPlay(Card card) {
         if (card != null) {
             if (topCard.getRankNum() <= card.getRankNum() || topCard.getSuitName().equals(card.getSuitName())) {
@@ -16,6 +21,10 @@ public class CardPile {
         return false;
     }
 
+    /**
+     *  attemps to play the card if impossible prints illegal move detected
+     * @param card card to play
+     */
     public void play(Card card) {
         if (canPlay(card) && card != null) {
             topCard = card;
@@ -25,10 +34,18 @@ public class CardPile {
         }
     }
 
+    /**
+     * 
+     * @return number of cards
+     */
     public int getNumCards() {
         return numCards;
     }
 
+    /**
+     * 
+     * @return returns the card at the top of the deck
+     */
     public Card getTopCard() {
         return topCard;
     }

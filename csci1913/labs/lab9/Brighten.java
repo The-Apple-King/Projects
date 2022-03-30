@@ -1,22 +1,21 @@
-public class Brighten(){
+//Owen Swearingen
+//lab 9
+public class Brighten extends Transformation {
 
-    private int brightness
-
-    public Brighten(int brightness){
-        this.brightness = brightness
+    private int brightness;
+    /**
+     * instantiates brightness transformation
+     * @param brightness brightness value, positive is brighter, negative is darker
+     */
+    public Brighten(int brightness) {
+        this.brightness = brightness;
     }
 
-    public RGBImage brightenImage(RGBImage image){
-        RGBImage retVal = new RGBImage(image.getWidth(), image.getHeight());
-        for (int x = 0; x < image.getWidth(); x++) {
-            for (int y = 0; y < image.getHeight(); y++) {
-                retVal.setColor(x, y, do_transform(x, y, image.getColor(x, y), image));
-            }
-        }
-        return retVal;
-    }
+    /**
+     * adds the brightness value to the R, G, and B colors to make the image brighter or darker
+     */
     protected RGBColor do_transform(int x, int y, RGBColor originalColor, RGBImage image) {
-        
-        return new RGBColor(originalColor.getRed()+brightness, originalColor.getGreen()+brightness, originalColor.getBlue()+brightness);
+        return new RGBColor(originalColor.getRed() + brightness, originalColor.getGreen() + brightness,
+                originalColor.getBlue() + brightness);
     }
 }

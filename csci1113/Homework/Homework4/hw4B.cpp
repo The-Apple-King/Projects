@@ -1,91 +1,64 @@
 // Owen Swearingen
-//Homework 4B
+// Homework 4A
+// opens and closes mailboxes to output list of squares
 
 #include <iostream>
 #include <string>
 #include <iomanip>
 using namespace std;
 
-char encryptChar(char phrase, char key, char letters[26]);
-char decryptChar(char phrase, char key, char letters[26]);
-int indexOf(char c, char letters[26]);
+int seperate(string number, int numberArr[]);
 
-int main(){
+int main()
+{
+    string number1;
+    int number1array[300] = {0};
+    int number2array[300] = {0};
+    string number2;
+    cout << "enter number 1: ";
+    cin >> number1;
+    cout << "enter number 2: ";
+    cin >> number2;
 
-    //create data
-    string phrase;
-    string keyword;
-    char letters[26] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
-    
-    cout << "Encrypted phrase: ";
-    cin >> phrase;
-    cout << "Enter the keyword: ";
-    cin >> keyword;
-    
+    int array1Pos = 0;
+    int array2Pos = 0;
+    string strtest;
+    int inttest;
 
-    //loop through and create a new string
-    for (size_t i = 0; i < phrase.length(); i++)
+    array1Pos = seperate(number1, number1array);
+    array2Pos = seperate(number2, number2array);
+
+    cout << "the result is ";
+    int carry = 0;
+    for (size_t i = 0; i < max(array1Pos, array2Pos) + 2; i++)
     {
-        int j = i%(keyword.length());
-        phrase[i] = decryptChar(toupper(phrase[i]),toupper(keyword[j]), letters);
-
+        inttest = (number1array[i] + number2array[i] + carry);
+        number1array[i] = ((number1array[i] + number2array[i] + carry) % 1000);
+        carry = (number1array[i] + number2array[i] + carry) / 1000;
     }
 
-    //output data
-    cout << "The message: " + phrase;
-    
-}
-
-
-
-/**
- * @brief takes in two characters and 
- * encrypts the first using the second as a key
- * 
- * @param phrase the char to be encrypted
- * @param key the character key to encryption
- * @param letters char array of all the letters of the alphabet
- * @return char returns modified phrase
- */
-char encryptChar(char phrase, char key, char letters[26]){
-    return letters[((indexOf(phrase, letters)+indexOf(key, letters))%26)];
-}
-
-
-
-/**
- * @brief decrypts a char using a second char as a key
- * 
- * @param phrase the phrase to be decrypted
- * @param key the key to decrypt
- * @param letters char array of letters
- * @return char returns the decrypted char array
- */
-char decryptChar(char phrase, char key, char letters[26]){
-    if ((indexOf(phrase, letters)-indexOf(key, letters)) >= 0)
+    for (int i = max(array1Pos, array2Pos) + 2; i >= 0; i--)
     {
-        return letters[indexOf(phrase, letters)-indexOf(key, letters)];
-    }
-    else{
-    return letters[26+ indexOf(phrase, letters)-indexOf(key, letters)];
-    }
-}
-
-
-
-/**
- * @brief finds the index location of the character
- * 
- * @param c the character
- * @param letters the char array containing alphabet
- * @return int the index of c in letters or -1 if it isn't a letter
- */
-int indexOf(char c, char letters[26]){
-    for (size_t i = 0; i < 26; i++)
-    {
-        if(letters[i] == c){
-            return i;
+        if (number1array[i] != 0)
+        {
+            cout << number1array[i] << ",";
         }
     }
-    return -1;
+}
+
+int seperate(string number, int numberArr[])
+{
+    int count =0;
+    int len = 0;
+    for (int i = number.length() - 1; i >= 0; i--)
+    {
+        while (i > 0 && number[i] != ',')
+        {
+            len++;
+            i--;
+        }
+        numberArr[count] = stoi(number.substr(i, len));
+        count++;
+    }
+    return count;
 }

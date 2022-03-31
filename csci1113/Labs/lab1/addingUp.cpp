@@ -18,7 +18,7 @@ int main() {
 	}
 	average = sum / NUMITEMS;
 
-	cout << "The average of all the numbers is: " << average << endl;
+	cout << "The average of all the numbers is: " <<  << endl;
 
 	return 0;
 

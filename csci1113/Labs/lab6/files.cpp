@@ -78,7 +78,7 @@ int max()
     return max;
 }
 
-int average()
+int ()
 {
     ifstream infile;
     int num;

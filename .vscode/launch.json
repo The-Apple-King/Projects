@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch AITest",
+            "request": "launch",
+            "mainClass": "AITest",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
             "name": "Launch Tester",
             "request": "launch",
             "mainClass": "Tester",

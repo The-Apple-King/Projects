@@ -7,7 +7,7 @@
 #include <iomanip>
 using namespace std;
 
-int seperate(string number, int numberArr[]);
+int separate(string number, int numberArr[]);
 
 int main()
 {
@@ -25,8 +25,8 @@ int main()
     string strtest;
     int inttest;
 
-    array1Pos = seperate(number1, number1array);
-    array2Pos = seperate(number2, number2array);
+    array1Pos = separate(number1, number1array);
+    array2Pos = separate(number2, number2array);
 
     cout << "the result is ";
     int carry = 0;
@@ -46,7 +46,7 @@ int main()
     }
 }
 
-int seperate(string number, int numberArr[])
+int separate(string number, int numberArr[])
 {
     int count =0;
     int len = 0;

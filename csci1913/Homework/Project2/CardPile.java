@@ -1,3 +1,5 @@
+//Project 2
+//Owen Swearingen
 public class CardPile {
 
     private Card topCard;
@@ -14,9 +16,7 @@ public class CardPile {
      */
     public boolean canPlay(Card card) {
         if (card != null) {
-            if (topCard.getRankNum() <= card.getRankNum() || topCard.getSuitName().equals(card.getSuitName())) {
-                return true;
-            }
+            return topCard.getRankNum() <= card.getRankNum() || topCard.getSuitNum() == card.getSuitNum();
         }
         return false;
     }

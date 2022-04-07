@@ -11,7 +11,7 @@ public class AITest {
         Deck deck = new Deck();
         Hand hand = new Hand(deck, 5);
         CardPile pile = new CardPile(deck.draw());
-        AI testAI = new BiggestCardAI();
+        AI testAI = new SmallestCardAI();
 
         System.out.println("Top card is: "+pile.getTopCard());
 

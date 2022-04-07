@@ -1,3 +1,7 @@
+import java.util.Random;
+
+//Project 2
+//Owen Swearingen
 public class Deck {
     private int deckSize = 52;
     private Card[] deck = new Card[52];
@@ -10,18 +14,20 @@ public class Deck {
                 count++;
             }
         }
+        shuffle();
     }
     
-
     public void shuffle() {
-        for (int i = 0; i < deck.length; i++) {
-            int k = (int) Math.random() * i;
+        java.util.Random random = new Random();
+        for (int i = 1; i < deck.length; i++) {
+            int k = (random.nextInt(i));
             Card temp = deck[i];
             deck[i] = deck[k];
             deck[k] = temp;
         }
         deckSize = 52;
     }
+
 
     /**
      * returns card decrements deckSize

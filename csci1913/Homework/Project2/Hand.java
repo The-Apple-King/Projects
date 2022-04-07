@@ -1,3 +1,5 @@
+//Project 2
+//Owen Swearingen
 public class Hand {
 
     private Card[] hand;

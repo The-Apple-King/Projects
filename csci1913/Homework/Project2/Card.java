@@ -1,3 +1,5 @@
+//Project 2
+//Owen Swearingen
 public class Card {
     private int cardRank;
     private int cardSuit;
@@ -29,6 +31,7 @@ public class Card {
     public int getRankNum() {
         return cardRank;
     }
+    
     /**
      * 
      * @return returns the name of the card that corresponds to the rank number
@@ -37,6 +40,14 @@ public class Card {
         return rankkey[cardRank-1];
     }
 
+    /**
+     * 
+     * @return number corresponding to the rank
+     */
+    public int getSuitNum() {
+        return cardSuit;
+    }
+    
     /**
      * 
      * @return returns the name of the suit 

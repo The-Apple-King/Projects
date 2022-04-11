@@ -2,4 +2,5 @@
 **/*.byte
 **/*.exe
 **/_build
+**/*.xml
 Class exercises/*

@@ -9,6 +9,13 @@
             "name": "Launch TestMyDate",
             "request": "launch",
             "mainClass": "TestMyDate",
+            "projectName": "projects_9450d42a"
+        },
+        {
+            "type": "java",
+            "name": "Launch TestMyDate",
+            "request": "launch",
+            "mainClass": "TestMyDate",
             "projectName": "repo-swear041_a631936a"
         },
         {

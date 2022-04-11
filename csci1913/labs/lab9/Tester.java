@@ -6,7 +6,7 @@ public class Tester {
         Transformation t;
         Transformation[] transformations;
 
-/*
+
         // example 1 -- Transformation class
         img = RGBImageUtil.load("bruininks.png");
         t = new Transformation();
@@ -111,7 +111,7 @@ public class Tester {
 //        RGBImageUtil.showImage(img);
 //        RGBImageUtil.showImage(out);
         RGBImageUtil.saveImage(out, "your_bruininks_Sgroovy.png");
-*/
+
         // Example 12 -- transformation util.
         transformations = new Transformation[]{
                 new AddBorder(13, new RGBColor(238, 130, 238)), // violet

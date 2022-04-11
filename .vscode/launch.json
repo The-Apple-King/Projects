@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch TestMyDate",
+            "request": "launch",
+            "mainClass": "TestMyDate",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
+            "name": "Launch TestTuple",
+            "request": "launch",
+            "mainClass": "TestTuple",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
             "name": "Launch Tournament",
             "request": "launch",
             "mainClass": "Tournament",

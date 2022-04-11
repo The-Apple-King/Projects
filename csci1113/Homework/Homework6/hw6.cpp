@@ -9,8 +9,9 @@ struct Laser
     char output[40][40]; // output array
     int x = 0;//x position of laser
     int y = 0;//y position of laser
-    int maxX = 0;
-    int maxY = 0;
+    //makes it easier to print out
+    int maxX = 0;//max x position of laser
+    int maxY = 0;//max y position of laser
     bool on = false;// whether the laser is on or off
     int direction = 0; // east = 0 south = 1 west = 2 north = 3
 };
@@ -32,7 +33,7 @@ int main()
     ifstream infile;
     char command;// command recieved from the file
 
-    infile.open("C:/Users/TheAppleKing/Documents/school/Programs/repo-swear041/csci1113/Homework/Homework6/laser.txt");
+    infile.open("laser.txt");
     if (!infile)
     {
         cout << "Error opening the file. Terminating.\n";
@@ -52,7 +53,7 @@ int main()
     infile.close();
 
     ofstream outfile;
-    outfile.open("C:/Users/TheAppleKing/Documents/school/Programs/repo-swear041/csci1113/Homework/Homework6/output.txt");
+    outfile.open("output.txt");
     print(laser, &outfile);
     outfile.close();
 }
@@ -182,10 +183,6 @@ void forward(struct Laser &laser, int count)
         break;
     case 3: // north
         ydir--;
-        break;
-
-    default:
-        cout << "should not reach here you fucked up";
         break;
     }
     for (size_t i = 0; i < count; i++)

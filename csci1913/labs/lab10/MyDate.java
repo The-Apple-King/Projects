@@ -1,3 +1,5 @@
+//Owen Swearingen
+//lab 10
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -8,7 +10,7 @@ import java.util.Scanner;
  * (NOTE -- I can think of at least one way to break this rule, but it's pretty obscure.
  * If you figure out how to break the rule congrats!)
  */
-public class MyDate {
+public class MyDate implements Comparable<MyDate> {
     private static final int[] DAYS_PER_MONTH = {31,28,31,30,31,30,31,31,30,31,30,31};
 
     private int day, month, y;
@@ -84,9 +86,7 @@ public class MyDate {
         }
     }
 
-    //-----------------------------------------fix-----------------------------------
-
-    public boolean isBefore(MyDate other) {
+    private boolean isBefore(MyDate other) {
         if (y < other.y) {
             // we are in an earlier year
             return true;
@@ -101,11 +101,9 @@ public class MyDate {
         }
     }
 
-    public boolean isEqualTo(MyDate other) {
+    private boolean isEqualTo(MyDate other) {
         return y==other.y && month == other.month && day == other.day;
     }
-
-    //----------------------------------------fix-----------------------------------------
 
     @Override
     public String toString() {
@@ -115,11 +113,12 @@ public class MyDate {
 
     public static MyDate fromString(String input) {
         input = input.replace('-',' ');
-        Scanner s = new Scanner(input);
-        int y = s.nextInt();
-        int m = s.nextInt();
-        int d = s.nextInt();
-        return new MyDate(d, m, y);
+        try (Scanner s = new Scanner(input)) {
+            int y = s.nextInt();
+            int m = s.nextInt();
+            int d = s.nextInt();
+            return new MyDate(d, m, y);
+        }
     }
 
     public static int daysBetween(MyDate date1, MyDate date2) {
@@ -131,7 +130,7 @@ public class MyDate {
                 // we want date1 < date2 so swap the variables (leaving objects alone)
                 MyDate tmp = date1;
                 date1 = date2;
-                date2 = date1;
+                date2 = tmp;
             }
             int count = 0;
             // This is a really inefficient way to do this, but whatever.
@@ -151,5 +150,37 @@ public class MyDate {
         // than it needs to be.
         LocalDate date = LocalDate.now();
         return new MyDate(date.getDayOfMonth(), date.getMonthValue(), date.getYear());
+    }
+
+    /**
+     * compares two MyDate objects
+     * @param myDate2 date compared against this one
+     * @return a negative integer, zero, or a positive integer as the first
+     *  argument is less than, equal to, or greater than the second.
+     */
+    public int compareTo(MyDate myDate2){
+        if (this.isEqualTo(myDate2)) {
+            return 0;
+        }
+        else if(this.isBefore(myDate2)){
+            return -1;
+        }
+        return 1;
+    }
+
+    /**
+     * determines if a date object refers to the same date
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        } else if (other == null) {
+            return false;
+        } else if (other instanceof MyDate) {
+            return isEqualTo((MyDate)other);
+        } else {
+            return false;
+        }
     }
 }

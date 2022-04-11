@@ -1,5 +1,5 @@
 // Owen Swearingen
-//Homework 4A
+//Homework 5A
 //opens and closes mailboxes to output list of squares
 
 #include <iostream>

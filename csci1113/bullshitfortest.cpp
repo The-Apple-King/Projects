@@ -1,31 +1,31 @@
 #include <iostream> 
- using namespace std; 
- int alter( int &, int &); 
- int c; 
- int main(){ 
-  int a, b, d; 
-  a = 1; 
-  b = 2; 
-  c = 3; 
-  d = 4; 
-  a = alter(d, b); 
-  cout << "a = " << a << " b = " << b << " c = " << c << " d = " << 
-d << endl; 
-int alter(int &a, int &b){ 
-  int d; 
+#include <string> 
+using namespace std; 
  
-cout << "a = " << a << " b = " << b << " c = " << c << " d = " << 
-d << endl; 
-   
-d = a * b; 
-  c = a + b; 
-  b = 9; 
-  a = 7; 
-   
-cout << " " << a << " " << b << " " << c << " " << d << endl; 
-  
-   
-return b; 
+string* getFullName(); 
+int main() { 
+ 
+    string* name; 
+ 
+    name = getFullName(); 
+    for (int i = 0; i < 3; i++) { 
+        cout << name[i] << " "; 
+    } 
+    cout << endl; 
+ 
+    delete[] name; 
+ 
+    return 0; 
+} 
+string* getFullName() { 
+ 
+    string fullName[3]; 
+    cout << "Enter your first name "; 
+    getline(cin, fullName[0]); 
+    cout << "Enter your second name "; 
+    getline(cin, fullName[1]); 
+    cout << "Enter your last name "; 
+    getline(cin, fullName[2]); 
+ 
+    return fullName; 
 }
- } 
- 

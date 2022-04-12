@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch BraceCheckerTester",
+            "request": "launch",
+            "mainClass": "BraceCheckerTester",
+            "projectName": "projects_9450d42a"
+        },
+        {
+            "type": "java",
+            "name": "Launch GenericStackTester",
+            "request": "launch",
+            "mainClass": "GenericStackTester",
+            "projectName": "projects_9450d42a"
+        },
+        {
+            "type": "java",
             "name": "Launch TestMyDate",
             "request": "launch",
             "mainClass": "TestMyDate",

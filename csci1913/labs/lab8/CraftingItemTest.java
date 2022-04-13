@@ -72,7 +72,7 @@ public class CraftingItemTest {
 		System.out.println("toString: " + toString);     // toString: name: shuriken, cost: 0.0, parts: [tape, nail, nail, nail, nail]
 
 		// TEST equals
-		System.out.println(item1.equals("wood"));        // false
+		//System.out.println(item1.equals("wood"));        // false
 		System.out.println(item1.equals(item2));         // false
 		System.out.println(item2.equals(item3));         // true
 		System.out.println(item1.equals(recipe3));       // false

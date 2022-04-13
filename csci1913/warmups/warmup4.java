@@ -1,4 +1,4 @@
-public class warmup4 {
+/*public class warmup4 {
     private ELEM[] data;
     private int length;
 
@@ -14,3 +14,4 @@ public class warmup4 {
         return false;
     }
 }
+*/

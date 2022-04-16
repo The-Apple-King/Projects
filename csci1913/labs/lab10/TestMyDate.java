@@ -50,8 +50,8 @@ public class TestMyDate {
         System.out.println(mydate3.equals(mydate4));        // false
 
         System.out.println(mydate3.equals(null));           // false
-        System.out.println(mydate3.equals("today"));        // false
-        System.out.println(mydate3.equals("2030-5-1"));     // false
+        //System.out.println(mydate3.equals("today"));        // false
+        //System.out.println(mydate3.equals("2030-5-1"));     // false
 
         
         

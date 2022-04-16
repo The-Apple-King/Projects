@@ -1,4 +1,4 @@
-public class warmup3{
+/*public class warmup3{
     public static void main(String[] args){
         int count =0;
         scanner Tracer = new scanner(system.in());
@@ -37,4 +37,4 @@ public class point{
         return false;
     }
 
-}
+}*/

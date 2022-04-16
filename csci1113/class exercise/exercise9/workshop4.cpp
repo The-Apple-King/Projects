@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-struct bookData
+class Book
 {
     private:
     string title;
@@ -10,21 +10,23 @@ struct bookData
     double price;
     int copies;
     public:
-    bookData();
-    bookData(string, string*, int, string, double, int);
+    Book();
+    Book(string, string*, int, string, double, int);
     void setTitle(string);
     void setAuthor(string[], int);
     void setISBN(string);
     void setPrice(double);
     void setCopies(int);
-    string getTitle(string);
-    string* getAuthor(string[], int);
-    string getISBN(string);
-    double getPrice(double);
-    int getCopies(int);
+    string getTitle();
+    string* getAuthor();
+    string getISBN();
+    double getPrice();
+    int getCopies();
+    void display(ostream &out) const;
+    void read(istream &in);
 };
 
-bookData::bookData(){
+Book::Book(){
     title = "";
     for (size_t i = 0; i < 4; i++)
     {
@@ -34,7 +36,7 @@ bookData::bookData(){
     price = 0;
     copies = 0;
 }
-bookData::bookData(string titleval, string* auth, int numauth, string isbnval, double priceval, int copiesval){
+Book::Book(string titleval, string* auth, int numauth, string isbnval, double priceval, int copiesval){
     title = titleval;
     for (size_t i = 0; i < 4; i++)
     {
@@ -50,36 +52,82 @@ bookData::bookData(string titleval, string* auth, int numauth, string isbnval, d
     price = priceval;
     copies = copiesval;
 }
-    void setTitle(string titleval){
-        bookData::title = titleval;
+    void Book::setTitle(string titleval){
+        Book::title = titleval;
     }
-    void setAuthor(string* auth, int num){
+    void Book::setAuthor(string* auth, int num){
         for (size_t i = 0; i < num; i++)
         {
-            bookData::author[i] = auth[i];
+            author[i] = auth[i];
         }
     }
-    void setISBN(string){
-
+    void Book::setISBN(string val){
+        isbn = val;
     }
-    void setPrice(double){
-
+    void Book::setPrice(double val){
+        price = val;
     }
-    void setCopies(int){
-
+    void Book::setCopies(int val){
+        copies = val;
     }
-    string getTitle(string){
-
+    string Book::getTitle(){
+        return title;
     }
-    string* getAuthor(string[], int){
-
+    string* Book::getAuthor(){
+        return author;
     }
-    string getISBN(string){
-
+    string Book::getISBN(){
+        return isbn;
     }
-    double getPrice(double){
-
+    double Book::getPrice(){
+        return price;
     }
-    int getCopies(int){
+    int Book::getCopies(){
+        return copies;
+    }
 
+    void Book::display(ostream &out) const {
+        out << "the title is: " << title << endl;
+        out << "the authors are: " << author[0] << ", " << author[0] << ", " << author[0] << ", " << author[0] << endl;
+        out << "the isbn is: " << isbn << endl;
+        out << "the price is: " << price << endl;
+        out << "the number of copies is: " << copies << endl;
+    }
+
+    void Book::read(istream &in){
+        cout << " title: ";
+        in >> title;
+        cout << "number of authors";
+        int num;
+        in >> num;
+        for (size_t i = 0; i < num; i++)
+        {
+            cout << "author " << i+1 << endl ;
+            in >> author[i];
+        }
+        cout << "isbn: ";
+        in >> isbn;
+        cout << "price: ";
+        in >> price;
+        cout << "copies: ";
+        in >> copies;
+        
+    }
+
+    istream &operator>>(istream &in, Book &b) {
+        b.read(in);
+        return in;
+    }
+
+    ostream &operator<<(ostream &out, Book &b) {
+        b.display(out);
+        return out;
+    }
+
+
+    int main(){
+        Book fiction;
+        cout << "enter book's information";
+        cin >> fiction;
+        cout << fiction << endl;
     }

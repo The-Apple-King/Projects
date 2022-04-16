@@ -9,6 +9,7 @@ public class GenericStack<Elem> {
      * creates a new Elem stack of size 'size'
      * @param size the default size of the stack
      */
+    
     public GenericStack(int size){
         data = (Elem[]) new Object[size];
     }

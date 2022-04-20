@@ -7,6 +7,7 @@ class Point{
       int getY() const;  // return yloc 
       void setX(int x); 
       void setY(int y); 
+      Point &operator+(const Point) //b
   private: 
       int  xloc; 
       int  yloc; 
@@ -15,14 +16,26 @@ class Point{
 // creates a new Point by adding both the x and y coordinates. 
 Point &operator+(const Point &lhs, const Point &rhs); 
  
-a. 
+a. Point &operator+(const Point &a, const Point &b){
+    int x = a.getX() + b.getX();
+    int y = a.getY() + b.getY();
+    Point c = Point(x, y);
+    return c;
+}
 
 b.
 
-c.
+c.Point &operator+(const Point &b){
+    int x = x + b.X;
+    int y = y + b.Y;
+    Point c = Point(x, y);
+    return c;
+}
 
-d.
+d. ostream because it does the same thing as writing cout over and over;
 
-e.
+e. we need to use << for a different value type when using cout not for any items in class
  
-f.
+f. ostream &operator<<(const Point a){
+    a.getX() + ',' + a.getY();
+}

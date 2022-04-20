@@ -7,6 +7,8 @@ private:
     double imag;
 
 public:
+    complexNum();
+    complexNum(double, double);
 	void input(istream&);
     void output(ostream&);
     double getReal();
@@ -16,19 +18,28 @@ public:
 
 };
 
+ostream &operator<<(ostream &, complexNum &);
+istream &operator>>(istream &, complexNum &);
+complexNum operator+(complexNum &, complexNum &);
+complexNum operator-(complexNum &);
+
+complexNum::complexNum(){
+    real = 0;
+    imag = 0;
+}
+
+complexNum::complexNum(double a, double b){
+    real = a;
+    imag = b;
+}
+
 int main(){
-    complexNum c1 = complexNum();
-    complexNum c2 = complexNum();
-
-    c1.input(cin);
-    c2.input(cin);
-
-    c1.output(cout);
-    c2.output(cout);
-
-    c2.setReal(22.2);
-    c2.getReal();
-    c2.output(cout);
+    complexNum c1,c2,c3; 
+    cout << "Enter two complex values: "; 
+    cin >> c1 >> c2; 
+    c3 = c1+c2; 
+    cout << "The sum is: " << c3 << endl; 
+    cout << "and negating the sum yields: " << -c3 << endl; 
 }
 
 void complexNum::input(istream& instream){
@@ -42,7 +53,33 @@ void complexNum::input(istream& instream){
 }
 
 void complexNum::output(ostream& outstream){
-    outstream << getReal() << " + " << getImag() << "i" << endl;
+    if(getImag() > 0){
+        outstream << getReal() << " + " << getImag() << "i" << endl;
+    }
+    else{
+        outstream << getReal() << " - " << getImag() << "i" << endl;
+    }
+}
+
+ostream &operator<<(ostream &out, complexNum &a){
+    if(a.getImag() > 0){
+        out << a.getReal() << " + " << a.getImag() << "i" << endl;
+    }
+    else{
+        out << a.getReal() << " - " << a.getImag() << "i" << endl;
+    }
+    return out;
+}
+
+istream &operator>>(istream &in, complexNum &a){
+    double temp;
+    cout << "enter real number: ";
+    in >> temp;
+    a.setReal(temp);
+    cout << "enter imaginary number: ";
+    in >> temp;
+    a.setImag(temp);
+    return in;
 }
 
 double complexNum::getReal(){
@@ -59,4 +96,12 @@ void complexNum::setReal(double realval){
 
 void complexNum::setImag(double imagval){
     imag = imagval;
+}
+
+complexNum operator+(complexNum &a, complexNum &b){
+    return complexNum { (a.getReal() + b.getReal()), (a.getImag() + b.getImag())};
+}
+
+complexNum operator-(complexNum &a){
+    return complexNum { -a.getReal(), -a.getImag()};
 }

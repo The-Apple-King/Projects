@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch RepeatBlockQueueTest",
+            "request": "launch",
+            "mainClass": "lab12.RepeatBlockQueueTest",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
+            "name": "Launch RepeatBlockQueueNodeTest",
+            "request": "launch",
+            "mainClass": "lab12.RepeatBlockQueueNodeTest",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
             "name": "Launch BraceCheckerTester",
             "request": "launch",
             "mainClass": "BraceCheckerTester",

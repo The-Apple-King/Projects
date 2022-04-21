@@ -34,8 +34,9 @@ c.Point &operator+(const Point &b){
 
 d. ostream because it does the same thing as writing cout over and over;
 
-e. we need to use << for a different value type when using cout not for any items in class
+e. we need to use << for a different value type when using cout not for any private items in class
  
-f. ostream &operator<<(const Point a){
-    a.getX() + ',' + a.getY();
+f. ostream &operator<<(ostream& outstream, const Point a){
+    outstream << a.getX() + ',' + a.getY();
+    return outstream;
 }

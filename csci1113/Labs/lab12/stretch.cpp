@@ -1,27 +1,8 @@
 #include <iostream>
+#include "stretch.h"
 using namespace std;
 
-class complexNum {
-private:
-	double real;
-    double imag;
 
-public:
-    complexNum();
-    complexNum(double, double);
-	void input(istream&);
-    void output(ostream&);
-    double getReal();
-    double getImag();
-    void setReal(double);
-    void setImag(double);
-
-};
-
-ostream &operator<<(ostream &, complexNum &);
-istream &operator>>(istream &, complexNum &);
-complexNum operator+(complexNum &, complexNum &);
-complexNum operator-(complexNum &);
 
 complexNum::complexNum(){
     real = 0;
@@ -39,7 +20,8 @@ int main(){
     cin >> c1 >> c2; 
     c3 = c1+c2; 
     cout << "The sum is: " << c3 << endl; 
-    cout << "and negating the sum yields: " << -c3 << endl; 
+    -c3;
+    cout << "and negating the sum yields: " << c3 << endl;
 }
 
 void complexNum::input(istream& instream){
@@ -62,12 +44,28 @@ void complexNum::output(ostream& outstream){
 }
 
 ostream &operator<<(ostream &out, complexNum &a){
+    bool test = false;
+    bool test2 = false;
+    if(a.getReal() != 0){
+        out << a.getReal();
+        test = true;
+    }
     if(a.getImag() > 0){
-        out << a.getReal() << " + " << a.getImag() << "i" << endl;
+        if(test){
+            out << " + ";
+        }
+        out << a.getImag() << "i" << endl;
+        test2 = true;
     }
-    else{
-        out << a.getReal() << " - " << a.getImag() << "i" << endl;
+    else if(a.getImag() < 0){
+        out << " - " << a.getImag() << "i" << endl;
+        test2 = true;
     }
+    if (!test && !test2)
+    {
+        out << 0;
+    }
+    
     return out;
 }
 
@@ -102,6 +100,7 @@ complexNum operator+(complexNum &a, complexNum &b){
     return complexNum { (a.getReal() + b.getReal()), (a.getImag() + b.getImag())};
 }
 
-complexNum operator-(complexNum &a){
-    return complexNum { -a.getReal(), -a.getImag()};
+void complexNum::operator-() {
+    real = -real;
+    imag = - imag;
 }

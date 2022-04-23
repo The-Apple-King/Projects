@@ -1,22 +1,72 @@
 // Owen Swearingen
 // Center of mass
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 class PointMass
 {
 private:
-    int loc[3];
-    int mass;
+    double loc[3];
+    double mass;
 
 public:
     PointMass();
-    PointMass(int, int, int, int);
-    int getX();
-    int getY();
-    int getZ();
-    int getMass();
+    PointMass(double, double, double, double);
+    double getX();
+    double getY();
+    double getZ();
+    double getMass();
 };
+
+PointMass centerOfMass(PointMass* points, double numPoints);
+ostream &operator<<(ostream &out, PointMass &a);
+
+int main()
+{
+
+    ifstream infile;
+
+    infile.open("pointMass.txt");
+    if (!infile)
+    {
+        cout << "Error opening the file. Terminating.\n";
+        return -1;
+    }
+
+    PointMass points[10];
+    double numPoints = 0;
+    infile >> numPoints;
+    while (numPoints <= 0)// extra test in case negative or 0 points
+    {
+        infile >> numPoints;
+    }
+    for (size_t i = 0; i < numPoints; i++)
+    {
+        double x,y,z,mass;
+        infile >> x >> y >> z >> mass;
+        points[i] = PointMass(x,y,z,mass);
+    }
+    
+    cout << "Location matrix: " << endl;
+    for (size_t i = 0; i < numPoints; i++)
+    {
+            cout << points[i].getX() << " " << points[i].getY() << " " << points[i].getZ() << endl;
+    }
+
+    cout << "Masses vector: " << endl;
+    for (size_t i = 0; i < numPoints; i++)
+    {
+        cout << points[i].getMass() << endl;
+    }
+    cout << "N:\n" << numPoints << endl;
+    
+    PointMass COM = centerOfMass(points, numPoints);
+    cout << "Center of Gravity: " << endl;
+    cout << COM;
+
+}
+
 
 PointMass::PointMass()
 {
@@ -27,7 +77,7 @@ PointMass::PointMass()
     mass = 0;
 }
 
-PointMass::PointMass(int x, int y, int z, int massval)
+PointMass::PointMass(double x, double y, double z, double massval)
 {
     loc[0] = x;
     loc[1] = y;
@@ -35,72 +85,55 @@ PointMass::PointMass(int x, int y, int z, int massval)
     mass = massval;
 }
 
-int PointMass::getX()
+double PointMass::getX()
 {
     return loc[0];
 }
-int PointMass::getY()
+double PointMass::getY()
 {
     return loc[1];
 }
-int PointMass::getZ()
+double PointMass::getZ()
 {
     return loc[2];
 }
-int PointMass::getMass()
+double PointMass::getMass()
 {
     return mass;
 }
 
-int* centerOfMass(PointMass* points, int numPoints){
-    int *numerator = new int[3];
-    for (size_t i = 0; i < 3; i++)
-    {
-        numerator[i] = 0;
-    }
-    
-    int massSum = 0;
+PointMass centerOfMass(PointMass* points, double numPoints){
+    double numerator[3] = {0,0,0};
+    double massSum = 0;
+
     for (size_t i = 0; i < numPoints; i++)
     {
-        int x = points[i].getX();
-        int y = points[i].getY();
-        int z = points[i].getZ();
-        int mass = points[i].getMass();
+        double x = points[i].getX();
+        double y = points[i].getY();
+        double z = points[i].getZ();
+        double mass = points[i].getMass();
 
-        numerator[0] = (x*mass);
-        numerator[1] = (y*mass);
-        numerator[2] = (z*mass);
+        numerator[0] += (x*mass);
+        numerator[1] += (y*mass);
+        numerator[2] += (z*mass);
         massSum += mass;
     }
     for (size_t i = 0; i < 3; i++)
     {
-        numerator[i]/=massSum;
+        numerator[i] = numerator[i] / massSum;
     }
-    return numerator;
-}
 
-int main()
-{
-
-    PointMass *points;
-    int numPoints = 0;
-    cout << "gimme the shit";
-    cin >> numPoints;
-    while (numPoints <= 0)
-    {
-        cout << "enter a number bigger than 0";
-        cout << "gimme the shit";
-        cin >> numPoints;
-    }
-    for (size_t i = 0; i < numPoints; i++)
-    {
-        int x,y,z,mass;
-        cin >> x >> y >> z >> mass;
-        points[i] = PointMass(x,y,z,mass);
-    }
-    int *COM = centerOfMass(points, numPoints);
+    PointMass val = PointMass(numerator[0], numerator[1], numerator[2], massSum);
+    return val;
     
-    cout << "idk what you want";
-
 }
+
+ostream &operator<<(ostream &out, PointMass &a){
+    out << a.getX() << " " << a.getY() << " " << a.getZ() ;
+    return out;
+}
+
+//ifstream &operator>>(ifstream in, double x){}
+
+
 

@@ -134,6 +134,9 @@ public class CharBagTest {
                 System.out.println("Test failed, a CharBag with only a and b generated a not a/b value");
             }
         }
+        if(a > 4902 && a < 5098){
+            System.out.println(true);
+        }
         System.out.println(a + ", " + b);
         // random, being the way it is, means that we can't predict the exact values here. But, they should be close to each other.
         // however, if I did my math right then 95% of the time a and b should be between 5098 and 4902 (inclusive)
@@ -155,6 +158,9 @@ public class CharBagTest {
             } else {
                 System.out.println("Test failed, a CharBag with only a and b generated a not a/b value");
             }
+        }
+        if(a > 5904 && a <6096){
+            System.out.println(true);
         }
         System.out.println(a + ", " + b);
         // random, being the way it is, means that we can't predict the exact values here. But, they should be close to each other.

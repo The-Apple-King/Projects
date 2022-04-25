@@ -6,6 +6,41 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch GibberisherMain",
+            "request": "launch",
+            "mainClass": "GibberisherMain",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
+            "name": "Launch TrieTest",
+            "request": "launch",
+            "mainClass": "TrieTest",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
+            "name": "Launch TrieNodeTest",
+            "request": "launch",
+            "mainClass": "TrieNodeTest",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
+            "name": "Launch CharBagTest",
+            "request": "launch",
+            "mainClass": "CharBagTest",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
+            "name": "Launch LetterSampleTest",
+            "request": "launch",
+            "mainClass": "LetterSampleTest",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
             "name": "Launch RepeatBlockQueueTest",
             "request": "launch",
             "mainClass": "lab12.RepeatBlockQueueTest",

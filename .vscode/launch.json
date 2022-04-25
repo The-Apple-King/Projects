@@ -9,6 +9,20 @@
             "name": "Launch GibberisherMain",
             "request": "launch",
             "mainClass": "GibberisherMain",
+            "projectName": "projects_9450d42a"
+        },
+        {
+            "type": "java",
+            "name": "Launch killme",
+            "request": "launch",
+            "mainClass": "killme",
+            "projectName": "projects_9450d42a"
+        },
+        {
+            "type": "java",
+            "name": "Launch GibberisherMain",
+            "request": "launch",
+            "mainClass": "GibberisherMain",
             "projectName": "repo-swear041_a631936a"
         },
         {

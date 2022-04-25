@@ -89,21 +89,22 @@ public class CharBag {
     public char getRandomChar() {
         if (totLetters > 0) {
             Random rand = new Random();
-            int num = rand.nextInt(totLetters);
+            int num = 1+rand.nextInt(totLetters);
             int accum = 0;
-            int loc = 0;
-            //finds the location of num in array
-            while(accum < num || (loc < 26 && letters[loc] == 0)) {
-                accum += letters[loc++];
+            int loc = -1;
+            //finds location of num in array
+            while(accum < num) {
+                loc++;
+                accum += letters[loc];
             }
-            //returns the lett
-            if(loc >= 26){ 
-                return LetterSample.STOP;
-            }else{
-                return (char) (loc + 97);
-            } 
+            //finds and returns the correct char value of the random char
+            if(loc <= 25){ 
+                return((char) (loc + 97));
+            }else if(loc == 26){
+                return(LetterSample.STOP);
+            }
         }
-        return LetterSample.STOP;
+        return(LetterSample.STOP);
     }
 
 }

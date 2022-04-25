@@ -2,14 +2,22 @@ import java.util.Random;
 
 public class CharBag {
 
-    private int letters[];
-    int totLetters;
+    private int letters[]; //array representing the letters the last index being the stop char
+    int totLetters; //the total number of letters sampled
 
+    /**
+     * 
+     */
     public CharBag(){
         letters = new int[27];
         totLetters = 0;
     }
 
+    /**
+     * a helper function to find the location in our array of the char sent in
+     * @param c the character to find the position of
+     * @return the position in the array of a char
+     */
     private int arrPos(char c) {
         int letterloc;
         if (Character.isLetter(c)) {
@@ -21,11 +29,19 @@ public class CharBag {
         return letterloc;
     }
 
+    /**
+     * adds a value to the charbag
+     * @param c character to add to the charbag
+     */
     public void add(char c) {
         letters[arrPos(c)]++;
         totLetters++;
     }
-
+    
+    /**
+     * removes a char from charbag
+     * @param c the char to be removed
+     */
     public void remove(char c) {
         if(letters[arrPos(c)] > 0){
         letters[arrPos(c)]--;
@@ -33,14 +49,27 @@ public class CharBag {
         }
     }
 
+    /**
+     * returns the number of char c in the charbag
+     * @param c the char to check position
+     * @return the number of c in the charbag
+     */
     public int getCount(char c) {
         return letters[arrPos(c)];
     }
 
+    /**
+     * gets the total amount of samples in the charbag
+     * @return total letters
+     */
     public int getSize() {
         return totLetters;
     }
 
+    
+    /** 
+     * returns the letters and how many in a string
+    */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -53,16 +82,22 @@ public class CharBag {
         return sb.toString();
     }
 
+    /**
+     * returns a random character with skewed probability based on the data in charbag
+     * @return a random char
+     */
     public char getRandomChar() {
         if (totLetters > 0) {
             Random rand = new Random();
             int num = rand.nextInt(totLetters);
             int accum = 0;
             int loc = 0;
+            //finds the location of num in array
             while(accum < num || (loc < 26 && letters[loc] == 0)) {
                 accum += letters[loc++];
             }
-            if(loc >= 26){ // fix this shit alex is dumb and wrote it wrong and its definitely not your fault
+            //returns the lett
+            if(loc >= 26){ 
                 return LetterSample.STOP;
             }else{
                 return (char) (loc + 97);

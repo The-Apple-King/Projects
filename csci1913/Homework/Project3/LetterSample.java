@@ -4,19 +4,36 @@ public class LetterSample {
     private char nextLetter;
     private String segmentString;
 
+    /**
+     * creates a sample of letters and what letter should follow that sample
+     * @param segmentString the string identifying this LetterSample
+     * @param nextLetter the letter after to add to the Charbag
+     */
     public LetterSample(String segmentString, char nextLetter) {
         this.nextLetter = nextLetter;
         this.segmentString = segmentString;
     }
 
+    /**
+     * returns the segment that identifies this string
+     */
     public String getSegment() {
         return segmentString;
     }
 
+    /**
+     * returns the letter that should follow the segment string
+     */
     public char getNextLetter() {
         return nextLetter;
     }    
 
+    /**
+     * takes a string and turns it into an array of LetterSamples
+     * @param input the word to be separated into samples 
+     * @param segmentSize the size of the segment of letters
+     * @return array of LetterSamples
+     */
     public static LetterSample[] toSamples(String input, int segmentSize) {
         LetterSample segments[] = new LetterSample[input.length()+1];
         char word[] = new char[input.length() + 1];
@@ -40,6 +57,9 @@ public class LetterSample {
         return segments;
     }
 
+    /**
+     * returns a LetterSample as a string
+     */
     @Override
     public String toString() {
         return "\"" + segmentString + "\"" + " -> "  + nextLetter;

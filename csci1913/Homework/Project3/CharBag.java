@@ -2,8 +2,13 @@ import java.util.Random;
 
 public class CharBag {
 
-    private int letters[] = new int[27];
+    private int letters[];
     int totLetters;
+
+    public CharBag(){
+        letters = new int[27];
+        totLetters = 0;
+    }
 
     private int arrPos(char c) {
         int letterloc;
@@ -51,17 +56,17 @@ public class CharBag {
     public char getRandomChar() {
         if (totLetters > 0) {
             Random rand = new Random();
-            int num = 1 + rand.nextInt(totLetters);
+            int num = rand.nextInt(totLetters);
             int accum = 0;
             int loc = 0;
-            while(loc < 26){
-                accum += letters[loc];
-                if(accum >= num){
-                    break;
-                }
-                loc++;
+            while(accum < num || (loc < 26 && letters[loc] == 0)) {
+                accum += letters[loc++];
             }
-            return (char) (loc+97);
+            if(loc >= 26){ // fix this shit alex is dumb and wrote it wrong and its definitely not your fault
+                return LetterSample.STOP;
+            }else{
+                return (char) (loc + 97);
+            } 
         }
         return LetterSample.STOP;
     }

@@ -2,30 +2,28 @@
 public class TrieNode<T> {
 
     private T data;
-    private TrieNode<T>[] nodes = new TrieNode[26];
+    private TrieNode<T>[] nodes;
     
 
     public TrieNode(){
-        for (int i = 0; i < 26; i++) {
-            nodes[i] = null;
-        }
+        nodes = new TrieNode[26];
         data = null;
     }
-
 
     public T getData() {
         return data;
     }
 
-
     public void setData(T d) {
         data = d;
     }
 
-
     public TrieNode<T> getChild(char c) {
+        if(c < 96 || c > 123){
+            return null;
+        }
         if(nodes[(int) (c-97)] == null){
-            nodes[(int) (c-97)] = new TrieNode<>();
+            nodes[(int) (c-97)] = new TrieNode<T>();
         }
         return nodes[(int) (c-97)];
     }

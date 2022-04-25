@@ -9,13 +9,13 @@ public class LetterSample {
         this.segmentString = segmentString;
     }
 
-    public char getNextLetter() {
-        return nextLetter;
-    }
-
     public String getSegment() {
         return segmentString;
     }
+
+    public char getNextLetter() {
+        return nextLetter;
+    }    
 
     public static LetterSample[] toSamples(String input, int segmentSize) {
         LetterSample segments[] = new LetterSample[input.length()+1];

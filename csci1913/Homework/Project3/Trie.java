@@ -3,7 +3,7 @@ public class Trie<T> {
     private TrieNode<T> root;
 
     public Trie() {
-        root = new TrieNode<>();
+        root = new TrieNode<T>();
     }
 
     private TrieNode<T> getNode(String string) {
@@ -18,8 +18,9 @@ public class Trie<T> {
         return getNode(string).getData();
     }
 
-    public void put(String string, T val) {
+    public T put(String string, T val) {
         getNode(string).setData(val);
+        return val;
     }
 
     public TrieNode<T> getRoot() {

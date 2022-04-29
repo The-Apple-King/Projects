@@ -60,7 +60,8 @@ Array &Array::operator=(const Array &toCopy)
 void Array::display(ostream &out){
     for (size_t i = 0; i < size-1; i++)
     {
-        out << ptr[i] + ", ";
+        string str = ptr[i] + ", ";
+        out << str;
     }
     out << ptr[size];
 }
@@ -83,4 +84,10 @@ istream &operator>>(istream &in,Array &val)
 ostream &operator<<(ostream &out,Array &val){
     val.display(out);
     return out;
+}
+
+int main(){
+    Array a1;
+    cin >>  a1;
+    cout << a1;
 }

@@ -90,3 +90,4 @@ int main()
     cout << "How long the battery's remaining energy can charge after recharging (in seconds):" << endl;
     cout << batman.maxTime(8) << endl;
 }
+

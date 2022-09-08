@@ -1,4 +1,3 @@
-package lab12;
 public class RepeatBlockQueueTest {
     public static void main(String[] args) {
         ///////////////////////////////////////////////////////////////

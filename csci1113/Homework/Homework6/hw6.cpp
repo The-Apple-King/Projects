@@ -56,6 +56,8 @@ int main()
     outfile.open("output.txt");
     print(laser, &outfile);
     outfile.close();
+    int *a = new int[69], b;
+    delete[] a;
 }
 
 /**

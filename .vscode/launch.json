@@ -4,18 +4,26 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+
+        {
+            "type": "java",
+            "name": "Launch CallTreeTests",
+            "request": "launch",
+            "mainClass": "lab13.CallTreeTests",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
+            "name": "Launch CallTreeNodeTests",
+            "request": "launch",
+            "mainClass": "lab13.CallTreeNodeTests",
+            "projectName": "repo-swear041_a631936a"
+        },
         {
             "type": "java",
             "name": "Launch GibberisherMain",
             "request": "launch",
             "mainClass": "GibberisherMain",
-            "projectName": "projects_9450d42a"
-        },
-        {
-            "type": "java",
-            "name": "Launch killme",
-            "request": "launch",
-            "mainClass": "killme",
             "projectName": "projects_9450d42a"
         },
         {

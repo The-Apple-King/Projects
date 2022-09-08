@@ -1,5 +1,3 @@
-package lab12;
-
 public class RepeatBlockQueueNodeTest {
     public static void main(String[] args) {
         RepeatBlockQueueNode<String> rbqn = new RepeatBlockQueueNode<>("apple", null);

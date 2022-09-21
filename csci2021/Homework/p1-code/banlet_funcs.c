@@ -30,7 +30,7 @@ int count_linebreaks(char *msg){
   int tot = 1;
   for (size_t i = 0; i < strlen(msg); i++)
   {
-    if (msg[i] = '/n')
+    if (msg[i] = '\n')
     {
       tot++;
     }
@@ -56,7 +56,7 @@ int *find_linebreaks(char *msg, int *nbreaks){
   int accum = 0;
   for (size_t i = 0; i < strlen(msg); i++)
   {
-    if (msg[i] = '/n')
+    if (msg[i] == '\n')
     {
       linebreaklocs[accum] = i;
     }
@@ -92,7 +92,7 @@ void print_fontified_oneline(char *msg, font_t *font, int length){
     for(int j = 0; j < length; j++) {
       printf("%s", font->glyphs[msg[j]]);
     }
-    printf('\n');
+    printf("\n");
   }
   
 }
@@ -126,7 +126,9 @@ void print_fontified_oneline(char *msg, font_t *font, int length){
 // | |___.| (_| || |   | |   | |_| |    
 //  \____| \__,_||_|   |_|    \___/     
 void print_fontified(char *msg, font_t *font){
-  // WRITE ME
+  int breaks = count_linebreaks(msg);
+  find_linebreaks(msg, &breaks);
+
 }
 
 

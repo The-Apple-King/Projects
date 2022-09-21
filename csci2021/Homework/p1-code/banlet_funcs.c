@@ -12,7 +12,12 @@
 // char s2[]="A A B B A"; string_replace_char(s2, 'B', 'Y'); // s2 is "A A Y Y A"
 // char s3[]="A A B B A"; string_replace_char(s3, ' ', '-'); // s3 is "A-A-B-B-A"
 void string_replace_char(char *str, char old, char new){
-  // WRITE ME
+  for (size_t i = 0; i < strlen(str); i++)
+  {
+    if(str[i] == old){
+      str[i] = new;
+    }
+  }
 }
 
 // PROBLEM 1: Counts the number of newline characters '\n' in the
@@ -30,7 +35,7 @@ int count_linebreaks(char *msg){
   int tot = 1;
   for (size_t i = 0; i < strlen(msg); i++)
   {
-    if (msg[i] = '\n')
+    if (msg[i] == '\n')
     {
       tot++;
     }
@@ -94,7 +99,6 @@ void print_fontified_oneline(char *msg, font_t *font, int length){
     }
     printf("\n");
   }
-  
 }
 
 // PROBLEM 2: Uses print_fontified_oneline() with find_linebreaks() to

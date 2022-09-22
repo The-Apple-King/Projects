@@ -57,15 +57,18 @@ int count_linebreaks(char *msg){
 // // nbreaks is now 2
 // // breask is now [5, 11]
 int *find_linebreaks(char *msg, int *nbreaks){
-  int *linebreaklocs = malloc(sizeof(int)* (*nbreaks));
+  *nbreaks = count_linebreaks(msg);
+  int *linebreaklocs = (int*)malloc(sizeof(int)* (*nbreaks));
   int accum = 0;
-  for (size_t i = 0; i < strlen(msg); i++)
+  size_t i = 0;
+  for (; i < strlen(msg) && accum < *nbreaks; i++)
   {
     if (msg[i] == '\n')
     {
-      linebreaklocs[accum] = i;
+      linebreaklocs[accum++] = i;
     }
   }
+  linebreaklocs[accum] = i;
   return linebreaklocs;
 }
 
@@ -92,10 +95,9 @@ int *find_linebreaks(char *msg, int *nbreaks){
 // |  _  ||  __/| || || (_) ||_|
 // |_| |_| \___||_||_| \___/ (_)
 void print_fontified_oneline(char *msg, font_t *font, int length){
-  for (size_t i = 0; i < font->height; i++)
-  {
-    for(int j = 0; j < length; j++) {
-      printf("%s", font->glyphs[msg[j]]);
+  for (size_t i = 0; i < font->height; i++) {
+    for(size_t j = 0; j < length; j++) {
+      printf("%s", font->glyphs[(int)msg[j]].data[i]);
     }
     printf("\n");
   }
@@ -131,8 +133,17 @@ void print_fontified_oneline(char *msg, font_t *font, int length){
 //  \____| \__,_||_|   |_|    \___/     
 void print_fontified(char *msg, font_t *font){
   int breaks = count_linebreaks(msg);
-  find_linebreaks(msg, &breaks);
-
+  int *newline = find_linebreaks(msg, &breaks);
+  for (size_t i = 0; i < breaks; i++)
+  {
+    if(i) {
+      print_fontified_oneline(msg + newline[i-1] + 1, font, newline[i] - newline[i-1] - 1);
+    } else {
+      print_fontified_oneline(msg, font, newline[i]);
+    }
+    printf("\n");
+  }
+  free(newline);
 }
 
 

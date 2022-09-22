@@ -1,0 +1,26 @@
+{
+    // Checks print_fontified_oneline honors the length parameter.
+    char *string;
+    string = "One two three four, tell me that you love me more.";
+    print_fontified_oneline(string, &font_standard, 4);
+    print_fontified_oneline(string, &font_standard, 8);
+    print_fontified_oneline(string, &font_standard, 19);
+}
+  ___                 
+ / _ \ ,_ __.   ___   
+| | | || '_ \  /'_`\  
+| |_| || | | ||  __/  
+ \___/ |_| |_| \___|  
+                      
+  ___                 ._.                      
+ / _ \ ,_ __.   ___   | |_.__      __.  ___    
+| | | || '_ \  /'_`\  | __|\ \ /\ / /  / _ \   
+| |_| || | | ||  __/  | |_  \ V  V /  | (_) |  
+ \___/ |_| |_| \___|   \__|  \_/\_/    \___/   
+                                               
+  ___                 ._.                      ._.   _                           __                        
+ / _ \ ,_ __.   ___   | |_.__      __.  ___    | |_.| |__  ._ __.  ___   ___    / _|  ___  ._. ._.._ __.   
+| | | || '_ \  /'_`\  | __|\ \ /\ / /  / _ \   | __|| '_ \ | `__| /'_`\ /'_`\  | |_  / _ \ | | | || `__|   
+| |_| || | | ||  __/  | |_  \ V  V /  | (_) |  | |_ | | | || |   |  __/|  __/  |  _|| (_) || |_| || |    _ 
+ \___/ |_| |_| \___|   \__|  \_/\_/    \___/    \__||_| |_||_|    \___| \___|  |_|   \___/  \__,_||_|   ( )
+                                                                                                        |/ 

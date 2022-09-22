@@ -1,0 +1,99 @@
+* (TEST 13) banlet_main allcaps bass
+COMMENTS:
+Runs banlet_main with a data/font_capsonly.txt font and multiline
+message taken from data/bass.txt.
+
+** program: ./banlet_main "$(cat data/bass.txt)" data/font_capsonly.txt
+
+** --- Failure messages --- 
+- FAILURE: Output Mismatch at lines marked
+
+** --- Side by Side Differences ---
+- Expect output in: test-results/raw/prob2-13-expect.tmp
+- Actual output in: test-results/raw/prob2-13-actual.tmp
+- Differing lines have a character like '|' '>' or '<' in the middle
+#+BEGIN_SRC sbs-diff
+==== EXPECT ====                                             ==== ACTUAL ====                                          
+ _  __    _     _____  _____                               | ERROR: Couldn't open font file
+| |/ /   / \   |_   _||__  / _                             <
+| ' /   / _ \    | |    / / (_)                            <
+| . \  / ___ \   | |   / /_  _                             <
+|_|\_\/_/   \_\  |_|  /____|(_)                            <
+                                                           <
+    _     _      _       __   __  ___   _   _  ____        <
+   / \   | |    | |      \ \ / / / _ \ | | | ||  _ \       <
+  / _ \  | |    | |       \ V / | | | || | | || |_) |      <
+ / ___ \ | |___ | |___     | |  | |_| || |_| ||  _ <       <
+/_/   \_\|_____||_____|    |_|   \___/  \___/ |_| \_\      <
+                                                           <
+.____      _     ____   ____        _     ____  ._____.    <
+| __ )    / \   / ___| / ___|      / \   |  _ \ | ____|    <
+|  _ \   / _ \  \___ \ \___ \     / _ \  | |_) ||  _|      <
+| |_) | / ___ \  ___) | ___) |   / ___ \ |  _ < | |___     <
+|____/ /_/   \_\|____/ |____/   /_/   \_\|_| \_\|_____|    <
+                                                           <
+.____  ._____. _       ___   _   _   ____.   _____   ___   <
+| __ ) | ____|| |     / _ \ | \ | | / ___|  |_   _| / _ \  <
+|  _ \ |  _|  | |    | | | ||  \| || |  _.    | |  | | | | <
+| |_) || |___ | |___ | |_| || |\  || |_| |    | |  | |_| | <
+|____/ |_____||_____| \___/ |_| \_| \____|    |_|   \___/  <
+                                                           <
+ _   _  ____   _  _  _                                     <
+| | | |/ ___| | || || |                                    <
+| | | |\___ \ | || || |                                    <
+| |_| | ___) ||_||_||_|                                    <
+ \___/ |____/ (_)(_)(_)                                    <
+                                                           <
+#+END_SRC
+
+** --- Line Differences ---
+EXPECT:   1)  _  __    _     _____  _____   
+EXPECT:   2) | |/ /   / \   |_   _||__  / _ 
+EXPECT:   3) | ' /   / _ \    | |    / / (_)
+EXPECT:   4) | . \  / ___ \   | |   / /_  _ 
+EXPECT:   5) |_|\_\/_/   \_\  |_|  /____|(_)
+EXPECT:   6)                                
+EXPECT:   7)     _     _      _       __   __  ___   _   _  ____  
+EXPECT:   8)    / \   | |    | |      \ \ / / / _ \ | | | ||  _ \ 
+EXPECT:   9)   / _ \  | |    | |       \ V / | | | || | | || |_) |
+EXPECT:  10)  / ___ \ | |___ | |___     | |  | |_| || |_| ||  _ < 
+EXPECT:  11) /_/   \_\|_____||_____|    |_|   \___/  \___/ |_| \_\
+EXPECT:  12)                                                      
+EXPECT:  13) .____      _     ____   ____        _     ____  ._____.
+EXPECT:  14) | __ )    / \   / ___| / ___|      / \   |  _ \ | ____|
+EXPECT:  15) |  _ \   / _ \  \___ \ \___ \     / _ \  | |_) ||  _|  
+EXPECT:  16) | |_) | / ___ \  ___) | ___) |   / ___ \ |  _ < | |___ 
+EXPECT:  17) |____/ /_/   \_\|____/ |____/   /_/   \_\|_| \_\|_____|
+EXPECT:  18)                                                        
+EXPECT:  19) .____  ._____. _       ___   _   _   ____.   _____   ___  
+EXPECT:  20) | __ ) | ____|| |     / _ \ | \ | | / ___|  |_   _| / _ \ 
+EXPECT:  21) |  _ \ |  _|  | |    | | | ||  \| || |  _.    | |  | | | |
+EXPECT:  22) | |_) || |___ | |___ | |_| || |\  || |_| |    | |  | |_| |
+EXPECT:  23) |____/ |_____||_____| \___/ |_| \_| \____|    |_|   \___/ 
+EXPECT:  24)                                                           
+EXPECT:  25)  _   _  ____   _  _  _ 
+EXPECT:  26) | | | |/ ___| | || || |
+EXPECT:  27) | | | |\___ \ | || || |
+EXPECT:  28) | |_| | ___) ||_||_||_|
+EXPECT:  29)  \___/ |____/ (_)(_)(_)
+EXPECT:  30)                        
+ACTUAL:   1) ERROR: Couldn't open font file
+
+--- Valgrind Log from: test-results/raw/prob2-13-valgrd.tmp ---
+==6819== Memcheck, a memory error detector
+==6819== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==6819== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==6819== Command: ./banlet_main KATZ:_ALL\ YOUR_BASS\ ARE_BELONG\ TO_US!!! data/font_capsonly.txt
+==6819== Parent PID: 6816
+==6819== 
+==6819== error calling PR_SET_PTRACER, vgdb might block
+==6819== 
+==6819== HEAP SUMMARY:
+==6819==     in use at exit: 0 bytes in 0 blocks
+==6819==   total heap usage: 0 allocs, 0 frees, 0 bytes allocated
+==6819== 
+==6819== All heap blocks were freed -- no leaks are possible
+==6819== 
+==6819== For lists of detected and suppressed errors, rerun with: -s
+==6819== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+

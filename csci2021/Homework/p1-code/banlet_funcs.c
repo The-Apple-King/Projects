@@ -6,15 +6,17 @@
 // string 'str'.  May use the strlen() library function to determine
 // string length or directly look for a '\0' null termination
 // character to end the string.
-// 
+//
 // EXAMPLES:
 // char s1[]="A A B B A"; string_replace_char(s1, 'A', 'X'); // s1 is "X X B B X"
 // char s2[]="A A B B A"; string_replace_char(s2, 'B', 'Y'); // s2 is "A A Y Y A"
 // char s3[]="A A B B A"; string_replace_char(s3, ' ', '-'); // s3 is "A-A-B-B-A"
-void string_replace_char(char *str, char old, char new){
+void string_replace_char(char *str, char old, char new)
+{
   for (size_t i = 0; i < strlen(str); i++)
   {
-    if(str[i] == old){
+    if (str[i] == old)
+    {
       str[i] = new;
     }
   }
@@ -25,13 +27,14 @@ void string_replace_char(char *str, char old, char new){
 // be a line break. May use the strlen() library function to determine
 // string length or directly look for a '\0' null termination
 // character to end the string.
-// 
+//
 // EXAMPLES:
 // count_linebreaks("Hi")        ->  1
 // count_linebreaks("Hi There")  ->  1
 // count_linebreaks("Hi\nThere") ->  2
 // count_linebreaks("O\nM\nG")   ->  3
-int count_linebreaks(char *msg){
+int count_linebreaks(char *msg)
+{
   int tot = 1;
   for (size_t i = 0; i < strlen(msg); i++)
   {
@@ -114,24 +117,25 @@ void print_fontified_oneline(char *msg, font_t *font, int length){
 // EXAMPLE:
 //   print_fontified("apple\nB@N@N@\nCarr0^", &font_standard);
 // Shows the following on standard output:
-//                      ,-,      
-//   __ _ ,_ __. ,_ __. | |  ___ 
+//                      ,-,
+//   __ _ ,_ __. ,_ __. | |  ___
 //  / _` || '_ \ | '_ \ | | /'_`\
 // | (_| || |_) || |_) || ||  __/
 //  \__,_|| .__/ | .__/ |_| \___|
-//        |_|    |_|             
-// ,____    ____  ._  ._.   ____  ._  ._.   ____  
+//        |_|    |_|
+// ,____    ____  ._  ._.   ____  ._  ._.   ____
 // | == )  / __ \ | \ | |  / __ \ | \ | |  / __ \ 
 // |  _ \ / / _` ||  \| | / / _` ||  \| | / / _` |
 // | |_)|| | (_| || |\  || | (_| || |\  || | (_| |
 // |____/ \ \__,.||_| \_| \ \__,.||_| \_| \ \__,.|
-//         \____/          \____/          \____/ 
+//         \____/          \____/          \____/
 //   ____.                     ___   /\ 
 //  / ___|  __ _ ._ __.._ __. / _ \ |/\|
-// | |     / _` || `__|| `__|| | | |    
-// | |___.| (_| || |   | |   | |_| |    
-//  \____| \__,_||_|   |_|    \___/     
-void print_fontified(char *msg, font_t *font){
+// | |     / _` || `__|| `__|| | | |
+// | |___.| (_| || |   | |   | |_| |
+//  \____| \__,_||_|   |_|    \___/
+void print_fontified(char *msg, font_t *font)
+{
   int breaks = count_linebreaks(msg);
   int *newline = find_linebreaks(msg, &breaks);
   for (size_t i = 0; i < breaks; i++)
@@ -146,25 +150,29 @@ void print_fontified(char *msg, font_t *font){
   free(newline);
 }
 
-
 // PROVIDED: Initializes a glyph to mostly X's except for its
 // codepoint on the first line.
-void glyph_init(glyph_t *glyph, int codepoint){
+void glyph_init(glyph_t *glyph, int codepoint)
+{
   glyph->codepoint = codepoint;
   glyph->width = 6;
-  for(int i=0; i<MAX_HEIGHT; i++){
-    for(int j=0; j<MAX_WIDTH; j++){
-      if(j == glyph->width){
+  for (int i = 0; i < MAX_HEIGHT; i++)
+  {
+    for (int j = 0; j < MAX_WIDTH; j++)
+    {
+      if (j == glyph->width)
+      {
         glyph->data[i][j] = '\0'; // null terminate
       }
-      else{
+      else
+      {
         glyph->data[i][j] = 'X';
       }
     }
   }
-  int len = sprintf((char *)glyph->data, "%d",codepoint); // add codepoint # to glyph
-  glyph->data[0][len] = 'X';                              // remove null termination char
-}        
+  int len = sprintf((char *)glyph->data, "%d", codepoint); // add codepoint # to glyph
+  glyph->data[0][len] = 'X';                               // remove null termination char
+}
 
 // PROBLEM 2: Loads a banner font from 'filename'.  The format of font
 // files is documented more thoroughly in the project specification
@@ -190,7 +198,7 @@ void glyph_init(glyph_t *glyph, int codepoint){
 // The two characters above are the codepoint 42 '*' and codepoint 43
 // '+' with the ? symbols eventually being replaced by spaces during
 // loading.
-// 
+//
 // If 'filename' cannot be opened for reading, returns NULL.
 //
 // Memory allocation happens in two steps: (1) allocates memory for a
@@ -213,14 +221,33 @@ void glyph_init(glyph_t *glyph, int codepoint){
 // Glyphs are read from 'filename' until an attempt to read a glyph's
 // codepoint with fscanf() returns EOF (end of file). This causes the
 // routine to return the allocated font_t data for use elsewhere.
-font_t *font_load(char *filename){
-  // WRITE ME
-  return NULL;
+font_t *font_load(char *filename)
+{
+  FILE *ptr;
+  ptr = fopen(filename, "r");
+  font_t *font;
+  glyph_t *glyph;
+  glyph_init(glyph, 1); //initializes glyph 
+
+  int height = fscanf(ptr, "%d"); // start with finding the height
+  for (size_t i = 0; i < 128; i++)  //should loop for each character
+  {
+    for (size_t j = 0; j < height; i++)
+    {
+      glyph->data[i][j] = fscanf(ptr, "%s"); // this one should take the line of a char and put it into data of glyph
+    }
+  }
+  //puts shit into font
+  font->glyphs = glyph; 
+  font->height=height;
+  return font;
 }
 
 // PROBLEM 2: Frees the memory associated with 'font'.  First frees
 // the glyph array, then frees the font itself. Hint: this funciton
 // should be 2 lines long.
-void font_free(font_t *font){
-  // WRITE ME
+void font_free(font_t *font)
+{
+  free(font->glyphs);
+  free(font);
 }

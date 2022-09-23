@@ -223,19 +223,29 @@ void glyph_init(glyph_t *glyph, int codepoint)
 // routine to return the allocated font_t data for use elsewhere.
 font_t *font_load(char *filename)
 {
+  
   FILE *ptr;
   ptr = fopen(filename, "r");
-  font_t *font;
-  glyph_t *glyph;
-  glyph_init(glyph, 1); //initializes glyph 
+  font_t *font = malloc(sizeof(font_t)); //should instantiate font with enough size
+  glyph_t *glyph = malloc(sizeof(glyph_t)*NUM_ASCII_GLYPHS);// should instantiate glyph with enough space
 
-  int height = fscanf(ptr, "%d"); // start with finding the height
-  for (size_t i = 0; i < 128; i++)  //should loop for each character
+  int height = 0;
+  fscanf(ptr, "%d", height); // start with finding the height
+  int asciival = 0;
+  fscanf(ptr, "%d", asciival); //reads ascii val of char
+  while (asciival != EOF)
   {
-    for (size_t j = 0; j < height; i++)
+    glyph_init(glyph, asciival); //instantiates the val at loc ascii val
+    for (size_t j = 0; j < height; j++)
     {
-      glyph->data[i][j] = fscanf(ptr, "%s"); // this one should take the line of a char and put it into data of glyph
+      for (size_t i = 0; i < 6; i++) //replace 6 with an actual val 
+      {
+        //should read a line and put it into glyph
+
+      }
+      
     }
+    fscanf(ptr, "%d", asciival); //should take next ascii val unless end of file
   }
   //puts shit into font
   font->glyphs = glyph; 

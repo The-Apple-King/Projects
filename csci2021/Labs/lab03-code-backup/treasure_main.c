@@ -54,33 +54,33 @@ treasuremap_t *treasuremap_load(char *file_name){
   FILE *file_handle = fopen(file_name, "r");
 
   // TODO: Check if the file fails to open and return NULL if so.
-  if(file_handle){
+  if(file_handle == ???){
     printf("Couldn't open file '%s', returning NULL\n",
            file_name);
 
     // TODO: return failure value
-    return NULL;
+    return ???;
   }
 
   printf("Allocating map struct\n");
 
   // TODO: Determine byte size for treasuremap_t struct
-  treasuremap_t *tmap = malloc(sizeof(int) * 3);
+  treasuremap_t *tmap = malloc(sizeof(???));
 
   fscanf(file_handle,"%d %d", &tmap->height, &tmap->width);
   printf("Map is %d by %d\n", tmap->height, tmap->width);
 
   // TODO: read in the number of treasures
-  fscanf(file_handle, "%d", &tmap->ntreasures);
+  fscanf(???);
 
   // TODO: print message like '4 treasures on the map'
-  printf("%d treasures on the map", tmap->ntreasures);
+  printf(???);
 
 
   printf("Allocating array of treasure locations\n");
 
   // TODO: allocate array of treasure locations
-  tmap->locations = malloc(sizeof(char) * tmap->height * tmap->width);
+  tmap->locations = malloc(???);
 
   printf("Reading treasures\n");
 
@@ -90,10 +90,10 @@ treasuremap_t *treasuremap_load(char *file_name){
     fscanf(file_handle, "%d", &tmap->locations[i].row);
 
     // TODO: read in the column location for this treasure
-    fscanf(file_handle, "%d", &tmap->locations[i].col);
+    fscanf(???);
 
     // TODO: read in the description for this treasure
-    fscanf(file_handle, "%s", tmap->locations->description);
+    fscanf(???);
 
     printf("Treasure at %d %d called '%s'\n",
            tmap->locations[i].row,
@@ -118,7 +118,7 @@ void treasuremap_free(treasuremap_t *tmap){
   free(tmap->locations);
 
   // TODO: the tmap struct
-  free(tmap);
+  free(???);
 
   return;
 }
@@ -128,7 +128,7 @@ void treasuremap_free(treasuremap_t *tmap){
 // printspace[][] array from the header which is unsafe but simpler to
 // implement for small maps than dynamic allocation.
 void treasuremap_print(treasuremap_t *tm){
-  char printspace[128][128];
+  char printspace[128][128] = {};
 
   printf("==TREASURE MAP==\n");
 

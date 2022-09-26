@@ -17,4 +17,3 @@ z{|}~";
     print_fontified(string, font);
     font_free(font);
 }
-Segmentation Fault

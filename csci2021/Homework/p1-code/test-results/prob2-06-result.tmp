@@ -3,8 +3,7 @@ COMMENTS:
 ** program: ./test_banlet_funcs2 load_font_3
 
 ** --- Failure messages --- 
-- FAILURE(139) due to SIGSEGV (segmentation fault) from OS
-- FAILURE: Valgrind reports reachable memory, may need to add free() or fclose()
+- FAILURE(137) due to TIMEOUT: Runtime exceeded maximum of '5s'
 - FAILURE: Output Mismatch at lines marked
 
 ** --- Side by Side Differences ---
@@ -33,7 +32,7 @@ z { | } ~";                                                                     
     print_fontified(string, font);                                                                 print_fontified(string, font);
     font_free(font);                                                                               font_free(font);
 }                                                                                              }
-   _   34XXXX  35XXXX  36XXXX  37XXXX  38XXXX  39XXXX  40XXXX  41XXXX                        | Segmentation Fault
+   _   34XXXX  35XXXX  36XXXX  37XXXX  38XXXX  39XXXX  40XXXX  41XXXX                        <
   | |  XXXXXX  XXXXXX  XXXXXX  XXXXXX  XXXXXX  XXXXXX  XXXXXX  XXXXXX                        <
   | |  XXXXXX  XXXXXX  XXXXXX  XXXXXX  XXXXXX  XXXXXX  XXXXXX  XXXXXX                        <
   |_|  XXXXXX  XXXXXX  XXXXXX  XXXXXX  XXXXXX  XXXXXX  XXXXXX  XXXXXX                        <
@@ -156,51 +155,12 @@ EXPECT:  77) XXXXXX  XXXXXX  XXXXXX  XXXXXX  XXXXXX
 EXPECT:  78) XXXXXX  XXXXXX  XXXXXX  XXXXXX  XXXXXX
 EXPECT:  79) XXXXXX  XXXXXX  XXXXXX  XXXXXX  XXXXXX
 EXPECT:  80) XXXXXX  XXXXXX  XXXXXX  XXXXXX  XXXXXX
-ACTUAL:  21) Segmentation Fault
 
 --- Valgrind Log from: test-results/raw/prob2-06-valgrd.tmp ---
-==6602== Memcheck, a memory error detector
-==6602== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==6602== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==6602== Command: ./test_banlet_funcs2 load_font_3
-==6602== Parent PID: 6601
-==6602== 
-==6602== error calling PR_SET_PTRACER, vgdb might block
-==6602== Invalid read of size 4
-==6602==    at 0x109A3D: print_fontified_oneline (banlet_funcs.c:98)
-==6602==    by 0x109B36: print_fontified (banlet_funcs.c:142)
-==6602==    by 0x109716: main (test_banlet_funcs2.c:127)
-==6602==  Address 0x8 is not stack'd, malloc'd or (recently) free'd
-==6602== 
-==6602== 
-==6602== Process terminating with default action of signal 11 (SIGSEGV)
-==6602==  Access not within mapped region at address 0x8
-==6602==    at 0x109A3D: print_fontified_oneline (banlet_funcs.c:98)
-==6602==    by 0x109B36: print_fontified (banlet_funcs.c:142)
-==6602==    by 0x109716: main (test_banlet_funcs2.c:127)
-==6602==  If you believe this happened as a result of a stack
-==6602==  overflow in your program's main thread (unlikely but
-==6602==  possible), you can try to increase the size of the
-==6602==  main thread stack using the --main-stacksize= flag.
-==6602==  The main thread stack size used in this run was 8388608.
-==6602== 
-==6602== HEAP SUMMARY:
-==6602==     in use at exit: 40 bytes in 1 blocks
-==6602==   total heap usage: 1 allocs, 0 frees, 40 bytes allocated
-==6602== 
-==6602== 40 bytes in 1 blocks are still reachable in loss record 1 of 1
-==6602==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==6602==    by 0x109906: find_linebreaks (banlet_funcs.c:61)
-==6602==    by 0x109A94: print_fontified (banlet_funcs.c:136)
-==6602==    by 0x109716: main (test_banlet_funcs2.c:127)
-==6602== 
-==6602== LEAK SUMMARY:
-==6602==    definitely lost: 0 bytes in 0 blocks
-==6602==    indirectly lost: 0 bytes in 0 blocks
-==6602==      possibly lost: 0 bytes in 0 blocks
-==6602==    still reachable: 40 bytes in 1 blocks
-==6602==         suppressed: 0 bytes in 0 blocks
-==6602== 
-==6602== For lists of detected and suppressed errors, rerun with: -s
-==6602== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==5253== Memcheck, a memory error detector
+==5253== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==5253== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==5253== Command: ./test_banlet_funcs2 load_font_3
+==5253== Parent PID: 5252
+==5253== 
 

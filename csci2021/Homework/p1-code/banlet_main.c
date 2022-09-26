@@ -3,7 +3,7 @@
 // require modification.
 #include "banlet.h"
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[]){
   if(argc < 2){
     printf("usage: %s '<message>'\n",argv[0]);
     printf("       %s '<message>' <fontfile>\n",argv[0]);

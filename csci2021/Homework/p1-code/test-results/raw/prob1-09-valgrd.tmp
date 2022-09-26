@@ -1,16 +1,15 @@
-==5082== Memcheck, a memory error detector
-==5082== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==5082== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==5082== Command: ./test_banlet_funcs1 find_linebreaks_2
-==5082== Parent PID: 5081
-==5082== 
-==5082== error calling PR_SET_PTRACER, vgdb might block
-==5082== 
-==5082== HEAP SUMMARY:
-==5082==     in use at exit: 0 bytes in 0 blocks
-==5082==   total heap usage: 1 allocs, 1 frees, 12 bytes allocated
-==5082== 
-==5082== All heap blocks were freed -- no leaks are possible
-==5082== 
-==5082== For lists of detected and suppressed errors, rerun with: -s
-==5082== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==5869== Memcheck, a memory error detector
+==5869== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==5869== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==5869== Command: ./test_banlet_funcs1 find_linebreaks_2
+==5869== Parent PID: 5868
+==5869== 
+==5869== 
+==5869== HEAP SUMMARY:
+==5869==     in use at exit: 0 bytes in 0 blocks
+==5869==   total heap usage: 1 allocs, 1 frees, 12 bytes allocated
+==5869== 
+==5869== All heap blocks were freed -- no leaks are possible
+==5869== 
+==5869== For lists of detected and suppressed errors, rerun with: -s
+==5869== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

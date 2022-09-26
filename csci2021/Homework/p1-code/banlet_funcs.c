@@ -230,9 +230,9 @@ font_t *font_load(char *filename)
   glyph_t *glyph = malloc(sizeof(glyph_t)*NUM_ASCII_GLYPHS);// should instantiate glyph with enough space
 
   int height = 0;
-  fscanf(ptr, "%d", height); // start with finding the height
+  fscanf(ptr, "%d", &height); // start with finding the height
   int asciival = 0;
-  fscanf(ptr, "%d", asciival); //reads ascii val of char
+  fscanf(ptr, "%d", &asciival); //reads ascii val of char
   while (asciival != EOF)
   {
     glyph_init(glyph, asciival); //instantiates the val at loc ascii val
@@ -245,7 +245,7 @@ font_t *font_load(char *filename)
       }
       
     }
-    fscanf(ptr, "%d", asciival); //should take next ascii val unless end of file
+    fscanf(ptr, "%d", &asciival); //should take next ascii val unless end of file
   }
   //puts shit into font
   font->glyphs = glyph; 

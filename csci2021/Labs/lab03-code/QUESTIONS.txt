@@ -153,8 +153,8 @@ Struct Definition
 
   The `treasuremap_t' struct is defined in the following location which
   shows its fields (parts):
-  - ( ) In the c file `treasure_main.c'
-  - (x) In the header `treasure.h'
+  - (x) In the c file `treasure_main.c'
+  - ( ) In the header `treasure.h'
   - ( ) In the header `stdio.h'
   - ( ) Trick question: the definition is read from the user typing
 
@@ -167,7 +167,7 @@ File Format
   to the documentation for the function and your observations of the
   `map1.tm' and `map2.tm' files, which of the best describes the format
   of these files.
-  - ( ) The file looks like how treasure_main prints them, as something
+  - (x) The file looks like how treasure_main prints them, as something
     like
     ,----
     |   ..A..
@@ -180,7 +180,7 @@ File Format
     `----
     and the application should just read the strings in the file into
     the struct.
-  - (x) The first line has the the size of the treasuremap AND the
+  - ( ) The first line has the the size of the treasuremap AND the
     number of treasures in the map (N). There are N remaining lines
     which have treasure positions/descriptions in them.
   - ( ) The first line has the number of rows/columns in the map and
@@ -205,11 +205,11 @@ Nest Struct Syntax
 
   Which of the following best describes the syntax used based on the
   `treasuremap_t' type?
-  - ( ) `tmap' is a pointer to a struct so `->' is used to dereference
+  - (x) `tmap' is a pointer to a struct so `->' is used to dereference
     it to a field; the `locations' field is a pointer to an array so
     square braces are used to dereference it. `fscanf()' needs an
     address so `&' is used.
-  - (x) `tmap' is a normal struct so `->' is used to access its fields;
+  - ( ) `tmap' is a normal struct so `->' is used to access its fields;
     the `locations' field is a normal array so square braces are used to
     dereference it. `fscanf()' needs an address so `&' is used.
   - ( ) `tmap' is a pointer so `&' is used to dereference it with `->'

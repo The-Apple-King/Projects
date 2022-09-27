@@ -1,6 +1,16 @@
-==5379== Memcheck, a memory error detector
-==5379== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==5379== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==5379== Command: ./banlet_main Hello\ world! data/font_mini.txt
-==5379== Parent PID: 5378
-==5379== 
+==16017== Memcheck, a memory error detector
+==16017== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==16017== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==16017== Command: ./banlet_main Hello\ world! data/font_mini.txt
+==16017== Parent PID: 16016
+==16017== 
+==16017== error calling PR_SET_PTRACER, vgdb might block
+==16017== 
+==16017== HEAP SUMMARY:
+==16017==     in use at exit: 0 bytes in 0 blocks
+==16017==   total heap usage: 5 allocs, 5 frees, 31,212 bytes allocated
+==16017== 
+==16017== All heap blocks were freed -- no leaks are possible
+==16017== 
+==16017== For lists of detected and suppressed errors, rerun with: -s
+==16017== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

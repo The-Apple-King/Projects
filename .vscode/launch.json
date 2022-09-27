@@ -214,6 +214,26 @@
                 }
             ],
             "preLaunchTask": "C/C++: g++.exe build active file"
+        },
+        {
+            "name": "Banlet Main",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/csci2021/Homework/p1-code/banlet_main",
+            "args": [],
+            "stopAtEntry": true,
+            "cwd": "/usr/bin",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
         }
     ]
 }

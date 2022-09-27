@@ -9,3 +9,4 @@
       printf("NULL returned correctly\n");
     }
 }
+NULL returned correctly

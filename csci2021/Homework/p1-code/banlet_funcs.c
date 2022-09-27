@@ -59,9 +59,10 @@ int count_linebreaks(char *msg)
 // //            index in string: 012345 67890
 // // nbreaks is now 2
 // // breask is now [5, 11]
-int *find_linebreaks(char *msg, int *nbreaks){
+int *find_linebreaks(char *msg, int *nbreaks)
+{
   *nbreaks = count_linebreaks(msg);
-  int *linebreaklocs = (int*)malloc(sizeof(int)* (*nbreaks));
+  int *linebreaklocs = (int *)malloc(sizeof(int) * (*nbreaks));
   int accum = 0;
   size_t i = 0;
   for (; i < strlen(msg) && accum < *nbreaks; i++)
@@ -97,9 +98,12 @@ int *find_linebreaks(char *msg, int *nbreaks){
 // | |_| | /'_`\| || | / _ \ | |
 // |  _  ||  __/| || || (_) ||_|
 // |_| |_| \___||_||_| \___/ (_)
-void print_fontified_oneline(char *msg, font_t *font, int length){
-  for (size_t i = 0; i < font->height; i++) {
-    for(size_t j = 0; j < length; j++) {
+void print_fontified_oneline(char *msg, font_t *font, int length)
+{
+  for (size_t i = 0; i < font->height; i++)
+  {
+    for (size_t j = 0; j < length; j++)
+    {
       printf("%s", font->glyphs[(int)msg[j]].data[i]);
     }
     printf("\n");
@@ -140,9 +144,12 @@ void print_fontified(char *msg, font_t *font)
   int *newline = find_linebreaks(msg, &breaks);
   for (size_t i = 0; i < breaks; i++)
   {
-    if(i) {
-      print_fontified_oneline(msg + newline[i-1] + 1, font, newline[i] - newline[i-1] - 1);
-    } else {
+    if (i)
+    {
+      print_fontified_oneline(msg + newline[i - 1] + 1, font, newline[i] - newline[i - 1] - 1);
+    }
+    else
+    {
       print_fontified_oneline(msg, font, newline[i]);
     }
     printf("\n");
@@ -223,33 +230,37 @@ void glyph_init(glyph_t *glyph, int codepoint)
 // routine to return the allocated font_t data for use elsewhere.
 font_t *font_load(char *filename)
 {
-  
+
   FILE *ptr;
   ptr = fopen(filename, "r");
-  font_t *font = malloc(sizeof(font_t)); //should instantiate font with enough size
-  glyph_t *glyph = malloc(sizeof(glyph_t)*NUM_ASCII_GLYPHS);// should instantiate glyph with enough space
+  if (ptr == NULL)
+  {
+    return NULL;
+  }
+
+  fseek(ptr, 8, SEEK_CUR);
+  font_t *font = malloc(sizeof(font_t)); // should instantiate font with enough size
+  font->glyphs = malloc(sizeof(glyph_t) * NUM_ASCII_GLYPHS);
 
   int height = 0;
   fscanf(ptr, "%d", &height); // start with finding the height
-  int asciival = 0;
-  fscanf(ptr, "%d", &asciival); //reads ascii val of char
-  while (asciival != EOF)
-  {
-    glyph_init(glyph, asciival); //instantiates the val at loc ascii val
-    for (size_t j = 0; j < height; j++)
-    {
-      for (size_t i = 0; i < 6; i++) //replace 6 with an actual val 
-      {
-        //should read a line and put it into glyph
+  font->height = height;
+  int asciival;
 
-      }
-      
-    }
-    fscanf(ptr, "%d", &asciival); //should take next ascii val unless end of file
+  for (size_t i = 0; i < NUM_ASCII_GLYPHS; i++)
+  {
+    glyph_init(&font->glyphs[i], i);
   }
-  //puts shit into font
-  font->glyphs = glyph; 
-  font->height=height;
+
+  while (fscanf(ptr, "%d", &asciival) != EOF)
+  {
+    for (size_t i = 0; i < height; i++)
+    {
+      fscanf(ptr, "%s", font->glyphs[asciival].data[i]);
+      string_replace_char(font->glyphs[asciival].data[i], '?', ' ');
+    }
+  }
+  fclose(ptr);
   return font;
 }
 

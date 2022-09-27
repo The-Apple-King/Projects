@@ -142,7 +142,7 @@ Command Line Arguments
     user types it in.
   - ( ) The global variable `args' will be an array with `args[0]' as
     the string `map1.tm'
-  - ( ) The `argc' parameter will have value 2 and `argv[1]' will be a
+  - (x) The `argc' parameter will have value 2 and `argv[1]' will be a
     pointer to the string `map1.tm'
   - ( ) The `getenv()' function is used to extract the command line
     arguments from the environment.
@@ -153,8 +153,8 @@ Struct Definition
 
   The `treasuremap_t' struct is defined in the following location which
   shows its fields (parts):
-  - (x) In the c file `treasure_main.c'
-  - ( ) In the header `treasure.h'
+  - ( ) In the c file `treasure_main.c'
+  - (x) In the header `treasure.h'
   - ( ) In the header `stdio.h'
   - ( ) Trick question: the definition is read from the user typing
 
@@ -167,7 +167,7 @@ File Format
   to the documentation for the function and your observations of the
   `map1.tm' and `map2.tm' files, which of the best describes the format
   of these files.
-  - (x) The file looks like how treasure_main prints them, as something
+  - ( ) The file looks like how treasure_main prints them, as something
     like
     ,----
     |   ..A..
@@ -180,7 +180,7 @@ File Format
     `----
     and the application should just read the strings in the file into
     the struct.
-  - ( ) The first line has the the size of the treasuremap AND the
+  - (x) The first line has the the size of the treasuremap AND the
     number of treasures in the map (N). There are N remaining lines
     which have treasure positions/descriptions in them.
   - ( ) The first line has the number of rows/columns in the map and

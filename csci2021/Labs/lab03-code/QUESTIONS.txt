@@ -138,7 +138,7 @@ Command Line Arguments
   The `treasure_main.c' program is run with command line parameters like
   `> ./treasure_main map1.tm'.  How is the file name `map1.tm' made
   available in the `main()' function?
-  - (x) The `fscanf()' function is used to read the command line as the
+  - ( ) The `fscanf()' function is used to read the command line as the
     user types it in.
   - ( ) The global variable `args' will be an array with `args[0]' as
     the string `map1.tm'
@@ -205,11 +205,11 @@ Nest Struct Syntax
 
   Which of the following best describes the syntax used based on the
   `treasuremap_t' type?
-  - (x) `tmap' is a pointer to a struct so `->' is used to dereference
+  - ( ) `tmap' is a pointer to a struct so `->' is used to dereference
     it to a field; the `locations' field is a pointer to an array so
     square braces are used to dereference it. `fscanf()' needs an
     address so `&' is used.
-  - ( ) `tmap' is a normal struct so `->' is used to access its fields;
+  - (x) `tmap' is a normal struct so `->' is used to access its fields;
     the `locations' field is a normal array so square braces are used to
     dereference it. `fscanf()' needs an address so `&' is used.
   - ( ) `tmap' is a pointer so `&' is used to dereference it with `->'

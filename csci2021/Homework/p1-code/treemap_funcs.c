@@ -5,6 +5,7 @@
 
 // treemap_funcs.c: Provides a small library of functions that operate on
 // binary search trees mapping strings keys to string values.
+
 /**
  * @brief Initialize the given tree to have a null root making it size 0.
  *
@@ -74,22 +75,13 @@ int treemap_add(treemap_t *tree, char key[], char val[])
     return 2;//shouldnt reach
 }
 
-// Inserts given key/value into a binary search tree. Uses an
-// ITERATIVE (loopy) approach to insertion which starts a pointer at
-// the root of the tree and changes its location until the correct
-// insertion point is located. If the key given already exists in the
-// tree, no new node is created; the existing value is changed to the
-// parameter 'val' and 0 is returned.  If no node with the given key
-// is found, a new node is created and with the given key/val, added
-// to the tree, and 1 is returned. Makes use of strcpy() to ease
-// copying characters between memory locations.
 
 /**
  * @brief searches tree for key
  *
  * @param tree the tree to search through
  * @param key the key of the node to search for
- * @return char* returns the node if found or null if not found
+ * @return char* returns the node if found or NULL if not found
  */
 char *treemap_get(treemap_t *tree, char key[])
 {
@@ -112,13 +104,6 @@ char *treemap_get(treemap_t *tree, char key[])
     return NULL; // only breaks out of the while loop if doesn't exist
 }
 
-// Searches the tree for given 'key' and returns its associated
-// value. Uses an ITERATIVE (loopy) search approach which starts a
-// pointer at the root of the tree and changes it until the search key
-// is found or determined not to be in the tree. If a matching key is
-// found, returns a pointer to its value. If no matching key is found,
-// returns NULL.
-
 /**
  * @brief clears all nodes and frees the memory
  *
@@ -127,8 +112,6 @@ char *treemap_get(treemap_t *tree, char key[])
 void treemap_clear(treemap_t *tree){
     node_remove_all(tree->root);
 }
-// Eliminate all nodes in the tree setting its contents empty. Uses
-// recursive node_remove_all() function to free memory for all nodes.
 
 /**
  * @brief helps treemap_clear by freeing memory
@@ -151,10 +134,6 @@ void node_remove_all(node_t *cur){
     free(cur->val);
     free(cur);
 }
-// Recursive helper function which visits all nodes rooted at node
-// `cur` and frees the memory associated with them. This requires a
-// post-order traversal: visit left sub-tree, visit right sub-tree,
-// then free the `cur` node.
 
 /**
  * @brief returns the number of nodes in the tree
@@ -165,8 +144,6 @@ void node_remove_all(node_t *cur){
 int treemap_size(treemap_t *tree){
     return node_count_all(tree->root);
 }
-// Returns the number of nodes currently in the tree. Uses
-// node_count_all() to recursively count all nodes.
 
 /**
  * @brief returns the size of the tree under the current node
@@ -181,27 +158,21 @@ int node_count_all(node_t *cur){
     }
     return 0;
 }
-// Counts all nodes in the tree rooted at `cur`. Uses recursion to
-// descend to the left and right branch if present and count nodes
-// there, adding 1 for the `cur` if non-null. Returns 0 if `cur` is
-// NULL.
+
 
 /**
- * @brief prints the key/val pairs in reverse order
+ * @brief prints the nodes in reverse order
+ *  with 2 starting spaces per level of indentation
  *
- * @param tree
+ * @param tree tree to print out
  */
 void treemap_print_revorder(treemap_t *tree){
     return node_print_revorder(tree->root, 0);
 }
-// Prints the key/val pairs of the tree in reverse order at differing
-// levels of indentation which shows all elements and their structure
-// in the tree. Visually the tree can be rotated clockwise to see its
-// structure. See the related node_print_revorder() for additional
-// detals.
 
 /**
- * @brief helper function that prints the nodes
+ * @brief helper function that prints the nodes in reverse order
+ *  with 2 starting spaces per level of indentation
  *
  * @param cur current node we are looking at
  * @param indent the value of spacing 2 spaces per indent
@@ -216,58 +187,34 @@ void node_print_revorder(node_t *cur, int indent){
     printf("%s", &cur->val);
     node_print_revorder(cur->left, indent++);
 }
-// Recursive helper function which prints all key/val pairs in the
-// tree rooted at node 'cur' in reverse order. Traverses right
-// subtree, prints cur node's key/val, then traverses left tree.
-// Parameter 'indent' indicates how far to indent (2 spaces per indent
-// level).
-//
-// For example: a if the root node "El" is passed into the function
-// and it has the following structure:
-//
-//         ___El->strange_____
-//        |                   |
-// Dustin->corny       ___Mike->stoic
-//                    |
-//               Lucas->brash
-//
-// the recursive calls will print the following output:
-//
-//   Mike -> stoic                 # root->right
-//     Lucas -> brash              # root->right->left
-// El -> strange                   # root
-//   Dustin -> corny               # root->left
 
 /**
- * @briefprint the tree in pre order
+ * @brief print the tree in pre order, prints with 2 spaces on the left per level deep
  *
- * @param tree
+ * @param tree tree to print out
  */
 void treemap_print_preorder(treemap_t *tree){
     node_write_preorder(tree->root, stdout, 0);
 }
-// Print all the data in the tree in pre-order with indentation
-// corresponding to the depth of the tree. Makes use of
-// node_write_preorder() for this.
 
 /**
- * @brief
+ * @brief Saves the tree by opening the named file
  *
- * @param tree
- * @param fname
+ * @param tree tree to save
+ * @param fname file to save to
  */
 void treemap_save(treemap_t *tree, char *fname){
-    
+    FILE *ptr = fopen(fname, "w");
+    node_write_preorder(tree->root, ptr, 0);
+    fclose(ptr);
 }
-// Saves the tree by opening the named file, writing the tree to it in
-// pre-order with node_write_preorder(), then closing the file.
 
 /**
- * @brief
+ * @brief helper function to prin things in preorder
  *
- * @param cur
- * @param out
- * @param depth
+ * @param cur current node
+ * @param out loc to output to
+ * @param depth the depth of tree/spacing used to print with
  */
 void node_write_preorder(node_t *cur, FILE *out, int depth){
     for (size_t i = 0; i < depth; i++)
@@ -279,20 +226,24 @@ void node_write_preorder(node_t *cur, FILE *out, int depth){
     node_print_preorder(cur->left, depth++);
     node_print_preorder(cur->right, depth++);
 }
-// Recursive helper function which writes/prints the tree in pre-order
-// to the given open file handle. The parameter depth gives how far to
-// indent node data, 2 spaces per unit depth. Depth increases by 1 on
-// each recursive call. The function prints the cur node data,
-// traverses the left tree, then traverses the right tree.
 
 /**
- * @brief
+ * @brief clears current tree and loads one from a file
  *
- * @param tree
- * @param fname
- * @return int
+ * @param tree tree to replace/fill with elements
+ * @param fname file to read from
+ * @return int 1 if loaded 0 if failed
  */
 int treemap_load(treemap_t *tree, char *fname){
+    FILE *ptr = fopen(fname, "r");
+    if (!ptr) //checks if file exists
+    {
+        return 0;
+    }
+    treemap_clear(tree); // clears if file exists
+    
+    treemap_add(tree, fscanf(ptr, "%s"),fscanf(ptr, "%s"));//should add the first val depending on how spaces are dealt with
+    //loop  
 
 }
 // Clears the given tree then loads new elements to it from the

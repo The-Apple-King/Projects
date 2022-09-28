@@ -266,13 +266,9 @@ int treemap_load(treemap_t *tree, char *fname){
 
     while(fscanf(ptr, "%s", key) != EOF){//might put in right loc by default, could be an error here
     fscanf(ptr, "%s", val);
+    //printf("%s -> %s", key, val);
     treemap_add(tree, key, val);
     }
+    fclose(ptr);
     return 1;
 }
-// Clears the given tree then loads new elements to it from the
-// named. Repeated calls to treemap_add() are used to add strings read
-// from the file.  If the tree is stored in pre-order in the file, its
-// exact structure will be restored.  Returns 1 if the tree is loaded
-// successfully and 0 if opening the named file fails in which case no
-// changes are made to the tree.

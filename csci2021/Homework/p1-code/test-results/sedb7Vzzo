@@ -1,0 +1,295 @@
+* (TEST 20) Stress Testing
+COMMENTS:
+Does a lot of adding to create a large tree, saves and loads it.
+Similar to the provided data/big-script.txt. Will stress test the
+implementation. 
+
+** program: ./treemap_main -echo
+
+** --- Failure messages --- 
+- FAILURE: Valgrind reports reachable memory, may need to add free() or fclose()
+- FAILURE: Output Mismatch at lines marked
+
+** --- Side by Side Differences ---
+- Expect output in: test-results/raw/prob3-20-expect.tmp
+- Actual output in: test-results/raw/prob3-20-actual.tmp
+- Differing lines have a character like '|' '>' or '<' in the middle
+#+BEGIN_SRC sbs-diff
+==== EXPECT ====                                                                                  ==== ACTUAL ====                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+TreeMap Editor                                                                                    TreeMap Editor
+Commands:                                                                                         Commands:
+  quit:            exit the program                                                                 quit:            exit the program
+  print:           shows contents of the tree in reverse sorted order                               print:           shows contents of the tree in reverse sorted order
+  add <key> <val>: inserts the given key/val into the tree, duplicate keys are ignored              add <key> <val>: inserts the given key/val into the tree, duplicate keys are ignored
+  get <key>:       prints FOUND if the name is in the tree, NOT FOUND otherwise                     get <key>:       prints FOUND if the name is in the tree, NOT FOUND otherwise
+  clear:           eliminates all key/vals from the tree                                            clear:           eliminates all key/vals from the tree
+  size:            prints the total number of nodes in the tree                                     size:            prints the total number of nodes in the tree
+  preorder:        prints contents of the tree in pre-order which is how it will be saved           preorder:        prints contents of the tree in pre-order which is how it will be saved
+  save <file>:     writes the contents of the tree in pre-order to the given file                   save <file>:     writes the contents of the tree in pre-order to the given file
+  load <file>:     clears the current tree and loads the one in the given file                      load <file>:     clears the current tree and loads the one in the given file
+TM> add Mary girl                                                                                 TM> add Mary girl
+TM> add James boy                                                                                 TM> add James boy
+TM> add Patricia girl                                                                             TM> add Patricia girl
+TM> add John boy                                                                                  TM> add John boy
+TM> add Jennifer girl                                                                             TM> add Jennifer girl
+TM> add Robert boy                                                                                TM> add Robert boy
+TM> add Elizabeth girl                                                                            TM> add Elizabeth girl
+TM> add Michael boy                                                                               TM> add Michael boy
+TM> add Linda girl                                                                                TM> add Linda girl
+TM> add William boy                                                                               TM> add William boy
+TM> add Barbara girl                                                                              TM> add Barbara girl
+TM> add David boy                                                                                 TM> add David boy
+TM> add Susan girl                                                                                TM> add Susan girl
+TM> add Richard boy                                                                               TM> add Richard boy
+TM> add Jessica girl                                                                              TM> add Jessica girl
+TM> add Joseph boy                                                                                TM> add Joseph boy
+TM> add Margaret girl                                                                             TM> add Margaret girl
+TM> add Thomas boy                                                                                TM> add Thomas boy
+TM> add Sarah girl                                                                                TM> add Sarah girl
+TM> add Charles boy                                                                               TM> add Charles boy
+TM> add Karen girl                                                                                TM> add Karen girl
+TM> add Christopher boy                                                                           TM> add Christopher boy
+TM> add Nancy girl                                                                                TM> add Nancy girl
+TM> add Daniel boy                                                                                TM> add Daniel boy
+TM> add Betty girl                                                                                TM> add Betty girl
+TM> add Matthew boy                                                                               TM> add Matthew boy
+TM> add Lisa girl                                                                                 TM> add Lisa girl
+TM> add Anthony boy                                                                               TM> add Anthony boy
+TM> add Dorothy girl                                                                              TM> add Dorothy girl
+TM> add Donald boy                                                                                TM> add Donald boy
+TM> add Sandra girl                                                                               TM> add Sandra girl
+TM> add Mark boy                                                                                  TM> add Mark boy
+TM> add Ashley girl                                                                               TM> add Ashley girl
+TM> add Paul boy                                                                                  TM> add Paul boy
+TM> add Kimberly girl                                                                             TM> add Kimberly girl
+TM> add Steven boy                                                                                TM> add Steven boy
+TM> add Donna girl                                                                                TM> add Donna girl
+TM> add Andrew boy                                                                                TM> add Andrew boy
+TM> add Carol girl                                                                                TM> add Carol girl
+TM> add Kenneth boy                                                                               TM> add Kenneth boy
+TM> add Michelle girl                                                                             TM> add Michelle girl
+TM> add George boy                                                                                TM> add George boy
+TM> add Emily girl                                                                                TM> add Emily girl
+TM> add Joshua boy                                                                                TM> add Joshua boy
+TM> add Amanda girl                                                                               TM> add Amanda girl
+TM> add Kevin boy                                                                                 TM> add Kevin boy
+TM> add Helen girl                                                                                TM> add Helen girl
+TM> add Brian boy                                                                                 TM> add Brian boy
+TM> add Melissa girl                                                                              TM> add Melissa girl
+TM> add Edward boy                                                                                TM> add Edward boy
+TM> add Deborah girl                                                                              TM> add Deborah girl
+TM> add Ronald boy                                                                                TM> add Ronald boy
+TM> add Stephanie girl                                                                            TM> add Stephanie girl
+TM> add Timothy boy                                                                               TM> add Timothy boy
+TM> add Laura girl                                                                                TM> add Laura girl
+TM> add Jason boy                                                                                 TM> add Jason boy
+TM> add Rebecca girl                                                                              TM> add Rebecca girl
+TM> add Jeffrey boy                                                                               TM> add Jeffrey boy
+TM> add Sharon girl                                                                               TM> add Sharon girl
+TM> add Ryan boy                                                                                  TM> add Ryan boy
+TM> add Cynthia girl                                                                              TM> add Cynthia girl
+TM> add Gary boy                                                                                  TM> add Gary boy
+TM> add Kathleen girl                                                                             TM> add Kathleen girl
+TM> add Jacob boy                                                                                 TM> add Jacob boy
+TM> add Amy girl                                                                                  TM> add Amy girl
+TM> add Nicholas boy                                                                              TM> add Nicholas boy
+TM> add Shirley girl                                                                              TM> add Shirley girl
+TM> add Eric boy                                                                                  TM> add Eric boy
+TM> add Anna girl                                                                                 TM> add Anna girl
+TM> add Stephen boy                                                                               TM> add Stephen boy
+TM> add Angela girl                                                                               TM> add Angela girl
+TM> add Jonathan boy                                                                              TM> add Jonathan boy
+TM> add Ruth girl                                                                                 TM> add Ruth girl
+TM> add Larry boy                                                                                 TM> add Larry boy
+TM> add Brenda girl                                                                               TM> add Brenda girl
+TM> add Justin boy                                                                                TM> add Justin boy
+TM> add Pamela girl                                                                               TM> add Pamela girl
+TM> add Scott boy                                                                                 TM> add Scott boy
+TM> add Nicole girl                                                                               TM> add Nicole girl
+TM> add Frank boy                                                                                 TM> add Frank boy
+TM> add Katherine girl                                                                            TM> add Katherine girl
+TM> add Brandon boy                                                                               TM> add Brandon boy
+TM> add Virginia girl                                                                             TM> add Virginia girl
+TM> add Raymond boy                                                                               TM> add Raymond boy
+TM> add Catherine girl                                                                            TM> add Catherine girl
+TM> add Gregory boy                                                                               TM> add Gregory boy
+TM> add Christine girl                                                                            TM> add Christine girl
+TM> add Benjamin boy                                                                              TM> add Benjamin boy
+TM> add Samantha girl                                                                             TM> add Samantha girl
+TM> add Samuel boy                                                                                TM> add Samuel boy
+TM> add Debra girl                                                                                TM> add Debra girl
+TM> add Patrick boy                                                                               TM> add Patrick boy
+TM> add Janet girl                                                                                TM> add Janet girl
+TM> add Alexander boy                                                                             TM> add Alexander boy
+TM> add Rachel girl                                                                               TM> add Rachel girl
+TM> add Jack boy                                                                                  TM> add Jack boy
+TM> add Carolyn girl                                                                              TM> add Carolyn girl
+TM> add Dennis boy                                                                                TM> add Dennis boy
+TM> add Emma girl                                                                                 TM> add Emma girl
+TM> add Jerry boy                                                                                 TM> add Jerry boy
+TM> add Maria girl                                                                                TM> add Maria girl
+TM> add Tyler boy                                                                                 TM> add Tyler boy
+TM> add Heather girl                                                                              TM> add Heather girl
+TM> add Aaron boy                                                                                 TM> add Aaron boy
+TM> add Diane girl                                                                                TM> add Diane girl
+TM> add Henry boy                                                                                 TM> add Henry boy
+TM> add Julie girl                                                                                TM> add Julie girl
+TM> add Douglas boy                                                                               TM> add Douglas boy
+TM> add Joyce girl                                                                                TM> add Joyce girl
+TM> add Jose boy                                                                                  TM> add Jose boy
+TM> add Evelyn girl                                                                               TM> add Evelyn girl
+TM> add Peter boy                                                                                 TM> add Peter boy
+TM> add Frances girl                                                                              TM> add Frances girl
+TM> add Adam boy                                                                                  TM> add Adam boy
+TM> add Joan girl                                                                                 TM> add Joan girl
+TM> add Zachary boy                                                                               TM> add Zachary boy
+TM> add Christina girl                                                                            TM> add Christina girl
+TM> add Nathan boy                                                                                TM> add Nathan boy
+TM> add Kelly girl                                                                                TM> add Kelly girl
+TM> add Walter boy                                                                                TM> add Walter boy
+TM> add Victoria girl                                                                             TM> add Victoria girl
+TM> add Harold boy                                                                                TM> add Harold boy
+TM> add Lauren girl                                                                               TM> add Lauren girl
+TM> add Kyle boy                                                                                  TM> add Kyle boy
+TM> add Martha girl                                                                               TM> add Martha girl
+TM> add Carl boy                                                                                  TM> add Carl boy
+TM> add Judith girl                                                                               TM> add Judith girl
+TM> add Arthur boy                                                                                TM> add Arthur boy
+TM> add Cheryl girl                                                                               TM> add Cheryl girl
+TM> add Gerald boy                                                                                TM> add Gerald boy
+TM> add Megan girl                                                                                TM> add Megan girl
+TM> add Roger boy                                                                                 TM> add Roger boy
+TM> add Andrea girl                                                                               TM> add Andrea girl
+TM> add Keith boy                                                                                 TM> add Keith boy
+TM> add Ann girl                                                                                  TM> add Ann girl
+TM> add Jeremy boy                                                                                TM> add Jeremy boy
+TM> add Alice girl                                                                                TM> add Alice girl
+TM> add Terry boy                                                                                 TM> add Terry boy
+TM> add Jean girl                                                                                 TM> add Jean girl
+TM> add Lawrence boy                                                                              TM> add Lawrence boy
+TM> add Doris girl                                                                                TM> add Doris girl
+TM> add Sean boy                                                                                  TM> add Sean boy
+TM> add Jacqueline girl                                                                           TM> add Jacqueline girl
+TM> add Christian boy                                                                             TM> add Christian boy
+TM> add Kathryn girl                                                                              TM> add Kathryn girl
+TM> add Albert boy                                                                                TM> add Albert boy
+TM> add Hannah girl                                                                               TM> add Hannah girl
+TM> add Joe boy                                                                                   TM> add Joe boy
+TM> add Olivia girl                                                                               TM> add Olivia girl
+TM> add Ethan boy                                                                                 TM> add Ethan boy
+TM> add Gloria girl                                                                               TM> add Gloria girl
+TM> add Austin boy                                                                                TM> add Austin boy
+TM> add Marie girl                                                                                TM> add Marie girl
+TM> add Jesse boy                                                                                 TM> add Jesse boy
+TM> add Teresa girl                                                                               TM> add Teresa girl
+TM> add Willie boy                                                                                TM> add Willie boy
+TM> add Sara girl                                                                                 TM> add Sara girl
+TM> add Billy boy                                                                                 TM> add Billy boy
+TM> add Janice girl                                                                               TM> add Janice girl
+TM> add Bryan boy                                                                                 TM> add Bryan boy
+TM> add Julia girl                                                                                TM> add Julia girl
+TM> add Bruce boy                                                                                 TM> add Bruce boy
+TM> add Grace girl                                                                                TM> add Grace girl
+TM> add Jordan boy                                                                                TM> add Jordan boy
+TM> add Judy girl                                                                                 TM> add Judy girl
+TM> add Ralph boy                                                                                 TM> add Ralph boy
+TM> add Theresa girl                                                                              TM> add Theresa girl
+TM> add Roy boy                                                                                   TM> add Roy boy
+TM> add Rose girl                                                                                 TM> add Rose girl
+TM> add Noah boy                                                                                  TM> add Noah boy
+TM> add Beverly girl                                                                              TM> add Beverly girl
+TM> add Dylan boy                                                                                 TM> add Dylan boy
+TM> add Denise girl                                                                               TM> add Denise girl
+TM> add Eugene boy                                                                                TM> add Eugene boy
+TM> add Marilyn girl                                                                              TM> add Marilyn girl
+TM> add Wayne boy                                                                                 TM> add Wayne boy
+TM> add Amber girl                                                                                TM> add Amber girl
+TM> add Alan boy                                                                                  TM> add Alan boy
+TM> add Madison girl                                                                              TM> add Madison girl
+TM> add Juan boy                                                                                  TM> add Juan boy
+TM> add Danielle girl                                                                             TM> add Danielle girl
+TM> add Louis boy                                                                                 TM> add Louis boy
+TM> add Brittany girl                                                                             TM> add Brittany girl
+TM> add Russell boy                                                                               TM> add Russell boy
+TM> add Diana girl                                                                                TM> add Diana girl
+TM> add Gabriel boy                                                                               TM> add Gabriel boy
+TM> add Abigail girl                                                                              TM> add Abigail girl
+TM> add Randy boy                                                                                 TM> add Randy boy
+TM> add Jane girl                                                                                 TM> add Jane girl
+TM> add Philip boy                                                                                TM> add Philip boy
+TM> add Natalie girl                                                                              TM> add Natalie girl
+TM> add Harry boy                                                                                 TM> add Harry boy
+TM> add Lori girl                                                                                 TM> add Lori girl
+TM> add Vincent boy                                                                               TM> add Vincent boy
+TM> add Tiffany girl                                                                              TM> add Tiffany girl
+TM> add Bobby boy                                                                                 TM> add Bobby boy
+TM> add Alexis girl                                                                               TM> add Alexis girl
+TM> add Johnny boy                                                                                TM> add Johnny boy
+TM> add Kayla girl                                                                                TM> add Kayla girl
+TM> add Logan boy                                                                                 TM> add Logan boy
+TM> get Natalie                                                                                   TM> get Natalie
+FOUND: girl                                                                                       FOUND: girl
+TM> get Juan                                                                                      TM> get Juan
+FOUND: boy                                                                                        FOUND: boy
+TM> get Cartman                                                                                   TM> get Cartman
+NOT FOUND                                                                                         NOT FOUND
+TM> get MrGarrison                                                                                TM> get MrGarrison
+NOT FOUND                                                                                         NOT FOUND
+TM> size                                                                                          TM> size
+200 nodes                                                                                         200 nodes
+TM> print                                                                                         TM> print
+        Zachary -> boy                                                                                    Zachary -> boy
+          Willie -> boy                                                                                     Willie -> boy
+      William -> boy                                                                                    William -> boy
+                  Wayne -> boy                                                                                      Wayne -> boy
+                Walter -> boy                                                                                     Walter -> boy
+              Virginia -> girl                                                                                  Virginia -> girl
+                    Vincent -> boy                                                                                    Vincent -> boy
+                  Victoria -> girl                                                                                  Victoria -> girl
+                Tyler -> boy                                                                                      Tyler -> boy
+            Timothy -> boy                                                                                    Timothy -> boy
+              Tiffany -> girl                                                                                   Tiffany -> girl
+          Thomas -> boy                                                                                     Thomas -> boy
+              Theresa -> girl                                                                                   Theresa -> girl
+            Terry -> boy                                                                                      Terry -> boy
+              Teresa -> girl                                                                                    Teresa -> girl
+        Susan -> girl                                                                                     Susan -> girl
+            Steven -> boy                                                                                     Steven -> boy
+                Stephen -> boy                                                                                    Stephen -> boy
+              Stephanie -> girl                                                                                 Stephanie -> girl
+                  Shirley -> girl                                                                                   Shirley -> girl
+                Sharon -> girl                                                                                    Sharon -> girl
+                    Sean -> boy                                                                                       Sean -> boy
+                  Scott -> boy                                                                                      Scott -> boy
+          Sarah -> girl                                                                                     Sarah -> girl
+              Sara -> girl                                                                                      Sara -> girl
+            Sandra -> girl                                                                                    Sandra -> girl
+                    Samuel -> boy                                                                                     Samuel -> boy
+                  Samantha -> girl                                                                                  Samantha -> girl
+                Ryan -> boy                                                                                       Ryan -> boy
+                  Ruth -> girl                                                                                      Ruth -> girl
+                      Russell -> boy                                                                                    Russell -> boy
+                    Roy -> boy                                                                                        Roy -> boy
+                      Rose -> girl                                                                                      Rose -> girl
+              Ronald -> boy                                                                                     Ronald -> boy
+                Roger -> boy                                                                                      Roger -> boy
+    Robert -> boy                                                                                     Robert -> boy
+      Richard -> boy                                                                                    Richard -> boy
+          Rebecca -> girl                                                                                   Rebecca -> girl
+            Raymond -> boy                                                                                    Raymond -> boy
+                  Randy -> boy                                                                                      Randy -> boy
+                Ralph -> boy                                                                                      Ralph -> boy
+              Rachel -> girl                                                                                    Rachel -> girl
+                  Philip -> boy                                                                                     Philip -> boy
+                Peter -> boy                                                                                      Peter -> boy
+        Paul -> boy                                                                                       Paul -> boy
+          Patrick -> boy                                                                                    Patrick -> boy
+  Patricia -> girl                                                                                  Patricia -> girl
+          Pamela -> girl                                                                                    Pamela -> girl
+              Olivia -> girl                                                                                    Olivia -> girl
+                Noah -> boy                                                                                       Noah -> boy
+            Nicole -> girl                                                                                    Nicole -> girl
+        Nicholas -> boy                                                                                   Nicholas -> boy
+          Nathan -> boy                                                                                     Nathan -> boy
+            Natalie -> girl                                                                                   Natalie -> girl
+      Nancy -> girl                                                                                     Nanc

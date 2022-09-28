@@ -49,7 +49,9 @@
         "xutility": "cpp",
         "list": "cpp",
         "vector": "cpp",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "treemap.h": "c",
+        "string.h": "c"
     },
     "java.project.sourcePaths": [
         "csci1913/labs/lab9",

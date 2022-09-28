@@ -12,7 +12,7 @@
  * @param tree, a empty tree
  */
 void treemap_init(treemap_t *tree)
-{
+{   
     tree->root = NULL;
 }
 
@@ -27,11 +27,13 @@ void treemap_init(treemap_t *tree)
 int treemap_add(treemap_t *tree, char key[], char val[])
 {
     node_t *cur = tree->root;
-    if (cur == NULL)
+    if (cur == NULL)// first case
     {
-        cur = (node_t*)malloc(sizeof(node_t));
+        tree->root = (node_t*)malloc(sizeof(node_t));
+        cur = tree->root;
         strcpy(cur->key, key);
         strcpy(cur->val, val);
+        cur->left = cur->right = NULL;
         return 1;
     }
     else
@@ -46,9 +48,12 @@ int treemap_add(treemap_t *tree, char key[], char val[])
                 }
                 else
                 {
-                    cur->right = malloc(sizeof(node_t));
-                    strcpy(cur->right->key, key);
-                    strcpy(cur->right->val, val);
+                    cur->right = (node_t*)malloc(sizeof(node_t));
+                    cur = cur->right;
+                    strcpy(cur->key, key);
+                    strcpy(cur->val, val);
+                    cur->left = cur->right = NULL;
+                    return 1;
                 }
             }
             else if (strcmp(cur->key, key) < 0) // if key is smaller go left
@@ -59,14 +64,18 @@ int treemap_add(treemap_t *tree, char key[], char val[])
                 }
                 else
                 {
-                    cur->left = malloc(sizeof(node_t));
-                    strcpy(cur->left->key, key);
-                    strcpy(cur->left->val, val);
+                    cur->left = (node_t*)malloc(sizeof(node_t));
+                    cur = cur->left;
+                    strcpy(cur->key, key);
+                    strcpy(cur->val, val);
+                    cur->left = cur->right = NULL;
+                    return 1;
                 }
             }
             else if (strcmp(cur->key, key) == 0) // if equal update the val and exit
             {
                 strcpy(cur->val, val);
+                printf("modified existing key\n");
                 return 0;
             }
         }
@@ -110,7 +119,12 @@ char *treemap_get(treemap_t *tree, char key[])
  * @param tree tree to clear
  */
 void treemap_clear(treemap_t *tree){
+    if (tree->root == NULL)
+    {
+        return;
+    }
     node_remove_all(tree->root);
+    tree->root = NULL;
 }
 
 /**
@@ -130,8 +144,6 @@ void node_remove_all(node_t *cur){
         node_remove_all(cur->right);
     }
     //if there isn't a left or right clears 
-    free(cur->key);
-    free(cur->val);
     free(cur);
 }
 
@@ -178,14 +190,17 @@ void treemap_print_revorder(treemap_t *tree){
  * @param indent the value of spacing 2 spaces per indent
  */
 void node_print_revorder(node_t *cur, int indent){
-    node_print_revorder(cur->right, indent++);
+    if(cur == NULL){
+        return;
+    }
+    
+    node_print_revorder(cur->left, indent+1);
     for (size_t i = 0; i < indent; i++)
     {
         printf("  ");
     }
-    printf("%s", &cur->key);
-    printf("%s", &cur->val);
-    node_print_revorder(cur->left, indent++);
+    printf("%s -> %s\n", cur->key, cur->val);
+    node_print_revorder(cur->right, indent+1);
 }
 
 /**
@@ -217,14 +232,18 @@ void treemap_save(treemap_t *tree, char *fname){
  * @param depth the depth of tree/spacing used to print with
  */
 void node_write_preorder(node_t *cur, FILE *out, int depth){
+    if (cur == NULL)
+    {
+        return;
+    }
+    
     for (size_t i = 0; i < depth; i++)
     {
-        printf("  ");
+        fprintf(out, "  ");
     }
-    printf("%s", &cur->key);
-    printf("%s", &cur->val);
-    node_print_preorder(cur->left, depth++);
-    node_print_preorder(cur->right, depth++);
+    fprintf(out, "%s %s\n", cur->key, cur->val);
+    node_write_preorder(cur->right, out, depth+1);
+    node_write_preorder(cur->left, out, depth+1);
 }
 
 /**
@@ -238,13 +257,18 @@ int treemap_load(treemap_t *tree, char *fname){
     FILE *ptr = fopen(fname, "r");
     if (!ptr) //checks if file exists
     {
+        printf("ERROR: could not open file '%s'\n", fname);
         return 0;
     }
     treemap_clear(tree); // clears if file exists
-    
-    treemap_add(tree, fscanf(ptr, "%s"),fscanf(ptr, "%s"));//should add the first val depending on how spaces are dealt with
-    //loop  
 
+    char key[64], val[64];
+
+    while(fscanf(ptr, "%s", key) != EOF){//might put in right loc by default, could be an error here
+    fscanf(ptr, "%s", val);
+    treemap_add(tree, key, val);
+    }
+    return 1;
 }
 // Clears the given tree then loads new elements to it from the
 // named. Repeated calls to treemap_add() are used to add strings read

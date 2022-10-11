@@ -1,0 +1,64 @@
+* (TEST 9) set_batt_from_ports() 6579 P
+COMMENTS:
+** program: ./test_batt_update "set_batt_from_ports() 6579 P"
+
+** --- Failure messages --- 
+- FAILURE: Output Mismatch at lines marked
+
+** --- Side by Side Differences ---
+- Expect output in: test-results/raw/prob1-09-expect.tmp
+- Actual output in: test-results/raw/prob1-09-actual.tmp
+- Differing lines have a character like '|' '>' or '<' in the middle
+#+BEGIN_SRC sbs-diff
+==== EXPECT ====                                                        ==== ACTUAL ====                                                     
+{                                                                      | No test named 'set_batt_from_ports() 6579 P                                                                        ' found
+    // Checks proper voltage / percent for a mid-range sensor value.                                                                      <
+    BATT_VOLTAGE_PORT = 6579;                                                                      <
+    BATT_STATUS_PORT  = 0b010000;                                                                      <
+    BATT_DISPLAY_PORT = -1;                                                                      <
+    batt_t actual = {};            // all 0s                                                                      <
+    int ret = set_batt_from_ports(&actual);                                                                      <
+    printf("ret: %d\n",ret);                                                                      <
+    printf("actual = "); print_batt(actual);                                                                      <
+    print_ports();                                                                      <
+}                                                                      <
+---OUTPUT---                                                                      <
+ret: 0                                                                      <
+actual = {                                                                      <
+  .mlvolts = 3289,                                                                      <
+  .percent = 36,                                                                      <
+  .mode    = 1,                                                                      <
+}                                                                      <
+BATT_VOLTAGE_PORT  : 6579                                                                      <
+BATT_STATUS_PORT   : 000 10000                                                                      <
+BATT_DISPLAY_PORT  : 111 11111 1111111 1111111 1111111 111                                                                      <
+index              :  29    24      17      10       3   0                                                                      <
+#+END_SRC                                                                      <
+#+END_SRC
+
+** --- Line Differences ---
+EXPECT:   1) {
+EXPECT:   2)     // Checks proper voltage / percent for a mid-range sensor value.
+EXPECT:   3)     BATT_VOLTAGE_PORT = 6579;
+EXPECT:   4)     BATT_STATUS_PORT  = 0b010000;
+EXPECT:   5)     BATT_DISPLAY_PORT = -1;
+EXPECT:   6)     batt_t actual = {};            // all 0s
+EXPECT:   7)     int ret = set_batt_from_ports(&actual);
+EXPECT:   8)     printf("ret: %d\n",ret);
+EXPECT:   9)     printf("actual = "); print_batt(actual);
+EXPECT:  10)     print_ports();
+EXPECT:  11) }
+EXPECT:  12) ---OUTPUT---
+EXPECT:  13) ret: 0
+EXPECT:  14) actual = {
+EXPECT:  15)   .mlvolts = 3289,
+EXPECT:  16)   .percent = 36,
+EXPECT:  17)   .mode    = 1,
+EXPECT:  18) }
+EXPECT:  19) BATT_VOLTAGE_PORT  : 6579
+EXPECT:  20) BATT_STATUS_PORT   : 000 10000
+EXPECT:  21) BATT_DISPLAY_PORT  : 111 11111 1111111 1111111 1111111 111
+EXPECT:  22) index              :  29    24      17      10       3   0
+EXPECT:  23) #+END_SRC
+ACTUAL:   1) No test named 'set_batt_from_ports() 6579 P' found
+

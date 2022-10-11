@@ -1,0 +1,98 @@
+* (TEST 16) set_display_from_batt() 3.507 V
+COMMENTS:
+** program: ./test_batt_update "set_display_from_batt() 3.507 V"
+
+** --- Failure messages --- 
+- FAILURE: Output Mismatch at lines marked
+
+** --- Side by Side Differences ---
+- Expect output in: test-results/raw/prob1-16-expect.tmp
+- Actual output in: test-results/raw/prob1-16-actual.tmp
+- Differing lines have a character like '|' '>' or '<' in the middle
+#+BEGIN_SRC sbs-diff
+==== EXPECT ====                                                         ==== ACTUAL ====                                                      
+{                                                                       | No test named 'set_display_from_batt() 3.507 V                                                                         ' found
+    // Should show 3.50 V: no rounding associated with the last digit                                                                       <
+    // of the voltage reading.                                                                       <
+    BATT_VOLTAGE_PORT = -1;                                                                       <
+    BATT_STATUS_PORT  = -1;                                                                       <
+    BATT_DISPLAY_PORT = -1;                                                                       <
+    batt_t batt = {                                                                       <
+      .mlvolts = 3507,                                                                       <
+      .percent = 62,                                                                       <
+      .mode = 2,                                                                       <
+    };                                                                       <
+    int ret = set_display_from_batt(batt, dispint);                                                                       <
+    printf("ret: %d\n",ret);                                                                       <
+    printf("%-18s : %s\n%-18s : %s\n",                                                                       <
+           "dispint bits", bitstr(*dispint, INT_BITS),                                                                       <
+           "index", bitstr_index(INT_BITS));                                                                       <
+    printf("\n");  print_ports();  printf("\n");                                                                       <
+    BATT_DISPLAY_PORT = *dispint;                                                                       <
+    printf("Display based on dispint:\n");                                                                       <
+    print_batt_display();                                                                       <
+}                                                                       <
+---OUTPUT---                                                                       <
+ret: 0                                                                       <
+dispint bits       : 000 00111 1001111 1101101 0000110 110                                                                       <
+index              :  29    24      17      10       3   0                                                                       <
+                                                                       <
+BATT_VOLTAGE_PORT  : -1                                                                       <
+BATT_STATUS_PORT   : 111 11111                                                                       <
+BATT_DISPLAY_PORT  : 111 11111 1111111 1111111 1111111 111                                                                       <
+index              :  29    24      17      10       3   0                                                                       <
+                                                                       <
+Display based on dispint:                                                                       <
++-^^^-+  ####   ####     #                                                                            <
+|     |     #   #        #                                                                            <
+|     |     #   #        #                                                                            <
+|#####|  ####   ####     #  V                                                                         <
+|#####|     #      #     #                                                                            <
+|#####|     #      #     #                                                                            <
++-----+  #### o ####     #                                                                            <
+#+END_SRC                                                                       <
+#+END_SRC
+
+** --- Line Differences ---
+EXPECT:   1) {
+EXPECT:   2)     // Should show 3.50 V: no rounding associated with the last digit
+EXPECT:   3)     // of the voltage reading.
+EXPECT:   4)     BATT_VOLTAGE_PORT = -1;
+EXPECT:   5)     BATT_STATUS_PORT  = -1;
+EXPECT:   6)     BATT_DISPLAY_PORT = -1;
+EXPECT:   7)     batt_t batt = {
+EXPECT:   8)       .mlvolts = 3507,
+EXPECT:   9)       .percent = 62,
+EXPECT:  10)       .mode = 2,
+EXPECT:  11)     };
+EXPECT:  12)     int ret = set_display_from_batt(batt, dispint);
+EXPECT:  13)     printf("ret: %d\n",ret);
+EXPECT:  14)     printf("%-18s : %s\n%-18s : %s\n",
+EXPECT:  15)            "dispint bits", bitstr(*dispint, INT_BITS),
+EXPECT:  16)            "index", bitstr_index(INT_BITS));
+EXPECT:  17)     printf("\n");  print_ports();  printf("\n");
+EXPECT:  18)     BATT_DISPLAY_PORT = *dispint;
+EXPECT:  19)     printf("Display based on dispint:\n");
+EXPECT:  20)     print_batt_display();
+EXPECT:  21) }
+EXPECT:  22) ---OUTPUT---
+EXPECT:  23) ret: 0
+EXPECT:  24) dispint bits       : 000 00111 1001111 1101101 0000110 110
+EXPECT:  25) index              :  29    24      17      10       3   0
+EXPECT:  26) 
+EXPECT:  27) BATT_VOLTAGE_PORT  : -1
+EXPECT:  28) BATT_STATUS_PORT   : 111 11111
+EXPECT:  29) BATT_DISPLAY_PORT  : 111 11111 1111111 1111111 1111111 111
+EXPECT:  30) index              :  29    24      17      10       3   0
+EXPECT:  31) 
+EXPECT:  32) Display based on dispint:
+EXPECT:  33) +-^^^-+  ####   ####     #     
+EXPECT:  34) |     |     #   #        #     
+EXPECT:  35) |     |     #   #        #     
+EXPECT:  36) |#####|  ####   ####     #  V  
+EXPECT:  37) |#####|     #      #     #     
+EXPECT:  38) |#####|     #      #     #     
+EXPECT:  39) +-----+  #### o ####     #     
+EXPECT:  40) #+END_SRC
+ACTUAL:   1) No test named 'set_display_from_batt() 3.507 V' found
+

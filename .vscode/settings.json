@@ -51,7 +51,8 @@
         "vector": "cpp",
         "stdio.h": "c",
         "treemap.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "batt.h": "c"
     },
     "java.project.sourcePaths": [
         "csci1913/labs/lab9",

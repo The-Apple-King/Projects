@@ -1,0 +1,66 @@
+* (TEST 7) set_batt_from_ports() 7845 P is 100%
+COMMENTS:
+** program: ./test_batt_update "set_batt_from_ports() 7845 P is 100%"
+
+** --- Failure messages --- 
+- FAILURE: Output Mismatch at lines marked
+
+** --- Side by Side Differences ---
+- Expect output in: test-results/raw/prob1-07-expect.tmp
+- Actual output in: test-results/raw/prob1-07-actual.tmp
+- Differing lines have a character like '|' '>' or '<' in the middle
+#+BEGIN_SRC sbs-diff
+==== EXPECT ====                                                       ==== ACTUAL ====                                                    
+{                                                                     | No test named 'set_batt_from_ports() 7845 P is 100%                                                                       ' found
+    // Checks that the percentage is set to 100% if voltage port is                                                                     <
+    // sufficiently high.                                                                     <
+    BATT_VOLTAGE_PORT = 7845;                                                                     <
+    BATT_STATUS_PORT  = 0b010000;                                                                     <
+    BATT_DISPLAY_PORT = -1;                                                                     <
+    batt_t actual = {};            // all 0s                                                                     <
+    int ret = set_batt_from_ports(&actual);                                                                     <
+    printf("ret: %d\n",ret);                                                                     <
+    printf("actual = "); print_batt(actual);                                                                     <
+    print_ports();                                                                     <
+}                                                                     <
+---OUTPUT---                                                                     <
+ret: 0                                                                     <
+actual = {                                                                     <
+  .mlvolts = 3922,                                                                     <
+  .percent = 100,                                                                     <
+  .mode    = 1,                                                                     <
+}                                                                     <
+BATT_VOLTAGE_PORT  : 7845                                                                     <
+BATT_STATUS_PORT   : 000 10000                                                                     <
+BATT_DISPLAY_PORT  : 111 11111 1111111 1111111 1111111 111                                                                     <
+index              :  29    24      17      10       3   0                                                                     <
+#+END_SRC                                                                     <
+#+END_SRC
+
+** --- Line Differences ---
+EXPECT:   1) {
+EXPECT:   2)     // Checks that the percentage is set to 100% if voltage port is
+EXPECT:   3)     // sufficiently high.
+EXPECT:   4)     BATT_VOLTAGE_PORT = 7845;
+EXPECT:   5)     BATT_STATUS_PORT  = 0b010000;
+EXPECT:   6)     BATT_DISPLAY_PORT = -1;
+EXPECT:   7)     batt_t actual = {};            // all 0s
+EXPECT:   8)     int ret = set_batt_from_ports(&actual);
+EXPECT:   9)     printf("ret: %d\n",ret);
+EXPECT:  10)     printf("actual = "); print_batt(actual);
+EXPECT:  11)     print_ports();
+EXPECT:  12) }
+EXPECT:  13) ---OUTPUT---
+EXPECT:  14) ret: 0
+EXPECT:  15) actual = {
+EXPECT:  16)   .mlvolts = 3922,
+EXPECT:  17)   .percent = 100,
+EXPECT:  18)   .mode    = 1,
+EXPECT:  19) }
+EXPECT:  20) BATT_VOLTAGE_PORT  : 7845
+EXPECT:  21) BATT_STATUS_PORT   : 000 10000
+EXPECT:  22) BATT_DISPLAY_PORT  : 111 11111 1111111 1111111 1111111 111
+EXPECT:  23) index              :  29    24      17      10       3   0
+EXPECT:  24) #+END_SRC
+ACTUAL:   1) No test named 'set_batt_from_ports() 7845 P is 100%' found
+

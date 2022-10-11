@@ -1,0 +1,66 @@
+* (TEST 12) set_batt_from_ports() FAILS
+COMMENTS:
+** program: ./test_batt_update "set_batt_from_ports() FAILS"
+
+** --- Failure messages --- 
+- FAILURE: Output Mismatch at lines marked
+
+** --- Side by Side Differences ---
+- Expect output in: test-results/raw/prob1-12-expect.tmp
+- Actual output in: test-results/raw/prob1-12-actual.tmp
+- Differing lines have a character like '|' '>' or '<' in the middle
+#+BEGIN_SRC sbs-diff
+==== EXPECT ====                                                         ==== ACTUAL ====                                                      
+{                                                                       | No test named 'set_batt_from_ports() FAILS                                                                         ' found
+    // Negative voltage sensor value should cause a failure and leave                                                                       <
+    // the batt_t struct 'actual' unchanged.                                                                       <
+    BATT_VOLTAGE_PORT = -7200;                                                                       <
+    BATT_STATUS_PORT  = 0b110011;                                                                       <
+    BATT_DISPLAY_PORT = -1;                                                                       <
+    batt_t actual = {};            // all 0s                                                                       <
+    int ret = set_batt_from_ports(&actual);                                                                       <
+    printf("ret: %d\n",ret);                                                                       <
+    printf("actual = "); print_batt(actual);                                                                       <
+    print_ports();                                                                       <
+}                                                                       <
+---OUTPUT---                                                                       <
+ret: 1                                                                       <
+actual = {                                                                       <
+  .mlvolts = 0,                                                                       <
+  .percent = 0,                                                                       <
+  .mode    = 0,                                                                       <
+}                                                                       <
+BATT_VOLTAGE_PORT  : -7200                                                                       <
+BATT_STATUS_PORT   : 001 10011                                                                       <
+BATT_DISPLAY_PORT  : 111 11111 1111111 1111111 1111111 111                                                                       <
+index              :  29    24      17      10       3   0                                                                       <
+#+END_SRC                                                                       <
+#+END_SRC
+
+** --- Line Differences ---
+EXPECT:   1) {
+EXPECT:   2)     // Negative voltage sensor value should cause a failure and leave
+EXPECT:   3)     // the batt_t struct 'actual' unchanged.
+EXPECT:   4)     BATT_VOLTAGE_PORT = -7200;
+EXPECT:   5)     BATT_STATUS_PORT  = 0b110011;
+EXPECT:   6)     BATT_DISPLAY_PORT = -1;
+EXPECT:   7)     batt_t actual = {};            // all 0s
+EXPECT:   8)     int ret = set_batt_from_ports(&actual);
+EXPECT:   9)     printf("ret: %d\n",ret);
+EXPECT:  10)     printf("actual = "); print_batt(actual);
+EXPECT:  11)     print_ports();
+EXPECT:  12) }
+EXPECT:  13) ---OUTPUT---
+EXPECT:  14) ret: 1
+EXPECT:  15) actual = {
+EXPECT:  16)   .mlvolts = 0,
+EXPECT:  17)   .percent = 0,
+EXPECT:  18)   .mode    = 0,
+EXPECT:  19) }
+EXPECT:  20) BATT_VOLTAGE_PORT  : -7200
+EXPECT:  21) BATT_STATUS_PORT   : 001 10011
+EXPECT:  22) BATT_DISPLAY_PORT  : 111 11111 1111111 1111111 1111111 111
+EXPECT:  23) index              :  29    24      17      10       3   0
+EXPECT:  24) #+END_SRC
+ACTUAL:   1) No test named 'set_batt_from_ports() FAILS' found
+

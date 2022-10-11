@@ -1,0 +1,16 @@
+==28363== Memcheck, a memory error detector
+==28363== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==28363== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==28363== Command: ./test_batt_update batt_update()\ error
+==28363== Parent PID: 28362
+==28363== 
+==28363== error calling PR_SET_PTRACER, vgdb might block
+==28363== 
+==28363== HEAP SUMMARY:
+==28363==     in use at exit: 0 bytes in 0 blocks
+==28363==   total heap usage: 1 allocs, 1 frees, 4 bytes allocated
+==28363== 
+==28363== All heap blocks were freed -- no leaks are possible
+==28363== 
+==28363== For lists of detected and suppressed errors, rerun with: -s
+==28363== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

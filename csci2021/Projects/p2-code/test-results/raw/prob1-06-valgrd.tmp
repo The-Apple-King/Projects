@@ -1,0 +1,16 @@
+==27585== Memcheck, a memory error detector
+==27585== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==27585== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==27585== Command: ./test_batt_update set_batt_from_ports()\ mixed\ STATUS\ P
+==27585== Parent PID: 27584
+==27585== 
+==27585== error calling PR_SET_PTRACER, vgdb might block
+==27585== 
+==27585== HEAP SUMMARY:
+==27585==     in use at exit: 0 bytes in 0 blocks
+==27585==   total heap usage: 1 allocs, 1 frees, 4 bytes allocated
+==27585== 
+==27585== All heap blocks were freed -- no leaks are possible
+==27585== 
+==27585== For lists of detected and suppressed errors, rerun with: -s
+==27585== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

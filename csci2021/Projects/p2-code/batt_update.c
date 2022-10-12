@@ -66,7 +66,7 @@ int set_batt_from_ports(batt_t *batt)
  */
 int set_display_from_batt(batt_t batt, int *display)
 {
-    int nums[10] = {0b0111111, 0b0000011, 0b1011011, 1001111, 0b1100110, 0b1101101, 0b1111101, 0b0000111, 0b01111111, 0b1101111}; // bit vals for each digit
+    int nums[10] = {0b0111111, 0b0000110, 0b1011011, 0b1001111, 0b1100110, 0b1101101, 0b1111101, 0b0000111, 0b01111111, 0b1101111}; // bit vals for each digit
 
     // set the battery icon by checking all sections
     if (batt.percent >= 90)
@@ -96,36 +96,46 @@ int set_display_from_batt(batt_t batt, int *display)
     *display <<= 24;
 
     // set the number display
-    if (batt.mode == 1)
-    {                                             // volts
-        int voltage = (batt.mlvolts * 3) / 60;    // used to modulo and find each digit
-        int count = 100;                          // used to know what to modulo by
-        *display |= 0b011111101111110111111 << 3; // sets to all zeroes by default
+    if (batt.mode == 2) // volts
+    {
+        int voltage = batt.mlvolts; // used to modulo and find each digit
+
+        // rounds up
+        if (voltage % 10 >= 5)
+        {
+            voltage += 10;
+        }
+        voltage /= 10;
+
+        int count = 100; // used to know what to modulo by
         for (int i = 14; i >= 0; i -= 7)
         {
-            *display |= nums[voltage % count] << (i + 3);
-            voltage -= (voltage % count) * count;
+            *display |= nums[voltage / count] << (i + 3);
+            voltage %= count;
             count /= 10;
         }
-        *display |= 0b001;
+        *display |= 0b110;
     }
-    else
-    {                                       // percent
-        int percent = (batt.percent * 100); // used for modulo to find each digit
+    else // percent
+    {
+        int percent = (batt.percent); // used for modulo to find each digit
         int count = 100;                    // used to know which amount to modulo by
         int nonzero = 0;                    // flag used to know when there is no longer a leading 0
-        *display |= nums[0] << 3;
-        for (int i = 14; i >= 0; i += 7)
+        for (int i = 14; i >= 0; i -= 7)
         {
-            if (percent % count != 0 || nonzero == 1)
+            if (count > 0 && (percent / count != 0 || nonzero == 1))
             {
-                *display |= nums[percent % count] << (i + 3);
-                percent -= (percent % count) * count;
-                count /= 10;
+                *display |= nums[percent / count] << (i + 3);
+                percent %= count;
                 nonzero = 1;
             }
+            count /= 10;
         }
-        *display |= 0b110;
+        if (!nonzero)
+        {
+            *display |= nums[0] << 3;
+        }
+        *display |= 0b001;
     }
     return 0;
 }

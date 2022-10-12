@@ -1,29 +1,16 @@
-==28099== Memcheck, a memory error detector
-==28099== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==28099== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==28099== Command: ./test_batt_update set_display_from_batt()\ level\ 2
-==28099== Parent PID: 28098
-==28099== 
-==28099== error calling PR_SET_PTRACER, vgdb might block
-==28099== Conditional jump or move depends on uninitialised value(s)
-==28099==    at 0x10B9E9: bitstr (batt_sim.c:166)
-==28099==    by 0x10ABC9: main (test_batt_update.c:426)
-==28099==  Uninitialised value was created by a stack allocation
-==28099==    at 0x10939F: main (test_batt_update.c:31)
-==28099== 
-==28099== Conditional jump or move depends on uninitialised value(s)
-==28099==    at 0x10B822: set_batt_display (batt_sim.c:122)
-==28099==    by 0x10B943: print_batt_display (batt_sim.c:140)
-==28099==    by 0x10AC3D: main (test_batt_update.c:432)
-==28099==  Uninitialised value was created by a stack allocation
-==28099==    at 0x10939F: main (test_batt_update.c:31)
-==28099== 
-==28099== 
-==28099== HEAP SUMMARY:
-==28099==     in use at exit: 0 bytes in 0 blocks
-==28099==   total heap usage: 1 allocs, 1 frees, 4 bytes allocated
-==28099== 
-==28099== All heap blocks were freed -- no leaks are possible
-==28099== 
-==28099== For lists of detected and suppressed errors, rerun with: -s
-==28099== ERROR SUMMARY: 24 errors from 2 contexts (suppressed: 0 from 0)
+==12484== Memcheck, a memory error detector
+==12484== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==12484== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==12484== Command: ./test_batt_update set_display_from_batt()\ level\ 2
+==12484== Parent PID: 12483
+==12484== 
+==12484== error calling PR_SET_PTRACER, vgdb might block
+==12484== 
+==12484== HEAP SUMMARY:
+==12484==     in use at exit: 0 bytes in 0 blocks
+==12484==   total heap usage: 1 allocs, 1 frees, 4 bytes allocated
+==12484== 
+==12484== All heap blocks were freed -- no leaks are possible
+==12484== 
+==12484== For lists of detected and suppressed errors, rerun with: -s
+==12484== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

@@ -1,64 +1,0 @@
-* (TEST 8) set_batt_from_ports() 2500 V
-COMMENTS:
-** program: ./test_batt_update "set_batt_from_ports() 2500 V"
-
-** --- Failure messages --- 
-- FAILURE: Output Mismatch at lines marked
-
-** --- Side by Side Differences ---
-- Expect output in: test-results/raw/prob1-08-expect.tmp
-- Actual output in: test-results/raw/prob1-08-actual.tmp
-- Differing lines have a character like '|' '>' or '<' in the middle
-#+BEGIN_SRC sbs-diff
-==== EXPECT ====                                              ==== ACTUAL ====                                           
-{                                                            | No test named 'set_batt_from_ports() 2500 V                                                              ' found
-    // Checks a low voltage rating should be 0 percent                                                            <
-    BATT_VOLTAGE_PORT = 2500;                                                            <
-    BATT_STATUS_PORT  = 0b000000;                                                            <
-    BATT_DISPLAY_PORT = -1;                                                            <
-    batt_t actual = {};            // all 0s                                                            <
-    int ret = set_batt_from_ports(&actual);                                                            <
-    printf("ret: %d\n",ret);                                                            <
-    printf("actual = "); print_batt(actual);                                                            <
-    print_ports();                                                            <
-}                                                            <
----OUTPUT---                                                            <
-ret: 0                                                            <
-actual = {                                                            <
-  .mlvolts = 1250,                                                            <
-  .percent = 0,                                                            <
-  .mode    = 2,                                                            <
-}                                                            <
-BATT_VOLTAGE_PORT  : 2500                                                            <
-BATT_STATUS_PORT   : 000 00000                                                            <
-BATT_DISPLAY_PORT  : 111 11111 1111111 1111111 1111111 111                                                            <
-index              :  29    24      17      10       3   0                                                            <
-#+END_SRC                                                            <
-#+END_SRC
-
-** --- Line Differences ---
-EXPECT:   1) {
-EXPECT:   2)     // Checks a low voltage rating should be 0 percent
-EXPECT:   3)     BATT_VOLTAGE_PORT = 2500;
-EXPECT:   4)     BATT_STATUS_PORT  = 0b000000;
-EXPECT:   5)     BATT_DISPLAY_PORT = -1;
-EXPECT:   6)     batt_t actual = {};            // all 0s
-EXPECT:   7)     int ret = set_batt_from_ports(&actual);
-EXPECT:   8)     printf("ret: %d\n",ret);
-EXPECT:   9)     printf("actual = "); print_batt(actual);
-EXPECT:  10)     print_ports();
-EXPECT:  11) }
-EXPECT:  12) ---OUTPUT---
-EXPECT:  13) ret: 0
-EXPECT:  14) actual = {
-EXPECT:  15)   .mlvolts = 1250,
-EXPECT:  16)   .percent = 0,
-EXPECT:  17)   .mode    = 2,
-EXPECT:  18) }
-EXPECT:  19) BATT_VOLTAGE_PORT  : 2500
-EXPECT:  20) BATT_STATUS_PORT   : 000 00000
-EXPECT:  21) BATT_DISPLAY_PORT  : 111 11111 1111111 1111111 1111111 111
-EXPECT:  22) index              :  29    24      17      10       3   0
-EXPECT:  23) #+END_SRC
-ACTUAL:   1) No test named 'set_batt_from_ports() 2500 V' found
-

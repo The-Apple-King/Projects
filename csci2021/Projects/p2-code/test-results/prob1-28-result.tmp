@@ -1,74 +1,0 @@
-* (TEST 28) batt_update() 7400 V
-COMMENTS:
-** program: ./test_batt_update "batt_update() 7400 V"
-
-** --- Failure messages --- 
-- FAILURE: Output Mismatch at lines marked
-
-** --- Side by Side Differences ---
-- Expect output in: test-results/raw/prob1-28-expect.tmp
-- Actual output in: test-results/raw/prob1-28-actual.tmp
-- Differing lines have a character like '|' '>' or '<' in the middle
-#+BEGIN_SRC sbs-diff
-==== EXPECT ====                                              ==== ACTUAL ====                                           
-{                                                            | No test named 'batt_update() 7400 V                                                              ' found
-    // call batt_update() with given sensor and status                                                            <
-    BATT_VOLTAGE_PORT = 7400;                                                            <
-    BATT_STATUS_PORT  = 0b010100; // Volts mode                                                            <
-    BATT_DISPLAY_PORT = -1;                                                            <
-    int ret = batt_update();                                                            <
-    printf("ret: %d\n",ret);                                                            <
-    printf("\n");  print_ports();  printf("\n");                                                            <
-    printf("Display based on BATT_DISPLAY_PORT:\n");                                                            <
-    print_batt_display();                                                            <
-}                                                            <
----OUTPUT---                                                            <
-ret: 0                                                            <
-                                                            <
-BATT_VOLTAGE_PORT  : 7400                                                            <
-BATT_STATUS_PORT   : 000 10100                                                            <
-BATT_DISPLAY_PORT  : 000 01111 0000000 1111111 0000111 001                                                            <
-index              :  29    24      17      10       3   0                                                            <
-                                                            <
-Display based on BATT_DISPLAY_PORT:                                                            <
-+-^^^-+         ####  ####                                                                 <
-|     |         #  #     #                                                                 <
-|#####|         #  #     #                                                                 <
-|#####|         ####     #                                                                 <
-|#####|         #  #     #  %                                                              <
-|#####|         #  #     #                                                                 <
-+-----+         ####     #                                                                 <
-#+END_SRC                                                            <
-#+END_SRC
-
-** --- Line Differences ---
-EXPECT:   1) {
-EXPECT:   2)     // call batt_update() with given sensor and status
-EXPECT:   3)     BATT_VOLTAGE_PORT = 7400;
-EXPECT:   4)     BATT_STATUS_PORT  = 0b010100; // Volts mode
-EXPECT:   5)     BATT_DISPLAY_PORT = -1;
-EXPECT:   6)     int ret = batt_update();
-EXPECT:   7)     printf("ret: %d\n",ret);
-EXPECT:   8)     printf("\n");  print_ports();  printf("\n");
-EXPECT:   9)     printf("Display based on BATT_DISPLAY_PORT:\n");
-EXPECT:  10)     print_batt_display();
-EXPECT:  11) }
-EXPECT:  12) ---OUTPUT---
-EXPECT:  13) ret: 0
-EXPECT:  14) 
-EXPECT:  15) BATT_VOLTAGE_PORT  : 7400
-EXPECT:  16) BATT_STATUS_PORT   : 000 10100
-EXPECT:  17) BATT_DISPLAY_PORT  : 000 01111 0000000 1111111 0000111 001
-EXPECT:  18) index              :  29    24      17      10       3   0
-EXPECT:  19) 
-EXPECT:  20) Display based on BATT_DISPLAY_PORT:
-EXPECT:  21) +-^^^-+         ####  ####     
-EXPECT:  22) |     |         #  #     #     
-EXPECT:  23) |#####|         #  #     #     
-EXPECT:  24) |#####|         ####     #     
-EXPECT:  25) |#####|         #  #     #  %  
-EXPECT:  26) |#####|         #  #     #     
-EXPECT:  27) +-----+         ####     #     
-EXPECT:  28) #+END_SRC
-ACTUAL:   1) No test named 'batt_update() 7400 V' found
-

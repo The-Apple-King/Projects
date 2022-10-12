@@ -1,76 +1,0 @@
-* (TEST 30) batt_update() error
-COMMENTS:
-** program: ./test_batt_update "batt_update() error"
-
-** --- Failure messages --- 
-- FAILURE: Output Mismatch at lines marked
-
-** --- Side by Side Differences ---
-- Expect output in: test-results/raw/prob1-30-expect.tmp
-- Actual output in: test-results/raw/prob1-30-actual.tmp
-- Differing lines have a character like '|' '>' or '<' in the middle
-#+BEGIN_SRC sbs-diff
-==== EXPECT ====                                                        ==== ACTUAL ====                                                     
-{                                                                      | No test named 'batt_update() error                                                                        ' found
-    // call batt_update() with negative voltage reading which should                                                                      <
-    // bail out without changing anything.                                                                      <
-    BATT_VOLTAGE_PORT = -6421;  // Negative value causes error out                                                                      <
-    BATT_STATUS_PORT  = 0b111011; // Percent mode                                                                      <
-    BATT_DISPLAY_PORT = -1;                                                                      <
-    int ret = batt_update();                                                                      <
-    printf("ret: %d\n",ret);                                                                      <
-    printf("\n");  print_ports();  printf("\n");                                                                      <
-    printf("Display based on BATT_DISPLAY_PORT:\n");                                                                      <
-    print_batt_display();                                                                      <
-}                                                                      <
----OUTPUT---                                                                      <
-ret: 1                                                                      <
-                                                                      <
-BATT_VOLTAGE_PORT  : -6421                                                                      <
-BATT_STATUS_PORT   : 001 11011                                                                      <
-BATT_DISPLAY_PORT  : 111 11111 1111111 1111111 1111111 111                                                                      <
-index              :  29    24      17      10       3   0                                                                      <
-                                                                      <
-Display based on BATT_DISPLAY_PORT:                                                                      <
-+-^^^-+  ####   ####  ####                                                                           <
-|#####|  #  #   #  #  #  #                                                                           <
-|#####|  #  #   #  #  #  #                                                                           <
-|#####|  ####   ####  ####  V                                                                        <
-|#####|  #  #   #  #  #  #  %                                                                        <
-|#####|  #  #   #  #  #  #                                                                           <
-+-----+  #### o ####  ####                                                                           <
-#+END_SRC                                                                      <
-#+END_SRC
-
-** --- Line Differences ---
-EXPECT:   1) {
-EXPECT:   2)     // call batt_update() with negative voltage reading which should
-EXPECT:   3)     // bail out without changing anything.
-EXPECT:   4)     BATT_VOLTAGE_PORT = -6421;  // Negative value causes error out
-EXPECT:   5)     BATT_STATUS_PORT  = 0b111011; // Percent mode
-EXPECT:   6)     BATT_DISPLAY_PORT = -1;
-EXPECT:   7)     int ret = batt_update();
-EXPECT:   8)     printf("ret: %d\n",ret);
-EXPECT:   9)     printf("\n");  print_ports();  printf("\n");
-EXPECT:  10)     printf("Display based on BATT_DISPLAY_PORT:\n");
-EXPECT:  11)     print_batt_display();
-EXPECT:  12) }
-EXPECT:  13) ---OUTPUT---
-EXPECT:  14) ret: 1
-EXPECT:  15) 
-EXPECT:  16) BATT_VOLTAGE_PORT  : -6421
-EXPECT:  17) BATT_STATUS_PORT   : 001 11011
-EXPECT:  18) BATT_DISPLAY_PORT  : 111 11111 1111111 1111111 1111111 111
-EXPECT:  19) index              :  29    24      17      10       3   0
-EXPECT:  20) 
-EXPECT:  21) Display based on BATT_DISPLAY_PORT:
-EXPECT:  22) +-^^^-+  ####   ####  ####     
-EXPECT:  23) |#####|  #  #   #  #  #  #     
-EXPECT:  24) |#####|  #  #   #  #  #  #     
-EXPECT:  25) |#####|  ####   ####  ####  V  
-EXPECT:  26) |#####|  #  #   #  #  #  #  %  
-EXPECT:  27) |#####|  #  #   #  #  #  #     
-EXPECT:  28) +-----+  #### o ####  ####     
-EXPECT:  29) #+END_SRC
-ACTUAL:   1) No test named 'batt_update() error' found
-

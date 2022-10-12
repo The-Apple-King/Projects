@@ -12,20 +12,20 @@ batt = {
 result = set_display_from_batt(batt, &display);
 result: 0
 display is
-bits:  000 00001 0000000 0000000 0111111 110
+bits:  000 00001 1001111 0000110 1101101 110
 index:  29    24      17      10       3   0
 
 result = batt_update();
 result: 0
 BATT_DISPLAY_PORT is
-bits:  000 00001 0000000 0000000 0111111 110
+bits:  000 00001 1001111 0000110 1101101 110
 index:  29    24      17      10       3   0
 
 Battery Meter Display:
-+-^^^-+               ####     
-|     |               #  #     
-|     |               #  #     
-|     |               #  #  V  
-|     |               #  #     
-|#####|               #  #     
-+-----+       o       ####     
++-^^^-+  ####      #  ####     
+|     |     #      #  #        
+|     |     #      #  #        
+|     |  ####      #  ####  V  
+|     |     #      #     #     
+|#####|     #      #     #     
++-----+  #### o    #  ####     

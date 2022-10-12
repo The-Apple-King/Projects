@@ -1,73 +1,0 @@
-* (TEST 34) ./batt_main 7204 P
-COMMENTS:
-** program: ./batt_main 7204 P
-
-** --- Failure messages --- 
-- FAILURE(137) due to TIMEOUT: Runtime exceeded maximum of '5s'
-- FAILURE: Output Mismatch at lines marked
-
-** --- Side by Side Differences ---
-- Expect output in: test-results/raw/prob1-34-expect.tmp
-- Actual output in: test-results/raw/prob1-34-actual.tmp
-- Differing lines have a character like '|' '>' or '<' in the middle
-#+BEGIN_SRC sbs-diff
-==== EXPECT ====                                   ==== ACTUAL ====                                
-BATT_VOLTAGE_PORT set to: 7204                                                   BATT_VOLTAGE_PORT set to: 7204
-BATT_STATUS_PORT  set to: 0x91                                                   BATT_STATUS_PORT  set to: 0x91
-
-result = set_batt_from_ports( &batt );                                                   result = set_batt_from_ports( &batt );
-result: 0                                                   result: 0
-batt = {                                                   batt = {
-  .mlvolts = 3602                                                     .mlvolts = 3602
-  .percent = 75                                                     .percent = 75
-  .mode    = 1                                                 |   .mode    = -111
-}                                                   }
-
-result = set_display_from_batt(batt, &display);                                                 <
-result: 0                                                 <
-display is                                                 <
-bits:  000 01111 0000000 0000111 1101101 001                                                 <
-index:  29    24      17      10       3   0                                                 <
-                                                 <
-result = batt_update();                                                 <
-result: 0                                                 <
-BATT_DISPLAY_PORT is                                                 <
-bits:  000 01111 0000000 0000111 1101101 001                                                 <
-index:  29    24      17      10       3   0                                                 <
-                                                 <
-Battery Meter Display:                                                 <
-+-^^^-+         ####  ####                                                      <
-|     |            #  #                                                         <
-|#####|            #  #                                                         <
-|#####|            #  ####                                                      <
-|#####|            #     #  %                                                   <
-|#####|            #     #                                                      <
-+-----+            #  ####                                                      <
-#+END_SRC                                                 <
-#+END_SRC
-
-** --- Line Differences ---
-EXPECT:   9)   .mode    = 1
-ACTUAL:   9)   .mode    = -111
-EXPECT:  12) result = set_display_from_batt(batt, &display);
-EXPECT:  13) result: 0
-EXPECT:  14) display is
-EXPECT:  15) bits:  000 01111 0000000 0000111 1101101 001
-EXPECT:  16) index:  29    24      17      10       3   0
-EXPECT:  17) 
-EXPECT:  18) result = batt_update();
-EXPECT:  19) result: 0
-EXPECT:  20) BATT_DISPLAY_PORT is
-EXPECT:  21) bits:  000 01111 0000000 0000111 1101101 001
-EXPECT:  22) index:  29    24      17      10       3   0
-EXPECT:  23) 
-EXPECT:  24) Battery Meter Display:
-EXPECT:  25) +-^^^-+         ####  ####     
-EXPECT:  26) |     |            #  #        
-EXPECT:  27) |#####|            #  #        
-EXPECT:  28) |#####|            #  ####     
-EXPECT:  29) |#####|            #     #  %  
-EXPECT:  30) |#####|            #     #     
-EXPECT:  31) +-----+            #  ####     
-EXPECT:  32) #+END_SRC
-

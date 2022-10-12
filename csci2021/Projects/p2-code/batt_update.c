@@ -66,34 +66,16 @@ int set_batt_from_ports(batt_t *batt)
  */
 int set_display_from_batt(batt_t batt, int *display)
 {
+    int count = 100;              // used to know which amount to modulo by
+    *display = 0;                                                                                                                   // initializes value
     int nums[10] = {0b0111111, 0b0000110, 0b1011011, 0b1001111, 0b1100110, 0b1101101, 0b1111101, 0b0000111, 0b01111111, 0b1101111}; // bit vals for each digit
+    int battlevel[5] = {5, 30, 50, 70, 90};                                                                                         // levels of battery to check against
 
     // set the battery icon by checking all sections
-    if (batt.percent >= 90)
+    for (int i = 0; i < 5 && batt.percent >= battlevel[i]; i++)
     {
-        *display = 0b11111;
+        *display |= 1 << (i + 24);
     }
-    else if (batt.percent >= 70)
-    {
-        *display = 0b01111;
-    }
-    else if (batt.percent >= 50)
-    {
-        *display = 0b00111;
-    }
-    else if (batt.percent >= 30)
-    {
-        *display = 0b00011;
-    }
-    else if (batt.percent >= 5)
-    {
-        *display = 0b00001;
-    }
-    else
-    {
-        *display = 0b00000;
-    }
-    *display <<= 24;
 
     // set the number display
     if (batt.mode == 2) // volts
@@ -107,20 +89,19 @@ int set_display_from_batt(batt_t batt, int *display)
         }
         voltage /= 10;
 
-        int count = 100; // used to know what to modulo by
         for (int i = 14; i >= 0; i -= 7)
         {
             *display |= nums[voltage / count] << (i + 3);
             voltage %= count;
             count /= 10;
         }
+        // set the units
         *display |= 0b110;
     }
     else // percent
     {
         int percent = (batt.percent); // used for modulo to find each digit
-        int count = 100;                    // used to know which amount to modulo by
-        int nonzero = 0;                    // flag used to know when there is no longer a leading 0
+        int nonzero = 0;              // flag used to know when there is no longer a leading 0
         for (int i = 14; i >= 0; i -= 7)
         {
             if (count > 0 && (percent / count != 0 || nonzero == 1))
@@ -131,10 +112,11 @@ int set_display_from_batt(batt_t batt, int *display)
             }
             count /= 10;
         }
-        if (!nonzero)
+        if (!nonzero) // if percent is 0
         {
             *display |= nums[0] << 3;
         }
+        // set the units
         *display |= 0b001;
     }
     return 0;

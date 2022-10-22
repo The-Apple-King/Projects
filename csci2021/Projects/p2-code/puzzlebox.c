@@ -394,10 +394,10 @@ void phase06(){
   int ilen = slen / sizeof(int) - 1;
   int location1 = (hash % 211) % ilen;
   int location2 = (hash % 311) % ilen;
-  ((int *)actual)[location1] = 0x58585858;
-  ((int *)actual)[location2] = 0x59595959;
-  *(((int *)actual) + a) = b;
-  *(((int *)actual) + c) = d;
+  ((int *)actual)[location1] = 0x58585858;  //1,482,184,792
+  ((int *)actual)[location2] = 0x59595959;  //1,499,027,801
+  *(((int *)actual) + a) = b; //make a and c = loc1 &2
+  *(((int *)actual) + c) = d; //make b and d = val in that loc?
 
   
   if(strncmp(expect,actual,BUFSIZE) == 0){
@@ -438,28 +438,32 @@ void phase08() {
     "What, you prefer structured loops? How mundane.\n";
   goto LTOP;
 
+//if odd *3 + 1
+//if even /2
+
+
  LEND:
   failure(msg);
  LOM1:
-  n = (n<<2) - n + 1;
+  n = (n<<2) - n + 1; //increases val
  LCHK:
-  if(s == t && m == t){
+  if(s == t && m == t){ //needed
     goto LAFT;
   }
   s++;
   goto LTOP;
  LOC1:
-  if(n & 1){
-    goto LOM1;
+  if(n & 1){ //if odd
+    goto LOM1; // becomes even
   }
   goto LEM1;
  LTOP:
-  if(!(n>1)){
+  if(!(n>1)){ //if n < 1 fail
     goto LEND;
   }
   goto LOC1;
  LEM1:
-  n = n >> 1;
+  n = n >> 1; // divide by 2
   goto LCHK;
  LAFT:
   return;
@@ -505,8 +509,8 @@ void phase09(){
   }
 
   long seed = (((long) hash) << 32) + ~hash;
-  pb_srand(seed);                           
-  scramble(letters, 100);                   
+  pb_srand(seed);         // 8102370456722381054
+  scramble(letters, 100); // SnXJTKlaUZHcMNhFqjBLEtReGxfkOuwimbzpYgVdoIyPvQDCAWrs
   
   char buf[BUFSIZE] = {};                   
   for(int i=0; i<5; i++){           
@@ -517,7 +521,7 @@ void phase09(){
     long l;
     char s[8];
   } chong;
-  chong.l = 478426194263;                   
+  chong.l = 478426194263;                   //Waldo\000\000
 
   if(strcmp(buf,chong.s)==0){               
     return;

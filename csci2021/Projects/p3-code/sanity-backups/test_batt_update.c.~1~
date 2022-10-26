@@ -13,11 +13,11 @@
 #define PRINT_TEST sprintf(sysbuf,"awk 'NR==(%d+1){P=1;print \"{\"} P==1 && /ENDTEST/{P=0; print \"}\\n---OUTPUT---\"} P==1{print}' %s", __LINE__, __FILE__); \
                    system(sysbuf);
 
-void print_batt(batt_t *batt){
+void print_batt(batt_t batt){
   printf("{\n"); 
-  printf("  ->mlvolts = %d,\n",batt->mlvolts);
-  printf("  ->percent = %d,\n",batt->percent);
-  printf("  ->mode    = %d,\n",batt->mode);
+  printf("  .mlvolts = %d,\n",batt.mlvolts);
+  printf("  .percent = %d,\n",batt.percent);
+  printf("  .mode    = %d,\n",batt.mode);
   printf("}\n");
 }
 
@@ -37,7 +37,6 @@ int main(int argc, char *argv[]){
   char sysbuf[1024];
 
   int *dispint = malloc(sizeof(int)); // used for tests that set the display
-  batt_t *actual_batt = malloc(sizeof(batt_t));
 
   if(0){}
 
@@ -49,9 +48,10 @@ int main(int argc, char *argv[]){
     BATT_VOLTAGE_PORT = 0;
     BATT_STATUS_PORT  = 0b000000;
     BATT_DISPLAY_PORT = -1;
-    int ret = set_batt_from_ports(actual_batt);
+    batt_t actual = {};            // all 0s
+    int ret = set_batt_from_ports(&actual);
     printf("ret: %d\n",ret);
-    printf("actual = "); print_batt(actual_batt);
+    printf("actual = "); print_batt(actual);
     print_ports();
   } // ENDTEST
 
@@ -61,9 +61,10 @@ int main(int argc, char *argv[]){
     BATT_VOLTAGE_PORT = 0;
     BATT_STATUS_PORT  = 0b010000;
     BATT_DISPLAY_PORT = -1;
-    int ret = set_batt_from_ports(actual_batt);
+    batt_t actual = {};            // all 0s
+    int ret = set_batt_from_ports(&actual);
     printf("ret: %d\n",ret);
-    printf("actual = "); print_batt(actual_batt);
+    printf("actual = "); print_batt(actual);
     print_ports();
   } // ENDTEST
 
@@ -73,9 +74,10 @@ int main(int argc, char *argv[]){
     BATT_VOLTAGE_PORT = 7400;
     BATT_STATUS_PORT  = 0b000000;
     BATT_DISPLAY_PORT = -1;
-    int ret = set_batt_from_ports(actual_batt);
+    batt_t actual = {};            // all 0s
+    int ret = set_batt_from_ports(&actual);
     printf("ret: %d\n",ret);
-    printf("actual = "); print_batt(actual_batt);
+    printf("actual = "); print_batt(actual);
     print_ports();
   } // ENDTEST
 
@@ -85,9 +87,10 @@ int main(int argc, char *argv[]){
     BATT_VOLTAGE_PORT = 7400;
     BATT_STATUS_PORT  = 0b010000;
     BATT_DISPLAY_PORT = -1;
-    int ret = set_batt_from_ports(actual_batt);
+    batt_t actual = {};            // all 0s
+    int ret = set_batt_from_ports(&actual);
     printf("ret: %d\n",ret);
-    printf("actual = "); print_batt(actual_batt);
+    printf("actual = "); print_batt(actual);
     print_ports();
   } // ENDTEST
 
@@ -99,9 +102,10 @@ int main(int argc, char *argv[]){
     BATT_VOLTAGE_PORT = 7500;
     BATT_STATUS_PORT  = 0b10101001;
     BATT_DISPLAY_PORT = -1;
-    int ret = set_batt_from_ports(actual_batt);
+    batt_t actual = {};            // all 0s
+    int ret = set_batt_from_ports(&actual);
     printf("ret: %d\n",ret);
-    printf("actual = "); print_batt(actual_batt);
+    printf("actual = "); print_batt(actual);
     print_ports();
   } // ENDTEST
 
@@ -113,9 +117,10 @@ int main(int argc, char *argv[]){
     BATT_VOLTAGE_PORT = 6277;
     BATT_STATUS_PORT  = 0b01110110;
     BATT_DISPLAY_PORT = -1;
-    int ret = set_batt_from_ports(actual_batt);
+    batt_t actual = {};            // all 0s
+    int ret = set_batt_from_ports(&actual);
     printf("ret: %d\n",ret);
-    printf("actual = "); print_batt(actual_batt);
+    printf("actual = "); print_batt(actual);
     print_ports();
   } // ENDTEST
 
@@ -126,9 +131,10 @@ int main(int argc, char *argv[]){
     BATT_VOLTAGE_PORT = 7845;
     BATT_STATUS_PORT  = 0b010000;
     BATT_DISPLAY_PORT = -1;
-    int ret = set_batt_from_ports(actual_batt);
+    batt_t actual = {};            // all 0s
+    int ret = set_batt_from_ports(&actual);
     printf("ret: %d\n",ret);
-    printf("actual = "); print_batt(actual_batt);
+    printf("actual = "); print_batt(actual);
     print_ports();
   } // ENDTEST
 
@@ -138,9 +144,10 @@ int main(int argc, char *argv[]){
     BATT_VOLTAGE_PORT = 2500;
     BATT_STATUS_PORT  = 0b000000;
     BATT_DISPLAY_PORT = -1;
-    int ret = set_batt_from_ports(actual_batt);
+    batt_t actual = {};            // all 0s
+    int ret = set_batt_from_ports(&actual);
     printf("ret: %d\n",ret);
-    printf("actual = "); print_batt(actual_batt);
+    printf("actual = "); print_batt(actual);
     print_ports();
   } // ENDTEST
 
@@ -150,9 +157,10 @@ int main(int argc, char *argv[]){
     BATT_VOLTAGE_PORT = 6579;
     BATT_STATUS_PORT  = 0b010000;
     BATT_DISPLAY_PORT = -1;
-    int ret = set_batt_from_ports(actual_batt);
+    batt_t actual = {};            // all 0s
+    int ret = set_batt_from_ports(&actual);
     printf("ret: %d\n",ret);
-    printf("actual = "); print_batt(actual_batt);
+    printf("actual = "); print_batt(actual);
     print_ports();
   } // ENDTEST
 
@@ -162,11 +170,13 @@ int main(int argc, char *argv[]){
     BATT_VOLTAGE_PORT = 6016;
     BATT_STATUS_PORT  = 0b101100;
     BATT_DISPLAY_PORT = -1;
-    int ret = set_batt_from_ports(actual_batt);
+    batt_t actual = {};            // all 0s
+    int ret = set_batt_from_ports(&actual);
     printf("ret: %d\n",ret);
-    printf("actual = "); print_batt(actual_batt);
+    printf("actual = "); print_batt(actual);
     print_ports();
   } // ENDTEST
+
 
   else if( strcmp( test_name, "set_batt_from_ports() 6050 P" )==0 ) {
     PRINT_TEST;
@@ -174,9 +184,10 @@ int main(int argc, char *argv[]){
     BATT_VOLTAGE_PORT = 6050;
     BATT_STATUS_PORT  = 0b110000;
     BATT_DISPLAY_PORT = -1;
-    int ret = set_batt_from_ports(actual_batt);
+    batt_t actual = {};            // all 0s
+    int ret = set_batt_from_ports(&actual);
     printf("ret: %d\n",ret);
-    printf("actual = "); print_batt(actual_batt);
+    printf("actual = "); print_batt(actual);
     print_ports();
   } // ENDTEST
 
@@ -187,10 +198,10 @@ int main(int argc, char *argv[]){
     BATT_VOLTAGE_PORT = -7200;
     BATT_STATUS_PORT  = 0b110011;
     BATT_DISPLAY_PORT = -1;
-    memset(actual_batt, 0, sizeof(batt_t));
-    int ret = set_batt_from_ports(actual_batt);
+    batt_t actual = {};            // all 0s
+    int ret = set_batt_from_ports(&actual);
     printf("ret: %d\n",ret);
-    printf("actual = "); print_batt(actual_batt);
+    printf("actual = "); print_batt(actual);
     print_ports();
   } // ENDTEST
 
@@ -582,6 +593,5 @@ int main(int argc, char *argv[]){
   }
 
   free(dispint);
-  free(actual_batt);
   return 0;
 }

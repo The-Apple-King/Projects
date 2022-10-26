@@ -10,17 +10,18 @@
     BATT_VOLTAGE_PORT = 0;
     BATT_STATUS_PORT  = 0b000000;
     BATT_DISPLAY_PORT = -1;
-    int ret = set_batt_from_ports(actual_batt);
+    batt_t actual = {};            // all 0s
+    int ret = set_batt_from_ports(&actual);
     printf("ret: %d\n",ret);
-    printf("actual = "); print_batt(actual_batt);
+    printf("actual = "); print_batt(actual);
     print_ports();
 }
 ---OUTPUT---
 ret: 0
 actual = {
-  ->mlvolts = 0,
-  ->percent = 0,
-  ->mode    = 2,
+  .mlvolts = 0,
+  .percent = 0,
+  .mode    = 2,
 }
 BATT_VOLTAGE_PORT  : 0
 BATT_STATUS_PORT   : 000 00000
@@ -36,17 +37,18 @@ index              :  29    24      17      10       3   0
     BATT_VOLTAGE_PORT = 0;
     BATT_STATUS_PORT  = 0b010000;
     BATT_DISPLAY_PORT = -1;
-    int ret = set_batt_from_ports(actual_batt);
+    batt_t actual = {};            // all 0s
+    int ret = set_batt_from_ports(&actual);
     printf("ret: %d\n",ret);
-    printf("actual = "); print_batt(actual_batt);
+    printf("actual = "); print_batt(actual);
     print_ports();
 }
 ---OUTPUT---
 ret: 0
 actual = {
-  ->mlvolts = 0,
-  ->percent = 0,
-  ->mode    = 1,
+  .mlvolts = 0,
+  .percent = 0,
+  .mode    = 1,
 }
 BATT_VOLTAGE_PORT  : 0
 BATT_STATUS_PORT   : 000 10000
@@ -62,17 +64,18 @@ index              :  29    24      17      10       3   0
     BATT_VOLTAGE_PORT = 7400;
     BATT_STATUS_PORT  = 0b000000;
     BATT_DISPLAY_PORT = -1;
-    int ret = set_batt_from_ports(actual_batt);
+    batt_t actual = {};            // all 0s
+    int ret = set_batt_from_ports(&actual);
     printf("ret: %d\n",ret);
-    printf("actual = "); print_batt(actual_batt);
+    printf("actual = "); print_batt(actual);
     print_ports();
 }
 ---OUTPUT---
 ret: 0
 actual = {
-  ->mlvolts = 3700,
-  ->percent = 87,
-  ->mode    = 2,
+  .mlvolts = 3700,
+  .percent = 87,
+  .mode    = 2,
 }
 BATT_VOLTAGE_PORT  : 7400
 BATT_STATUS_PORT   : 000 00000
@@ -88,17 +91,18 @@ index              :  29    24      17      10       3   0
     BATT_VOLTAGE_PORT = 7400;
     BATT_STATUS_PORT  = 0b010000;
     BATT_DISPLAY_PORT = -1;
-    int ret = set_batt_from_ports(actual_batt);
+    batt_t actual = {};            // all 0s
+    int ret = set_batt_from_ports(&actual);
     printf("ret: %d\n",ret);
-    printf("actual = "); print_batt(actual_batt);
+    printf("actual = "); print_batt(actual);
     print_ports();
 }
 ---OUTPUT---
 ret: 0
 actual = {
-  ->mlvolts = 3700,
-  ->percent = 87,
-  ->mode    = 1,
+  .mlvolts = 3700,
+  .percent = 87,
+  .mode    = 1,
 }
 BATT_VOLTAGE_PORT  : 7400
 BATT_STATUS_PORT   : 000 10000
@@ -116,17 +120,18 @@ index              :  29    24      17      10       3   0
     BATT_VOLTAGE_PORT = 7500;
     BATT_STATUS_PORT  = 0b10101001;
     BATT_DISPLAY_PORT = -1;
-    int ret = set_batt_from_ports(actual_batt);
+    batt_t actual = {};            // all 0s
+    int ret = set_batt_from_ports(&actual);
     printf("ret: %d\n",ret);
-    printf("actual = "); print_batt(actual_batt);
+    printf("actual = "); print_batt(actual);
     print_ports();
 }
 ---OUTPUT---
 ret: 0
 actual = {
-  ->mlvolts = 3750,
-  ->percent = 93,
-  ->mode    = 2,
+  .mlvolts = 3750,
+  .percent = 93,
+  .mode    = 2,
 }
 BATT_VOLTAGE_PORT  : 7500
 BATT_STATUS_PORT   : 101 01001
@@ -144,17 +149,18 @@ index              :  29    24      17      10       3   0
     BATT_VOLTAGE_PORT = 6277;
     BATT_STATUS_PORT  = 0b01110110;
     BATT_DISPLAY_PORT = -1;
-    int ret = set_batt_from_ports(actual_batt);
+    batt_t actual = {};            // all 0s
+    int ret = set_batt_from_ports(&actual);
     printf("ret: %d\n",ret);
-    printf("actual = "); print_batt(actual_batt);
+    printf("actual = "); print_batt(actual);
     print_ports();
 }
 ---OUTPUT---
 ret: 0
 actual = {
-  ->mlvolts = 3138,
-  ->percent = 17,
-  ->mode    = 1,
+  .mlvolts = 3138,
+  .percent = 17,
+  .mode    = 1,
 }
 BATT_VOLTAGE_PORT  : 6277
 BATT_STATUS_PORT   : 011 10110
@@ -171,17 +177,18 @@ index              :  29    24      17      10       3   0
     BATT_VOLTAGE_PORT = 7845;
     BATT_STATUS_PORT  = 0b010000;
     BATT_DISPLAY_PORT = -1;
-    int ret = set_batt_from_ports(actual_batt);
+    batt_t actual = {};            // all 0s
+    int ret = set_batt_from_ports(&actual);
     printf("ret: %d\n",ret);
-    printf("actual = "); print_batt(actual_batt);
+    printf("actual = "); print_batt(actual);
     print_ports();
 }
 ---OUTPUT---
 ret: 0
 actual = {
-  ->mlvolts = 3922,
-  ->percent = 100,
-  ->mode    = 1,
+  .mlvolts = 3922,
+  .percent = 100,
+  .mode    = 1,
 }
 BATT_VOLTAGE_PORT  : 7845
 BATT_STATUS_PORT   : 000 10000
@@ -197,17 +204,18 @@ index              :  29    24      17      10       3   0
     BATT_VOLTAGE_PORT = 2500;
     BATT_STATUS_PORT  = 0b000000;
     BATT_DISPLAY_PORT = -1;
-    int ret = set_batt_from_ports(actual_batt);
+    batt_t actual = {};            // all 0s
+    int ret = set_batt_from_ports(&actual);
     printf("ret: %d\n",ret);
-    printf("actual = "); print_batt(actual_batt);
+    printf("actual = "); print_batt(actual);
     print_ports();
 }
 ---OUTPUT---
 ret: 0
 actual = {
-  ->mlvolts = 1250,
-  ->percent = 0,
-  ->mode    = 2,
+  .mlvolts = 1250,
+  .percent = 0,
+  .mode    = 2,
 }
 BATT_VOLTAGE_PORT  : 2500
 BATT_STATUS_PORT   : 000 00000
@@ -223,17 +231,18 @@ index              :  29    24      17      10       3   0
     BATT_VOLTAGE_PORT = 6579;
     BATT_STATUS_PORT  = 0b010000;
     BATT_DISPLAY_PORT = -1;
-    int ret = set_batt_from_ports(actual_batt);
+    batt_t actual = {};            // all 0s
+    int ret = set_batt_from_ports(&actual);
     printf("ret: %d\n",ret);
-    printf("actual = "); print_batt(actual_batt);
+    printf("actual = "); print_batt(actual);
     print_ports();
 }
 ---OUTPUT---
 ret: 0
 actual = {
-  ->mlvolts = 3289,
-  ->percent = 36,
-  ->mode    = 1,
+  .mlvolts = 3289,
+  .percent = 36,
+  .mode    = 1,
 }
 BATT_VOLTAGE_PORT  : 6579
 BATT_STATUS_PORT   : 000 10000
@@ -249,17 +258,18 @@ index              :  29    24      17      10       3   0
     BATT_VOLTAGE_PORT = 6016;
     BATT_STATUS_PORT  = 0b101100;
     BATT_DISPLAY_PORT = -1;
-    int ret = set_batt_from_ports(actual_batt);
+    batt_t actual = {};            // all 0s
+    int ret = set_batt_from_ports(&actual);
     printf("ret: %d\n",ret);
-    printf("actual = "); print_batt(actual_batt);
+    printf("actual = "); print_batt(actual);
     print_ports();
 }
 ---OUTPUT---
 ret: 0
 actual = {
-  ->mlvolts = 3008,
-  ->percent = 1,
-  ->mode    = 2,
+  .mlvolts = 3008,
+  .percent = 1,
+  .mode    = 2,
 }
 BATT_VOLTAGE_PORT  : 6016
 BATT_STATUS_PORT   : 001 01100
@@ -275,17 +285,18 @@ index              :  29    24      17      10       3   0
     BATT_VOLTAGE_PORT = 6050;
     BATT_STATUS_PORT  = 0b110000;
     BATT_DISPLAY_PORT = -1;
-    int ret = set_batt_from_ports(actual_batt);
+    batt_t actual = {};            // all 0s
+    int ret = set_batt_from_ports(&actual);
     printf("ret: %d\n",ret);
-    printf("actual = "); print_batt(actual_batt);
+    printf("actual = "); print_batt(actual);
     print_ports();
 }
 ---OUTPUT---
 ret: 0
 actual = {
-  ->mlvolts = 3025,
-  ->percent = 3,
-  ->mode    = 1,
+  .mlvolts = 3025,
+  .percent = 3,
+  .mode    = 1,
 }
 BATT_VOLTAGE_PORT  : 6050
 BATT_STATUS_PORT   : 001 10000
@@ -302,18 +313,18 @@ index              :  29    24      17      10       3   0
     BATT_VOLTAGE_PORT = -7200;
     BATT_STATUS_PORT  = 0b110011;
     BATT_DISPLAY_PORT = -1;
-    memset(actual_batt, 0, sizeof(batt_t));
-    int ret = set_batt_from_ports(actual_batt);
+    batt_t actual = {};            // all 0s
+    int ret = set_batt_from_ports(&actual);
     printf("ret: %d\n",ret);
-    printf("actual = "); print_batt(actual_batt);
+    printf("actual = "); print_batt(actual);
     print_ports();
 }
 ---OUTPUT---
 ret: 1
 actual = {
-  ->mlvolts = 0,
-  ->percent = 0,
-  ->mode    = 0,
+  .mlvolts = 0,
+  .percent = 0,
+  .mode    = 0,
 }
 BATT_VOLTAGE_PORT  : -7200
 BATT_STATUS_PORT   : 001 10011

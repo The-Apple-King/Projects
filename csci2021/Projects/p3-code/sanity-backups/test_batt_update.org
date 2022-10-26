@@ -1,9 +1,9 @@
-#+TITLE: test_hybrid_batt_update and hybrid_main tests
+#+TITLE: test_batt_update and batt_main tests
 #+TESTY: PREFIX="prob1"
 #+TESTY: USE_VALGRIND=1
 
 * set_batt_from_ports() 0 V
-#+TESTY: program='./test_hybrid_batt_update "set_batt_from_ports() 0 V"'
+#+TESTY: program='./test_batt_update "set_batt_from_ports() 0 V"'
 #+BEGIN_SRC sh
 {
     // Check sensor value of 0 and status set for voltage
@@ -29,7 +29,7 @@ index              :  29    24      17      10       3   0
 #+END_SRC
 
 * set_batt_from_ports() 0 P
-#+TESTY: program='./test_hybrid_batt_update "set_batt_from_ports() 0 P"'
+#+TESTY: program='./test_batt_update "set_batt_from_ports() 0 P"'
 #+BEGIN_SRC sh
 {
     // Check sensor value of 0 and status set for percent
@@ -55,7 +55,7 @@ index              :  29    24      17      10       3   0
 #+END_SRC
 
 * set_batt_from_ports() 7400 V
-#+TESTY: program='./test_hybrid_batt_update "set_batt_from_ports() 7400 V"'
+#+TESTY: program='./test_batt_update "set_batt_from_ports() 7400 V"'
 #+BEGIN_SRC sh
 {
     // Check sensor value of 7400 (3.70 V) and status set for voltage
@@ -81,7 +81,7 @@ index              :  29    24      17      10       3   0
 #+END_SRC
 
 * set_batt_from_ports() 7400 P
-#+TESTY: program='./test_hybrid_batt_update "set_batt_from_ports() 7400 P"'
+#+TESTY: program='./test_batt_update "set_batt_from_ports() 7400 P"'
 #+BEGIN_SRC sh
 {
     // Check sensor value of 7400 (3.70 V) and status set for percent
@@ -107,7 +107,7 @@ index              :  29    24      17      10       3   0
 #+END_SRC
 
 * set_batt_from_ports() mixed STATUS V
-#+TESTY: program='./test_hybrid_batt_update "set_batt_from_ports() mixed STATUS V"'
+#+TESTY: program='./test_batt_update "set_batt_from_ports() mixed STATUS V"'
 #+BEGIN_SRC sh
 {
     // Checks that only bit 4 of BATT_STATUS_PORT is used for
@@ -135,7 +135,7 @@ index              :  29    24      17      10       3   0
 #+END_SRC
 
 * set_batt_from_ports() mixed STATUS P
-#+TESTY: program='./test_hybrid_batt_update "set_batt_from_ports() mixed STATUS P"'
+#+TESTY: program='./test_batt_update "set_batt_from_ports() mixed STATUS P"'
 #+BEGIN_SRC sh
 {
     // Checks that only bit 4 of BATT_STATUS_PORT is used for
@@ -163,7 +163,7 @@ index              :  29    24      17      10       3   0
 #+END_SRC
 
 * set_batt_from_ports() 7845 P is 100%
-#+TESTY: program='./test_hybrid_batt_update "set_batt_from_ports() 7845 P is 100%"'
+#+TESTY: program='./test_batt_update "set_batt_from_ports() 7845 P is 100%"'
 #+BEGIN_SRC sh
 {
     // Checks that the percentage is set to 100% if voltage port is
@@ -190,7 +190,7 @@ index              :  29    24      17      10       3   0
 #+END_SRC
 
 * set_batt_from_ports() 2500 V
-#+TESTY: program='./test_hybrid_batt_update "set_batt_from_ports() 2500 V"'
+#+TESTY: program='./test_batt_update "set_batt_from_ports() 2500 V"'
 #+BEGIN_SRC sh
 {
     // Checks a low voltage rating should be 0 percent
@@ -216,7 +216,7 @@ index              :  29    24      17      10       3   0
 #+END_SRC
 
 * set_batt_from_ports() 6579 P
-#+TESTY: program='./test_hybrid_batt_update "set_batt_from_ports() 6579 P"'
+#+TESTY: program='./test_batt_update "set_batt_from_ports() 6579 P"'
 #+BEGIN_SRC sh
 {
     // Checks proper voltage / percent for a mid-range sensor value.
@@ -242,7 +242,7 @@ index              :  29    24      17      10       3   0
 #+END_SRC
 
 * set_batt_from_ports() 6016 V
-#+TESTY: program='./test_hybrid_batt_update "set_batt_from_ports() 6016 V"'
+#+TESTY: program='./test_batt_update "set_batt_from_ports() 6016 V"'
 #+BEGIN_SRC sh
 {
     // Low voltage sensor value should yield 1%
@@ -268,7 +268,7 @@ index              :  29    24      17      10       3   0
 #+END_SRC
 
 * set_batt_from_ports() 6050 P
-#+TESTY: program='./test_hybrid_batt_update "set_batt_from_ports() 6050 P"'
+#+TESTY: program='./test_batt_update "set_batt_from_ports() 6050 P"'
 #+BEGIN_SRC sh
 {
     // Low voltage sensor value, should be nonzero percent
@@ -294,7 +294,7 @@ index              :  29    24      17      10       3   0
 #+END_SRC
 
 * set_batt_from_ports() FAILS
-#+TESTY: program='./test_hybrid_batt_update "set_batt_from_ports() FAILS"'
+#+TESTY: program='./test_batt_update "set_batt_from_ports() FAILS"'
 #+BEGIN_SRC sh
 {
     // Negative voltage sensor value should cause a failure and leave
@@ -322,7 +322,7 @@ index              :  29    24      17      10       3   0
 #+END_SRC
 
 * set_display_from_batt() 0 V
-#+TESTY: program='./test_hybrid_batt_update "set_display_from_batt() 0 V"'
+#+TESTY: program='./test_batt_update "set_display_from_batt() 0 V"'
 #+BEGIN_SRC sh
 {
     // Show 0.0 V
@@ -365,7 +365,7 @@ Display based on dispint:
 #+END_SRC
 
 * set_display_from_batt() 0 %
-#+TESTY: program='./test_hybrid_batt_update "set_display_from_batt() 0 %"'
+#+TESTY: program='./test_batt_update "set_display_from_batt() 0 %"'
 #+BEGIN_SRC sh
 {
     // Given 0 volts which should also show 0% battery remaining
@@ -408,7 +408,7 @@ Display based on dispint:
 #+END_SRC
 
 * set_display_from_batt() 3.50 V
-#+TESTY: program='./test_hybrid_batt_update "set_display_from_batt() 3.50 V"'
+#+TESTY: program='./test_batt_update "set_display_from_batt() 3.50 V"'
 #+BEGIN_SRC sh
 {
     // Set dispint from the given batt which is in Voltage mode
@@ -452,7 +452,7 @@ Display based on dispint:
 #+END_SRC
 
 * set_display_from_batt() 3.507 V
-#+TESTY: program='./test_hybrid_batt_update "set_display_from_batt() 3.507 V"'
+#+TESTY: program='./test_batt_update "set_display_from_batt() 3.507 V"'
 #+BEGIN_SRC sh
 {
     // Should show 3.51 V: rounds Up associated with the last digit
@@ -496,7 +496,7 @@ Display based on dispint:
 #+END_SRC
 
 * set_display_from_batt() 62 %
-#+TESTY: program='./test_hybrid_batt_update "set_display_from_batt() 62 %"'
+#+TESTY: program='./test_batt_update "set_display_from_batt() 62 %"'
 #+BEGIN_SRC sh
 {
     // Percent mode, show 62 %
@@ -539,7 +539,7 @@ Display based on dispint:
 #+END_SRC
 
 * set_display_from_batt() 87 %
-#+TESTY: program='./test_hybrid_batt_update "set_display_from_batt() 87 %"'
+#+TESTY: program='./test_batt_update "set_display_from_batt() 87 %"'
 #+BEGIN_SRC sh
 {
     // Show 87 %
@@ -582,7 +582,7 @@ Display based on dispint:
 #+END_SRC
 
 * set_display_from_batt() 4.21 V
-#+TESTY: program='./test_hybrid_batt_update "set_display_from_batt() 4.21 V"'
+#+TESTY: program='./test_batt_update "set_display_from_batt() 4.21 V"'
 #+BEGIN_SRC sh
 {
     // Show 4.21 Volts
@@ -625,7 +625,7 @@ Display based on dispint:
 #+END_SRC
 
 * set_display_from_batt() 100 %
-#+TESTY: program='./test_hybrid_batt_update "set_display_from_batt() 100 %"'
+#+TESTY: program='./test_batt_update "set_display_from_batt() 100 %"'
 #+BEGIN_SRC sh
 {
     // Show 100%, the only case in which the hundreds digit of percent
@@ -669,7 +669,7 @@ Display based on dispint:
 #+END_SRC
 
 * set_display_from_batt() level 1
-#+TESTY: program='./test_hybrid_batt_update "set_display_from_batt() level 1"'
+#+TESTY: program='./test_batt_update "set_display_from_batt() level 1"'
 #+BEGIN_SRC sh
 {
     // Non-zero level that should show 1 bar in the level meter
@@ -712,7 +712,7 @@ Display based on dispint:
 #+END_SRC
 
 * set_display_from_batt() level 2
-#+TESTY: program='./test_hybrid_batt_update "set_display_from_batt() level 2"'
+#+TESTY: program='./test_batt_update "set_display_from_batt() level 2"'
 #+BEGIN_SRC sh
 {
     // 30% level is first point at which 2 bars show
@@ -755,7 +755,7 @@ Display based on dispint:
 #+END_SRC
 
 * set_display_from_batt() level 3
-#+TESTY: program='./test_hybrid_batt_update "set_display_from_batt() level 3"'
+#+TESTY: program='./test_batt_update "set_display_from_batt() level 3"'
 #+BEGIN_SRC sh
 {
     // 56% level is should show 3 bars
@@ -798,7 +798,7 @@ Display based on dispint:
 #+END_SRC
 
 * set_display_from_batt() level 4
-#+TESTY: program='./test_hybrid_batt_update "set_display_from_batt() level 4"'
+#+TESTY: program='./test_batt_update "set_display_from_batt() level 4"'
 #+BEGIN_SRC sh
 {
     // 89% is highest percentage at which 4 bars will be shown
@@ -841,7 +841,7 @@ Display based on dispint:
 #+END_SRC
 
 * set_display_from_batt() level 5
-#+TESTY: program='./test_hybrid_batt_update "set_display_from_batt() level 5"'
+#+TESTY: program='./test_batt_update "set_display_from_batt() level 5"'
 #+BEGIN_SRC sh
 {
     // 90% is lowest percentage at which 5 bars will be shown
@@ -884,7 +884,7 @@ Display based on dispint:
 #+END_SRC
 
 * set_display_from_batt() level 5 V
-#+TESTY: program='./test_hybrid_batt_update "set_display_from_batt() level 5 V"'
+#+TESTY: program='./test_batt_update "set_display_from_batt() level 5 V"'
 #+BEGIN_SRC sh
 {
     // 90% is lowest percentage at which 5 bars will be shown
@@ -927,7 +927,7 @@ Display based on dispint:
 #+END_SRC
 
 * set_display_from_batt() error
-#+TESTY: program='./test_hybrid_batt_update "set_display_from_batt() error"'
+#+TESTY: program='./test_batt_update "set_display_from_batt() error"'
 #+BEGIN_SRC sh
 {
     // Should detect negative voltage and error out
@@ -971,7 +971,7 @@ Display based on dispint:
 #+END_SRC
 
 * batt_update() 7400 V
-#+TESTY: program='./test_hybrid_batt_update "batt_update() 7400 V"'
+#+TESTY: program='./test_batt_update "batt_update() 7400 V"'
 #+BEGIN_SRC sh
 {
     // call batt_update() with given sensor and status
@@ -1003,7 +1003,7 @@ Display based on BATT_DISPLAY_PORT:
 #+END_SRC
 
 * batt_update() 7291 P
-#+TESTY: program='./test_hybrid_batt_update "batt_update() 7291 P"'
+#+TESTY: program='./test_batt_update "batt_update() 7291 P"'
 #+BEGIN_SRC sh
 {
     // call batt_update() with given sensor and status
@@ -1035,7 +1035,7 @@ Display based on BATT_DISPLAY_PORT:
 #+END_SRC
 
 * batt_update() error
-#+TESTY: program='./test_hybrid_batt_update "batt_update() error"'
+#+TESTY: program='./test_batt_update "batt_update() error"'
 #+BEGIN_SRC sh
 {
     // call batt_update() with negative voltage reading which should
@@ -1067,8 +1067,8 @@ Display based on BATT_DISPLAY_PORT:
 +-----+  #### o ####  ####     
 #+END_SRC
 
-* ./hybrid_main 6301 V
-#+TESTY: program='./hybrid_main 6301 V'
+* ./batt_main 6301 V
+#+TESTY: program='./batt_main 6301 V'
 #+BEGIN_SRC sh
 BATT_VOLTAGE_PORT set to: 6301
 BATT_STATUS_PORT  set to: 0x6F
@@ -1103,8 +1103,8 @@ Battery Meter Display:
 +-----+  #### o    #  ####     
 #+END_SRC
 
-* ./hybrid_main 6582 P
-#+TESTY: program='./hybrid_main 6582 P'
+* ./batt_main 6582 P
+#+TESTY: program='./batt_main 6582 P'
 #+BEGIN_SRC sh
 BATT_VOLTAGE_PORT set to: 6582
 BATT_STATUS_PORT  set to: 0x91
@@ -1139,8 +1139,8 @@ Battery Meter Display:
 +-----+         ####  ####     
 #+END_SRC
 
-* ./hybrid_main 6949 V
-#+TESTY: program='./hybrid_main 6949 V'
+* ./batt_main 6949 V
+#+TESTY: program='./batt_main 6949 V'
 #+BEGIN_SRC sh
 BATT_VOLTAGE_PORT set to: 6949
 BATT_STATUS_PORT  set to: 0x6F
@@ -1175,8 +1175,8 @@ Battery Meter Display:
 +-----+  #### o    #     #     
 #+END_SRC
 
-* ./hybrid_main 7204 P
-#+TESTY: program='./hybrid_main 7204 P'
+* ./batt_main 7204 P
+#+TESTY: program='./batt_main 7204 P'
 #+BEGIN_SRC sh
 BATT_VOLTAGE_PORT set to: 7204
 BATT_STATUS_PORT  set to: 0x91
@@ -1211,8 +1211,8 @@ Battery Meter Display:
 +-----+            #  ####     
 #+END_SRC
 
-* ./hybrid_main 7477 P
-#+TESTY: program='./hybrid_main 7477 P'
+* ./batt_main 7477 P
+#+TESTY: program='./batt_main 7477 P'
 #+BEGIN_SRC sh
 BATT_VOLTAGE_PORT set to: 7477
 BATT_STATUS_PORT  set to: 0x91

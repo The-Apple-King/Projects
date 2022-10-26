@@ -30,7 +30,7 @@ main:
         ## e.g. 36b locals + 4b padding + 8b return address = 48b divisible by 16
 	
         ## TODO: Add instructions to expand stack for locals + alignment padding
-        subq $40, %rsp
+        subq $4, %rsp
         
 	## PROVIDED: Sample setup for first call to order3(&r, &t, &v);
         movl    $17, 0(%rsp)           # r=17
@@ -52,9 +52,9 @@ main:
         call    order3                 # function call
         
         ## TODO: Complete this block for order3(&i, &j, &k);
-        movl    $24, 24(%rsp)           # i=24
-        movl    $27, 28(%rsp)           # j=27
-        movl    $29, 32(%rsp)           # k=29
+        movl    $5, 24(%rsp)           # i=24
+        movl    $9, 28(%rsp)           # j=27
+        movl    $2, 32(%rsp)           # k=29
         leaq    24(%rsp), %rdi         # arg1 &i
         leaq    28(%rsp), %rsi         # arg2 &j
         leaq    32(%rsp), %rdx         # arg2 &k
@@ -87,7 +87,7 @@ main:
         ## TODO: Add instructions to undo stack changes made at the
         ## beginning of main; e.g. shrink stack / restore rsp to its
         ## original value before returning
-	addq $40, %rsp
+	add $4, %rsp
 
         ## PROVIDED: return 0 for success
         movl    $0, %eax

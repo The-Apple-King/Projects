@@ -100,7 +100,7 @@ set_display_from_batt:
         movq $0, %rcx           # set rcx to be used as offset in loop
 
 .SET_BATT_IMAGE:
-        cmpq %rcx(%rax), 16(%rdi)        # compare percent in rdi to rax offset increment until rax < rdi
+        cmpq (%rax, %rcx), 16(%rdi)        # compare percent in rdi to rax offset increment until rax < rdi
         jg .SET_NUMS                    # if rax > jump out
         shlq $1, (%rbx)                      # else shift left
         incq (%rbx)                      # increment rbx

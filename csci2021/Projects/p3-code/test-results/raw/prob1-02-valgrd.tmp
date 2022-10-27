@@ -1,16 +1,21 @@
-==10527== Memcheck, a memory error detector
-==10527== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==10527== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==10527== Command: ./test_batt_update set_batt_from_ports()\ 0\ P
-==10527== Parent PID: 10526
-==10527== 
-==10527== error calling PR_SET_PTRACER, vgdb might block
-==10527== 
-==10527== HEAP SUMMARY:
-==10527==     in use at exit: 0 bytes in 0 blocks
-==10527==   total heap usage: 2 allocs, 2 frees, 8 bytes allocated
-==10527== 
-==10527== All heap blocks were freed -- no leaks are possible
-==10527== 
-==10527== For lists of detected and suppressed errors, rerun with: -s
-==10527== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==6100== Memcheck, a memory error detector
+==6100== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==6100== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==6100== Command: ./test_batt_update set_batt_from_ports()\ 0\ P
+==6100== Parent PID: 6099
+==6100== 
+--6100-- WARNING: Serious error when reading debug info
+--6100-- When reading debug info from /mnt/c/Users/gifte/Documents/projects/csci2021/Projects/p3-code/test_batt_update:
+--6100-- Ignoring non-Dwarf2/3/4 block in .debug_info
+--6100-- WARNING: Serious error when reading debug info
+--6100-- When reading debug info from /mnt/c/Users/gifte/Documents/projects/csci2021/Projects/p3-code/test_batt_update:
+--6100-- parse_CU_Header: is neither DWARF2 nor DWARF3 nor DWARF4
+==6100== 
+==6100== HEAP SUMMARY:
+==6100==     in use at exit: 0 bytes in 0 blocks
+==6100==   total heap usage: 2 allocs, 2 frees, 8 bytes allocated
+==6100== 
+==6100== All heap blocks were freed -- no leaks are possible
+==6100== 
+==6100== For lists of detected and suppressed errors, rerun with: -s
+==6100== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

@@ -80,7 +80,7 @@ num_vals:                       # declare multiple ints sequentially starting at
         .int 0b1101111          # 9
 
 
-## WARNING: Don't forget to switch back to .text as below
+# WARNING: Don't forget to switch back to .text as below
 ## Otherwise you may get weird permission errors when executing 
 .text
 .global  set_display_from_batt
@@ -98,13 +98,15 @@ set_display_from_batt:
         # rbx = the address to the global display var
         
         movq $0, %rcx           # set rcx to be used as offset in loop
+        movq $0, %r10
 
 .SET_BATT_IMAGE:
-        cmpq (%rax, %rcx), 16(%rdi)        # compare percent in rdi to rax offset increment until rax < rdi
+        cmpq %r10, 16(%rdi)        # compare percent in rdi to rax offset increment until rax < rdi
         jg .SET_NUMS                    # if rax > jump out
         shlq $1, (%rbx)                      # else shift left
         incq (%rbx)                      # increment rbx
         add $4, %rcx                    # set the offset for the array
+        movq (%rax, %rcx, 1), %r10
         jmp .SET_BATT_IMAGE             # code should add one to the battery display bits
 
 .SET_NUMS:
@@ -115,51 +117,66 @@ set_display_from_batt:
 
 .DISPLAY_VOLTAGE:                       # if mode is set to voltage
         movw %ax, (%rdi)                # repurpose rax to be used as voltage
-        divq $10                        # do we round up
+        movq $10, %r10
+        divq %r10                       # do we round up
         cmp $5, %rdx                    # compare remainder to see if round up
         add $1, %ax                     # add 1 to round up
-        movb $100, %sil                 # use rsi as div counter
-
+        
+        movq $100, %r10                 # use r10 as div counter
         shlq $7, (%rbx)                 # move the bits in batt image to the correct spot
-        divq $100                       # div 100 put 100s place into rax
-        or %rax(%rcx), (%rbx)           # set the 100's place
+        divq %r10                       # div 100 put 100s place into rax
+        movq (%rcx, %rax, 1), %r10
+        or %r10, (%rbx)           # set the 100's place
         movq %rdx, %rax                 # move the remainder into rax
 
         shlq $7, (%rbx)                 # move the bits in batt image to the correct spot
-        divq $10                        # div 10 put 10s place into rax
-        or %rax(%rcx), (%rbx)           # set the 10's place
-
+        movq $10, %r10                  # use r10 as div counter
+        divq %r10                       # div 10 put 10s place into rax
+        
+        movq (%rcx, %rax, 1), %r10
+        or %r10, (%rbx)           # set the 10's place
         shlq $7, (%rbx)                 # move the bits in batt image to the correct spot
-        or %rdx(%rcx), (%rbx)           # set the 1's place using remainder
+        movq (%rcx, %rdx, 1), %r10
+        or %r10, (%rbx)           # set the 1's place using remainder
         shlq $3, (%rbx)                 # shift left to set final bits
         or $0b110, (%rbx)                # set the decimal bit and the v bit
+
+        movq $0, %rax
+        ret
 
 .DISPLAY_PERCENT:       # if mode is set to percent
         movb %al, (%rdi)                # repurpose rax to be used as percent
         shlq $7, (%rbx)                 # move the bits in batt image to the correct spot
-        divq $100                       # div 100 put 100s place into rax
+        movq $100, %r10
+        divq %r10                       # div 100 put 100s place into rax
 
         cmp $0, %rax                    # test for leading 0
         je .TENS                        # if leading 0 jump to 10s 
 
-        or %rax(%rcx), (%rbx)           # set 100s place
+        movq (%rcx, %rax, 1), %r10
+        or %r10, (%rbx)           # set 100s place
 
 .TENS:
         movq %rdx, %rax                 # put remainder into rax
         shlq $7, (%rbx)                 # move the bits in batt image to the correct spot
-        divq $10                        # find num in 10s place
+        movq $10, %r10
+        divq %r10                        # find num in 10s place
 
         cmp $0, %rax                    # test for leading 0
         je .ONES                        # if leading 0 jump to ones
 
-        or %rax(%rcx), (%rbx)
+        movq (%rcx, %rax, 1), %r10
+        or %r10, (%rbx)
 
 .ONES:
         shlq $7, (%rbx)                  # move the bits in batt image to the correct spot
-        or %rdx(%rcx), (%rbx)            # set the 1s place
+        movq (%rcx, %rdx, 1), %r10
+        or %r10, (%rbx)            # set the 1s place
         shlq $3, (%rbx)                  # shift left to set final bits
         or $0b001, (%rbx)                 # set the percent symbol
 
+        movq $0, %rax
+        ret
 .text
 .global batt_update
         

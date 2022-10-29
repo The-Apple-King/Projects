@@ -1,49 +1,43 @@
-==6540== Memcheck, a memory error detector
-==6540== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==6540== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==6540== Command: ./test_batt_update set_display_from_batt()\ 3.507\ V
-==6540== Parent PID: 6539
-==6540== 
---6540-- WARNING: Serious error when reading debug info
---6540-- When reading debug info from /mnt/c/Users/gifte/Documents/projects/csci2021/Projects/p3-code/test_batt_update:
---6540-- Ignoring non-Dwarf2/3/4 block in .debug_info
---6540-- WARNING: Serious error when reading debug info
---6540-- When reading debug info from /mnt/c/Users/gifte/Documents/projects/csci2021/Projects/p3-code/test_batt_update:
---6540-- parse_CU_Header: is neither DWARF2 nor DWARF3 nor DWARF4
-==6540== Invalid read of size 8
-==6540==    at 0x10B970: ??? (batt_update_asm.s:104)
-==6540==    by 0x487C082: (below main) (libc-start.c:308)
-==6540==  Address 0x23e0dc3 is not stack'd, malloc'd or (recently) free'd
-==6540== 
-==6540== 
-==6540== Process terminating with default action of signal 11 (SIGSEGV)
-==6540==  Access not within mapped region at address 0x23E0DC3
-==6540==    at 0x10B970: ??? (batt_update_asm.s:104)
-==6540==    by 0x487C082: (below main) (libc-start.c:308)
-==6540==  If you believe this happened as a result of a stack
-==6540==  overflow in your program's main thread (unlikely but
-==6540==  possible), you can try to increase the size of the
-==6540==  main thread stack using the --main-stacksize= flag.
-==6540==  The main thread stack size used in this run was 8388608.
-==6540== 
-==6540== HEAP SUMMARY:
-==6540==     in use at exit: 8 bytes in 2 blocks
-==6540==   total heap usage: 2 allocs, 0 frees, 8 bytes allocated
-==6540== 
-==6540== 4 bytes in 1 blocks are still reachable in loss record 1 of 2
-==6540==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==6540==    by 0x109373: main (test_batt_update.c:39)
-==6540== 
-==6540== 4 bytes in 1 blocks are still reachable in loss record 2 of 2
-==6540==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==6540==    by 0x109384: main (test_batt_update.c:40)
-==6540== 
-==6540== LEAK SUMMARY:
-==6540==    definitely lost: 0 bytes in 0 blocks
-==6540==    indirectly lost: 0 bytes in 0 blocks
-==6540==      possibly lost: 0 bytes in 0 blocks
-==6540==    still reachable: 8 bytes in 2 blocks
-==6540==         suppressed: 0 bytes in 0 blocks
-==6540== 
-==6540== For lists of detected and suppressed errors, rerun with: -s
-==6540== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==617== Memcheck, a memory error detector
+==617== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==617== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==617== Command: ./test_batt_update set_display_from_batt()\ 3.507\ V
+==617== Parent PID: 616
+==617== 
+==617== Invalid read of size 4
+==617==    at 0x10B971: ??? (batt_update_asm.s:106)
+==617==    by 0x487C082: (below main) (libc-start.c:308)
+==617==  Address 0x1e00000005 is not stack'd, malloc'd or (recently) free'd
+==617== 
+==617== 
+==617== Process terminating with default action of signal 11 (SIGSEGV)
+==617==  Access not within mapped region at address 0x1E00000005
+==617==    at 0x10B971: ??? (batt_update_asm.s:106)
+==617==    by 0x487C082: (below main) (libc-start.c:308)
+==617==  If you believe this happened as a result of a stack
+==617==  overflow in your program's main thread (unlikely but
+==617==  possible), you can try to increase the size of the
+==617==  main thread stack using the --main-stacksize= flag.
+==617==  The main thread stack size used in this run was 8388608.
+==617== 
+==617== HEAP SUMMARY:
+==617==     in use at exit: 8 bytes in 2 blocks
+==617==   total heap usage: 2 allocs, 0 frees, 8 bytes allocated
+==617== 
+==617== 4 bytes in 1 blocks are still reachable in loss record 1 of 2
+==617==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==617==    by 0x109373: main (test_batt_update.c:39)
+==617== 
+==617== 4 bytes in 1 blocks are still reachable in loss record 2 of 2
+==617==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==617==    by 0x109384: main (test_batt_update.c:40)
+==617== 
+==617== LEAK SUMMARY:
+==617==    definitely lost: 0 bytes in 0 blocks
+==617==    indirectly lost: 0 bytes in 0 blocks
+==617==      possibly lost: 0 bytes in 0 blocks
+==617==    still reachable: 8 bytes in 2 blocks
+==617==         suppressed: 0 bytes in 0 blocks
+==617== 
+==617== For lists of detected and suppressed errors, rerun with: -s
+==617== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)

@@ -90,28 +90,41 @@ set_display_from_batt:
         ## assembly instructions here
 
         ## two useful techniques for this problem
-        movq    batt_level_cmp(%rip),%rax    # load my_int into register eax
-        movq    BATT_DISPLAY_PORT(%rip), %rbx
+        leaq    batt_level_cmp(%rip),%rax    # load my_int into register eax
 
         # START OF MY CODE-------------------------------------------------------------------------
         # rax = the compares for batt level
         # rbx = the address to the global display var
         
         movq $0, %rcx           # set rcx to be used as offset in loop
-        movq $0, %r10
 
-.SET_BATT_IMAGE:
-        cmpq %r10, 16(%rdi)        # compare percent in rdi to rax offset increment until rax < rdi
-        jg .SET_NUMS                    # if rax > jump out
-        shlq $1, (%rbx)                      # else shift left
-        incq (%rbx)                      # increment rbx
-        add $4, %rcx                    # set the offset for the array
-        movq (%rax, %rcx, 1), %r10
-        jmp .SET_BATT_IMAGE             # code should add one to the battery display bits
+
+.SET_BATT_IMAGE:        # set the first 7 bits and jump to set nums when done
+        movq  %rdi, %r10                # copy struct to r10
+        sarq $16, %r10                  # shift so we have the bits we want
+        andq $0xFF, %r10                # and so no leading bits
+        movl (%rax, %rcx, 4), %r11d
+        cmpq %r11, %r10      # compare percent to each level 
+        # rax contains all comparisons, rcx contains the arr loc, 4 should be num bytes
+
+        jl .SET_NUMS            # loop finished
+
+        shlq (%rsi)                     # shift left first shift does nothing, second + moves 1 to left for inc to set correct bit
+        incq (%rsi)                     # set the last bit to 1
+        incq %rcx                       # increment the arr
+
+        jmp .SET_BATT_IMAGE     # loop to check next batt level
+        
 
 .SET_NUMS:
         leaq num_vals(%rip),%rcx        # load pointer to beginning of my_array into rcx
-        cmpb $1, 24(%rdi)               # check mode
+
+        # put mode into %r10
+        movq  %rdi, %r10                # copy struct to r10
+        sarq $24, %r10                  # shift so we have the bits we want
+        andq $0xFF, %r10                # and so no leading bits
+        cmpq $1, %r10                   # compare percent in rdi to rax offset increment until rax < rdi
+
         je .DISPLAY_VOLTAGE             # if mode = 1 jump to voltage
         jmp .DISPLAY_PERCENT            # if mode = 2 jump to percent !!!!!!!!!!!!!!!!!!!!! may need to fix if val is not 1 or 2
 
@@ -123,30 +136,30 @@ set_display_from_batt:
         add $1, %ax                     # add 1 to round up
         
         movq $100, %r10                 # use r10 as div counter
-        shlq $7, (%rbx)                 # move the bits in batt image to the correct spot
+        shlq $7, (%rsi)                 # move the bits in batt image to the correct spot
         divq %r10                       # div 100 put 100s place into rax
         movq (%rcx, %rax, 1), %r10
-        or %r10, (%rbx)           # set the 100's place
+        or %r10, (%rsi)           # set the 100's place
         movq %rdx, %rax                 # move the remainder into rax
 
-        shlq $7, (%rbx)                 # move the bits in batt image to the correct spot
+        shlq $7, (%rsi)                 # move the bits in batt image to the correct spot
         movq $10, %r10                  # use r10 as div counter
         divq %r10                       # div 10 put 10s place into rax
         
         movq (%rcx, %rax, 1), %r10
-        or %r10, (%rbx)           # set the 10's place
-        shlq $7, (%rbx)                 # move the bits in batt image to the correct spot
+        or %r10, (%rsi)           # set the 10's place
+        shlq $7, (%rsi)                 # move the bits in batt image to the correct spot
         movq (%rcx, %rdx, 1), %r10
-        or %r10, (%rbx)           # set the 1's place using remainder
-        shlq $3, (%rbx)                 # shift left to set final bits
-        or $0b110, (%rbx)                # set the decimal bit and the v bit
+        or %r10, (%rsi)           # set the 1's place using remainder
+        shlq $3, (%rsi)                 # shift left to set final bits
+        or $0b110, (%rsi)                # set the decimal bit and the v bit
 
         movq $0, %rax
         ret
 
 .DISPLAY_PERCENT:       # if mode is set to percent
         movb %al, (%rdi)                # repurpose rax to be used as percent
-        shlq $7, (%rbx)                 # move the bits in batt image to the correct spot
+        shlq $7, (%rsi)                 # move the bits in batt image to the correct spot
         movq $100, %r10
         divq %r10                       # div 100 put 100s place into rax
 
@@ -154,11 +167,11 @@ set_display_from_batt:
         je .TENS                        # if leading 0 jump to 10s 
 
         movq (%rcx, %rax, 1), %r10
-        or %r10, (%rbx)           # set 100s place
+        or %r10, (%rsi)           # set 100s place
 
 .TENS:
         movq %rdx, %rax                 # put remainder into rax
-        shlq $7, (%rbx)                 # move the bits in batt image to the correct spot
+        shlq $7, (%rsi)                 # move the bits in batt image to the correct spot
         movq $10, %r10
         divq %r10                        # find num in 10s place
 
@@ -166,14 +179,14 @@ set_display_from_batt:
         je .ONES                        # if leading 0 jump to ones
 
         movq (%rcx, %rax, 1), %r10
-        or %r10, (%rbx)
+        or %r10, (%rsi)
 
 .ONES:
-        shlq $7, (%rbx)                  # move the bits in batt image to the correct spot
+        shlq $7, (%rsi)                  # move the bits in batt image to the correct spot
         movq (%rcx, %rdx, 1), %r10
-        or %r10, (%rbx)            # set the 1s place
-        shlq $3, (%rbx)                  # shift left to set final bits
-        or $0b001, (%rbx)                 # set the percent symbol
+        or %r10, (%rsi)            # set the 1s place
+        shlq $3, (%rsi)                  # shift left to set final bits
+        or $0b001, (%rsi)                 # set the percent symbol
 
         movq $0, %rax
         ret

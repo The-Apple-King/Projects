@@ -98,19 +98,20 @@ set_display_from_batt:
         
         movq $0, %rcx           # set rcx to be used as offset in loop
 
+        # set r10 to percent val
+        movl  %edi, %r10d                # copy struct to r10
+        sarl $16, %r10d                  # shift so we have the bits we want
+        andl $0xFF, %r10d                # and so no leading bits
 
 .SET_BATT_IMAGE:        # set the first 7 bits and jump to set nums when done
-        movq  %rdi, %r10                # copy struct to r10
-        sarq $16, %r10                  # shift so we have the bits we want
-        andq $0xFF, %r10                # and so no leading bits
         movl (%rax, %rcx, 4), %r11d
-        cmpq %r11, %r10      # compare percent to each level 
+        cmpl %r11d, %r10d      # compare percent to each level 
         # rax contains all comparisons, rcx contains the arr loc, 4 should be num bytes
 
         jl .SET_NUMS            # loop finished
 
-        shlq (%rsi)                     # shift left first shift does nothing, second + moves 1 to left for inc to set correct bit
-        incq (%rsi)                     # set the last bit to 1
+        shll $1, %r13d                 # shift left first shift does nothing, second + moves 1 to left for inc to set correct bit
+        incl %r13d                     # set the last bit to 1
         incq %rcx                       # increment the arr
 
         jmp .SET_BATT_IMAGE     # loop to check next batt level
@@ -119,77 +120,93 @@ set_display_from_batt:
 .SET_NUMS:
         leaq num_vals(%rip),%rcx        # load pointer to beginning of my_array into rcx
 
-        # put mode into %r10
-        movq  %rdi, %r10                # copy struct to r10
-        sarq $24, %r10                  # shift so we have the bits we want
-        andq $0xFF, %r10                # and so no leading bits
-        cmpq $1, %r10                   # compare percent in rdi to rax offset increment until rax < rdi
+        movl  %edi, %r10d                # copy struct to r10
+        sarl $24, %r10d                  # shift so we have the bits we want
 
-        je .DISPLAY_VOLTAGE             # if mode = 1 jump to voltage
-        jmp .DISPLAY_PERCENT            # if mode = 2 jump to percent !!!!!!!!!!!!!!!!!!!!! may need to fix if val is not 1 or 2
+        cmpl $2, %r10d                  # compare mode against 1
+        je .DISPLAY_PERCENT             # percent mode jump
+        # otherwise fall
 
 .DISPLAY_VOLTAGE:                       # if mode is set to voltage
-        movw %ax, (%rdi)                # repurpose rax to be used as voltage
-        movq $10, %r10
-        divq %r10                       # do we round up
-        cmp $5, %rdx                    # compare remainder to see if round up
-        add $1, %ax                     # add 1 to round up
-        
-        movq $100, %r10                 # use r10 as div counter
-        shlq $7, (%rsi)                 # move the bits in batt image to the correct spot
-        divq %r10                       # div 100 put 100s place into rax
-        movq (%rcx, %rax, 1), %r10
-        or %r10, (%rsi)           # set the 100's place
-        movq %rdx, %rax                 # move the remainder into rax
 
-        shlq $7, (%rsi)                 # move the bits in batt image to the correct spot
-        movq $10, %r10                  # use r10 as div counter
-        divq %r10                       # div 10 put 10s place into rax
-        
-        movq (%rcx, %rax, 1), %r10
-        or %r10, (%rsi)           # set the 10's place
-        shlq $7, (%rsi)                 # move the bits in batt image to the correct spot
-        movq (%rcx, %rdx, 1), %r10
-        or %r10, (%rsi)           # set the 1's place using remainder
-        shlq $3, (%rsi)                 # shift left to set final bits
-        or $0b110, (%rsi)                # set the decimal bit and the v bit
+        movl %edi, %eax                 # put struct in eax
+        andl $0xFF, %eax                # remove percent and mode
 
-        movq $0, %rax
+        addl $5, %eax                   # add 5 to eax so it rounds up
+        movl $10, %r10d
+        divl %r10d                        # div by 10
+
+        movl $100, %r10d
+        divl %r10d                       # take 100s into eax
+        movl (%rcx, %rax, 4), %r10d     # rcx has bit pattern, eax * 4 is loc in rcx
+        shll $7, %r13d                  # r13 accumulator shift left 7
+        orl %r10d, %r13d                # set bits in accum/r13
+
+        movl %edx, %eax                 # put remainder into eax
+
+        movl $10, %r10d
+        divl %r10d                      # put 10s into eax
+        movl (%rcx, %rax, 4), %r10d     # rcx has bit pattern, eax * 4 is loc in rcx
+        shll $7, %r13d                  # r13 accumulator shift left 7
+        orl %r10d, %r13d                # set bits in accum/r13
+
+        movl (%rcx, %rdx, 4), %r10d     # rcx has bit pattern, eax * 4 is loc in rcx
+        shll $7, %r13d                  # r13 accumulator shift left 7
+        orl %r10d, %r13d                # set bits in accum/r13
+
+        shll $3, %r13d                   # shift left to set final bits
+        orl $0b110, %r13d                # set the decimal bit and the v bit
+
+        movl %r13d, (%rsi)
+        movl $0, %eax
         ret
 
 .DISPLAY_PERCENT:       # if mode is set to percent
-        movb %al, (%rdi)                # repurpose rax to be used as percent
-        shlq $7, (%rsi)                 # move the bits in batt image to the correct spot
-        movq $100, %r10
-        divq %r10                       # div 100 put 100s place into rax
 
-        cmp $0, %rax                    # test for leading 0
-        je .TENS                        # if leading 0 jump to 10s 
+        movl %edi, %eax                 # put struct in eax
+        sarl $16, %eax                  # shift to correct bit
+        andl $0xFF, %eax                # remove mode
 
-        movq (%rcx, %rax, 1), %r10
-        or %r10, (%rsi)           # set 100s place
+        shll $7, %r13d                  # move bits to make space for last digit
+        movl $100, %r10d                # prep div
+        divl %r10d                      # div by 100
+
+        cmpl $0, %eax                   # if 0 in hundreds
+        je .TENS                        # jump to tens
+
+        movl (%rcx, %rax, 4), %r10d     # put bit pattern into r10d
+        orl %r10d, %r13d                # put bits from r10d into r13d
+
+
 
 .TENS:
-        movq %rdx, %rax                 # put remainder into rax
-        shlq $7, (%rsi)                 # move the bits in batt image to the correct spot
-        movq $10, %r10
-        divq %r10                        # find num in 10s place
 
-        cmp $0, %rax                    # test for leading 0
-        je .ONES                        # if leading 0 jump to ones
+        movl %edx, %eax                 # move the remainder into eax
 
-        movq (%rcx, %rax, 1), %r10
-        or %r10, (%rsi)
+        shll $7, %r13d                  # move bits to make space for last digit
+        movl $10, %r10d                 # prep div
+        divl %r10d                      # div by 10
+
+        cmpl $0, %eax                   # if 0 in 10s
+        je .ONES                        # jump to ones
+
+        movl (%rcx, %rax, 4), %r10d     # put bit pattern into r10d
+        orl %r10d, %r13d                # put bits from r10d into r13d
 
 .ONES:
-        shlq $7, (%rsi)                  # move the bits in batt image to the correct spot
-        movq (%rcx, %rdx, 1), %r10
-        or %r10, (%rsi)            # set the 1s place
-        shlq $3, (%rsi)                  # shift left to set final bits
-        or $0b001, (%rsi)                 # set the percent symbol
 
-        movq $0, %rax
-        ret
+        shll $7, %r13d                  # shift bits into correct pos 
+
+        movl (%rcx, %rdx, 4), %r10d     # put bit pattern into r10d
+        orl %r10d, %r13d                # put bits from r10d into r13d
+
+        shll $3, %r13d                  # shift left to set final bits
+        orl $0b001, %r13d                 # set the percent symbol
+
+        movl %r13d, (%rsi)              # put r13d into (%rsi) or display pos
+        movl $0, %eax                   # set eax to 0 
+        ret                             # return
+
 .text
 .global batt_update
         

@@ -3,7 +3,6 @@ COMMENTS:
 ** program: ./test_batt_update "set_display_from_batt() 0 V"
 
 ** --- Failure messages --- 
-- FAILURE(139) due to SIGSEGV (segmentation fault) from OS
 - FAILURE: Valgrind reports reachable memory, may need to add free() or fclose()
 - FAILURE: Output Mismatch at lines marked
 
@@ -34,7 +33,7 @@ COMMENTS:
     print_batt_display();                                        print_batt_display();
 }                                                            }
 ---OUTPUT---                                                 ---OUTPUT---
-ret: 0                                                     <
+ret: 0                                                     | Segmentation Fault
 dispint bits       : 000 00000 0111111 0111111 0111111 110 <
 index              :  29    24      17      10       3   0 <
                                                            <
@@ -71,49 +70,41 @@ EXPECT:  35) |     |  #  #   #  #  #  #  V
 EXPECT:  36) |     |  #  #   #  #  #  #     
 EXPECT:  37) |     |  #  #   #  #  #  #     
 EXPECT:  38) +-----+  #### o ####  ####     
+ACTUAL:  22) Segmentation Fault
 
 --- Valgrind Log from: test-results/raw/prob1-13-valgrd.tmp ---
-==518== Memcheck, a memory error detector
-==518== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==518== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==518== Command: ./test_batt_update set_display_from_batt()\ 0\ V
-==518== Parent PID: 517
-==518== 
-==518== Invalid read of size 4
-==518==    at 0x10B971: ??? (batt_update_asm.s:106)
-==518==    by 0x487C082: (below main) (libc-start.c:308)
-==518==  Address 0x1e00000005 is not stack'd, malloc'd or (recently) free'd
-==518== 
-==518== 
-==518== Process terminating with default action of signal 11 (SIGSEGV)
-==518==  Access not within mapped region at address 0x1E00000005
-==518==    at 0x10B971: ??? (batt_update_asm.s:106)
-==518==    by 0x487C082: (below main) (libc-start.c:308)
-==518==  If you believe this happened as a result of a stack
-==518==  overflow in your program's main thread (unlikely but
-==518==  possible), you can try to increase the size of the
-==518==  main thread stack using the --main-stacksize= flag.
-==518==  The main thread stack size used in this run was 8388608.
-==518== 
-==518== HEAP SUMMARY:
-==518==     in use at exit: 8 bytes in 2 blocks
-==518==   total heap usage: 2 allocs, 0 frees, 8 bytes allocated
-==518== 
-==518== 4 bytes in 1 blocks are still reachable in loss record 1 of 2
-==518==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==518==    by 0x109373: main (test_batt_update.c:39)
-==518== 
-==518== 4 bytes in 1 blocks are still reachable in loss record 2 of 2
-==518==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==518==    by 0x109384: main (test_batt_update.c:40)
-==518== 
-==518== LEAK SUMMARY:
-==518==    definitely lost: 0 bytes in 0 blocks
-==518==    indirectly lost: 0 bytes in 0 blocks
-==518==      possibly lost: 0 bytes in 0 blocks
-==518==    still reachable: 8 bytes in 2 blocks
-==518==         suppressed: 0 bytes in 0 blocks
-==518== 
-==518== For lists of detected and suppressed errors, rerun with: -s
-==518== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==25522== Memcheck, a memory error detector
+==25522== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==25522== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==25522== Command: ./test_batt_update set_display_from_batt()\ 0\ V
+==25522== Parent PID: 25521
+==25522== 
+==25522== error calling PR_SET_PTRACER, vgdb might block
+==25522== 
+==25522== Process terminating with default action of signal 8 (SIGFPE)
+==25522==  Integer divide by zero at address 0x1008DFFBC7
+==25522==    at 0x10B9F2: ??? (batt_update_asm.s:166)
+==25522==    by 0x488FD8F: (below main) (libc_start_call_main.h:58)
+==25522== 
+==25522== HEAP SUMMARY:
+==25522==     in use at exit: 8 bytes in 2 blocks
+==25522==   total heap usage: 2 allocs, 0 frees, 8 bytes allocated
+==25522== 
+==25522== 4 bytes in 1 blocks are still reachable in loss record 1 of 2
+==25522==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25522==    by 0x109373: main (test_batt_update.c:39)
+==25522== 
+==25522== 4 bytes in 1 blocks are still reachable in loss record 2 of 2
+==25522==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==25522==    by 0x109384: main (test_batt_update.c:40)
+==25522== 
+==25522== LEAK SUMMARY:
+==25522==    definitely lost: 0 bytes in 0 blocks
+==25522==    indirectly lost: 0 bytes in 0 blocks
+==25522==      possibly lost: 0 bytes in 0 blocks
+==25522==    still reachable: 8 bytes in 2 blocks
+==25522==         suppressed: 0 bytes in 0 blocks
+==25522== 
+==25522== For lists of detected and suppressed errors, rerun with: -s
+==25522== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 

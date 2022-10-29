@@ -1,0 +1,34 @@
+        movw 0(%rdi), %ax                # copy struct to r10
+
+        shlq $7, %r13                 # move the bits in batt image to the correct aspot
+        movq $100, %r10
+        divq %r10                       # div 100 put 100s place into rax
+
+        cmp $0, %rax                    # test for leading 0
+        je .TENS                        # if leading 0 jump to 10s 
+
+        movq (%rcx, %rax, 1), %r10
+        or %r10, %r13           # set 100s place
+
+.TENS:
+        movq %rdx, %rax                 # put remainder into rax
+        shlq $7, %r13                 # move the bits in batt image to the correct spot
+        movq $10, %r10
+        divq %r10                        # find num in 10s place
+
+        cmp $0, %rax                    # test for leading 0
+        je .ONES                        # if leading 0 jump to ones
+
+        movq (%rcx, %rax, 1), %r10
+        or %r10, %r13
+
+.ONES:
+        shlq $7, %r13                  # move the bits in batt image to the correct spot
+        movq (%rcx, %rdx, 1), %r10
+        or %r10, %r13            # set the 1s place
+        shlq $3, %r13                  # shift left to set final bits
+        or $0b001, %r13                 # set the percent symbol
+
+        movq %r13, (%rsi)
+        movq $0, %rax
+        ret

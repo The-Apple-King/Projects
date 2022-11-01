@@ -1,7 +1,0 @@
-==14770== Memcheck, a memory error detector
-==14770== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==14770== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==14770== Command: ./batt_main 6301 V
-==14770== Parent PID: 14769
-==14770== 
-==14770== error calling PR_SET_PTRACER, vgdb might block

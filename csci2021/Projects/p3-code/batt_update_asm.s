@@ -98,6 +98,7 @@ set_display_from_batt:
         
         movq $0, %rcx           # set rcx to be used as offset in loop
         movl $0, %r13d          # set r13d empty to use as accumulator
+        movl $0, %edx           # counter to stop batt image
 
         # set r10 to percent val
         movl  %edi, %r10d                # copy struct to r10
@@ -112,9 +113,13 @@ set_display_from_batt:
 
         jl .SET_NUMS            # loop finished
 
+        cmpl $5, %edx
+        je .SET_NUMS
+
         shll $1, %r13d                 # shift left first shift does nothing, second + moves 1 to left for inc to set correct bit
         incl %r13d                     # set the last bit to 1
         incq %rcx                       # increment the arr
+        incl %edx
 
         jmp .SET_BATT_IMAGE     # loop to check next batt level
         
@@ -132,7 +137,7 @@ set_display_from_batt:
 .DISPLAY_VOLTAGE:                       # if mode is set to voltage
 
         movl %edi, %eax                 # put struct in eax
-        andl $0xFF, %eax                # remove percent and mode
+        andl $0xFFFF, %eax                # remove percent and mode
 
         addl $5, %eax                   # add 5 to eax so it rounds up
         movl $10, %r10d
@@ -232,7 +237,24 @@ set_display_from_batt:
 ## ENTRY POINT FOR REQUIRED FUNCTION
 batt_update:
 	## assembly instructions here
+        subq $4, %rsp           # make room on the stack for the struct
+        leaq (%rsp), %rdi      # set rdi to pointer to stack
 
+        subq    $8,%rsp         # extend the stack 8 bytes
+        call    set_batt_from_ports   # stack aligned, call function
+        # return val from func in rax or eax
+
+        movl 8(%rsp), %edi      # change from pointer to struct
+
+        cmpl $0, %eax # if set_batt_from_ports returns 1
+        jne .FAILED   # jump to failed
+
+        leaq BATT_DISPLAY_PORT(%rip),%rsi
+        call set_display_from_batt
+        
+
+.FAILED:        # if we get here the val of rax is already set
+        addq    $12,%rsp     # shrink the stack to restore it to its original position
         ret
 
 

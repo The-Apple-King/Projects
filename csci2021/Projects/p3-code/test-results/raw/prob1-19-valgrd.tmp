@@ -1,7 +1,0 @@
-==14374== Memcheck, a memory error detector
-==14374== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==14374== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==14374== Command: ./test_batt_update set_display_from_batt()\ 4.21\ V
-==14374== Parent PID: 14373
-==14374== 
-==14374== error calling PR_SET_PTRACER, vgdb might block

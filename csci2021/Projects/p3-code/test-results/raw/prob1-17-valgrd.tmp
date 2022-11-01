@@ -1,7 +1,0 @@
-==14308== Memcheck, a memory error detector
-==14308== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==14308== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==14308== Command: ./test_batt_update set_display_from_batt()\ 62\ %
-==14308== Parent PID: 14307
-==14308== 
-==14308== error calling PR_SET_PTRACER, vgdb might block

@@ -1,7 +1,0 @@
-==14242== Memcheck, a memory error detector
-==14242== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==14242== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==14242== Command: ./test_batt_update set_display_from_batt()\ 3.50\ V
-==14242== Parent PID: 14241
-==14242== 
-==14242== error calling PR_SET_PTRACER, vgdb might block

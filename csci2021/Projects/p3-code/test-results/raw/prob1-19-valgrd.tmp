@@ -1,34 +1,7 @@
-==25720== Memcheck, a memory error detector
-==25720== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==25720== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==25720== Command: ./test_batt_update set_display_from_batt()\ 4.21\ V
-==25720== Parent PID: 25719
-==25720== 
-==25720== error calling PR_SET_PTRACER, vgdb might block
-==25720== 
-==25720== Process terminating with default action of signal 8 (SIGFPE)
-==25720==  Integer divide by zero at address 0x1008E00F8F
-==25720==    at 0x10B9F2: ??? (batt_update_asm.s:166)
-==25720==    by 0x488FD8F: (below main) (libc_start_call_main.h:58)
-==25720== 
-==25720== HEAP SUMMARY:
-==25720==     in use at exit: 8 bytes in 2 blocks
-==25720==   total heap usage: 2 allocs, 0 frees, 8 bytes allocated
-==25720== 
-==25720== 4 bytes in 1 blocks are still reachable in loss record 1 of 2
-==25720==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==25720==    by 0x109373: main (test_batt_update.c:39)
-==25720== 
-==25720== 4 bytes in 1 blocks are still reachable in loss record 2 of 2
-==25720==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==25720==    by 0x109384: main (test_batt_update.c:40)
-==25720== 
-==25720== LEAK SUMMARY:
-==25720==    definitely lost: 0 bytes in 0 blocks
-==25720==    indirectly lost: 0 bytes in 0 blocks
-==25720==      possibly lost: 0 bytes in 0 blocks
-==25720==    still reachable: 8 bytes in 2 blocks
-==25720==         suppressed: 0 bytes in 0 blocks
-==25720== 
-==25720== For lists of detected and suppressed errors, rerun with: -s
-==25720== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==14374== Memcheck, a memory error detector
+==14374== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==14374== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==14374== Command: ./test_batt_update set_display_from_batt()\ 4.21\ V
+==14374== Parent PID: 14373
+==14374== 
+==14374== error calling PR_SET_PTRACER, vgdb might block

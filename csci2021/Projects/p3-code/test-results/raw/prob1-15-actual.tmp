@@ -20,4 +20,3 @@
     print_batt_display();
 }
 ---OUTPUT---
-Segmentation Fault

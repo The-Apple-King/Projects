@@ -76,7 +76,7 @@ num_vals:                       # declare multiple ints sequentially starting at
         .int 0b1101101          # 5
         .int 0b1111101          # 6
         .int 0b0000111          # 7
-        .int 0b0111111          # 8
+        .int 0b1111111          # 8
         .int 0b1101111          # 9
 
 
@@ -97,6 +97,7 @@ set_display_from_batt:
         # rbx = the address to the global display var
         
         movq $0, %rcx           # set rcx to be used as offset in loop
+        movl $0, %r13d          # set r13d empty to use as accumulator
 
         # set r10 to percent val
         movl  %edi, %r10d                # copy struct to r10
@@ -105,6 +106,7 @@ set_display_from_batt:
 
 .SET_BATT_IMAGE:        # set the first 7 bits and jump to set nums when done
         movl (%rax, %rcx, 4), %r11d
+        
         cmpl %r11d, %r10d      # compare percent to each level 
         # rax contains all comparisons, rcx contains the arr loc, 4 should be num bytes
 
@@ -123,7 +125,7 @@ set_display_from_batt:
         movl  %edi, %r10d                # copy struct to r10
         sarl $24, %r10d                  # shift so we have the bits we want
 
-        cmpl $2, %r10d                  # compare mode against 1
+        cmpl $1, %r10d                  # compare mode against 1
         je .DISPLAY_PERCENT             # percent mode jump
         # otherwise fall
 
@@ -134,10 +136,12 @@ set_display_from_batt:
 
         addl $5, %eax                   # add 5 to eax so it rounds up
         movl $10, %r10d
-        divl %r10d                        # div by 10
+        cqto
+        idivl %r10d                        # div by 10
 
         movl $100, %r10d
-        divl %r10d                       # take 100s into eax
+        cqto
+        idivl %r10d                       # take 100s into eax
         movl (%rcx, %rax, 4), %r10d     # rcx has bit pattern, eax * 4 is loc in rcx
         shll $7, %r13d                  # r13 accumulator shift left 7
         orl %r10d, %r13d                # set bits in accum/r13
@@ -145,7 +149,8 @@ set_display_from_batt:
         movl %edx, %eax                 # put remainder into eax
 
         movl $10, %r10d
-        divl %r10d                      # put 10s into eax
+        cqto
+        idivl %r10d                      # put 10s into eax
         movl (%rcx, %rax, 4), %r10d     # rcx has bit pattern, eax * 4 is loc in rcx
         shll $7, %r13d                  # r13 accumulator shift left 7
         orl %r10d, %r13d                # set bits in accum/r13
@@ -169,14 +174,27 @@ set_display_from_batt:
 
         shll $7, %r13d                  # move bits to make space for last digit
         movl $100, %r10d                # prep div
-        divl %r10d                      # div by 100
+        cqto
+        idivl %r10d                      # div by 100
 
         cmpl $0, %eax                   # if 0 in hundreds
         je .TENS                        # jump to tens
 
+
+        # set 100 
         movl (%rcx, %rax, 4), %r10d     # put bit pattern into r10d
         orl %r10d, %r13d                # put bits from r10d into r13d
+        movl (%rcx), %r10d
+        shll $7, %r13d                  # move bits to make space for last digit
+        orl %r10d, %r13d                # put bits from r10d into r13d
+        shll $7, %r13d                  # move bits to make space for last digit
+        orl %r10d, %r13d                # put bits from r10d into r13d
+        shll $3, %r13d                  # shift left to set final bits
+        orl $0b001, %r13d                 # set the percent symbol
 
+        movl %r13d, (%rsi)              # put r13d into (%rsi) or display pos
+        movl $0, %eax                   # set eax to 0 
+        ret
 
 
 .TENS:
@@ -185,7 +203,8 @@ set_display_from_batt:
 
         shll $7, %r13d                  # move bits to make space for last digit
         movl $10, %r10d                 # prep div
-        divl %r10d                      # div by 10
+        cqto
+        idivl %r10d                      # div by 10
 
         cmpl $0, %eax                   # if 0 in 10s
         je .ONES                        # jump to ones

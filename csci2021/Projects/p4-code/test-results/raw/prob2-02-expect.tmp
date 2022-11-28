@@ -1,0 +1,2 @@
+>> ./search_benchmark 1 7 5 la | head -1
+    SIZE  NSEARCH      array

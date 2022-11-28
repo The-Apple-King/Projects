@@ -1,0 +1,14 @@
+>> output=$(/usr/bin/time -f '%U seconds' ./search_benchmark 10 10 750 ll 2>&1 )
+>> runtime=$(echo $output | awk '{x=$1} END{if(x<1.0){print $1}}')
+>> msg=""
+>> msg+="Linked list run should take > 1.0 seconds\n"
+>> msg+="Took $runtime seconds\n"
+>> msg+="Check program logic\n"
+>> msg+="PROGRAM OUTPUT:\n"
+>> msg+="$output\n"
+>> if [[ "$runtime" != "" ]]; then printf "$msg"; fi
+Linked list run should take > 1.0 seconds
+Took 0.00 seconds
+Check program logic
+PROGRAM OUTPUT:
+0.00 seconds

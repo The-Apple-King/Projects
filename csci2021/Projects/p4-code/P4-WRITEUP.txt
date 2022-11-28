@@ -1,0 +1,194 @@
+                              ____________
+
+                               P4 WRITEUP
+                              ____________
+
+
+- Name: (FILL THIS in)
+- NetID: (THE kauf0095 IN kauf0095@umn.edu)
+
+Answer the questions below according to the project specification. Write
+your answers directly in this text file and submit it along with your
+code.
+
+
+PROBLEM 1: sumdiag_OPTM()
+=========================
+
+  Do your timing study on loginNN.cselabs.umn.edu
+
+
+(A) Paste Source Code
+~~~~~~~~~~~~~~~~~~~~~
+
+  int sumdiag_VER1(matrix_t *mat, vector_t *vec) {
+  if(vec->len != (mat->rows + mat->cols -1)){
+    printf("sumdiag_base: bad sizes\n");
+    return 1;
+  }
+
+  vector_t vec1 = *vec;
+  matrix_t mat1 = *mat;
+  
+  // create an array so we can increment the vals of diagonals instead of setting them repeatedly
+  int* vecArr;
+  vecArr = (int*) malloc(sizeof(int) * vec1.len+1);
+  for(int i=0; i<vec1.len; i++){
+   vecArr[i] = 0;
+  }
+
+  
+  //acess rows then cols: makes full use of cache
+  // loc is the diagonal location: created in loop so it doesnt take up space in register
+  for (size_t y = 0, loc = 5; y < mat1.cols; y++, loc--){
+    for (size_t x = 0; x < mat1.rows; x++){
+      vecArr[loc + x] += MGET(mat1, x, y);
+    }
+  }
+  
+  // sets the val of vectors 1 by 1
+  for (size_t i = 0; i < vec1.len; i++){
+    VSET(vec1, i, vecArr[i]);
+  }
+    *vec = vec1;
+}
+
+  ##################################################################
+
+
+(B) Timing on loginNN.cselabs.umn.edu
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Paste a copy of the results of running `sumdiag_benchmark' on
+  loginNN.cselabs.umn.edu (like login01, login02, ..., login06) in the
+  space below which shows how your performance optimizations improved on
+  the baseline codes.
+
+  ####################### YOUR ANSWER HERE #########################
+
+  ##################################################################
+
+
+(C) Optimizations
+~~~~~~~~~~~~~~~~~
+
+  Describe in some detail the optimizations you used to speed the code
+  up.  THE CODE SHOULD CONTAIN SOME COMMENTS already to describe these
+  but in the section below, describe in English the techniques you used
+  to make the code run faster.  Format your descriptions into discrete
+  chunks such as.
+        Optimization 1: I created matrix_t and vector_t variables locally.
+          This limits main memory access when accessing data.
+
+        Optimization 2: replaced short function calls with macros.
+          This is faster because instead of moving the pointer and accessing main memory 
+          in order to access functions we avoid accessing main memory as much as possible.
+
+        Optimization 3: changed how the matrix is accessed so that values are always sequential.
+          this keeps the memory we access in the cache as much as possible
+
+        Optimization 4: used an array to store vector vals and increment the value of each row sequentially.
+          This is faster because it allows me to make use of the cache and 
+          then only access the vector pointers one time limiting main memory access.
+
+        ...  Optimization N: Blah bla blah... This should make run
+        faster because yakkety yakeety yak.
+  Full credit solutions will have a least THREE optimizations and
+  describe WHY these improved performance in at least a couple
+  sentences.
+
+  ####################### YOUR ANSWER HERE #########################
+
+  ##################################################################
+
+
+PROBLEM 2: Timing Search Algorithms
+===================================
+
+  Do your timing study on loginNN.cselabs.umn.edu. In most cases, report
+  times larger than 1e-03 seconds as times shorter than this are
+  unreliable. Run searches for more repetitions to lengthen run times.
+
+
+(A) Min Size for Algorithmic Differences
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Determine the size of input array where one starts to see a measurable
+  difference in the performance of the linear and logarithmic
+  algorithms.  Produce a timing table which includes all algorithms
+  which clearly demonstrates an uptick in the times associated with some
+  while others remain much lower.  Identify what size this appears to be
+  a occur.
+
+  SHOW A TIMING TABLE to support your conclusions and ensure that the
+  times reported are larger that 1e-03.
+
+  ####################### YOUR ANSWER HERE #########################
+
+  ##################################################################
+
+
+(B) Linear Search in List vs Array
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Determine whether the linear array and linked list search remain
+  approximately at the same performance level as size increases to large
+  data or whether one begins to become favorable over other. Determine
+  the approximate size at which this divergence becomes obvious. Discuss
+  reasons WHY this difference arises.
+
+  SHOW A TIMING TABLE to support your conclusions and ensure that the
+  times reported are larger that 1e-03.
+
+
+  ####################### YOUR ANSWER HERE #########################
+
+  ##################################################################
+
+
+(C) Binary Search in Tree vs Array
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Compare the binary array search and binary tree search on small to
+  very large arrays. Determine if there is a size at which the
+  performance of these two begins to diverge. If so, describe why this
+  might be happening based on your understanding of the data structures
+  and the memory system. If not, describe why you believe there is
+  little performance difference between the two.
+
+  SHOW A TIMING TABLE to support your conclusions and ensure that the
+  times reported are larger that 1e-03.
+
+  ####################### YOUR ANSWER HERE #########################
+
+  ##################################################################
+
+
+(D) Caching Effects on Algorithms
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  It is commonly believed that memory systems that feature a Cache will
+  lead to arrays performing faster than linked structures such as Linked
+  Lists and Binary Search Trees. Describe whether your timings confirm
+  or refute this belief.  Address both types of algorithms in your
+  answer:
+  - What effects does Cache have on Linear Search in arrays and lists
+    and why?
+  - What effects does Cache have on Binary Search in arrays and trees
+    and why?
+
+  ####################### YOUR ANSWER HERE #########################
+
+  ##################################################################
+
+
+(E) OPTIONAL MAKEUP CREDIT
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  If you decided to make use of a table of function pointers/structs
+  which is worth makeup credit, describe your basic design for this
+  below.
+
+  ####################### YOUR ANSWER HERE #########################
+
+  ##################################################################

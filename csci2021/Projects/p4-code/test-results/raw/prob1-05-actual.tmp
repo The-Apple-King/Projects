@@ -1,14 +1,14 @@
-WARNING: expected host 'csel-remote-lnx-01' but got host 'TheAppleSurface'
+WARNING: expected host 'csel-remote-lnx-01' but got host 'TheApplePC'
 WARNING: timing results / scoring will not reflect actual scoring
 WARNING: run on host 'csel-remote-lnx-01' for accurate results
 ==== Matrix Diagonal Sum Benchmark Version 3 ====
 ------ Tuned for csel-remote-lnx-NN machines --------
   SIZE       BASE       OPTM  SPDUP POINTS 
-   512 1.5955e-01 1.5529e-02  10.27   0.84 
-  1024 5.6262e-01 3.0070e-02  18.71   2.11 
-  1101 5.1599e-01 4.0112e-02  12.86   1.98 
-RAW POINTS: 4.93
+   512 7.8125e-02 1.5625e-02   5.00   0.58 
+  1024 3.5938e-01 3.1250e-02  11.50   1.76 
+  1101 3.5938e-01 1.5625e-02  23.00   2.43 
+RAW POINTS: 4.77
 TOTAL POINTS: 5 / 35
-WARNING: expected host 'csel-remote-lnx-01' but got host 'TheAppleSurface'
+WARNING: expected host 'csel-remote-lnx-01' but got host 'TheApplePC'
 WARNING: timing results / scoring will not reflect actual scoring
 WARNING: run on host 'csel-remote-lnx-01' for accurate results

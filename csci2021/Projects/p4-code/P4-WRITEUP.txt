@@ -22,6 +22,7 @@ PROBLEM 1: sumdiag_OPTM()
 ~~~~~~~~~~~~~~~~~~~~~
 
   int sumdiag_VER1(matrix_t *mat, vector_t *vec) {
+  // OPTIMIZED CODE HERE
   if(vec->len != (mat->rows + mat->cols -1)){
     printf("sumdiag_base: bad sizes\n");
     return 1;
@@ -33,24 +34,53 @@ PROBLEM 1: sumdiag_OPTM()
   // create an array so we can increment the vals of diagonals instead of setting them repeatedly
   int* vecArr;
   vecArr = (int*) malloc(sizeof(int) * vec1.len+1);
-  for(int i=0; i<vec1.len; i++){
+  for(int i=0; i<vec1.len-4; i+=4){
    vecArr[i] = 0;
+   vecArr[i+1] = 0;
+   vecArr[i+2] = 0;
+   vecArr[i+3] = 0;
   }
-
   
+  for (size_t i = vec1.len-4; i < vec1.len; i++)
+  {
+    vecArr[i] = 0;
+  }
+  
+
   //acess rows then cols: makes full use of cache
   // loc is the diagonal location: created in loop so it doesnt take up space in register
-  for (size_t y = 0, loc = 5; y < mat1.cols; y++, loc--){
-    for (size_t x = 0; x < mat1.rows; x++){
-      vecArr[loc + x] += MGET(mat1, x, y);
+  for (size_t y = 0, loc = mat1.cols-1; y < mat1.rows; y++, loc--){
+    int x;
+    for (x = 0; x < mat1.cols-4; x+=4){
+      vecArr[loc + x] += MGET(mat1, y, x);
+      vecArr[loc + x+1] += MGET(mat1, y, x+1);
+      vecArr[loc + x+2] += MGET(mat1, y, x+2);
+      vecArr[loc + x+3] += MGET(mat1, y, x+3);
+    }
+
+    for (size_t i = x; i < mat1.cols; i++)
+    {
+      vecArr[loc + i] += MGET(mat1, y, i);
     }
   }
   
   // sets the val of vectors 1 by 1
-  for (size_t i = 0; i < vec1.len; i++){
+  int i;
+  for (i = 0; i < vec1.len-4; i+=4){
+    VSET(vec1, i, vecArr[i]);
+    VSET(vec1, i+1, vecArr[i+1]);
+    VSET(vec1, i+2, vecArr[i+2]);
+    VSET(vec1, i+3, vecArr[i+3]);
+  }
+  for (; i < vec1.len; i++)
+  {
     VSET(vec1, i, vecArr[i]);
   }
+  
+    free(vecArr);
     *vec = vec1;
+  
+  return 0;
 }
 
   ##################################################################
@@ -66,6 +96,19 @@ PROBLEM 1: sumdiag_OPTM()
 
   ####################### YOUR ANSWER HERE #########################
 
+  ==== Matrix Diagonal Sum Benchmark Version 3 ====
+  ------ Tuned for csel-remote-lnx-NN machines --------
+    SIZE       BASE       OPTM  SPDUP POINTS
+    512 1.2881e-02 2.0000e-03   6.44   0.67 
+    1024 5.2053e-02 7.6900e-03   6.77   1.38 
+    1101 7.5672e-02 1.0096e-02   7.50   1.56 
+    2048 3.1709e-01 3.3417e-02   9.49   3.25 
+    4099 1.5043e+00 1.3392e-01  11.23   6.98 
+    6001 3.3823e+00 2.8883e-01  11.71  10.40 
+    8192 6.5036e+00 5.3578e-01  12.14  14.41 
+  RAW POINTS: 38.65
+  TOTAL POINTS: 35 / 35
+
   ##################################################################
 
 
@@ -78,26 +121,59 @@ PROBLEM 1: sumdiag_OPTM()
   to make the code run faster.  Format your descriptions into discrete
   chunks such as.
         Optimization 1: I created matrix_t and vector_t variables locally.
-          This limits main memory access when accessing data.
+          This limits main memory access when accessing data. keeping as much memory as possible in
+          registers means that no time is lost saving or reading from ram or hard drive in order to do computations.
 
         Optimization 2: replaced short function calls with macros.
           This is faster because instead of moving the pointer and accessing main memory 
-          in order to access functions we avoid accessing main memory as much as possible.
+          to access functions we avoid accessing main memory as much as possible. 
+          This keeps registers needed to send and recieve data free to be used by the current function,
+          and limits main memory access which is slower than saving in registers.
 
         Optimization 3: changed how the matrix is accessed so that values are always sequential.
-          this keeps the memory we access in the cache as much as possible
+          this keeps the memory we access in the cache as much as possible. By accessing data sequentially
+          we load in the next few sections of the array into cache and don't need to replace the cache for every
+          value in the array. This limits main memory access which is faster.
 
         Optimization 4: used an array to store vector vals and increment the value of each row sequentially.
-          This is faster because it allows me to make use of the cache and 
-          then only access the vector pointers one time limiting main memory access.
+          This is faster because it allows me to make use of the cache and then only access the vector pointers 
+          one time limiting main memory access. This also allows me to use macros to access data instead of functions,
+          which as stated earlier is faster and limits main memory access.
 
-        ...  Optimization N: Blah bla blah... This should make run
-        faster because yakkety yakeety yak.
+        Optimization 5: unrolled loops to limit comparisions necessary to run loop.
+          this means less computations are needed and therefore less time. It is faster to add 4, 1 time 
+          than to add 1, 4 times.
+
+
   Full credit solutions will have a least THREE optimizations and
   describe WHY these improved performance in at least a couple
   sentences.
 
   ####################### YOUR ANSWER HERE #########################
+
+        Optimization 1: I created matrix_t and vector_t variables locally.
+          This limits main memory access when accessing data. keeping as much memory as possible in
+          registers means that no time is lost saving or reading from ram or hard drive in order to do computations.
+
+        Optimization 2: replaced short function calls with macros.
+          This is faster because instead of moving the pointer and accessing main memory 
+          to access functions we avoid accessing main memory as much as possible. 
+          This keeps registers needed to send and recieve data free to be used by the current function,
+          and limits main memory access which is slower than saving in registers.
+
+        Optimization 3: changed how the matrix is accessed so that values are always sequential.
+          this keeps the memory we access in the cache as much as possible. By accessing data sequentially
+          we load in the next few sections of the array into cache and don't need to replace the cache for every
+          value in the array. This limits main memory access which is faster.
+
+        Optimization 4: used an array to store vector vals and increment the value of each row sequentially.
+          This is faster because it allows me to make use of the cache and then only access the vector pointers 
+          one time limiting main memory access. This also allows me to use macros to access data instead of functions,
+          which as stated earlier is faster and limits main memory access.
+
+        Optimization 5: unrolled loops to limit comparisions necessary to run loop.
+          this means less computations are needed and therefore less time. It is faster to add 4, 1 time 
+          than to add 1, 4 times.
 
   ##################################################################
 

@@ -1,15 +1,16 @@
-==1080== Memcheck, a memory error detector
-==1080== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==1080== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==1080== Command: ./sumdiag_print 7
-==1080== Parent PID: 1079
-==1080== 
-==1080== 
-==1080== HEAP SUMMARY:
-==1080==     in use at exit: 0 bytes in 0 blocks
-==1080==   total heap usage: 4 allocs, 4 frees, 353 bytes allocated
-==1080== 
-==1080== All heap blocks were freed -- no leaks are possible
-==1080== 
-==1080== For lists of detected and suppressed errors, rerun with: -s
-==1080== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==200== Memcheck, a memory error detector
+==200== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==200== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==200== Command: ./sumdiag_print 7
+==200== Parent PID: 199
+==200== 
+==200== error calling PR_SET_PTRACER, vgdb might block
+==200== 
+==200== HEAP SUMMARY:
+==200==     in use at exit: 0 bytes in 0 blocks
+==200==   total heap usage: 4 allocs, 4 frees, 353 bytes allocated
+==200== 
+==200== All heap blocks were freed -- no leaks are possible
+==200== 
+==200== For lists of detected and suppressed errors, rerun with: -s
+==200== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

@@ -7,8 +7,3 @@
 >> msg+="PROGRAM OUTPUT:\n"
 >> msg+="$output\n"
 >> if [[ "$runtime" != "" ]]; then printf "$msg"; fi
-Linked list run should take > 1.0 seconds
-Took 0.00 seconds
-Check program logic
-PROGRAM OUTPUT:
-0.00 seconds

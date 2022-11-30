@@ -54,7 +54,7 @@ int main(int argc, char *argv[]){
   }
 
   // TODO: START TIMING HERE
-  ???;
+  begin = clock();
 
   suma=0, sumb=0;                  // initialize sum
   for(int iter=0; iter<max_iter; iter++){
@@ -67,10 +67,11 @@ int main(int argc, char *argv[]){
   }
   suma += sumb;
   // TODO: STOP TIMING HERE
-  ???;
+  end = clock();
 
   // TODO: COMPUTE CPU TIME AND PRINT IT using the provided FORMAT string
-  ???;
+  cpu_time = end-begin;
+  printf(FORMAT, "int_field_base", cpu_time, suma);
 
   free(int_field_arr1);             // free memory
 
@@ -87,7 +88,7 @@ int main(int argc, char *argv[]){
   }
 
   // TODO: START TIMING HERE
-  ???;
+  begin = clock();
 
   suma=0, sumb=0;                  // initialize sum
   for(int iter=0; iter<max_iter; iter++){
@@ -102,10 +103,11 @@ int main(int argc, char *argv[]){
   end = clock();                   // get later moment to compare to start
 
   // TODO: STOP TIMING HERE
-  ???;
+  end = clock();
 
   // TODO: COMPUTE CPU TIME AND PRINT IT using the provided FORMAT string
-  ???;
+  cpu_time = end-begin;
+  printf(FORMAT, "arr_field_base", cpu_time, suma);
 
   free(arr_field1.a_arr);           // free memory
   free(arr_field1.b_arr);
@@ -121,7 +123,7 @@ int main(int argc, char *argv[]){
   }
 
   // TODO: START TIMING HERE
-  ???;
+  begin = clock();
 
   suma=0, sumb=0;                  // initialize sum
   for(int iter=0; iter<max_iter; iter++){
@@ -133,10 +135,11 @@ int main(int argc, char *argv[]){
   suma += sumb;
 
   // TODO: STOP TIMING HERE
-  ???;
+  end = clock();
 
   // TODO: COMPUTE CPU TIME AND PRINT IT using the provided FORMAT string
-  ???;
+  cpu_time = end-begin;
+  printf(FORMAT, "int_field_optm", cpu_time, suma);
 
   free(int_field_arr2);             // free memory
 
@@ -153,7 +156,7 @@ int main(int argc, char *argv[]){
   }
 
   // TODO: START TIMING HERE
-  ???;
+  begin = clock();
 
   suma=0, sumb=0;                  // initialize sum
   for(int iter=0; iter<max_iter; iter++){
@@ -165,10 +168,11 @@ int main(int argc, char *argv[]){
   suma += sumb;
 
   // TODO: STOP TIMING HERE
-  ???;
+  end = clock();
 
   // TODO: COMPUTE CPU TIME AND PRINT IT using the provided FORMAT string
-  ???;
+  cpu_time = end-begin;
+  printf(FORMAT, "arr_field_optm", cpu_time, suma);
 
   free(arr_field2.a_arr);           // free memory
   free(arr_field2.b_arr);

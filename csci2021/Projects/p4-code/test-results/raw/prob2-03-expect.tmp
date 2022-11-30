@@ -1,0 +1,2 @@
+>> ./search_benchmark 2 9 3 la ba bt | head -1
+    SIZE  NSEARCH      array       binary       tree 

@@ -1,6 +1,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+using namespace std;
 
 /**
 Part A
@@ -24,6 +25,53 @@ functions:
 4. getCoolness: returns float
 5. getWeight: returns double
 */
+
+class duck
+{
+private:
+    string name;
+    float coolness;
+    double weight;
+public:
+    duck();
+    duck(string, float, double);
+    ~duck();
+
+    string getName();
+    float getCoolness();
+    double getWeight();
+};
+
+duck::duck()
+{
+    this->name = "NA";
+    this->coolness = 0;
+    this->weight = 0;
+}
+
+duck::duck(string name, float coolness, double weight)
+{
+    this->name = name;
+    this->coolness = coolness;
+    this->weight = weight;
+}
+
+string duck::getName(){
+    return this->name;
+}
+
+float duck::getCoolness(){
+    return coolness;
+}
+
+double duck::getWeight(){
+    return weight;
+}
+
+duck::~duck()
+{
+}
+
 
 /**
 Part B

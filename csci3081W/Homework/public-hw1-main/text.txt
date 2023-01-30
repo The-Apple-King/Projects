@@ -24,8 +24,8 @@ Problem 2: Fruit (15 pts)
 We have given you a file named fruit_class.cc where you need to define a Fruit class and
 complete main() based on the given instructions (inline comments).
 Submission: Submit one file to Gradescope for this problem: fruit_class.cc
-Problem 3: Ducks (75 pts)
 
+Problem 3: Ducks (75 pts)
 a.Ducks in a row (15 pts)
 We have given you a file named main.cc and duck.cc that contain instructions for the
 creation of a Duck class with some attributes, as well as a partially filled main function

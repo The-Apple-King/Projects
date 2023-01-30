@@ -35,7 +35,10 @@ private:
 public:
     duck();
     duck(string, float, double);
-    ~duck();
+    duck(const duck&); //creates a copy of a duck object
+    duck& operator=(const duck&);   //sets a duck equal to another duck
+    ~duck();    //can be called to deallocate data
+    
 
     string getName();
     float getCoolness();
@@ -68,6 +71,10 @@ double duck::getWeight(){
     return weight;
 }
 
+duck& operator=(const duck&)
+{
+}
+
 duck::~duck()
 {
 }
@@ -81,6 +88,8 @@ Add comments explaining what each one does,
 how they differ from one other, 
 and differences between each of these and the default constructor.
 */
+
+
 
 /**
 Part C

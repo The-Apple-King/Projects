@@ -1,0 +1,78 @@
+Problem 1: Passwords (10 pts)
+a. In a file named passwords_a.cc, write a C++ program that takes in user input a string
+representing a password and an integer representing a user's age.  Check if the
+password is at least 8 characters long and if the user's age is at least 18. If the password
+is at least 8 characters long and the user's age is at least 18, print "Access granted." If
+the password is less than 8 characters long and the user's age is at least 18, print
+"Password too short, access denied." If the password is at least 8 characters long and
+the user's age is less than 18, print "Too young, access denied." If neither condition is
+met, print "Access denied".
+
+take string password and age, 
+check password is at least 8 chars 
+age is 18+
+
+b. In a file named passwords_b.cc, write a C++ program that takes in user input two strings
+representing passwords and checks if they match using string comparison methods
+(section 8.4.1). If the passwords match, print "passwords match" and if they don't match,
+print "passwords do not match".
+Submission: Submit two files to Gradescope for this problem: passwords_a.cc and
+passwords_b.cc
+
+
+Problem 2: Fruit (15 pts)
+We have given you a file named fruit_class.cc where you need to define a Fruit class and
+complete main() based on the given instructions (inline comments).
+Submission: Submit one file to Gradescope for this problem: fruit_class.cc
+
+Problem 3: Ducks (75 pts)
+a.Ducks in a row (15 pts)
+We have given you a file named main.cc and duck.cc that contain instructions for the
+creation of a Duck class with some attributes, as well as a partially filled main function
+that contains a vector of a few ducks. Your job is to complete the Duck class as well as
+sort the ducks based on their coolness in the main method. (Hint: Look at C++ standard
+sort)
+b.Big Three (10 pts)
+For this part of the homework, you will build upon your duck.cc file. You must add a
+destructor, copy constructor, and copy assignment operator. You must also explain what
+each one does and how they differ from each other and the default constructor in your
+own words. (use inline comments for your explanations)
+c.More Ducks (30 pts)
+We will now refactor our Duck class to be an abstractparentclass (Duck) with child
+classes (Mallard, Canvasback, and Rubber).
+- Each class should be its own file (duck.cc, mallard.cc, canvasback.cc, and
+rubber.cc)
+The parent class will have the following pure virtualmethods added:
+- quack: string
+- display: string
+- swim: string
+- fly: string
+The child classes have the following behavior:
+Mallard
+- quack: prints “Quack!”
+- display: prints “I am a Mallard Duck!”
+- swim: prints “I can swim!”
+- fly: prints “I can fly!”
+Canvasback
+- quack: prints “Quack!”
+- display: prints “I am a Canvasback Duck!”
+- swim: prints “I can swim!”
+- fly: prints “I can fly!”
+Rubber
+- quack: prints “Squeak!”
+- display: prints “I am a Rubber Duck!”
+- swim: prints “I can swim!”
+- fly: prints “I can’tfly!”
+One of these four added functions can be refactored such that it is not pure virtual
+anymore. Refactor that function accordingly.
+Create an instance of each of the children classes in the main function.
+You'll also have to comment out the ducks vector, all the push_backs, and sort from part
+a. Why? Respond in the comments section in duck.cc where it says [Response here].
+d.Duck Extension - Creativity Time (20 pts)
+Create five functions that take in two ducks and output something. You get to define the
+functions however you want. Feel free to add new variables to the ducks in order to
+complete wanted functionality. In addition to writing the code, comments are required.
+Comments should not only detail the logic behind the code, but also explain how the
+different classes and methods interact to create an interesting experience. In the main
+method, demonstrate each one of your five functions in action. This is your chance to
+have fun!

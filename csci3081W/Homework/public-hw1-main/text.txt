@@ -53,21 +53,32 @@ Mallard
 - display: prints “I am a Mallard Duck!”
 - swim: prints “I can swim!”
 - fly: prints “I can fly!”
+
+
 Canvasback
 - quack: prints “Quack!”
 - display: prints “I am a Canvasback Duck!”
 - swim: prints “I can swim!”
 - fly: prints “I can fly!”
+
+
 Rubber
 - quack: prints “Squeak!”
 - display: prints “I am a Rubber Duck!”
 - swim: prints “I can swim!”
 - fly: prints “I can’tfly!”
+
 One of these four added functions can be refactored such that it is not pure virtual
 anymore. Refactor that function accordingly.
+
+swim
+
 Create an instance of each of the children classes in the main function.
 You'll also have to comment out the ducks vector, all the push_backs, and sort from part
+
 a. Why? Respond in the comments section in duck.cc where it says [Response here].
+
+
 d.Duck Extension - Creativity Time (20 pts)
 Create five functions that take in two ducks and output something. You get to define the
 functions however you want. Feel free to add new variables to the ducks in order to

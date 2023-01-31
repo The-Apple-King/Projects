@@ -8,15 +8,15 @@ Part A
 
 Prompt: We have given you specifications for a Duck class that has a few attributes (shown below).
 Your job is to complete the Duck class and
-finish the main method so that the ducks get ordered based on their coolness.
+finish the main method so that the Ducks get ordered based on their coolness.
 Hint: Look at C++ standard library sort function
 
-DUCK:
+Duck:
 
 variables:
-1. name: string - the name of the duck
-2. coolness: float - how cool the duck is (float from 1-10)
-3. weight: double - average weight of the duck in pounds
+1. name: string - the name of the Duck
+2. coolness: float - how cool the Duck is (float from 1-10)
+3. weight: double - average weight of the Duck in pounds
 
 functions:
 1. default constructor
@@ -43,7 +43,7 @@ and differences between each of these and the default constructor.
 Part C
 
 We will now refactor our Duck class to be an abstract parent class (Duck) with child classes (Mallard, Canvasback, and Rubber).
-    Each class should be its own file (duck.cc, mallard.cc, canvasback.cc, and rubber.cc)
+    Each class should be its own file (Duck.cc, mallard.cc, canvasback.cc, and rubber.cc)
 The parent class will have the following pure virtual methods added:
     quack: void
     display: void
@@ -67,7 +67,7 @@ The child classes have the following behavior:
         fly: prints “I can’t fly!”
 1. One of these four added functions can be refactored such that it is not pure virtual anymore. Refactor that function accordingly.
 2. Create an instance of each of the children classes in the main function.
-3. You'll also have to comment out the ducks vector, all the push_backs, and sort from part A.
+3. You'll also have to comment out the Ducks vector, all the push_backs, and sort from part A.
 Why?
 [Response here]
 */
@@ -75,9 +75,9 @@ Why?
 /**
 Part D
 
-Create five functions that take in two ducks and output something. 
+Create five functions that take in two Ducks and output something. 
 You get to define the functions however you want. 
-Feel free to add new variables to the ducks in order to complete wanted functionality. 
+Feel free to add new variables to the Ducks in order to complete wanted functionality. 
 In addition to writing the code, comments are required. 
 Comments should not only detail the logic behind the code, 
 but also explain how the different classes and methods interact to create an interesting experience. 
@@ -92,51 +92,58 @@ This is your chance to have fun!
 // TODO part D: 5 added functions and corresponding comments go here (or in your child class files depending on how you want to implement it)
 
 
-class duck
+class Duck
 {
 private:
     string name;
     float coolness;
     double weight;
 public:
-    duck();
-    duck(string, float, double);
-    duck(const duck&); //creates a copy of a duck object
-    duck& operator=(const duck&){}//sets a duck equal to another duck
-    ~duck();    //can be called to deallocate data 
+    Duck();
+    Duck(string, float, double);
+    Duck(const Duck&); //creates a copy of a Duck object
+    Duck& operator=(const Duck&){}//sets a Duck equal to another Duck
+    ~Duck();    //can be called to deallocate data 
     
 
     string getName();
     float getCoolness();
     double getWeight();
+
+    string swim();
 };
 
-duck::duck()
+Duck::Duck()
 {
     this->name = "NA";
     this->coolness = 0;
     this->weight = 0;
 }
 
-duck::duck(string name, float coolness, double weight)
+Duck::Duck(string name, float coolness, double weight)
 {
     this->name = name;
     this->coolness = coolness;
     this->weight = weight;
 }
 
-string duck::getName(){
+string Duck::getName(){
     return this->name;
 }
 
-float duck::getCoolness(){
+float Duck::getCoolness(){
     return coolness;
 }
 
-double duck::getWeight(){
+double Duck::getWeight(){
     return weight;
 }
 
-duck::~duck()
+string Duck::swim()
+{
+    return "I can swim!";
+}
+
+Duck::~Duck()
 {
 }

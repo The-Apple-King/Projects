@@ -1,12 +1,19 @@
 #include <duck.cc>
 
-class Canvasback
+class Canvasback:public Duck
 {
 private:
     /* data */
 public:
     Canvasback(/* args */);
     ~Canvasback();
+
+    string quack();
+    //“Quack!”
+    string display();
+//    “I am a Canvasback Duck!”
+    string fly();
+    //"I can fly!"
 };
 
 Canvasback::Canvasback(/* args */)
@@ -15,4 +22,19 @@ Canvasback::Canvasback(/* args */)
 
 Canvasback::~Canvasback()
 {
+}
+
+string Canvasback::quack()
+{
+    return "Quack!";
+}
+
+string Canvasback::display()
+{
+    return "I am a Canvasback Duck!";
+}
+
+string Canvasback::fly()
+{
+    return "I can fly!";
 }

@@ -26,58 +26,6 @@ functions:
 5. getWeight: returns double
 */
 
-class duck
-{
-private:
-    string name;
-    float coolness;
-    double weight;
-public:
-    duck();
-    duck(string, float, double);
-    duck(const duck&); //creates a copy of a duck object
-    duck& operator=(const duck&);   //sets a duck equal to another duck
-    ~duck();    //can be called to deallocate data
-    
-
-    string getName();
-    float getCoolness();
-    double getWeight();
-};
-
-duck::duck()
-{
-    this->name = "NA";
-    this->coolness = 0;
-    this->weight = 0;
-}
-
-duck::duck(string name, float coolness, double weight)
-{
-    this->name = name;
-    this->coolness = coolness;
-    this->weight = weight;
-}
-
-string duck::getName(){
-    return this->name;
-}
-
-float duck::getCoolness(){
-    return coolness;
-}
-
-double duck::getWeight(){
-    return weight;
-}
-
-duck& operator=(const duck&)
-{
-}
-
-duck::~duck()
-{
-}
 
 
 /**
@@ -142,3 +90,53 @@ This is your chance to have fun!
 // TODO part B: add the big three
 // TODO part C: refactor Duck class and create a few new classes (separate files)
 // TODO part D: 5 added functions and corresponding comments go here (or in your child class files depending on how you want to implement it)
+
+
+class duck
+{
+private:
+    string name;
+    float coolness;
+    double weight;
+public:
+    duck();
+    duck(string, float, double);
+    duck(const duck&); //creates a copy of a duck object
+    duck& operator=(const duck&){}//sets a duck equal to another duck
+    ~duck();    //can be called to deallocate data 
+    
+
+    string getName();
+    float getCoolness();
+    double getWeight();
+};
+
+duck::duck()
+{
+    this->name = "NA";
+    this->coolness = 0;
+    this->weight = 0;
+}
+
+duck::duck(string name, float coolness, double weight)
+{
+    this->name = name;
+    this->coolness = coolness;
+    this->weight = weight;
+}
+
+string duck::getName(){
+    return this->name;
+}
+
+float duck::getCoolness(){
+    return coolness;
+}
+
+double duck::getWeight(){
+    return weight;
+}
+
+duck::~duck()
+{
+}

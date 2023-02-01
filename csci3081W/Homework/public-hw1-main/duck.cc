@@ -179,4 +179,9 @@ Duck::~Duck()
 {
 }
 
+
+#include "rubber.cc"
+#include "mallard.cc"
+#include "canvasback.cc"
+
 #endif

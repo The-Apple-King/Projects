@@ -6,6 +6,7 @@ class Rubber:public Duck
 private:
     /* data */
 public:
+    using Duck::Duck;
     Rubber(/* args */);
     ~Rubber();
     string quack();

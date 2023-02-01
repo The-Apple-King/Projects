@@ -19,9 +19,9 @@ int main()
     // ducks.push_back(Duck(std::string("Loon"), 10.0f, 10.0d));
     // ducks.push_back(Duck(std::string("Mallard"), 7.6f, 2.5d));
 
-    Mallard mallard = Mallard("Mallard", 7.6f, 2.5d);
-    Canvasback canvas = Canvasback("CanvasBack", 5.8f, 2.7d);
-    Rubber duckie = Rubber("The best Kind of Duck", 1000.0f, 10.0d);
+    Mallard mallard = Mallard(std::string("Mallard"), 7.6f, 2.5d);
+    Canvasback canvas = Canvasback(std::string("CanvasBack"), 5.8f, 2.7d);
+    Rubber duckie = Rubber(std::string("The best Kind of Duck"), 1000.0f, 10.0d);
 
     // TODO part A: sort the ducks based on coolness
     // Note: You may want to double check your work here by printing to standard output
@@ -35,18 +35,23 @@ int main()
     // TODO part D: Demonstrate each one of your five defined functions.
 
     // compares the coolness of two ducks and returns true if the first duck has a lower coolness
-    Duck.compareCoolness(canvas, duckie);
-
-    //compares the weights of two ducks and returns true if the first duck is lighter
-    if(Duck.compareWeight(mallard, canvas)){
-        cout << canvas.getName() << "is the biggest duck" << endl;
+    if(compareCoolness(canvas, duckie)){
+        cout << duckie.getName() << " is the coolest duck." << endl;
     }
     else{
-        cout << mallard.getName() << "is the biggest duck" << endl;
+        cout << canvas.getName() << " is the coolest duck." << endl;
+    }
+
+    //compares the weights of two ducks and returns true if the first duck is lighter
+    if(compareWeight(mallard, canvas)){
+        cout << canvas.getName() << " is the biggest duck." << endl;
+    }
+    else{
+        cout << mallard.getName() << " is the biggest duck." << endl;
     }
 
     //have two ducks fight and see who would win, uses type then weight to determine winner
-    Duck.fightToTheDeath(mallard, canvas);
+    fightToTheDeath(mallard, canvas);
     
     return 0;
 }

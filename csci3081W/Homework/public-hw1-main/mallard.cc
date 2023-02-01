@@ -1,10 +1,12 @@
 #include "duck.cc"
 
-class Mallard:public Duck
+class Mallard: public Duck
 {
 private:
     /* data */
 public:
+
+    using Duck::Duck;
     Mallard(/* args */);
     ~Mallard();
 

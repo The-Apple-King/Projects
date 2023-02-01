@@ -223,11 +223,11 @@ void fightToTheDeath(Duck &duck1, Duck &duck2)
 
     if (duck1win)
     {
-        cout << duck1.getName() << "wins, " << duck2.getName() << "has perished" << endl;
+        cout << duck1.getName() << " wins, " << duck2.getName() << " has perished" << endl;
         duck2.~Duck();
     }
     else{
-        cout << duck2.getName() << "wins, " << duck1.getName() << "has perished" << endl;
+        cout << duck2.getName() << " wins, " << duck1.getName() << " has perished" << endl;
         duck1.~Duck();
     }
 }

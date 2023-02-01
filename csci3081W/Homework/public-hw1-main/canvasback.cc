@@ -5,6 +5,7 @@ class Canvasback:public Duck
 private:
     /* data */
 public:
+    using Duck::Duck;
     Canvasback(/* args */);
     ~Canvasback();
 

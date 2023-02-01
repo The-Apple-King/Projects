@@ -1,4 +1,6 @@
-#include "duck.cc"
+#ifndef DUCK_CC
+#def DUCK_CC
+#endif
 
 
 class Rubber:public Duck

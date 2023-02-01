@@ -1,6 +1,3 @@
-#ifndef DUCK_CC
-#define DUCK_CC
-
 #include <string>
 #include <vector>
 #include <iostream>
@@ -111,7 +108,6 @@ public:
 
     string getName();
     float getCoolness();
-    bool compareCoolness(Duck, Duck);
     double getWeight();
 
     string swim();
@@ -131,39 +127,12 @@ Duck::Duck(string name, float coolness, double weight)
     this->weight = weight;
 }
 
-Duck &Duck::operator=(const Duck &d) {
-    this->name = d.name;
-    this->weight = d.weight;
-    this->coolness = d.coolness;
-    return *this;
-}
-
-Duck::Duck(const Duck &d)
-{
-    this->name = d.name;
-    this->weight = d.weight;
-    this->coolness = d.coolness;
-}
-
-
 string Duck::getName(){
     return this->name;
 }
 
 float Duck::getCoolness(){
     return coolness;
-}
-
-/**
- * @brief compares two ducks coolness and returns true if duck 1 is not as cool
- * 
- * @param duck1 first duck
- * @param duck2 second duck
- * @return true if first has a smaller coolness
- * @return false if first has a bigger coolness
- */
-bool compareCoolness(Duck duck1, Duck duck2){
-    return (duck1.getCoolness() < duck2.getCoolness());
 }
 
 double Duck::getWeight(){
@@ -178,5 +147,3 @@ string Duck::swim()
 Duck::~Duck()
 {
 }
-
-#endif

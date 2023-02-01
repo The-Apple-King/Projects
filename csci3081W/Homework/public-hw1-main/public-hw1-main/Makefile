@@ -17,7 +17,7 @@ passwords_b: passwords_b.o
 fruit: fruit_class.o
 	$(CXX) -o $@.out $^
 
-main: main.o
+main: main.o duck.o mallard.o canvasback.o rubber.o
 	$(CXX) -o $@.out $^
 
 .PHONY: clean

@@ -52,7 +52,8 @@
         "stdio.h": "c",
         "treemap.h": "c",
         "string.h": "c",
-        "batt.h": "c"
+        "batt.h": "c",
+        "algorithm": "cpp"
     },
     "java.project.sourcePaths": [
         "csci1913/labs/lab9",

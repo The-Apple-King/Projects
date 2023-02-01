@@ -29,18 +29,14 @@ functions:
 5. getWeight: returns double
 */
 
-
-
 /**
 Part B
 
 Add the big three to your Duck class: destructor, copy constructor, copy assignment operator.
-Add comments explaining what each one does, 
-how they differ from one other, 
+Add comments explaining what each one does,
+how they differ from one other,
 and differences between each of these and the default constructor.
 */
-
-
 
 /**
 Part C
@@ -78,12 +74,12 @@ Why?
 /**
 Part D
 
-Create five functions that take in two Ducks and output something. 
-You get to define the functions however you want. 
-Feel free to add new variables to the Ducks in order to complete wanted functionality. 
-In addition to writing the code, comments are required. 
-Comments should not only detail the logic behind the code, 
-but also explain how the different classes and methods interact to create an interesting experience. 
+Create five functions that take in two Ducks and output something.
+You get to define the functions however you want.
+Feel free to add new variables to the Ducks in order to complete wanted functionality.
+In addition to writing the code, comments are required.
+Comments should not only detail the logic behind the code,
+but also explain how the different classes and methods interact to create an interesting experience.
 In the main method, demonstrate each one of your five functions in action.
 This is your chance to have fun!
 
@@ -94,20 +90,19 @@ This is your chance to have fun!
 // TODO part C: refactor Duck class and create a few new classes (separate files)
 // TODO part D: 5 added functions and corresponding comments go here (or in your child class files depending on how you want to implement it)
 
-
 class Duck
 {
 private:
     string name;
     float coolness;
     double weight;
+
 public:
     Duck();
     Duck(string, float, double);
-    Duck(const Duck&); //creates a copy of a Duck object
-    Duck& operator=(const Duck&);//sets a Duck equal to another Duck
-    ~Duck();    //can be called to deallocate data 
-    
+    Duck(const Duck &);            // creates a copy of a Duck object
+    Duck &operator=(const Duck &); // sets a Duck equal to another Duck
+    ~Duck();                       // can be called to deallocate data
 
     string getName();
     float getCoolness();
@@ -131,7 +126,8 @@ Duck::Duck(string name, float coolness, double weight)
     this->weight = weight;
 }
 
-Duck &Duck::operator=(const Duck &d) {
+Duck &Duck::operator=(const Duck &d)
+{
     this->name = d.name;
     this->weight = d.weight;
     this->coolness = d.coolness;
@@ -145,28 +141,99 @@ Duck::Duck(const Duck &d)
     this->coolness = d.coolness;
 }
 
-
-string Duck::getName(){
+string Duck::getName()
+{
     return this->name;
 }
 
-float Duck::getCoolness(){
+float Duck::getCoolness()
+{
     return coolness;
 }
 
 /**
  * @brief compares two ducks coolness and returns true if duck 1 is not as cool
- * 
+ *
  * @param duck1 first duck
  * @param duck2 second duck
  * @return true if first has a smaller coolness
  * @return false if first has a bigger coolness
  */
-bool compareCoolness(Duck duck1, Duck duck2){
+bool compareCoolness(Duck duck1, Duck duck2)
+{
     return (duck1.getCoolness() < duck2.getCoolness());
 }
 
-double Duck::getWeight(){
+bool compareWeight(Duck duck1, Duck duck2)
+{
+    return (duck1.getWeight() < duck2.getWeight());
+}
+
+/**
+ * @brief two ducks enter 1 duck leaves
+ * 
+ * @param duck1 first duck
+ * @param duck2 second duck
+ * @return Duck* winning duck
+ */
+void fightToTheDeath(Duck &duck1, Duck &duck2)
+{
+    bool duck1win = true;
+    bool duck2win = true;
+
+    // if they both aren't rubber ducks fight
+    if (duck1win && duck2win)
+    {
+        // bigger duck has advantage
+        if (duck1.getWeight() > duck2.getWeight())
+        {
+            duck2win = false;
+        }
+        //if they are equal weight we go by coolness
+        else if (duck1.getWeight() == duck2.getWeight())
+        {
+            if (duck1.getCoolness() > duck2.getCoolness())
+            {
+                duck2win = false;
+            }
+            //if they are the same random chance
+            else if (duck1.getCoolness() == duck2.getCoolness())
+            {
+                int tiebreaker = rand() % 2;
+                switch (tiebreaker)
+                {
+                case 0:
+                    duck2win = false;
+                     break;
+
+                default:
+                    duck1win = false;
+                }
+            }
+            else
+            {
+                duck1win = true;
+            }
+        }
+        else
+        {
+            duck1win = false;
+        }
+    }
+
+    if (duck1win)
+    {
+        cout << duck1.getName() << "wins, " << duck2.getName() << "has perished" << endl;
+        duck2.~Duck();
+    }
+    else{
+        cout << duck2.getName() << "wins, " << duck1.getName() << "has perished" << endl;
+        duck1.~Duck();
+    }
+}
+
+double Duck::getWeight()
+{
     return weight;
 }
 
@@ -178,10 +245,5 @@ string Duck::swim()
 Duck::~Duck()
 {
 }
-
-
-#include "rubber.cc"
-#include "mallard.cc"
-#include "canvasback.cc"
 
 #endif

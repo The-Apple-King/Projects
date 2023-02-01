@@ -52,6 +52,8 @@ int main()
 
     //have two ducks fight and see who would win, uses type then weight to determine winner
     fightToTheDeath(mallard, canvas);
+
+    //got any grapes?
     
     return 0;
 }

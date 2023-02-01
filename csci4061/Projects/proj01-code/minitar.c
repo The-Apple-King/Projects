@@ -19,12 +19,14 @@
  * Performs a simple sum over all bytes in the header in accordance with POSIX
  * standard for tar file structure.
  */
-void compute_checksum(tar_header *header) {
+void compute_checksum(tar_header *header)
+{
     // Have to initially set header's checksum to "all blanks"
     memset(header->chksum, ' ', 8);
     unsigned sum = 0;
     char *bytes = (char *)header;
-    for (int i = 0; i < sizeof(tar_header); i++) {
+    for (int i = 0; i < sizeof(tar_header); i++)
+    {
         sum += bytes[i];
     }
     snprintf(header->chksum, 8, "%07o", sum);
@@ -35,23 +37,26 @@ void compute_checksum(tar_header *header) {
  * the file identified by 'file_name'.
  * Returns 0 on success or -1 if an error occurs
  */
-int fill_tar_header(tar_header *header, const char *file_name) {
+int fill_tar_header(tar_header *header, const char *file_name)
+{
     memset(header, 0, sizeof(tar_header));
     char err_msg[MAX_MSG_LEN];
     struct stat stat_buf;
     // stat is a system call to inspect file metadata
-    if (stat(file_name, &stat_buf) != 0) {
+    if (stat(file_name, &stat_buf) != 0)
+    {
         snprintf(err_msg, MAX_MSG_LEN, "Failed to stat file %s", file_name);
         perror(err_msg);
         return -1;
     }
 
-    strncpy(header->name, file_name, 100); // Name of the file, null-terminated string
+    strncpy(header->name, file_name, 100);                       // Name of the file, null-terminated string
     snprintf(header->mode, 8, "%07o", stat_buf.st_mode & 07777); // Permissions for file, 0-padded octal
 
     snprintf(header->uid, 8, "%07o", stat_buf.st_uid); // Owner ID of the file, 0-padded octal
-    struct passwd *pwd = getpwuid(stat_buf.st_uid); // Look up name corresponding to owner ID
-    if (pwd == NULL) {
+    struct passwd *pwd = getpwuid(stat_buf.st_uid);    // Look up name corresponding to owner ID
+    if (pwd == NULL)
+    {
         snprintf(err_msg, MAX_MSG_LEN, "Failed to look up owner name of file %s", file_name);
         perror(err_msg);
         return -1;
@@ -59,21 +64,22 @@ int fill_tar_header(tar_header *header, const char *file_name) {
     strncpy(header->uname, pwd->pw_name, 32); // Owner  name of the file, null-terminated string
 
     snprintf(header->gid, 8, "%07o", stat_buf.st_gid); // Group ID of the file, 0-padded octal
-    struct group *grp = getgrgid(stat_buf.st_gid); // Look up name corresponding to group ID
-    if (grp == NULL) {
+    struct group *grp = getgrgid(stat_buf.st_gid);     // Look up name corresponding to group ID
+    if (grp == NULL)
+    {
         snprintf(err_msg, MAX_MSG_LEN, "Failed to look up group name of file %s", file_name);
         perror(err_msg);
         return -1;
     }
     strncpy(header->gname, grp->gr_name, 32); // Group name of the file, null-terminated string
 
-    snprintf(header->size, 12, "%011o", (unsigned)stat_buf.st_size); // File size, 0-padded octal
+    snprintf(header->size, 12, "%011o", (unsigned)stat_buf.st_size);   // File size, 0-padded octal
     snprintf(header->mtime, 12, "%011o", (unsigned)stat_buf.st_mtime); // Modification time, 0-padded octal
-    header->typeflag = REGTYPE; // File type, always regular file in this project
-    strncpy(header->magic, MAGIC, 6); // Special, standardized sequence of bytes
-    memcpy(header->version, "00", 2); // A bit weird, sidesteps null termination
-    snprintf(header->devmajor, 8, "%07o", major(stat_buf.st_dev)); // Major device number, 0-padded octal
-    snprintf(header->devminor, 8, "%07o", minor(stat_buf.st_dev)); // Minor device number, 0-padded octal
+    header->typeflag = REGTYPE;                                        // File type, always regular file in this project
+    strncpy(header->magic, MAGIC, 6);                                  // Special, standardized sequence of bytes
+    memcpy(header->version, "00", 2);                                  // A bit weird, sidesteps null termination
+    snprintf(header->devmajor, 8, "%07o", major(stat_buf.st_dev));     // Major device number, 0-padded octal
+    snprintf(header->devminor, 8, "%07o", minor(stat_buf.st_dev));     // Minor device number, 0-padded octal
 
     compute_checksum(header);
     return 0;
@@ -84,31 +90,36 @@ int fill_tar_header(tar_header *header, const char *file_name) {
  * Returns 0 upon success, -1 upon error
  * Note: This function uses lower-level I/O syscalls (not stdio), which we'll learn about later
  */
-int remove_trailing_bytes(const char *file_name, size_t nbytes) {
+int remove_trailing_bytes(const char *file_name, size_t nbytes)
+{
     char err_msg[MAX_MSG_LEN];
     // Note: ftruncate does not work with O_APPEND
     int fd = open(file_name, O_WRONLY);
-    if (fd == -1) {
+    if (fd == -1)
+    {
         snprintf(err_msg, MAX_MSG_LEN, "Failed to open file %s", file_name);
         perror(err_msg);
         return -1;
     }
     //  Seek to end of file - nbytes
     off_t current_pos = lseek(fd, -1 * nbytes, SEEK_END);
-    if (current_pos == -1) {
+    if (current_pos == -1)
+    {
         snprintf(err_msg, MAX_MSG_LEN, "Failed to seek in file %s", file_name);
         perror(err_msg);
         close(fd);
         return -1;
     }
     // Remove all contents of file past current position
-    if (ftruncate(fd, current_pos) == -1) {
+    if (ftruncate(fd, current_pos) == -1)
+    {
         snprintf(err_msg, MAX_MSG_LEN, "Failed to truncate file %s", file_name);
         perror(err_msg);
         close(fd);
         return -1;
     }
-    if (close(fd) == -1) {
+    if (close(fd) == -1)
+    {
         snprintf(err_msg, MAX_MSG_LEN, "Failed to close file %s", file_name);
         perror(err_msg);
         return -1;
@@ -116,23 +127,59 @@ int remove_trailing_bytes(const char *file_name, size_t nbytes) {
     return 0;
 }
 
+/**
+ * @brief returns the size of a file
+ * 
+ * @param filename the path of the file
+ * @return int size of the file
+ */
+int sizeOfFile(char *filename)
+{
+    fseek(filename, 0, SEEK_END);
+    return ftell(filename);
+}
 
-int create_archive(const char *archive_name, const file_list_t *files) {
+int create_archive(const char *archive_name, const file_list_t *files)
+{
+    // TODO
+    node_t file = files->head;
+    for (size_t i = 0; i < files->size; i++)
+    {
+        if (fill_tar_header(archive_name, file.name) == -1)
+        {
+            perror("fill_tar_header didn't work correctly");
+        }
+
+        //will print all full blocks of size 512 bytes
+        for (size_t i = 0; i < sizeOfFile(file.name)/512; i++)
+        {
+            fwrite(archive_name, 1, 512, file.name);
+        }
+        //print the final section along with trailing zeroes
+        
+            //if archive_name doesn't have its pointer updated you might need to maually set it
+        
+        //change the name to the next file
+        file = file.next;
+    }
+
+    return 0;
+}
+
+int append_files_to_archive(const char *archive_name, const file_list_t *files)
+{
     // TODO: Not yet implemented
     return 0;
 }
 
-int append_files_to_archive(const char *archive_name, const file_list_t *files) {
+int get_archive_file_list(const char *archive_name, file_list_t *files)
+{
     // TODO: Not yet implemented
     return 0;
 }
 
-int get_archive_file_list(const char *archive_name, file_list_t *files) {
-    // TODO: Not yet implemented
-    return 0;
-}
-
-int extract_files_from_archive(const char *archive_name) {
+int extract_files_from_archive(const char *archive_name)
+{
     // TODO: Not yet implemented
     return 0;
 }

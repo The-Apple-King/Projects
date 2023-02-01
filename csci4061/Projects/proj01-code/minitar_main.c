@@ -15,6 +15,7 @@ int main(int argc, char **argv) {
 
     // TODO: Parse command-line arguments and invoke functions from 'minitar.h'
     // to execute archive operations
+    
 
     file_list_clear(&files);
     return 0;

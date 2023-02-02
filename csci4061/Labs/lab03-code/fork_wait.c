@@ -18,6 +18,7 @@ int main() {
         } else if (pid > 0) {
             // Parent process, pid identifies child process
             // TODO wait for this child process to terminate
+            waitpid(pid, WEXITSTATUS(0),0);
         }
     }
     printf("FINISH pid: %d parent_pid: %d\n", getpid(), getppid());

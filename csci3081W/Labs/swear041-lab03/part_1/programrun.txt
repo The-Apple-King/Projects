@@ -1,0 +1,46 @@
+Questions 1-5
+Type Sizes:
+-----------
+char:           1
+short:          2
+int:            4
+long:           8
+double:         8
+unsigned char:  1
+unsigned short: 2
+unsigned int:   4
+void*:          8
+char*:          8
+int*:           8
+IVec3*:         8
+DVec3*:         8
+IVec3:          12
+DVec3:          24
+dvec:           24
+ivecArray:      192
+dvecArray:      384
+MixedData1:     12
+MixedData2:     8
+
+Questions 6
+Private Variables:
+-----------
+[1, 2, 3]
+[1, 2, 3.14159]
+
+Questions 7-8
+Byte Arrays:
+-----------
+44 1 0 0
+
+Questions 9-10
+Arrays:
+-----------
+0
+0
+0
+0
+0
+0
+3.14159
+0

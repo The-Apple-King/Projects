@@ -129,70 +129,80 @@ int remove_trailing_bytes(const char *file_name, size_t nbytes)
 
 /**
  * @brief returns the size of a file
- * 
+ *
  * @param filename a pointer to the file location
  * @return int size of the file
  */
 int sizeOfFile(FILE *filename)
 {
     fseek(filename, 0, SEEK_END);
+    fseek(filename, 0, SEEK_SET);
     return ftell(filename);
 }
 
 /**
- * @brief creates header and puts blocks of 512 bytes into file archive_name 
+ * @brief creates header and puts blocks of 512 bytes into file archive_name
  * then if necessary puts a not full block of 512 bytes filled with trailing zeroes
- * 
+ *
  * @param archive_name name of file to save to
  * @param file the name of the file to save from
  */
-int archiveSingleFile(const char *archive_name, const char *file){
+int archiveSingleFile(const char *archive_name, const char *file)
+{
     FILE *tar = fopen(archive_name, O_WRONLY);
     FILE *ptr = fopen(file, O_RDONLY)
 
-    //set tar to end of file
-    tar = seek(tar, 0, SEEK_END);
+        // set tar to end of file
+        tar = seek(tar, 0, SEEK_END);
 
-    //create header
+    // create header
     tar_header *header;
     fill_tar_header(header, file);
 
-    //start writing to file
-    //write header
+    // start writing to file
+    // write header
     fwrite(header, sizeof(header), 1, tar);
 
-    //write full blocks
-    for (size_t i = 0; i < sizeOfFile(ptr)/512; i++)
+    int count = sizeOfFile(ptr) / 512;
+
+    // write full blocks
+    for (size_t i = 0; i < count; i++)
     {
-        char* buf[512];
-        fread(buf,512, 1, ptr);
-        fwrite(buf,512, 1, tar);
+        char *buf[512];
+        fread(buf, 512, 1, ptr);
+        fwrite(buf, 512, 1, tar);
     }
 
-    //clean up not full block
-    for (size_t i = 0; i < 512; i++)
+    // clean up not full block************************************************************
+
+    //check if we need to add trailing zeroes
+    if (count % 512 != 0)
     {
-        //if not at end of file save one byte at a time
-        if (fread(buf, 1, 1, ptr) != EOF)
+        //save byte by byte until EOF then save 0s
+        for (size_t i = 0; i < 512; i++)
         {
-            fwrite(buf, 1, 1, tar);
-        }
-        //if at end of file print 0s until filled block
-        else {
-            fprintf(tar, 0);
+            // if not at end of file save one byte at a time
+            if (fread(buf, 1, 1, ptr) != EOF)
+            {
+                fwrite(buf, 1, 1, tar);
+            }
+            // if at end of file print 0s until filled block
+            else
+            {
+                fprintf(tar, 0);
+            }
         }
     }
 
-    //create var with size of file
+    // create var with size of file
     int endOfFile = sizeOfFile(tar);
 
-    //close files we opened 
+    // close files we opened
     fclose(ptr);
     fclose(tar);
-    
-    //returns size of the target file so we know where to put 2 blocks of zeroes in create_archive
+
+    // returns size of the target file so we know where to put 2 blocks of zeroes in create_archive
     return endOfFile;
-    
 }
 
 int create_archive(const char *archive_name, const file_list_t *files)
@@ -203,33 +213,32 @@ int create_archive(const char *archive_name, const file_list_t *files)
     for (size_t i = 0; i < files->size; i++)
     {
         archiveSingleFile(archive_name, curNode.name);
-        //if archive_name doesn't have its pointer updated you might need to maually set it
-        //change the name to the next file
+        // if archive_name doesn't have its pointer updated you might need to maually set it
+        // change the name to the next file
         curNode = curNode.next;
     }
 
-    //end file with 2 0 blocks
+    // end file with 2 0 blocks
 
-    //open target file
-    FILE *tar = fopen(archive_name, O_RDWR) 
+    // open target file
+    FILE *tar = fopen(archive_name, O_RDWR)
 
-    //loop for 2 blocks and write a '0' each time
-    for (size_t i = 0; i < 1024; i++)
+        // loop for 2 blocks and write a '0' each time
+        for (size_t i = 0; i < 1024; i++)
     {
         fprintf(tar, '0');
     }
-    
 
     return 0;
 }
 
 int append_files_to_archive(const char *archive_name, const file_list_t *files)
 {
-    //remove double 0 block
+    // remove double 0 block
     remove_trailing_bytes(archive_name, 1024);
 
-    //create_archive will take file list and call add single file on it until end
-    //then it adds trailing zeroes for us
+    // create_archive will take file list and call add single file on it until end
+    // then it adds trailing zeroes for us
     create_archive(archive_name, files);
 
     return 0;
@@ -237,8 +246,33 @@ int append_files_to_archive(const char *archive_name, const file_list_t *files)
 
 int get_archive_file_list(const char *archive_name, file_list_t *files)
 {
-    // TODO: Not yet implemented
+    // create a node and set it to the end of the list
+    node_t curNode = files->head;
+    while (curNode.next != NULL)
+    {
+        curNode = curNode.next;
+    }
+
+    FILE *tar = fopen(archive_name, O_RDONLY);
+    int size = 0;
+    char name[255];
+
+    for (size_t i = 0; i < count; i++)
+    {
+        fread(name, 100, 1, tar)            //read in name,no reference to prefix so unless necessary leave as is 
+        fseek(tar, 16, SEEK_CUR);           //seek till file size
+        fread(size, sizeof(int), 1, tar);   //take in size
+        fseek(tar, 488, SEEK_CUR);          //seek till end of header
+
+        if (size)
+        {
+            /* code */
+        }
+        
+
+    }
     
+
     return 0;
 }
 

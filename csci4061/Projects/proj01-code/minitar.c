@@ -150,10 +150,11 @@ int sizeOfFile(FILE *filename)
 int archiveSingleFile(const char *archive_name, const char *file)
 {
     FILE *tar = fopen(archive_name, O_WRONLY);
-    FILE *ptr = fopen(file, O_RDONLY)
+    FILE *ptr = fopen(file, O_RDONLY);
 
         // set tar to end of file
-        tar = seek(tar, 0, SEEK_END);
+        fseek(tar, 0, SEEK_END);
+        char *buf[512];
 
     // create header
     tar_header *header;
@@ -168,7 +169,6 @@ int archiveSingleFile(const char *archive_name, const char *file)
     // write full blocks
     for (size_t i = 0; i < count; i++)
     {
-        char *buf[512];
         fread(buf, 512, 1, ptr);
         fwrite(buf, 512, 1, tar);
     }
@@ -189,7 +189,7 @@ int archiveSingleFile(const char *archive_name, const char *file)
             // if at end of file print 0s until filled block
             else
             {
-                fprintf(tar, 0);
+                fprintf(tar, "%c", '0');
             }
         }
     }
@@ -208,25 +208,25 @@ int archiveSingleFile(const char *archive_name, const char *file)
 int create_archive(const char *archive_name, const file_list_t *files)
 {
     // TODO
-    node_t curNode = files->head;
+    node_t curNode = *(files->head);
 
     for (size_t i = 0; i < files->size; i++)
     {
         archiveSingleFile(archive_name, curNode.name);
         // if archive_name doesn't have its pointer updated you might need to maually set it
         // change the name to the next file
-        curNode = curNode.next;
+        curNode = *(curNode.next);
     }
 
     // end file with 2 0 blocks
 
     // open target file
-    FILE *tar = fopen(archive_name, O_RDWR)
+    FILE *tar = fopen(archive_name, O_RDWR);
 
         // loop for 2 blocks and write a '0' each time
-        for (size_t i = 0; i < 1024; i++)
+    for (size_t i = 0; i < 1024; i++)
     {
-        fprintf(tar, '0');
+        fprintf(tar, "%c", '0');
     }
 
     return 0;
@@ -257,17 +257,19 @@ int append_files_to_archive(const char *archive_name, const file_list_t *files)
 int get_archive_file_list(const char *archive_name, file_list_t *files)
 {
     // create a node and set it to the end of the list
-    node_t curNode = files->head;
+    node_t curNode = *(files->head);
 
     FILE *tar = fopen(archive_name, O_RDONLY);
     int size = 0;
+    char sizec[8];
     char name[255];
     int count = sizeOfFile(tar) - 1024;     // count = the number of actual blocks of code
     for (size_t i = 0; i < count; i += 512) // i+=512 will cover for the header files we seek through
     {
-        fread(name, 100, 1, tar)          // read in name,no reference to prefix so unless necessary leave as is
+        fread(name, 100, 1, tar);         // read in name,no reference to prefix so unless necessary leave as is
             fseek(tar, 24, SEEK_CUR);     // seek till file size
-        fread(size, sizeof(int), 1, tar); // take in size
+        fread(sizec, sizeof(int), 1, tar); // take in size
+        size = int(sizec);
         fseek(tar, 376, SEEK_CUR);        // seek till end of header
 
         // find the number of blocks until next header
@@ -279,8 +281,8 @@ int get_archive_file_list(const char *archive_name, file_list_t *files)
 
         // create a new node set its name, then update curNode to toAdd
         node_t toAdd;
-        toAdd.name = name;
-        curNode.next = toAdd;
+        strcpy(toAdd.name, name);
+        curNode.next = &toAdd;
         curNode = toAdd;
 
         // seek till next header
@@ -297,6 +299,7 @@ int extract_files_from_archive(const char *archive_name)
     // TODO
     FILE *tar = fopen(archive_name, O_RDONLY);
     int size = 0;
+    char sizes[8];
     char name[255];
     char codeBlock[512];
     int j = 0;
@@ -305,9 +308,10 @@ int extract_files_from_archive(const char *archive_name)
     while (fseek(tar, 0, SEEK_CUR) < sizeOfFile(tar) - 1024)
     {
 
-        fread(name, 100, 1, tar)          // read in name,no reference to prefix so unless necessary leave as is
+        fread(name, 100, 1, tar);         // read in name,no reference to prefix so unless necessary leave as is
             fseek(tar, 24, SEEK_CUR);     // seek till file size
-        fread(size, sizeof(int), 1, tar); // take in size
+        fread(sizes, sizeof(int), 1, tar); // take in size
+        size = int(sizes);
         fseek(tar, 376, SEEK_CUR);        // seek till end of header
 
         FILE *ptr = fopen(name, O_WRONLY);
@@ -315,7 +319,7 @@ int extract_files_from_archive(const char *archive_name)
         for (size_t j = 0; j < size / 512; j++) //read full codeblocks and write them to file name;
         {
             fread(codeBlock, 512, 1, tar);
-            fwrite(codeBlock, 512, 1, ptr)
+            fwrite(codeBlock, 512, 1, ptr);
         }
         if (j * 512 < size)
         {

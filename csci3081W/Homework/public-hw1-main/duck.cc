@@ -106,7 +106,11 @@ public:
 
     string getName();
     float getCoolness();
-    bool compareCoolness(Duck, Duck);
+    bool compareCoolness(Duck, Duck);               // 1
+    bool compareWeight(Duck, Duck);                 // 2
+    void fightToTheDeath(Duck &duck1, Duck &duck2); // 3
+    bool compareName(Duck, Duck);                   // 4
+    void lemonade(Duck duck1, Duck duck2);          // 5
     double getWeight();
 
     string swim();
@@ -159,12 +163,12 @@ float Duck::getCoolness()
  * @return true if first has a smaller coolness
  * @return false if first has a bigger coolness
  */
-bool compareCoolness(Duck duck1, Duck duck2)
+bool Duck::compareCoolness(Duck duck1, Duck duck2)
 {
     return (duck1.getCoolness() < duck2.getCoolness());
 }
 
-bool compareWeight(Duck duck1, Duck duck2)
+bool Duck::compareWeight(Duck duck1, Duck duck2)
 {
     return (duck1.getWeight() < duck2.getWeight());
 }
@@ -172,55 +176,47 @@ bool compareWeight(Duck duck1, Duck duck2)
 /**
  * @brief two ducks enter 1 duck leaves
  * 
+ * pass by reference so we can deallocate the duck that loses
+ * 
  * @param duck1 first duck
  * @param duck2 second duck
  * @return Duck* winning duck
  */
-void fightToTheDeath(Duck &duck1, Duck &duck2)
+void Duck::fightToTheDeath(Duck &duck1, Duck &duck2)
 {
-    bool duck1win = true;
-    bool duck2win = true;
+    //allows to check for the winner and loser
+    bool duck1win = false;
+    bool duck2win = false;
 
-    // if they both aren't rubber ducks fight
-    if (duck1win && duck2win)
+    //compare each weight if both equal they both come out false
+    duck1win = !compareWeight(duck1, duck2);
+    duck2win = compareWeight(duck1, duck2);
+
+    //if they are the same weight, test coolness
+    if (duck1win == duck2win)
     {
-        // bigger duck has advantage
-        if (duck1.getWeight() > duck2.getWeight())
-        {
-            duck2win = false;
-        }
-        //if they are equal weight we go by coolness
-        else if (duck1.getWeight() == duck2.getWeight())
-        {
-            if (duck1.getCoolness() > duck2.getCoolness())
-            {
-                duck2win = false;
-            }
-            //if they are the same random chance
-            else if (duck1.getCoolness() == duck2.getCoolness())
-            {
-                int tiebreaker = rand() % 2;
-                switch (tiebreaker)
-                {
-                case 0:
-                    duck2win = false;
-                     break;
-
-                default:
-                    duck1win = false;
-                }
-            }
-            else
-            {
-                duck1win = true;
-            }
-        }
-        else
-        {
-            duck1win = false;
-        }
+        duck1win = !compareCoolness(duck1, duck2);
+        duck2win = compareCoolness(duck1, duck2);
     }
 
+    //if they have same weight and coolness it comes to random chance
+    if (duck1win == duck2win)
+    {
+        int chance = rand()%2;
+        switch (chance)
+        {
+        case 0:
+            duck1win = true;
+            break;
+        
+        default:
+        duck2win = true;
+            break;
+        }
+    }
+    
+    
+    //output
     if (duck1win)
     {
         cout << duck1.getName() << " wins, " << duck2.getName() << " has perished" << endl;
@@ -230,6 +226,30 @@ void fightToTheDeath(Duck &duck1, Duck &duck2)
         cout << duck2.getName() << " wins, " << duck1.getName() << " has perished" << endl;
         duck1.~Duck();
     }
+}
+
+bool Duck::compareName(Duck duck1, Duck duck2)
+{
+    if (duck1.getName() < duck2.getName())
+    {
+        return true;
+    }
+    return false;
+}
+
+void Duck::lemonade(Duck duck1, Duck duck2)
+{
+    cout << "the duck walked up to the lemonade stand and said to the other duck running the stand" << endl;
+    cout << duck1.quack() << " (hey) " << endl;
+    cout << duck1.quack() << " " <<duck1.quack() << " " << duck1.quack() << endl;
+    cout << "(got any grapes?)" << endl;
+
+    cout << duck2.getName() << " said: " << duck2.quack() << " (No.)";
+    {
+        cout << duck2.quack();
+    }
+    cout << endl <<" (We just have lemonade.)"
+    
 }
 
 double Duck::getWeight()

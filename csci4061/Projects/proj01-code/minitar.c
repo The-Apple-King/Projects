@@ -260,16 +260,24 @@ int get_archive_file_list(const char *archive_name, file_list_t *files)
     for (size_t i = 0; i < count; i++)
     {
         fread(name, 100, 1, tar)            //read in name,no reference to prefix so unless necessary leave as is 
-        fseek(tar, 16, SEEK_CUR);           //seek till file size
+        fseek(tar, 24, SEEK_CUR);           //seek till file size
         fread(size, sizeof(int), 1, tar);   //take in size
-        fseek(tar, 488, SEEK_CUR);          //seek till end of header
+        fseek(tar, 376, SEEK_CUR);          //seek till end of header
 
-        if (size)
-        {
-            /* code */
+        //find the number of blocks until next header
+        int blocks = size/512;
+        if(size%512 > 0){
+            blocks++;
         }
-        
 
+        //create a new node set its name, then update curNode to toAdd
+        node_t toAdd;
+        toAdd.name = name;
+        curNode.next = toAdd;
+        curNode = toAdd;
+
+        //seek till next header
+        fseek(tar, blocks*512, SEEK_CUR);
     }
     
 
@@ -278,6 +286,6 @@ int get_archive_file_list(const char *archive_name, file_list_t *files)
 
 int extract_files_from_archive(const char *archive_name)
 {
-    // TODO: Not yet implemented
+    // TODO
     return 0;
 }

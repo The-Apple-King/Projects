@@ -7,18 +7,19 @@
 // Robots move in a circle with a specified radius.
 class Robot : public MovableEntity {
  public:
+  ~Robot();
   // Robots are declared with a name and a radius
   Robot(const std::string& name, float radius);
   // Gets the robot name
   const std::string& GetName() { return name; }
   // Gets the robot position
-  double* GetPosition() { return pos; }
+  std::vector<double> GetPosition() { return pos; }
   // Updates the robot's position
   void Update(double dt);
 
  private:
   std::string name;
-  double pos[2];
+  std::vector<double> pos = {0,0,0};
   double angle;
   double radius;
 };

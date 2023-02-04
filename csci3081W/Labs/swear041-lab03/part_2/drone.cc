@@ -1,20 +1,21 @@
 #define _USE_MATH_DEFINES
 #include "drone.h"
-
+#include <vector>
 #include <cmath>
 
 Drone::Drone(const std::string& name) : name(name) {
   // Drones have 3 components x,y,z
-  position = new double[3];
-  velocity = new double[3];
+  std::vector<double> position;
+  std::vector<double> velocity;
 }
 
 Drone::~Drone() {
   // Delete dynamically allocated variables
-  delete velocity;
+  position.clear();
+  velocity.clear();
 }
 
-void Drone::SetVelocity(double* velocity) {
+void Drone::SetVelocity(std::vector<double> velocity) {
   // Copy the velocity data into the member variable array.
   this->velocity = velocity;
 }

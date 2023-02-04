@@ -15,11 +15,11 @@ class Drone : public MovableEntity {
   // Gets the drone name
   const std::string& GetName() { return name; }
   // Gets the drone position
-  double* GetPosition() { return position; }
+  std::vector<double> GetPosition() { return position; }
   // Updates the drone's position
   void Update(double dt);
   // Sets the drone's velocity
-  void SetVelocity(double* velocity);
+  void SetVelocity(std::vector<double> velocity);
   // Rotates a drone
   void Rotate(double angle);
 
@@ -30,8 +30,8 @@ class Drone : public MovableEntity {
 
  private:
   std::string name;
-  double* position;
-  double* velocity;
+  std::vector<double> position = {0,0,0};
+  std::vector<double> velocity = {0,0,0};
 };
 
 #endif

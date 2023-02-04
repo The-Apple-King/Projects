@@ -14,10 +14,10 @@ class Tree : public Entity {
   // Gets the tree name
   const std::string& GetName() { return name; }
   // Gets the tree position
-  double* GetPosition() { return pos; }
+  std::vector<double> GetPosition() { return pos; }
 
  private:
-  double* pos;
+  std::vector<double> pos = {0,0};
   const std::string& name;
 };
 

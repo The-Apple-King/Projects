@@ -175,10 +175,10 @@ int archiveSingleFile(const char *archive_name, const char *file)
 
     // clean up not full block************************************************************
 
-    //check if we need to add trailing zeroes
+    // check if we need to add trailing zeroes
     if (count % 512 != 0)
     {
-        //save byte by byte until EOF then save 0s
+        // save byte by byte until EOF then save 0s
         for (size_t i = 0; i < 512; i++)
         {
             // if not at end of file save one byte at a time
@@ -244,42 +244,50 @@ int append_files_to_archive(const char *archive_name, const file_list_t *files)
     return 0;
 }
 
+/**
+ * @brief Get the list of files from the tar archive
+ *
+ * will clear anything in file list and replace it with what is in tar
+ * currently assumes that names are shorter than 101 chars
+ *
+ * @param archive_name
+ * @param files
+ * @return int
+ */
 int get_archive_file_list(const char *archive_name, file_list_t *files)
 {
     // create a node and set it to the end of the list
     node_t curNode = files->head;
-    while (curNode.next != NULL)
-    {
-        curNode = curNode.next;
-    }
 
     FILE *tar = fopen(archive_name, O_RDONLY);
     int size = 0;
     char name[255];
-
-    for (size_t i = 0; i < count; i++)
+    int count = sizeOfFile(tar) - 1024;     // count = the number of actual blocks of code
+    for (size_t i = 0; i < count; i += 512) // i+=512 will cover for the header files we seek through
     {
-        fread(name, 100, 1, tar)            //read in name,no reference to prefix so unless necessary leave as is 
-        fseek(tar, 24, SEEK_CUR);           //seek till file size
-        fread(size, sizeof(int), 1, tar);   //take in size
-        fseek(tar, 376, SEEK_CUR);          //seek till end of header
+        fread(name, 100, 1, tar)          // read in name,no reference to prefix so unless necessary leave as is
+            fseek(tar, 24, SEEK_CUR);     // seek till file size
+        fread(size, sizeof(int), 1, tar); // take in size
+        fseek(tar, 376, SEEK_CUR);        // seek till end of header
 
-        //find the number of blocks until next header
-        int blocks = size/512;
-        if(size%512 > 0){
+        // find the number of blocks until next header
+        int blocks = size / 512;
+        if (size % 512 > 0)
+        {
             blocks++;
         }
 
-        //create a new node set its name, then update curNode to toAdd
+        // create a new node set its name, then update curNode to toAdd
         node_t toAdd;
         toAdd.name = name;
         curNode.next = toAdd;
         curNode = toAdd;
 
-        //seek till next header
-        fseek(tar, blocks*512, SEEK_CUR);
+        // seek till next header
+        fseek(tar, blocks * 512, SEEK_CUR);
+        // update i by the number of blocks we just searched through
+        i += 512;
     }
-    
 
     return 0;
 }
@@ -287,5 +295,36 @@ int get_archive_file_list(const char *archive_name, file_list_t *files)
 int extract_files_from_archive(const char *archive_name)
 {
     // TODO
+    FILE *tar = fopen(archive_name, O_RDONLY);
+    int size = 0;
+    char name[255];
+    char codeBlock[512];
+    int j = 0;
+
+    // loop until pointer reaches end of code
+    while (fseek(tar, 0, SEEK_CUR) < sizeOfFile(tar) - 1024)
+    {
+
+        fread(name, 100, 1, tar)          // read in name,no reference to prefix so unless necessary leave as is
+            fseek(tar, 24, SEEK_CUR);     // seek till file size
+        fread(size, sizeof(int), 1, tar); // take in size
+        fseek(tar, 376, SEEK_CUR);        // seek till end of header
+
+        FILE *ptr = fopen(name, O_WRONLY);
+        j = 0;
+        for (size_t j = 0; j < size / 512; j++) //read full codeblocks and write them to file name;
+        {
+            fread(codeBlock, 512, 1, tar);
+            fwrite(codeBlock, 512, 1, ptr)
+        }
+        if (j * 512 < size)
+        {
+            fread(codeBlock, (size - (j * 512)), 1, tar);  // read in remaining codeBlock
+            fseek(tar, (j * 512 - size), SEEK_CUR);        // seek to end of 0 block
+            fwrite(codeBlock, (size - (j * 512)), 1, ptr); // write codeBlock to file
+        }
+        fclose(ptr); // close file
+    }
+
     return 0;
 }

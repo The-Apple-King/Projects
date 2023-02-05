@@ -18,7 +18,7 @@ class Entity {
 class MovableEntity : public Entity {
  public:
   // Updates the movable entity
-  void Update(double dt) {}
+  virtual void Update(double dt) {}
 };
 
 #endif

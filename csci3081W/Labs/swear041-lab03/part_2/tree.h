@@ -18,7 +18,7 @@ class Tree : public Entity {
 
  private:
   std::vector<double> pos = {0,0};
-  const std::string& name;
+  const std::string name;
 };
 
 #endif

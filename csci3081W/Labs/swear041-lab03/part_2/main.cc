@@ -57,7 +57,13 @@ int main(int argc, char **argv)
       Entity &entity = *entities[i];
       std::cout << entity.GetName();
       std::vector<double> pos = entity.GetPosition();
-      std::cout << ", " << pos[0] << ", " << pos[1] << ", " << pos[2] << std::endl;
+      for (size_t i = 0; i < pos.size(); i++)
+      {
+        std::cout << ", " << pos[i];
+      }
+      
+      std::cout << std::endl;
+      
 
       // Update all movable entities (entities that have an update function)
       // E.g. Trees do not update, but drones and robots will.

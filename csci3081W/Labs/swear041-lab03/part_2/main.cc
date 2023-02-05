@@ -8,11 +8,13 @@
 #include "robot.h"
 #include "tree.h"
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv)
+{
   // Initialize the number of iterations and simulation dt
   int iterations = 3;
   double dt = 0.1;
-  if (argc > 1) {
+  if (argc > 1)
+  {
     iterations = std::atoi(argv[1]);
     dt = std::atof(argv[2]);
   }
@@ -42,24 +44,28 @@ int main(int argc, char** argv) {
   entities.push_back(std::unique_ptr<Robot>(new Robot("Dave", 4)));
 
   // Iteratively call several simulation steps (iterations)
-  for (int iteration = 0; iteration < iterations; iteration++) {
+  for (int iteration = 0; iteration < iterations; iteration++)
+  {
     // Output the time step
     std::cout << "Time = " << (iteration * dt) << ":" << std::endl;
     std::cout << "--------------" << std::endl;
 
     // Loop through the entities
-    for (int i = 0; i < entities.size(); i++) {
+    for (int i = 0; i < entities.size(); i++)
+    {
       // Print out the current entity
-      Entity& entity = *entities[i];
+      Entity &entity = *entities[i];
       std::cout << entity.GetName();
       std::vector<double> pos = entity.GetPosition();
       std::cout << ", " << pos[0] << ", " << pos[1] << ", " << pos[2] << std::endl;
-      
 
       // Update all movable entities (entities that have an update function)
       // E.g. Trees do not update, but drones and robots will.
-      MovableEntity* movable = static_cast<MovableEntity*>(entities[i].get());
-      movable->Update(dt);
+      MovableEntity *movable = dynamic_cast<MovableEntity *>(entities[i].get());
+      if (movable != NULL)
+      {
+        movable->Update(dt);
+      }
     }
     std::cout << std::endl;
   }

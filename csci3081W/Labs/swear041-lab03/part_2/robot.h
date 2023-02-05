@@ -19,7 +19,7 @@ class Robot : public MovableEntity {
 
  private:
   std::string name;
-  std::vector<double> pos = {0,0,0};
+  std::vector<double> pos = {0,0};
   double angle;
   double radius;
 };

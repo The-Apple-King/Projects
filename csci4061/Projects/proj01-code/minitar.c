@@ -149,8 +149,8 @@ int sizeOfFile(FILE *filename)
  */
 int archiveSingleFile(const char *archive_name, const char *file)
 {
-    FILE *tar = fopen(archive_name, O_WRONLY);
-    FILE *ptr = fopen(file, O_RDONLY);
+    FILE *tar = fopen(archive_name, "w");
+    FILE *ptr = fopen(file, "r");
 
         // set tar to end of file
         fseek(tar, 0, SEEK_END);
@@ -221,7 +221,7 @@ int create_archive(const char *archive_name, const file_list_t *files)
     // end file with 2 0 blocks
 
     // open target file
-    FILE *tar = fopen(archive_name, O_RDWR);
+    FILE *tar = fopen(archive_name, "r+");
 
         // loop for 2 blocks and write a '0' each time
     for (size_t i = 0; i < 1024; i++)
@@ -269,7 +269,7 @@ int get_archive_file_list(const char *archive_name, file_list_t *files)
         fread(name, 100, 1, tar);         // read in name,no reference to prefix so unless necessary leave as is
             fseek(tar, 24, SEEK_CUR);     // seek till file size
         fread(sizec, sizeof(int), 1, tar); // take in size
-        size = int(sizec);
+        size = (int)(sizec);
         fseek(tar, 376, SEEK_CUR);        // seek till end of header
 
         // find the number of blocks until next header
@@ -314,7 +314,7 @@ int extract_files_from_archive(const char *archive_name)
         size = int(sizes);
         fseek(tar, 376, SEEK_CUR);        // seek till end of header
 
-        FILE *ptr = fopen(name, O_WRONLY);
+        FILE *ptr = fopen(name, "w");
         j = 0;
         for (size_t j = 0; j < size / 512; j++) //read full codeblocks and write them to file name;
         {

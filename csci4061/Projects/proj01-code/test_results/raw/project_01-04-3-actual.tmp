@@ -1,0 +1,10 @@
+$ tar -xvf test.tar
+gatsby.txt
+tar: Skipping to next header
+tar: Exiting with failure status due to previous errors
+$ diff -q gatsby.txt test_cases/resources/gatsby.txt
+$ rm -rf test_files/
+$ mkdir test_files
+$ mv gatsby.txt test_files/
+$ exit
+exit

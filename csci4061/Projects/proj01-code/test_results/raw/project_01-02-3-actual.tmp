@@ -1,0 +1,11 @@
+$ tar -xvf test.tar
+f1.bin
+tar: Skipping to next header
+tar: Exiting with failure status due to previous errors
+$ diff -q f1.bin test_cases/resources/f1.bin
+Files f1.bin and test_cases/resources/f1.bin differ
+$ rm -rf test_files/
+$ mkdir test_files
+$ mv f1.bin test_files/
+$ exit
+exit

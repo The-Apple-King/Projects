@@ -1,0 +1,28 @@
+==12079== Memcheck, a memory error detector
+==12079== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==12079== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==12079== Command: ./minitar -c -f test.tar large.bin f19.txt f7.bin
+==12079== Parent PID: 11546
+==12079== 
+==12079== error calling PR_SET_PTRACER, vgdb might block
+==12079== 
+==12079== HEAP SUMMARY:
+==12079==     in use at exit: 472 bytes in 1 blocks
+==12079==   total heap usage: 47 allocs, 46 frees, 70,057 bytes allocated
+==12079== 
+==12079== 472 bytes in 1 blocks are still reachable in loss record 1 of 1
+==12079==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12079==    by 0x48E06CD: __fopen_internal (iofopen.c:65)
+==12079==    by 0x48E06CD: fopen@@GLIBC_2.2.5 (iofopen.c:86)
+==12079==    by 0x10A30A: create_archive (minitar.c:238)
+==12079==    by 0x10957E: main (minitar_main.c:27)
+==12079== 
+==12079== LEAK SUMMARY:
+==12079==    definitely lost: 0 bytes in 0 blocks
+==12079==    indirectly lost: 0 bytes in 0 blocks
+==12079==      possibly lost: 0 bytes in 0 blocks
+==12079==    still reachable: 472 bytes in 1 blocks
+==12079==         suppressed: 0 bytes in 0 blocks
+==12079== 
+==12079== For lists of detected and suppressed errors, rerun with: -s
+==12079== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

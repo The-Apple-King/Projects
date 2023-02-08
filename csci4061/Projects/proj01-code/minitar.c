@@ -142,21 +142,6 @@ int sizeOfFile(FILE *filename)
     return size;
 }
 
-/**
- * takes a string of characters in octal and returns their value in base 10
- * will not check if string is octal assumed it is.
- */
-int string_to_octal(char *num)
-{
-    int result = 0;
-    while (*num)
-    {
-        result <<= 3;                  // multiply by 8 each time to get base 8
-        result += (int)(*num++ - '0'); // takes the char and turns it to an int and adds it to result
-    }
-    return result;
-}
-
 int endblock(const char *archive_name)
 {
     // open target file
@@ -298,7 +283,7 @@ int append_files_to_archive(const char *archive_name, const file_list_t *files)
  *
  * @param archive_name archive to get files from
  * @param files list to add files to
- * @return int 
+ * @return int
  */
 int get_archive_file_list(const char *archive_name, file_list_t *files)
 {
@@ -313,9 +298,9 @@ int get_archive_file_list(const char *archive_name, file_list_t *files)
     {
         fread(name, 100, 1, tar);          // read in name,no reference to prefix so unless necessary leave as is
         fseek(tar, 24, SEEK_CUR);          // seek till file size
+        fscanf(tar, "%o", &size);          // read in octal and put into size
         fread(sizes, sizeof(int), 1, tar); // take in size
-        size = string_to_octal(sizes);
-        fseek(tar, 376, SEEK_CUR); // seek till end of header
+        fseek(tar, 376, SEEK_CUR);         // seek till end of header
 
         // find the number of blocks until next header
         int blocks = size / 512;
@@ -339,22 +324,18 @@ int get_archive_file_list(const char *archive_name, file_list_t *files)
 
 int extract_files_from_archive(const char *archive_name)
 {
-    FILE *tar = fopen(archive_name, "r");   // file to read
-    int size = 0;                           // size of file in archive
-    char sizes[8];                          // size of file as a char array
-    char name[255];                         // name of file
-    char codeBlock[512];                    // buffer of codeblock
+    FILE *tar = fopen(archive_name, "r"); // file to read
+    int size = 0;                         // size of file in archive
+    char name[255];                       // name of file
+    char codeBlock[512];                  // buffer of codeblock
     int j = 0;
     // loop until pointer reaches end of code
     while (fseek(tar, 0, SEEK_CUR) < sizeOfFile(tar) - 1024)
     {
 
-        fread(name, 100, 1, tar);          // read in name,no reference to prefix so unless necessary leave as is
-        fseek(tar, 24, SEEK_CUR);          // seek till file size
-        fread(sizes, sizeof(int), 1, tar); // take in size
-
-        size = string_to_octal(sizes);
-
+        fread(name, 100, 1, tar);  // read in name,no reference to prefix so unless necessary leave as is
+        fseek(tar, 24, SEEK_CUR);  // seek till file size
+        fscanf(tar, "%o", &size);  // read in octal size
         fseek(tar, 376, SEEK_CUR); // seek till end of header
 
         FILE *ptr = fopen(name, "w");

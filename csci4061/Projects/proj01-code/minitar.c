@@ -253,6 +253,7 @@ int create_archive(const char *archive_name, const file_list_t *files)
  */
 int append_files_to_archive(const char *archive_name, const file_list_t *files)
 {
+
     // remove double 0 block
     remove_trailing_bytes(archive_name, 1024);
 
@@ -261,6 +262,7 @@ int append_files_to_archive(const char *archive_name, const file_list_t *files)
     for (int i = 0; i < files->size; i++)
     {
         archiveSingleFile(archive_name, curnode->name);
+        curnode = curnode->next;
     }
 
     // end file with 2 blocks of 0s
@@ -279,9 +281,8 @@ int append_files_to_archive(const char *archive_name, const file_list_t *files)
  * @param files list to add files to
  * @return int
  */
-int get_archive_file_list(const char *archive_name, file_list_t *files)
+int get_archive_file_list(const char *archive_name, file_list_t *files) // error to fix here
 {
-
     FILE *tar = fopen(archive_name, "r");
     if (tar == NULL)
     {
@@ -298,6 +299,8 @@ int get_archive_file_list(const char *archive_name, file_list_t *files)
         fseek(tar, 24, SEEK_CUR);          // seek till file size
         fscanf(tar, "%o", &size);          // read in octal and put into size
         fread(sizes, sizeof(int), 1, tar); // take in size
+
+        
         fseek(tar, 376, SEEK_CUR);         // seek till end of header
 
         // find the number of blocks until next header

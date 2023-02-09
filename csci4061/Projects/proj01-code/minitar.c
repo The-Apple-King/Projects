@@ -288,20 +288,26 @@ int get_archive_file_list(const char *archive_name, file_list_t *files) // error
     {
         perror("tar error in get archive file list");
     }
-    int size = 0;   // size of the file archive
-    char sizes[8];  // temporary location to store the size in string form
-    char name[255]; // name of file
+    int size = 0;         // size of the file archive
+    char nameEnd[100];    // name of file
+    char namePrefix[155]; // name of prefx
+    char fullName[255];   // full name compounded
 
     int count = sizeOfFile(tar) - 1024;  // count = the number of actual blocks of code
-    for (int i = 0; i < count; i += 512) // i+=512 will cover for the header files we seek through
+    if (count < 1024)
     {
-        fread(name, 100, 1, tar);          // read in name,no reference to prefix so unless necessary leave as is
-        fseek(tar, 24, SEEK_CUR);          // seek till file size
-        fscanf(tar, "%o", &size);          // read in octal and put into size
-        fread(sizes, sizeof(int), 1, tar); // take in size
-
-        
-        fseek(tar, 376, SEEK_CUR);         // seek till end of header
+        perror("File sent in was too short");
+        return -1;
+    }
+    
+    for (int i = 0; i < count;) // i+=512 will cover for the header files we seek through
+    {
+        fread(nameEnd, 100, 1, tar); // read in name,no reference to prefix so unless necessary leave as is
+        fseek(tar, 24, SEEK_CUR);    // seek till file size
+        fscanf(tar, "%o", &size);    // read in octal and put into size
+        fseek(tar, 209, SEEK_CUR);   // move pointer to start of name prefix
+        fread(namePrefix, 155, 1, tar); //read in namePrefix
+        fseek(tar, 12, SEEK_CUR); // seek till end of header
 
         // find the number of blocks until next header
         int blocks = size / 512;
@@ -310,14 +316,19 @@ int get_archive_file_list(const char *archive_name, file_list_t *files) // error
             blocks++;
         }
 
+        // creates a full name from prefix and name
+        strcpy(fullName, namePrefix); //copies namePrefix to fullName
+        strcat(fullName, nameEnd);    // appends nameEnd to fullName
+
         // adds file to file list
-        file_list_add(files, name);
+        file_list_add(files, fullName);
 
         // seek till next header
-        fseek(tar, blocks * 512, SEEK_CUR);
+        fseek(tar, (blocks * 512)+1, SEEK_CUR);
 
         // update i by the number of blocks we just searched through
-        i += (blocks * 512);
+        i += ((1+blocks) * 512);// +1 for header, blocks for file contents, 512 for block size
+
     }
 
     return 0;

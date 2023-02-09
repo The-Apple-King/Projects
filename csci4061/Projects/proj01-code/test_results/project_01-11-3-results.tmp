@@ -1,21 +1,4 @@
 -- List the files in the previously created archive
 Expected output is in file 'test_results/raw/project_01-11-3-expected.tmp'
 Actual output is in file 'test_results/raw/project_01-11-3-actual.tmp'
-Test FAILED
-== Side-by-Side Comparison ==
-== Differing lines have a character like '|' '>' or '<' in the middle
-==== EXPECT ====   ==== ACTUAL ====
-hello.txt          hello.txt
-f18.txt          | .txt
-f20.bin          | .bin
-f19.bin          | .bin
-f13.txt          | .txt
-== Line Differences ==
-EXPECT 2) f18.txt
-ACTUAL 2) .txt
-EXPECT 3) f20.bin
-ACTUAL 3) .bin
-EXPECT 4) f19.bin
-ACTUAL 4) .bin
-EXPECT 5) f13.txt
-ACTUAL 5) .txt
+Test PASSED

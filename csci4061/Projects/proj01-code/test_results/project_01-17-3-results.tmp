@@ -2,8 +2,4 @@
 -- contained in the archive
 Expected output is in file 'test_results/raw/project_01-17-3-expected.tmp'
 Actual output is in file 'test_results/raw/project_01-17-3-actual.tmp'
-Error: SEGMENTATION FAULT. Output:
-ptr error in archive single string: No such file or directory
-Failed to stat file f9.txt: No such file or directory
-fill_tar_header in archiveSingleFile: No such file or directory
-
+Test PASSED

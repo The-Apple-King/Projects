@@ -1,28 +1,33 @@
-==15618== Memcheck, a memory error detector
-==15618== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==15618== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==15618== Command: ./minitar -t -f test.tar
-==15618== Parent PID: 15234
-==15618== 
-==15618== error calling PR_SET_PTRACER, vgdb might block
-==15618== 
-==15618== HEAP SUMMARY:
-==15618==     in use at exit: 472 bytes in 1 blocks
-==15618==   total heap usage: 8 allocs, 7 frees, 5,792 bytes allocated
-==15618== 
-==15618== 472 bytes in 1 blocks are still reachable in loss record 1 of 1
-==15618==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==15618==    by 0x48E06CD: __fopen_internal (iofopen.c:65)
-==15618==    by 0x48E06CD: fopen@@GLIBC_2.2.5 (iofopen.c:86)
-==15618==    by 0x10A400: get_archive_file_list (minitar.c:286)
-==15618==    by 0x1095FE: main (minitar_main.c:37)
-==15618== 
-==15618== LEAK SUMMARY:
-==15618==    definitely lost: 0 bytes in 0 blocks
-==15618==    indirectly lost: 0 bytes in 0 blocks
-==15618==      possibly lost: 0 bytes in 0 blocks
-==15618==    still reachable: 472 bytes in 1 blocks
-==15618==         suppressed: 0 bytes in 0 blocks
-==15618== 
-==15618== For lists of detected and suppressed errors, rerun with: -s
-==15618== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==16683== Memcheck, a memory error detector
+==16683== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==16683== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==16683== Command: ./minitar -t -f test.tar
+==16683== Parent PID: 16317
+==16683== 
+--16683-- WARNING: Serious error when reading debug info
+--16683-- When reading debug info from /home/swearingeno/.local/Projects/csci4061/Projects/proj01-code/minitar:
+--16683-- Ignoring non-Dwarf2/3/4 block in .debug_info
+--16683-- WARNING: Serious error when reading debug info
+--16683-- When reading debug info from /home/swearingeno/.local/Projects/csci4061/Projects/proj01-code/minitar:
+--16683-- parse_CU_Header: is neither DWARF2 nor DWARF3 nor DWARF4
+==16683== 
+==16683== HEAP SUMMARY:
+==16683==     in use at exit: 472 bytes in 1 blocks
+==16683==   total heap usage: 8 allocs, 7 frees, 5,792 bytes allocated
+==16683== 
+==16683== 472 bytes in 1 blocks are still reachable in loss record 1 of 1
+==16683==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==16683==    by 0x48D592D: __fopen_internal (iofopen.c:65)
+==16683==    by 0x48D592D: fopen@@GLIBC_2.2.5 (iofopen.c:86)
+==16683==    by 0x10A45F: get_archive_file_list (minitar.c:286)
+==16683==    by 0x109632: main (minitar_main.c:37)
+==16683== 
+==16683== LEAK SUMMARY:
+==16683==    definitely lost: 0 bytes in 0 blocks
+==16683==    indirectly lost: 0 bytes in 0 blocks
+==16683==      possibly lost: 0 bytes in 0 blocks
+==16683==    still reachable: 472 bytes in 1 blocks
+==16683==         suppressed: 0 bytes in 0 blocks
+==16683== 
+==16683== For lists of detected and suppressed errors, rerun with: -s
+==16683== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

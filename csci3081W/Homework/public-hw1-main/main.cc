@@ -35,7 +35,7 @@ int main()
     // TODO part D: Demonstrate each one of your five defined functions.
 
     // compares the coolness of two ducks and returns true if the first duck has a lower coolness
-    if(compareCoolness(canvas, duckie)){
+    if(mallard.compareCoolness(canvas, duckie)){
         cout << duckie.getName() << " is the coolest duck." << endl;
     }
     else{
@@ -43,7 +43,7 @@ int main()
     }
 
     //compares the weights of two ducks and returns true if the first duck is lighter
-    if(compareWeight(mallard, canvas)){
+    if(mallard.compareWeight(mallard, canvas)){
         cout << canvas.getName() << " is the biggest duck." << endl;
     }
     else{
@@ -51,9 +51,11 @@ int main()
     }
 
     //have two ducks fight and see who would win, uses type then weight to determine winner
-    fightToTheDeath(mallard, canvas);
+    duckie.fightToTheDeath(mallard, canvas);
 
     //got any grapes?
+    duckie.lemonade(&duckie, &canvas);
+
     
     return 0;
 }

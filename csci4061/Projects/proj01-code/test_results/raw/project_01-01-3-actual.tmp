@@ -1,7 +1,5 @@
 $ tar -xvf test.tar
 f1.txt
-tar: Skipping to next header
-tar: Exiting with failure status due to previous errors
 $ diff -q f1.txt test_cases/resources/f1.txt
 $ rm -rf test_files/
 $ mkdir test_files

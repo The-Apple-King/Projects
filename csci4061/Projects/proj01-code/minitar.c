@@ -90,7 +90,7 @@ int fill_tar_header(tar_header *header, const char *file_name)
  * Returns 0 upon success, -1 upon error
  * Note: This function uses lower-level I/O syscalls (not stdio), which we'll learn about later
  */
-int remove_trailing_bytes(const char *file_name, size_t nbytes)
+int remove_trailing_bytes(const char *file_name, int nbytes)
 {
     char err_msg[MAX_MSG_LEN];
     // Note: ftruncate does not work with O_APPEND
@@ -153,9 +153,9 @@ int endblock(const char *archive_name)
     }
     fseek(tar, 0, SEEK_END);
     // loop for 2 blocks and write a '0' each time
-    for (size_t i = 0; i < 1024; i++)
+    for (int i = 0; i < 1024; i++)
     {
-        fprintf(tar, "%c", '0');
+        fprintf(tar, "%c", 0x00);
     }
     fclose(tar);
     return 0;
@@ -200,7 +200,7 @@ void archiveSingleFile(const char *archive_name, const char *file)
     int blocks = floor(fileSize / 512);
 
     // write full blocks
-    for (size_t i = 0; i < blocks; i++)
+    for (int i = 0; i < blocks; i++)
     {
         fread(buf, 512, 1, ptr);
         fwrite(buf, 512, 1, tar);
@@ -211,8 +211,8 @@ void archiveSingleFile(const char *archive_name, const char *file)
     if (fileSize != blocks * 512)
     {
         // if blocks*512 doesnt equal filesize save the extra bytes to file
-            fread(buf, 1, fileSize - (blocks * 512), ptr);
-            fwrite(buf, 512, 1, tar);
+        fread(buf, 1, fileSize - (blocks * 512), ptr);
+        fwrite(buf, 512, 1, tar);
     }
 
     // close files we opened
@@ -224,11 +224,15 @@ int create_archive(const char *archive_name, const file_list_t *files)
 {
     // empty file so no conflicts
     FILE *tar = fopen(archive_name, "w"); // opening file with w should clear contents
-    fclose(tar);                          // closing file saves changes so we can just call archiveSingleFile
+    if (tar == NULL)
+    {
+        perror("tar error in create archive to empty file");
+    }
+    fclose(tar); // closing file saves changes so we can just call archiveSingleFile
 
     // go file by file adding it to the archive
     node_t *curNode = files->head;
-    for (size_t i = 0; i < files->size; i++)
+    for (int i = 0; i < files->size; i++)
     {
         archiveSingleFile(archive_name, curNode->name);
         curNode = curNode->next;
@@ -254,7 +258,7 @@ int append_files_to_archive(const char *archive_name, const file_list_t *files)
 
     // loop through files, and add them to the archive
     node_t *curnode = files->head;
-    for (size_t i = 0; i < files->size; i++)
+    for (int i = 0; i < files->size; i++)
     {
         archiveSingleFile(archive_name, curnode->name);
     }
@@ -279,12 +283,16 @@ int get_archive_file_list(const char *archive_name, file_list_t *files)
 {
 
     FILE *tar = fopen(archive_name, "r");
+    if (tar == NULL)
+    {
+        perror("tar error in get archive file list");
+    }
     int size = 0;   // size of the file archive
     char sizes[8];  // temporary location to store the size in string form
     char name[255]; // name of file
 
-    int count = sizeOfFile(tar) - 1024;     // count = the number of actual blocks of code
-    for (size_t i = 0; i < count; i += 512) // i+=512 will cover for the header files we seek through
+    int count = sizeOfFile(tar) - 1024;  // count = the number of actual blocks of code
+    for (int i = 0; i < count; i += 512) // i+=512 will cover for the header files we seek through
     {
         fread(name, 100, 1, tar);          // read in name,no reference to prefix so unless necessary leave as is
         fseek(tar, 24, SEEK_CUR);          // seek till file size
@@ -315,9 +323,13 @@ int get_archive_file_list(const char *archive_name, file_list_t *files)
 int extract_files_from_archive(const char *archive_name)
 {
     FILE *tar = fopen(archive_name, "r"); // file to read
-    int size = 0;                         // size of file in archive
-    char name[255];                       // name of file
-    char codeBlock[512];                  // buffer of codeblock
+    if (tar == NULL)
+    {
+        perror("tar error in get extract files from archive");
+    }
+    int size = 0;        // size of file in archive
+    char name[255];      // name of file
+    char codeBlock[512]; // buffer of codeblock
     int j = 0;
     // loop until pointer reaches end of code
     while (fseek(tar, 0, SEEK_CUR) < sizeOfFile(tar) - 1024)
@@ -329,6 +341,10 @@ int extract_files_from_archive(const char *archive_name)
         fseek(tar, 376, SEEK_CUR); // seek till end of header
 
         FILE *ptr = fopen(name, "w");
+        if (ptr == NULL)
+        {
+            perror("ptr error when creating a txt file");
+        }
         for (j = 0; j < size / 512; j++) // read full codeblocks and write them to file name;
         {
             fread(codeBlock, 512, 1, tar);

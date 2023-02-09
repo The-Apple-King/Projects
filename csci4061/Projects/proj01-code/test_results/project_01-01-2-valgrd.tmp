@@ -1,16 +1,16 @@
-==8606== Memcheck, a memory error detector
-==8606== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==8606== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==8606== Command: ./minitar -c -f test.tar f1.txt
-==8606== Parent PID: 8601
-==8606== 
-==8606== error calling PR_SET_PTRACER, vgdb might block
-==8606== 
-==8606== HEAP SUMMARY:
-==8606==     in use at exit: 0 bytes in 0 blocks
-==8606==   total heap usage: 30 allocs, 30 frees, 33,905 bytes allocated
-==8606== 
-==8606== All heap blocks were freed -- no leaks are possible
-==8606== 
-==8606== For lists of detected and suppressed errors, rerun with: -s
-==8606== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==9640== Memcheck, a memory error detector
+==9640== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==9640== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==9640== Command: ./minitar -c -f test.tar f1.txt
+==9640== Parent PID: 9635
+==9640== 
+==9640== error calling PR_SET_PTRACER, vgdb might block
+==9640== 
+==9640== HEAP SUMMARY:
+==9640==     in use at exit: 0 bytes in 0 blocks
+==9640==   total heap usage: 30 allocs, 30 frees, 33,905 bytes allocated
+==9640== 
+==9640== All heap blocks were freed -- no leaks are possible
+==9640== 
+==9640== For lists of detected and suppressed errors, rerun with: -s
+==9640== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

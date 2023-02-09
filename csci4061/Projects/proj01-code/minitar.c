@@ -207,21 +207,12 @@ void archiveSingleFile(const char *archive_name, const char *file)
     }
 
     // clean up not full block************************************************************
-
+    memset(buf, '0', 512);
     if (fileSize != blocks * 512)
     {
         // if blocks*512 doesnt equal filesize save the extra bytes to file
-        for (int i = 0; i < (fileSize - (blocks * 512)); i++)
-        {
-            fread(buf, 1, 1, ptr);
-            fwrite(buf, 1, 1, tar);
-        }
-
-        // if at end of file print 0s until filled block
-        for (size_t i = 0; i < (((blocks + 1) * 512) - fileSize); i++)
-        {
-            fprintf(tar, "%c", '0');
-        }
+            fread(buf, 1, fileSize - (blocks * 512), ptr);
+            fwrite(buf, 512, 1, tar);
     }
 
     // close files we opened

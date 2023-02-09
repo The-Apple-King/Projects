@@ -142,21 +142,6 @@ int sizeOfFile(FILE *filename)
     return size;
 }
 
-/**
- * takes a string of characters in octal and returns their value in base 10
- * will not check if string is octal assumed it is.
- */
-int string_to_octal(char *num)
-{
-    int result = 0;
-    while (*num)
-    {
-        result <<= 3;                  // multiply by 8 each time to get base 8
-        result += (int)(*num++ - '0'); // takes the char and turns it to an int and adds it to result
-    }
-    return result;
-}
-
 int endblock(const char *archive_name)
 {
     // open target file
@@ -172,6 +157,7 @@ int endblock(const char *archive_name)
     {
         fprintf(tar, "%c", '0');
     }
+    fclose(tar);
     return 0;
 }
 
@@ -210,10 +196,11 @@ void archiveSingleFile(const char *archive_name, const char *file)
     // write header
     fwrite(&header, sizeof(header), 1, tar);
 
-    int count = sizeOfFile(ptr) / 512;
+    int fileSize = sizeOfFile(ptr);
+    int blocks = floor(fileSize / 512);
 
     // write full blocks
-    for (size_t i = 0; i < count; i++)
+    for (size_t i = 0; i < blocks; i++)
     {
         fread(buf, 512, 1, ptr);
         fwrite(buf, 512, 1, tar);
@@ -221,21 +208,18 @@ void archiveSingleFile(const char *archive_name, const char *file)
 
     // clean up not full block************************************************************
 
-    // check if we need to add trailing zeroes
-    if (count % 512 != 0)
+    if (fileSize != blocks * 512)
     {
-        // save byte by byte until EOF then save 0s
-        for (size_t i = 0; i < count % 512; i++)
+        // if blocks*512 doesnt equal filesize save the extra bytes to file
+        for (int i = 0; i < (fileSize - (blocks * 512)); i++)
         {
-            // if not at end of file save one byte at a time
-            if (fread(buf, 1, 1, ptr) != -1)
-            {
-                fwrite(buf, 1, 1, tar);
-            }
+            fread(buf, 1, 1, ptr);
+            fwrite(buf, 1, 1, tar);
         }
-        for (size_t i = 0; i < 512 - count % 512; i++)
+
+        // if at end of file print 0s until filled block
+        for (size_t i = 0; i < (((blocks + 1) * 512) - fileSize); i++)
         {
-            // if at end of file print 0s until filled block
             fprintf(tar, "%c", '0');
         }
     }
@@ -298,7 +282,7 @@ int append_files_to_archive(const char *archive_name, const file_list_t *files)
  *
  * @param archive_name archive to get files from
  * @param files list to add files to
- * @return int 
+ * @return int
  */
 int get_archive_file_list(const char *archive_name, file_list_t *files)
 {
@@ -339,16 +323,16 @@ int get_archive_file_list(const char *archive_name, file_list_t *files)
 
 int extract_files_from_archive(const char *archive_name)
 {
-    FILE *tar = fopen(archive_name, "r");   // file to read
-    int size = 0;                           // size of file in archive
-    char sizes[8];                          // size of file as a char array
-    char name[255];                         // name of file
-    char codeBlock[512];                    // buffer of codeblock
+    FILE *tar = fopen(archive_name, "r"); // file to read
+    int size = 0;                         // size of file in archive
+    char sizes[8];                        // size of file as a char array
+    char name[255];                       // name of file
+    char codeBlock[512];                  // buffer of codeblock
     int j = 0;
     // loop until pointer reaches end of code
     while (fseek(tar, 0, SEEK_CUR) < sizeOfFile(tar) - 1024)
     {
-
+        printf("we extract here?");
         fread(name, 100, 1, tar);          // read in name,no reference to prefix so unless necessary leave as is
         fseek(tar, 24, SEEK_CUR);          // seek till file size
         fread(sizes, sizeof(int), 1, tar); // take in size

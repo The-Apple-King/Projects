@@ -10,7 +10,6 @@ f1.txt                                         f1.txt
                                              > tar: Skipping to next header
                                              > tar: Exiting with failure status due to previous errors
 $ diff -q f1.txt test_cases/resources/f1.txt   $ diff -q f1.txt test_cases/resources/f1.txt
-                                             > Files f1.txt and test_cases/resources/f1.txt differ
 $ rm -rf test_files/                           $ rm -rf test_files/
 $ mkdir test_files                             $ mkdir test_files
 $ mv f1.txt test_files/                        $ mv f1.txt test_files/
@@ -19,4 +18,3 @@ exit                                           exit
 == Line Differences ==
 ACTUAL  3) tar: Skipping to next header
 ACTUAL  4) tar: Exiting with failure status due to previous errors
-ACTUAL  6) Files f1.txt and test_cases/resources/f1.txt differ

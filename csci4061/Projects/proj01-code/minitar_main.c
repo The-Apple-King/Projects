@@ -59,9 +59,11 @@ int main(int argc, char **argv)
         else
         {
             printf("Error: One or more of the specified files is not already present in archive");
+            file_list_clear(&files);
+            file_list_clear(&present);
+            return -1;
         }
         file_list_clear(&present);
-        
     }
 
     else if (strcmp(argv[1], "-x") == 0) // extract

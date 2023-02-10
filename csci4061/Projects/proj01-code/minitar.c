@@ -368,12 +368,10 @@ int extract_files_from_archive(const char *archive_name)
         return -1;
     }
 
-    // fseek(tar, 1, SEEK_SET);
     // loop through the file
     for (int i = 0; i < count;) // i+=512 will cover for the header files we seek through
     {
         fread(nameEnd, 100, 1, tar); // read in name,no reference to prefix so unless necessary leave as is
-
         fseek(tar, 24, SEEK_CUR); // seek till file size
         fscanf(tar, "%o", &size); // read in octal and put into size
         fseek(tar, 209, SEEK_CUR); // move pointer to start of name prefix
@@ -387,14 +385,12 @@ int extract_files_from_archive(const char *archive_name)
         strcpy(fullName, namePrefix); // copies namePrefix to fullName
         strcat(fullName, nameEnd);    // appends nameEnd to fullName
 
-
         // create the file to write to
         FILE *ptr = fopen(fullName, "w");
         if (ptr == NULL)
         {
             perror("ptr error in extract files from archive");
         }
-
 
         // write full blocks
         for (int j = 0; j < blocks; j++)
@@ -412,7 +408,6 @@ int extract_files_from_archive(const char *archive_name)
             fwrite(buf, size - (blocks * 512), 1, ptr);
             fseek(tar, (512 - (size - (blocks * 512))), SEEK_CUR);
         }
-        // fseek(tar, (((blocks+1) *512)-size), SEEK_CUR);
         fclose(ptr);
 
         // update i by the number of blocks we just searched through

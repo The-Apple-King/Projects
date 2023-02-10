@@ -13,6 +13,7 @@
 
 #define NUM_TRAILING_BLOCKS 2
 #define MAX_MSG_LEN 512
+#define BLOCK_SIZE 512
 
 /*
  * Helper function to compute the checksum of a tar header block
@@ -128,7 +129,7 @@ int remove_trailing_bytes(const char *file_name, int nbytes)
 }
 
 /**
- * @brief returns the size of a file
+ * @brief returns the size of a file and sets pointer to beginning of file
  *
  * @param filename a pointer to the file location
  * @return int size of the file
@@ -175,29 +176,32 @@ int endblock(const char *archive_name)
  * @param archive_name name of file to save to
  * @param file the name of the file to save from
  */
-void archiveSingleFile(const char *archive_name, const char *file)
+int archiveSingleFile(const char *archive_name, const char *file)
 {
     // open both files and error out if theres a problem
     FILE *tar = fopen(archive_name, "r+");
     if (tar == NULL)
     {
         perror("tar error in archive single string");
+        return -1;
     }
     FILE *ptr = fopen(file, "r");
     if (ptr == NULL)
     {
         perror("ptr error in archive single string");
+        return -1;
     }
 
     // set tar to end of file
     fseek(tar, 0, SEEK_END);
-    char buf[512];
+    char buf[BLOCK_SIZE];
 
     // create header
     tar_header header;
     if (fill_tar_header(&header, file) == -1)
     {
         perror("fill_tar_header in archiveSingleFile");
+        return -1;
     }
 
     // start writing to file
@@ -205,27 +209,28 @@ void archiveSingleFile(const char *archive_name, const char *file)
     fwrite(&header, sizeof(header), 1, tar);
 
     int fileSize = sizeOfFile(ptr);
-    int blocks = floor(fileSize / 512);
+    int blocks = floor(fileSize / BLOCK_SIZE);
 
     // write full blocks
     for (int i = 0; i < blocks; i++)
     {
-        fread(buf, 512, 1, ptr);
-        fwrite(buf, 512, 1, tar);
+        fread(buf, BLOCK_SIZE, 1, ptr);
+        fwrite(buf, BLOCK_SIZE, 1, tar);
     }
 
     // clean up not full block************************************************************
-    memset(buf, 0, 512);
-    if (fileSize != blocks * 512)
+    memset(buf, 0, BLOCK_SIZE);
+    if (fileSize != blocks * BLOCK_SIZE)
     {
         // if blocks*512 doesnt equal filesize save the extra bytes to file
-        fread(buf, 1, fileSize - (blocks * 512), ptr);
-        fwrite(buf, 512, 1, tar);
+        fread(buf, 1, fileSize - (blocks * BLOCK_SIZE), ptr);
+        fwrite(buf, BLOCK_SIZE, 1, tar);
     }
 
     // close files we opened
     fclose(ptr);
     fclose(tar);
+    return 0;
 }
 
 int create_archive(const char *archive_name, const file_list_t *files)
@@ -235,6 +240,7 @@ int create_archive(const char *archive_name, const file_list_t *files)
     if (tar == NULL)
     {
         perror("tar error in create archive to empty file");
+        return -1;
     }
     fclose(tar); // closing file saves changes so we can just call archiveSingleFile
 
@@ -242,8 +248,12 @@ int create_archive(const char *archive_name, const file_list_t *files)
     node_t *curNode = files->head;
     for (int i = 0; i < files->size; i++)
     {
-        archiveSingleFile(archive_name, curNode->name);
+        if(archiveSingleFile(archive_name, curNode->name) == 0){
         curNode = curNode->next;
+        }else{
+            perror("file not found");
+            return -1;
+        }
     }
 
     // end file with 2 0 blocks
@@ -269,8 +279,12 @@ int append_files_to_archive(const char *archive_name, const file_list_t *files)
     node_t *curnode = files->head;
     for (int i = 0; i < files->size; i++)
     {
-        archiveSingleFile(archive_name, curnode->name);
+        if(archiveSingleFile(archive_name, curnode->name)==0){
         curnode = curnode->next;
+        }else{
+            perror("file not found");
+            return -1;
+        }
     }
 
     // end file with 2 blocks of 0s
@@ -296,6 +310,7 @@ int get_archive_file_list(const char *archive_name, file_list_t *files) // error
     if (tar == NULL)
     {
         perror("tar error in get archive file list");
+        return -1;
     }
 
     int size = 0;         // size of the file archive
@@ -322,8 +337,8 @@ int get_archive_file_list(const char *archive_name, file_list_t *files) // error
         fseek(tar, 12, SEEK_CUR);       // seek till end of header
 
         // find the number of blocks until next header
-        int blocks = size / 512;
-        if (size % 512 > 0)
+        int blocks = size / BLOCK_SIZE;
+        if (size % BLOCK_SIZE > 0)
         {
             blocks++;
         }
@@ -336,10 +351,10 @@ int get_archive_file_list(const char *archive_name, file_list_t *files) // error
         file_list_add(files, fullName);
 
         // seek till next header
-        fseek(tar, (blocks * 512) + 1, SEEK_CUR);
+        fseek(tar, (blocks * BLOCK_SIZE) + 1, SEEK_CUR);
 
         // update i by the number of blocks we just searched through
-        i += ((1 + blocks) * 512); // +1 for header, blocks for file contents, 512 for block size
+        i += ((1 + blocks) * BLOCK_SIZE); // +1 for header, blocks for file contents, 512 for block size
     }
 
     return 0;
@@ -352,13 +367,14 @@ int extract_files_from_archive(const char *archive_name)
     if (tar == NULL)
     {
         perror("tar error in extract files from archive");
+        return -1;
     }
 
     int size = 0;         // size of the file archive
     char nameEnd[100];    // name of file
     char namePrefix[155]; // name of prefx
     char fullName[255];   // full name compounded
-    char buf[512];        // buffer to hold file data
+    char buf[BLOCK_SIZE]; // buffer to hold file data
 
     // find file size and make sure its big enough
     int count = sizeOfFile(tar) - 1024; // count = the number of actual blocks of code
@@ -371,15 +387,15 @@ int extract_files_from_archive(const char *archive_name)
     // loop through the file
     for (int i = 0; i < count;) // i+=512 will cover for the header files we seek through
     {
-        fread(nameEnd, 100, 1, tar); // read in name,no reference to prefix so unless necessary leave as is
-        fseek(tar, 24, SEEK_CUR); // seek till file size
-        fscanf(tar, "%o", &size); // read in octal and put into size
-        fseek(tar, 209, SEEK_CUR); // move pointer to start of name prefix
+        fread(nameEnd, 100, 1, tar);    // read in name,no reference to prefix so unless necessary leave as is
+        fseek(tar, 24, SEEK_CUR);       // seek till file size
+        fscanf(tar, "%o", &size);       // read in octal and put into size
+        fseek(tar, 209, SEEK_CUR);      // move pointer to start of name prefix
         fread(namePrefix, 155, 1, tar); // read in namePrefix
-        fseek(tar, 13, SEEK_CUR); // seek till end of header
+        fseek(tar, 13, SEEK_CUR);       // seek till end of header
 
         // find the number of blocks until next header
-        int blocks = size / 512;
+        int blocks = size / BLOCK_SIZE;
 
         // creates a full name from prefix and name
         strcpy(fullName, namePrefix); // copies namePrefix to fullName
@@ -390,28 +406,29 @@ int extract_files_from_archive(const char *archive_name)
         if (ptr == NULL)
         {
             perror("ptr error in extract files from archive");
+            return -1;
         }
 
         // write full blocks
         for (int j = 0; j < blocks; j++)
         {
-            fread(buf, 512, 1, tar);
-            fwrite(buf, 512, 1, ptr);
+            fread(buf, BLOCK_SIZE, 1, tar);
+            fwrite(buf, BLOCK_SIZE, 1, ptr);
         }
 
         // clean up not full block************************************************************
-        memset(buf, 0, 512);
-        if (size != blocks * 512)
+        memset(buf, 0, BLOCK_SIZE);
+        if (size != blocks * BLOCK_SIZE)
         {
             // if blocks*512 doesnt equal filesize save the extra bytes to file
-            fread(buf, 1, size - (blocks * 512), tar);
-            fwrite(buf, size - (blocks * 512), 1, ptr);
-            fseek(tar, (512 - (size - (blocks * 512))), SEEK_CUR);
+            fread(buf, 1, size - (blocks * BLOCK_SIZE), tar);
+            fwrite(buf, size - (blocks * BLOCK_SIZE), 1, ptr);
+            fseek(tar, (BLOCK_SIZE - (size - (blocks * BLOCK_SIZE))), SEEK_CUR);
         }
         fclose(ptr);
 
         // update i by the number of blocks we just searched through
-        i += ((2 + blocks) * 512); // +1 for header, blocks for file contents, 512 for block size
+        i += ((2 + blocks) * BLOCK_SIZE); // +1 for header, blocks for file contents, 512 for block size
     }
 
     return 0;

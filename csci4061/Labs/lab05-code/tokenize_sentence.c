@@ -1,33 +1,38 @@
-#include <string.h>
 #include <stdio.h>
+#include <string.h>
 
 #define BUF_LEN 512
 
 void print_words(char *s) {
-    // TODO Not yet implemented
+  // TODO Not yet implemented
+  char *token = strtok(s, " ");
+  while (token) {
+    printf("%s\n", token);
+    token = strtok(NULL, " ");
+  }
 }
 
 int main(int argc, char **argv) {
-    char sentence[BUF_LEN];
+  char sentence[BUF_LEN];
 
-    printf("sentence> ");
-    while(fgets(sentence, BUF_LEN, stdin) != NULL) {
-        // Remove trailing newline from sentence
-        int i = 0;
-        while (sentence[i] != '\n') {
-            i++;
-        }
-        sentence[i] = '\0';
+  printf("sentence> ");
+  while (fgets(sentence, BUF_LEN, stdin) != NULL) {
+    // Remove trailing newline from sentence
+    int i = 0;
+    while (sentence[i] != '\n') {
+      i++;
+    }
+    sentence[i] = '\0';
 
-        if (strcmp(sentence, "exit") == 0) {
-            return 0;
-        }
-
-        print_words(sentence);
-
-        printf("sentence> ");
+    if (strcmp(sentence, "exit") == 0) {
+      return 0;
     }
 
-    printf("\n");
-    return 0;
+    print_words(sentence);
+
+    printf("sentence> ");
+  }
+
+  printf("\n");
+  return 0;
 }

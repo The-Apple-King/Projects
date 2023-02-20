@@ -102,6 +102,7 @@ public:
     Duck(string, float, double);
     Duck(const Duck &);            // creates a copy of a Duck object
     Duck &operator=(const Duck &); // sets a Duck equal to another Duck
+    virtual string quack();
     ~Duck();                       // can be called to deallocate data
 
     string getName();
@@ -110,7 +111,7 @@ public:
     bool compareWeight(Duck, Duck);                 // 2
     void fightToTheDeath(Duck &duck1, Duck &duck2); // 3
     bool compareName(Duck, Duck);                   // 4
-    void lemonade(Duck duck1, Duck duck2);          // 5
+    void lemonade(Duck *duck1, Duck *duck2);          // 5
     double getWeight();
 
     string swim();
@@ -136,6 +137,11 @@ Duck &Duck::operator=(const Duck &d)
     this->weight = d.weight;
     this->coolness = d.coolness;
     return *this;
+}
+
+string Duck::quack()
+{
+    return "Quack!";
 }
 
 Duck::Duck(const Duck &d)
@@ -237,18 +243,20 @@ bool Duck::compareName(Duck duck1, Duck duck2)
     return false;
 }
 
-void Duck::lemonade(Duck duck1, Duck duck2)
+void Duck::lemonade(Duck *duck1, Duck *duck2)
 {
+
     cout << "the duck walked up to the lemonade stand and said to the other duck running the stand" << endl;
-    cout << duck1.quack() << " (hey) " << endl;
-    cout << duck1.quack() << " " <<duck1.quack() << " " << duck1.quack() << endl;
+    cout << duck1->quack() << " (hey) " << endl;
+    cout << duck1->quack() << " " <<duck1->quack() << " " << duck1->quack() << endl;
     cout << "(got any grapes?)" << endl;
 
-    cout << duck2.getName() << " said: " << duck2.quack() << " (No.)";
+    cout << duck2->getName() << " said: " << duck2->quack() << " (No.)" << endl;
+    for (size_t i = 0; i < 6; i++)
     {
-        cout << duck2.quack();
+        cout << duck2->quack() << " ";
     }
-    cout << endl <<" (We just have lemonade.)"
+    cout << endl <<" (We just have lemonade.)" << endl;
     
 }
 

@@ -45,7 +45,25 @@ int main(int argc, char **argv)
 
     else if (strcmp(argv[1], "-u") == 0) // update
     {
-        append_files_to_archive(argv[3], &files);
+        // create a file_list_t containing all files already in archive
+        file_list_t present;
+        file_list_init(&present);
+        get_archive_file_list(argv[3], &present);
+
+        //if all files to append are in present we can update them
+        if (file_list_is_subset(&files, &present))
+        {
+            append_files_to_archive(argv[3], &files);
+        }
+        // else we output an error
+        else
+        {
+            printf("Error: One or more of the specified files is not already present in archive");
+            file_list_clear(&files);
+            file_list_clear(&present);
+            return -1;
+        }
+        file_list_clear(&present);
     }
 
     else if (strcmp(argv[1], "-x") == 0) // extract

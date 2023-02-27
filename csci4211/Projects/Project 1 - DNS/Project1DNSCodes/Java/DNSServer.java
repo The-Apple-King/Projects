@@ -4,11 +4,13 @@
 
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
 import java.util.Random;
+import java.util.TreeMap;
 
 class DNSServer {
 	public static void main(String[] args) throws Exception {
-		int port = 5001;
+		int port = 9889;
 		ServerSocket sSock = null;
 
 		try {
@@ -38,36 +40,81 @@ class dnsQuery extends Thread {
 	//if there is only one IP address, return the IP address
 	//if there are multiple IP addresses, select one and return.
 	////optional: return the IP address according to the Ping value for better performance (lower latency)
+		if (ipList.length >= 1) {
+			return ipList[0];
+		}
+		return null;
     }
 	@Override public void run(){
 	BufferedReader inputStream;
         PrintWriter outStream;
         try {
-	//Open an input stream and an output stream for the socket
-	//Read requested query from socket input stream
-	//Parse input from the input stream
-	//Check the requested query
-           
-             boolean hostFound = false;
+			//Open an input stream and an output stream for the socket
+			inputStream = new BufferedReader(new InputStreamReader(sSock.getInputStream()));
+			outStream = new PrintWriter(sSock.getOutputStream(), true);
+
+
+			//Read requested query from socket input stream
+			String hostname = inputStream.readLine();
+
+
             try {
-		//check the DNS_mapping.txt to see if the host name exists
-		//set local file cache to predetermined file.
-                //create file if it doesn't exist 
-                //if it does exist, read the file line by line to look for a
-                //match with the query sent from the client
-                //If match, use the entry in cache.
-                    //However, we may get multiple IP addresses in cache, so call IPselection to select one. 
-		//If no lines match, query the local machine DNS lookup to get the IP resolution
-		//write the response in DNS_mapping.txt
-		//print response to the terminal
-		//send the response back to the client
-		//Close the server socket.
-             
-            
+				//open up writer and readers for files
+				PrintWriter csvLogFile = new PrintWriter(new FileWriter("dns-server-log.csv", true));
+				BufferedReader cacheReader = new BufferedReader(new FileReader("DNS_mapping.txt"));
+				PrintWriter cacheWriter = new PrintWriter(new FileWriter("DNS_mapping.txt", true));
+
+				//create a treemap with a key and a list of ipaddress for cache
+				String line = "";
+				TreeMap<String, ArrayList<String>> dictionary = new TreeMap<String, ArrayList<String>>();
+				while ((line = cacheReader.readLine()) != null) {
+					//while not at end of file save hostname and ip in string array
+					String keyPair[] = line.split(",");
+					//if hostname already exists add it to the list
+					if (dictionary.containsKey(keyPair[0])) {
+						dictionary.get(keyPair[0]).add(keyPair[1]);
+					}
+					//if hostname is new create a new array for its ipaddress
+					else{
+						dictionary.put(keyPair[0], new ArrayList<String>());
+						dictionary.get(keyPair[0]).add(keyPair[1]);
+					}
+				}
+
+				//if hostname is in the dictionary print to all required streams
+				if(dictionary.containsKey(hostname)){
+					String[] ipList = dictionary.get(hostname).toArray(new String[0]);
+					String ip = IPselection(ipList);
+					csvLogFile.println(hostname + ", " + ip + ", " + "CACHED");
+					outStream.println(hostname + ":" + ip + ":" + "CACHED");
+					System.out.println(hostname + ":" + ip + ":" + "CACHED");
+
+					//else we attempt to find an ipaddress for the hostname
+				}else{
+					String ipAddress;
+					try {
+						InetAddress inetAddress = InetAddress.getByName(hostname);
+						ipAddress = inetAddress.getHostAddress();
+					} catch (UnknownHostException e) {
+						ipAddress = "Host not found";
+					}
+					//then print to all required streams
+					csvLogFile.println(hostname + ", " + ipAddress + ", " + "API");
+					cacheWriter.println(hostname + "," + ipAddress);
+					outStream.println(hostname + ":" + ipAddress + ":" + "API");
+					System.out.println(hostname + ":" + ipAddress + ":" + "API");
+				}
+
+				//close required streams
+				cacheReader.close();
+				cacheWriter.close();
+				csvLogFile.close();
             } catch (Exception e) {
                 System.out.println("exception: " + e);
             }
 	//Close the input and output streams.
+			inputStream.close();
+			outStream.close();
 
 
         } catch (IOException e) {

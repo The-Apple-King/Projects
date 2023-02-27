@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Project1DNSCodes:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Project1DNSCodes_jar</output-path>
+    <root id="archive" name="Project1DNSCodes.jar">
+      <element id="module-output" name="Project1DNSCodes" />
+    </root>
+  </artifact>
+</component>

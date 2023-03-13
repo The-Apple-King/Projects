@@ -1,8 +1,7 @@
-google.com, 142.250.190.78
-umn.edu, 134.84.223.68
-notreal.co.uk, 104.21.7.191
-yahoo.com,98.137.11.163
-yahoo.con,Host not found
-penis.jpg,Host not found
-die.co.uk,104.247.81.52
-
+google.com,142.250.190.78
+penis.com,199.59.243.222
+what.net,Host not found
+buttsex.butt,Host not found
+what,Host not found
+umn.edu,134.84.223.68
+coolmathgames.com,151.101.2.132

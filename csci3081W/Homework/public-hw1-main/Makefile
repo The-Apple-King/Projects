@@ -5,6 +5,7 @@ all: main
 all: passwords_a
 all: passwords_b
 
+
 %.o: %.cc
 	$(CXX) -c $< -o $@
 
@@ -19,6 +20,9 @@ fruit: fruit_class.o
 
 main: main.o
 	$(CXX) -o $@.out $^
+
+duck: 
+	g++ mallard.cc duck.cc canvasback.cc rubber.cc -o out.out
 
 .PHONY: clean
 clean:

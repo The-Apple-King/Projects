@@ -3,7 +3,7 @@
 # Author: John Kolb <jhkolb@umn.edu>
 # Inspired by Chris Kauffman's original 'testy' utility
 # SPDX-License-Identifier: GPL-3.0-or-later
-# Version 0.2.7
+# Version 0.2.6
 # Requires Python 3.7 or above
 # Tested in Linux environments only
 
@@ -427,7 +427,7 @@ class TestCase:
             if timed_out:
                 self.execute_result = (output, CommandOutcome.TIMED_OUT)
             elif os.WIFSIGNALED(exit_status) and os.WTERMSIG(exit_status) == signal.SIGSEGV:
-                self.execute_result = output, CommandOutcome.SEG_FAULT
+                self.execute_result =  output, CommandOutcome.SEG_FAULT
             elif self.use_valgrind and os.WIFEXITED(exit_status) and os.WEXITSTATUS(exit_status) == VALGRIND_ERROR_RET:
                 self.execute_result = output, CommandOutcome.VALGRIND_FAIL
             else:
@@ -438,6 +438,7 @@ class TestCase:
     def start(self):
         self.thread = threading.Thread(target=self._executeCommand)
         self.thread.start()
+
 
     def finish(self):
         self.thread.join()
@@ -531,11 +532,6 @@ class TestSequence:
         self.results_output_file = os.path.join(TEST_RESULTS_DIR, output_file_name_root + "-results.tmp")
         self.use_valgrind = any([ test.use_valgrind for test in self.tests ])
 
-        # For thread-safe cancellation
-        self.is_canceled = threading.Event()
-        self.pending_tests_lock = threading.Lock()
-        self.pending_tests = {}
-
     def run(self):
         columns, _ = shutil.get_terminal_size()
         output = '=' * columns + "\n"
@@ -546,6 +542,9 @@ class TestSequence:
         total_max_score = sum([ test.points for test in self.tests] )
         total_score = 0
         summary = "Passed"
+
+        # Maintain list of pending tests in case needed for cancellation
+        self.pending_tests = {}
 
         for i, step in enumerate(self.steps):
             output += ('~' * columns + "\n")
@@ -559,25 +558,17 @@ class TestSequence:
                     if error:
                         output += f"Action {j+1}: Not executed due to error(s) in previous action\n"
                     elif action.type == "start":
-                        with self.pending_tests_lock:
-                            if self.is_canceled.is_set():
-                                return None # Bail out, no one is checking return value
-                            output += f"Action {j+1}: Start {action.target}\n"
-                            test.start()
-                            self.pending_tests[action.target] = test
+                        output += f"Action {j+1}: Start {action.target}\n"
+                        test.start()
+                        self.pending_tests[action.target] = test
                     elif action.type == "finish" or action.type == "run":
                         output += f"Action {j+1}: {action.type.title()} {action.target}\n"
                         if action.type == "run":
-                            with self.pending_tests_lock:
-                                if self.is_canceled.is_set():
-                                    return None # Bail out now, no one is checking return value
-                                test.start()
-                                self.pending_tests[action.target] = test
+                            test.start()
+                            self.pending_tests[action.target] = test
 
-                        # This will wait on test outcome, need lock released
                         result = test.finish()
-                        with self.pending_tests_lock:
-                            del self.pending_tests[action.target]
+                        del self.pending_tests[action.target]
                         total_score += result.score
                         output += result.output
                         if result.summary.startswith("Segmentation Fault") or result.summary.startswith("Valgrind Failure") or \
@@ -590,13 +581,11 @@ class TestSequence:
         return TestResult(summary, output, total_max_score, total_score, self.hidden)
 
     def cancel(self):
-        with self.pending_tests_lock:
-            self.is_canceled.set()
-            for pending_test in self.pending_tests.values():
-                try:
-                    os.kill(pending_test.pid, signal.SIGKILL)
-                except os.ProcessLookupError:
-                    pass # Process terminated before signal sent
+        for pending_test in self.pending_tests.values():
+            try:
+                os.kill(pending_test.pid, signal.SIGKILL)
+            except os.ProcessLookupError:
+                pass # Process terminated before signal sent
 
 
     @staticmethod

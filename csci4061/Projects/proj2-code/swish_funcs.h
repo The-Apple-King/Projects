@@ -1,6 +1,9 @@
 #ifndef SWISH_FUNCS_H
 #define SWISH_FUNCS_H
 
+#include "job_list.h"
+#include "string_vector.h"
+
 /*
  * Task 0
  * Divide a string with substrings separated by a single space (" ")

@@ -61,8 +61,8 @@ class dnsQuery extends Thread {
             try {
 				//open up writer and readers for files
 				PrintWriter csvLogFile = new PrintWriter(new FileWriter("dns-server-log.csv", true));
-				BufferedReader cacheReader = new BufferedReader(new FileReader("DNS_mapping.txt"));
 				PrintWriter cacheWriter = new PrintWriter(new FileWriter("DNS_mapping.txt", true));
+				BufferedReader cacheReader = new BufferedReader(new FileReader("DNS_mapping.txt"));
 
 				//create a treemap with a key and a list of ipaddress for cache
 				String line = "";

@@ -215,45 +215,6 @@
                 }
             ],
             "preLaunchTask": "C/C++: g++.exe build active file"
-        },
-        {
-            "name": "(gdb) Launch",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${workspaceFolder}/csci2021/Projects/p2-code/puzzlebox",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
-            ]
-        },
-        {
-            "name": "Banlet Main",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${workspaceRoot}/csci2021/Homework/p1-code/banlet_main",
-            "args": [],
-            "stopAtEntry": true,
-            "cwd": "/usr/bin",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "miDebuggerPath": "/usr/bin/gdb",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
-            ]
         }
     ]
 }

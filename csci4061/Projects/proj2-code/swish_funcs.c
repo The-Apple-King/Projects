@@ -53,10 +53,16 @@ int run_command(strvec_t *tokens) {
   }
 
   char *args[MAX_ARGS];
+  for (size_t i = 0; i < MAX_ARGS; i++)
+  {
+    args[i] = NULL;
+  }
+  
 
-  for (size_t i = 0; i < MAX_ARGS; i++) {
+  for (size_t i = 0; i < tokens->length; i++) {
+    
     // check if file input
-    if (strcmp(tokens->data[i], "<")) {
+    if (strcmp(tokens->data[i], "<") == 0) {
       i += 2;
       int input = open(tokens->data[i - 1], O_RDONLY);
 
@@ -70,9 +76,10 @@ int run_command(strvec_t *tokens) {
         perror("dup2 input");
         close(input);
       }
+      
     }
 
-    if (strcmp(tokens->data[i], ">")) {  // if has > output
+    if (strcmp(tokens->data[i], ">") == 0) {  // if has > output
       i += 2;
       int output = open(tokens->data[i - 1], O_WRONLY);
 
@@ -87,7 +94,7 @@ int run_command(strvec_t *tokens) {
         close(output);
       }
 
-    } else if (strcmp(tokens->data[i], ">>")) {  // if has >> output
+    } else if (strcmp(tokens->data[i], ">>") == 0) {  // if has >> output
       i += 2;
       int output = open(tokens->data[i - 1], O_WRONLY | O_APPEND);
 

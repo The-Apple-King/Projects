@@ -62,7 +62,7 @@ int main(int argc, char **argv) {
       char s[CMD_LEN];
       getcwd(s, CMD_LEN);
       if (s != NULL) {
-        printf("%s", s);
+        printf("%s\n", s);
       } else {
         perror("getcwd");
       }
@@ -138,15 +138,13 @@ int main(int argc, char **argv) {
     }
 
     else {
-      if (strcmp(tokens.data[tokens.length], "&") == 0) {
-      }
-
+      
       pid_t pid = fork();
       if (pid == 0)  // if child
       {
         run_command(&tokens);
       } else {
-        if (strcmp(tokens.data[tokens.length], "&") == 0) {
+        if (strcmp(tokens.data[tokens.length-1], "&") == 0) {
           job_list_add(&jobs, pid, first_token, JOB_BACKGROUND);
         } else {
           

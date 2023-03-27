@@ -31,7 +31,7 @@ QUIZ Questions poll() System Call
   Which event types are we interested in checking for if we want to know
   when a pipe will have data available for reading?
     - ( ) 'POLLIN', 'POLLOUT', and 'POLLERR'
-    - ( ) 'POLLIN' Only
+    - (X) 'POLLIN' Only
     - ( ) 'POLLOUT' Only
     - ( ) 'POLLIN' and 'POLLOUT'
 
@@ -40,12 +40,12 @@ QUIZ Questions poll() System Call
   has a pending event?
     - ( ) 0
     - ( ) 1
-    - ( ) -1
+    - (X) -1
     - ( ) 'INT_MAX'
 
   What is a convenient way to instruct 'poll()' to ignore a particular
   'struct pollfd' element in the array passed in as the first argument?
-    - ( ) Negate the value of the struct's 'fd' field
+    - (X) Negate the value of the struct's 'fd' field
     - ( ) Set the struct's 'revents' field to 0
     - ( ) Change the 'nfds' argument (the second argument) to 'poll()'
     - ( ) Trick question: You need to remove the element from the array.

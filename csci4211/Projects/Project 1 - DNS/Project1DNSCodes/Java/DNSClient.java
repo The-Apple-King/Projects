@@ -26,12 +26,13 @@ public class DNSClient{
             System.out.println("Type in a domain name to query, or 'q' to quit:");
             //send DNS query to the server. Change the URL to whatever you want to
             //query (ex. google.com, microsoft.com, umn.edu)
-            query = inLine.nextLine();
+        query = inLine.nextLine();
             if (query.equalsIgnoreCase("q") || query.equalsIgnoreCase("quit")) {
+                System.out.println("Exiting program");
                 System.exit(0);
             }
             else{
-		int port = 5001;
+                int port = 9889;
 		String host = "localhost";
 		//Create new client socket and connect to the server.
 

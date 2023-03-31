@@ -1,12 +1,12 @@
-#include "Helicopter.h"
+#include "Human.h"
 
 #include <cmath>
 #include <limits>
 
-#include "BeelineStrategy.h"
+#include "AstarStrategy.h"
 
 
-Helicopter::Helicopter(JsonObject& obj) : details(obj){
+Human::Human(JsonObject& obj) : details(obj){
   JsonArray pos(obj["position"]);
   position = {pos[0], pos[1], pos[2]};
   JsonArray dir(obj["direction"]);
@@ -19,17 +19,17 @@ Helicopter::Helicopter(JsonObject& obj) : details(obj){
     srand (time(NULL));
 }
 
-Helicopter::~Helicopter() {
+Human::~Human() {
 
 }
 
-void Helicopter::findDestination(){
-    destination = {((rand()%2900)-1400), 500, (rand()%1600 -800)};
+void Human::findDestination(){
+    destination = {((rand()%2900)-1400), 0, (rand()%1600 -800)};
     available = false;
-    toRandomPosition = new BeelineStrategy(position, destination);
+    toRandomPosition = new AstarStrategy(position, destination, graph);
 }
 
-void Helicopter::Update(double dt, std::vector<IEntity*> scheduler) {
+void Human::Update(double dt, std::vector<IEntity*> scheduler) {
 
     if(available)
         findDestination();
@@ -45,7 +45,7 @@ void Helicopter::Update(double dt, std::vector<IEntity*> scheduler) {
     }
 }
 
-void Helicopter::Rotate(double angle) {
+void Human::Rotate(double angle) {
     Vector3 dirTmp = direction;
   direction.x = dirTmp.x * std::cos(angle) - dirTmp.z * std::sin(angle);
   direction.z = dirTmp.x * std::sin(angle) + dirTmp.z * std::cos(angle);

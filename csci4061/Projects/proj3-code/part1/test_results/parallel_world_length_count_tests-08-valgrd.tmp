@@ -1,0 +1,51 @@
+==10243== Memcheck, a memory error detector
+==10243== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==10243== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==10243== Command: ./par_word_lengths test_cases/resources/single_line.txt test_cases/resources/single_line_2.txt test_cases/resources/single_line_3.txt test_cases/resources/single_line_4.txt
+==10243== Parent PID: 10199
+==10243== 
+==10244== 
+==10244== HEAP SUMMARY:
+==10244==     in use at exit: 0 bytes in 0 blocks
+==10244==   total heap usage: 2 allocs, 2 frees, 4,568 bytes allocated
+==10244== 
+==10244== All heap blocks were freed -- no leaks are possible
+==10244== 
+==10244== For lists of detected and suppressed errors, rerun with: -s
+==10244== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==10245== 
+==10245== HEAP SUMMARY:
+==10245==     in use at exit: 0 bytes in 0 blocks
+==10245==   total heap usage: 2 allocs, 2 frees, 4,568 bytes allocated
+==10245== 
+==10245== All heap blocks were freed -- no leaks are possible
+==10245== 
+==10245== For lists of detected and suppressed errors, rerun with: -s
+==10245== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==10246== 
+==10246== HEAP SUMMARY:
+==10246==     in use at exit: 0 bytes in 0 blocks
+==10246==   total heap usage: 2 allocs, 2 frees, 4,568 bytes allocated
+==10246== 
+==10246== All heap blocks were freed -- no leaks are possible
+==10246== 
+==10246== For lists of detected and suppressed errors, rerun with: -s
+==10246== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==10247== 
+==10247== HEAP SUMMARY:
+==10247==     in use at exit: 0 bytes in 0 blocks
+==10247==   total heap usage: 2 allocs, 2 frees, 4,568 bytes allocated
+==10247== 
+==10247== All heap blocks were freed -- no leaks are possible
+==10247== 
+==10247== For lists of detected and suppressed errors, rerun with: -s
+==10247== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==10243== 
+==10243== HEAP SUMMARY:
+==10243==     in use at exit: 0 bytes in 0 blocks
+==10243==   total heap usage: 1 allocs, 1 frees, 1,024 bytes allocated
+==10243== 
+==10243== All heap blocks were freed -- no leaks are possible
+==10243== 
+==10243== For lists of detected and suppressed errors, rerun with: -s
+==10243== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

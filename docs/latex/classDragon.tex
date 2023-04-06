@@ -1,0 +1,349 @@
+\hypertarget{classDragon}{}\doxysection{Dragon Class Reference}
+\label{classDragon}\index{Dragon@{Dragon}}
+
+
+Represents a \mbox{\hyperlink{classDragon}{Dragon}} in a physical system. Dragons move using euler integration based on a specified velocity and direction.  
+
+
+
+
+{\ttfamily \#include $<$Dragon.\+h$>$}
+
+
+
+Inheritance diagram for Dragon\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=132pt]{classDragon__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Dragon\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=132pt]{classDragon__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classDragon_a7038a55218af55080af2edbd1d814195}{Dragon}} (Json\+Object \&obj)
+\begin{DoxyCompactList}\small\item\em Dragons are created with a name. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classDragon_ae34521402d155aae936b65afbee22cf5}\label{classDragon_ae34521402d155aae936b65afbee22cf5}} 
+\mbox{\hyperlink{classDragon_ae34521402d155aae936b65afbee22cf5}{$\sim$\+Dragon}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classDragon_ac62a3e6d9e1873d84e5cc30a14884bc9}{Get\+Speed}} () const
+\begin{DoxyCompactList}\small\item\em Gets the speed of the \mbox{\hyperlink{classDragon}{Dragon}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classVector3}{Vector3}} \mbox{\hyperlink{classDragon_a01133ca34ab9313421f0ccf25629d92e}{Get\+Position}} () const
+\begin{DoxyCompactList}\small\item\em Gets the position of the \mbox{\hyperlink{classDragon}{Dragon}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classVector3}{Vector3}} \mbox{\hyperlink{classDragon_aa4af256150e493e5b0e49d75017510fd}{Get\+Direction}} () const
+\begin{DoxyCompactList}\small\item\em Gets the direction of the \mbox{\hyperlink{classDragon}{Dragon}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classVector3}{Vector3}} \mbox{\hyperlink{classDragon_a270cbf6917ec812bc9e568af35beda56}{Get\+Destination}} () const
+\begin{DoxyCompactList}\small\item\em Gets the destination of the \mbox{\hyperlink{classDragon}{Dragon}}. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classDragon_a5a98ebfb9b94b7839343958779272644}{Get\+Color}} () const
+\begin{DoxyCompactList}\small\item\em Gets the color of the \mbox{\hyperlink{classDragon}{Dragon}}. \end{DoxyCompactList}\item 
+Json\+Object \mbox{\hyperlink{classDragon_a9b53c56f77210dec775104f305127c09}{Get\+Details}} () const
+\begin{DoxyCompactList}\small\item\em Gets the details information of the \mbox{\hyperlink{classDragon}{Dragon}}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classDragon_a217426624776a93a0b1dc793416e0107}{Get\+Availability}} () const
+\begin{DoxyCompactList}\small\item\em Gets the availability of the \mbox{\hyperlink{classDragon}{Dragon}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classDragon_a0d8e70f4179af62ad9cf1281212db35b}{find\+Destination}} ()
+\begin{DoxyCompactList}\small\item\em finds another random destination to move to \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classDragon_aed72082fab4bbd28be481f6473445ed6}{Update}} (double dt, std\+::vector$<$ \mbox{\hyperlink{classIEntity}{I\+Entity}} $\ast$ $>$ scheduler)
+\begin{DoxyCompactList}\small\item\em Updates the \mbox{\hyperlink{classDragon}{Dragon}}\textquotesingle{}s position. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classDragon_ae9f2533623cc1d2dad3952e8f8b70f98}{Set\+Position}} (\mbox{\hyperlink{classVector3}{Vector3}} pos\+\_\+)
+\begin{DoxyCompactList}\small\item\em Sets the position of the \mbox{\hyperlink{classDragon}{Dragon}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classDragon_a03023acf9711b3a3323665c5eddb4e5c}{Set\+Direction}} (\mbox{\hyperlink{classVector3}{Vector3}} dir\+\_\+)
+\begin{DoxyCompactList}\small\item\em Sets the direction of the \mbox{\hyperlink{classDragon}{Dragon}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classDragon_a50fa8e004c76dfdd3a6fe12ff836a88a}{Set\+Destination}} (\mbox{\hyperlink{classVector3}{Vector3}} des\+\_\+)
+\begin{DoxyCompactList}\small\item\em Sets the destination of the \mbox{\hyperlink{classDragon}{Dragon}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classDragon_a71bcaf0570b9f48f9a1a1acc8369b58e}{Set\+Color}} (std\+::string col\+\_\+)
+\begin{DoxyCompactList}\small\item\em Sets the color of the \mbox{\hyperlink{classDragon}{Dragon}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classDragon_aa70bfd4f03330b9adb5dec234d2e0c7a}{Rotate}} (double angle)
+\begin{DoxyCompactList}\small\item\em Rotates the \mbox{\hyperlink{classDragon}{Dragon}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classDragon_a860c6e5035a3affb8bffba7f021f1229}\label{classDragon_a860c6e5035a3affb8bffba7f021f1229}} 
+\mbox{\hyperlink{classDragon_a860c6e5035a3affb8bffba7f021f1229}{Dragon}} (const \mbox{\hyperlink{classDragon}{Dragon}} \&\mbox{\hyperlink{classDragon}{Dragon}})=delete
+\begin{DoxyCompactList}\small\item\em Removing the copy constructor and assignment operator so that Dragons cannot be copied. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classDragon_a4eab6b543ef3f3dfac54fc6a9323a9a2}\label{classDragon_a4eab6b543ef3f3dfac54fc6a9323a9a2}} 
+\mbox{\hyperlink{classDragon}{Dragon}} \& {\bfseries operator=} (const \mbox{\hyperlink{classDragon}{Dragon}} \&\mbox{\hyperlink{classDragon}{Dragon}})=delete
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Represents a \mbox{\hyperlink{classDragon}{Dragon}} in a physical system. Dragons move using euler integration based on a specified velocity and direction. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classDragon_a7038a55218af55080af2edbd1d814195}\label{classDragon_a7038a55218af55080af2edbd1d814195}} 
+\index{Dragon@{Dragon}!Dragon@{Dragon}}
+\index{Dragon@{Dragon}!Dragon@{Dragon}}
+\doxysubsubsection{\texorpdfstring{Dragon()}{Dragon()}}
+{\footnotesize\ttfamily Dragon\+::\+Dragon (\begin{DoxyParamCaption}\item[{Json\+Object \&}]{obj }\end{DoxyParamCaption})}
+
+
+
+Dragons are created with a name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj} & J\+S\+ON object containing the \mbox{\hyperlink{classDragon}{Dragon}}\textquotesingle{}s information \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classDragon_a0d8e70f4179af62ad9cf1281212db35b}\label{classDragon_a0d8e70f4179af62ad9cf1281212db35b}} 
+\index{Dragon@{Dragon}!findDestination@{findDestination}}
+\index{findDestination@{findDestination}!Dragon@{Dragon}}
+\doxysubsubsection{\texorpdfstring{findDestination()}{findDestination()}}
+{\footnotesize\ttfamily void Dragon\+::find\+Destination (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+finds another random destination to move to 
+
+\mbox{\Hypertarget{classDragon_a217426624776a93a0b1dc793416e0107}\label{classDragon_a217426624776a93a0b1dc793416e0107}} 
+\index{Dragon@{Dragon}!GetAvailability@{GetAvailability}}
+\index{GetAvailability@{GetAvailability}!Dragon@{Dragon}}
+\doxysubsubsection{\texorpdfstring{GetAvailability()}{GetAvailability()}}
+{\footnotesize\ttfamily bool Dragon\+::\+Get\+Availability (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Gets the availability of the \mbox{\hyperlink{classDragon}{Dragon}}. 
+
+\begin{DoxyReturn}{Returns}
+The availability of the \mbox{\hyperlink{classDragon}{Dragon}} 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classIEntity_a90348881691a37d5c3d63265ed3463b1}{I\+Entity}}.
+
+\mbox{\Hypertarget{classDragon_a5a98ebfb9b94b7839343958779272644}\label{classDragon_a5a98ebfb9b94b7839343958779272644}} 
+\index{Dragon@{Dragon}!GetColor@{GetColor}}
+\index{GetColor@{GetColor}!Dragon@{Dragon}}
+\doxysubsubsection{\texorpdfstring{GetColor()}{GetColor()}}
+{\footnotesize\ttfamily std\+::string Dragon\+::\+Get\+Color (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Gets the color of the \mbox{\hyperlink{classDragon}{Dragon}}. 
+
+\begin{DoxyReturn}{Returns}
+The color of the \mbox{\hyperlink{classDragon}{Dragon}} 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classIEntity_a1326f6c0e0377a4fbde8a8c02fb6ccb3}{I\+Entity}}.
+
+\mbox{\Hypertarget{classDragon_a270cbf6917ec812bc9e568af35beda56}\label{classDragon_a270cbf6917ec812bc9e568af35beda56}} 
+\index{Dragon@{Dragon}!GetDestination@{GetDestination}}
+\index{GetDestination@{GetDestination}!Dragon@{Dragon}}
+\doxysubsubsection{\texorpdfstring{GetDestination()}{GetDestination()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classVector3}{Vector3}} Dragon\+::\+Get\+Destination (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Gets the destination of the \mbox{\hyperlink{classDragon}{Dragon}}. 
+
+\begin{DoxyReturn}{Returns}
+The destination of the \mbox{\hyperlink{classDragon}{Dragon}} 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classIEntity_a0dcaf865938ab1fb49c8389b5e580d90}{I\+Entity}}.
+
+\mbox{\Hypertarget{classDragon_a9b53c56f77210dec775104f305127c09}\label{classDragon_a9b53c56f77210dec775104f305127c09}} 
+\index{Dragon@{Dragon}!GetDetails@{GetDetails}}
+\index{GetDetails@{GetDetails}!Dragon@{Dragon}}
+\doxysubsubsection{\texorpdfstring{GetDetails()}{GetDetails()}}
+{\footnotesize\ttfamily Json\+Object Dragon\+::\+Get\+Details (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Gets the details information of the \mbox{\hyperlink{classDragon}{Dragon}}. 
+
+\begin{DoxyReturn}{Returns}
+The details information of the \mbox{\hyperlink{classDragon}{Dragon}} 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classIEntity_a97c799400ce05e2ff2566adc4d7b9634}{I\+Entity}}.
+
+\mbox{\Hypertarget{classDragon_aa4af256150e493e5b0e49d75017510fd}\label{classDragon_aa4af256150e493e5b0e49d75017510fd}} 
+\index{Dragon@{Dragon}!GetDirection@{GetDirection}}
+\index{GetDirection@{GetDirection}!Dragon@{Dragon}}
+\doxysubsubsection{\texorpdfstring{GetDirection()}{GetDirection()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classVector3}{Vector3}} Dragon\+::\+Get\+Direction (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Gets the direction of the \mbox{\hyperlink{classDragon}{Dragon}}. 
+
+\begin{DoxyReturn}{Returns}
+The direction of the \mbox{\hyperlink{classDragon}{Dragon}} 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classIEntity_aa99a8fef8b22195a5113c38ef51f086d}{I\+Entity}}.
+
+\mbox{\Hypertarget{classDragon_a01133ca34ab9313421f0ccf25629d92e}\label{classDragon_a01133ca34ab9313421f0ccf25629d92e}} 
+\index{Dragon@{Dragon}!GetPosition@{GetPosition}}
+\index{GetPosition@{GetPosition}!Dragon@{Dragon}}
+\doxysubsubsection{\texorpdfstring{GetPosition()}{GetPosition()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classVector3}{Vector3}} Dragon\+::\+Get\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Gets the position of the \mbox{\hyperlink{classDragon}{Dragon}}. 
+
+\begin{DoxyReturn}{Returns}
+The position of the \mbox{\hyperlink{classDragon}{Dragon}} 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classIEntity_a9bc32587aab91761fc0e718612498199}{I\+Entity}}.
+
+\mbox{\Hypertarget{classDragon_ac62a3e6d9e1873d84e5cc30a14884bc9}\label{classDragon_ac62a3e6d9e1873d84e5cc30a14884bc9}} 
+\index{Dragon@{Dragon}!GetSpeed@{GetSpeed}}
+\index{GetSpeed@{GetSpeed}!Dragon@{Dragon}}
+\doxysubsubsection{\texorpdfstring{GetSpeed()}{GetSpeed()}}
+{\footnotesize\ttfamily float Dragon\+::\+Get\+Speed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Gets the speed of the \mbox{\hyperlink{classDragon}{Dragon}}. 
+
+\begin{DoxyReturn}{Returns}
+The speed of the \mbox{\hyperlink{classDragon}{Dragon}} 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classIEntity_a6520d2b1dc71d092bab38ef9f5cc9ff4}{I\+Entity}}.
+
+\mbox{\Hypertarget{classDragon_aa70bfd4f03330b9adb5dec234d2e0c7a}\label{classDragon_aa70bfd4f03330b9adb5dec234d2e0c7a}} 
+\index{Dragon@{Dragon}!Rotate@{Rotate}}
+\index{Rotate@{Rotate}!Dragon@{Dragon}}
+\doxysubsubsection{\texorpdfstring{Rotate()}{Rotate()}}
+{\footnotesize\ttfamily void Dragon\+::\+Rotate (\begin{DoxyParamCaption}\item[{double}]{angle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Rotates the \mbox{\hyperlink{classDragon}{Dragon}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em angle} & The angle by which the \mbox{\hyperlink{classDragon}{Dragon}} should be rotated \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classIEntity_a4c109baa4179c28422623a7d3b2e9f82}{I\+Entity}}.
+
+\mbox{\Hypertarget{classDragon_a71bcaf0570b9f48f9a1a1acc8369b58e}\label{classDragon_a71bcaf0570b9f48f9a1a1acc8369b58e}} 
+\index{Dragon@{Dragon}!SetColor@{SetColor}}
+\index{SetColor@{SetColor}!Dragon@{Dragon}}
+\doxysubsubsection{\texorpdfstring{SetColor()}{SetColor()}}
+{\footnotesize\ttfamily void Dragon\+::\+Set\+Color (\begin{DoxyParamCaption}\item[{std\+::string}]{col\+\_\+ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Sets the color of the \mbox{\hyperlink{classDragon}{Dragon}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em col\+\_\+} & The new color of the \mbox{\hyperlink{classDragon}{Dragon}} \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classIEntity_a61b62fe1126f473d8ebb524c70c57a39}{I\+Entity}}.
+
+\mbox{\Hypertarget{classDragon_a50fa8e004c76dfdd3a6fe12ff836a88a}\label{classDragon_a50fa8e004c76dfdd3a6fe12ff836a88a}} 
+\index{Dragon@{Dragon}!SetDestination@{SetDestination}}
+\index{SetDestination@{SetDestination}!Dragon@{Dragon}}
+\doxysubsubsection{\texorpdfstring{SetDestination()}{SetDestination()}}
+{\footnotesize\ttfamily void Dragon\+::\+Set\+Destination (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classVector3}{Vector3}}}]{des\+\_\+ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Sets the destination of the \mbox{\hyperlink{classDragon}{Dragon}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em des\+\_\+} & The new destination of the \mbox{\hyperlink{classDragon}{Dragon}} \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classIEntity_aa473000823f673e9d7b89aed3cd3fc5c}{I\+Entity}}.
+
+\mbox{\Hypertarget{classDragon_a03023acf9711b3a3323665c5eddb4e5c}\label{classDragon_a03023acf9711b3a3323665c5eddb4e5c}} 
+\index{Dragon@{Dragon}!SetDirection@{SetDirection}}
+\index{SetDirection@{SetDirection}!Dragon@{Dragon}}
+\doxysubsubsection{\texorpdfstring{SetDirection()}{SetDirection()}}
+{\footnotesize\ttfamily void Dragon\+::\+Set\+Direction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classVector3}{Vector3}}}]{dir\+\_\+ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Sets the direction of the \mbox{\hyperlink{classDragon}{Dragon}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dir\+\_\+} & The new direction of the \mbox{\hyperlink{classDragon}{Dragon}} \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classIEntity_a64bfaa448a929ca71693ff3e2edb9d97}{I\+Entity}}.
+
+\mbox{\Hypertarget{classDragon_ae9f2533623cc1d2dad3952e8f8b70f98}\label{classDragon_ae9f2533623cc1d2dad3952e8f8b70f98}} 
+\index{Dragon@{Dragon}!SetPosition@{SetPosition}}
+\index{SetPosition@{SetPosition}!Dragon@{Dragon}}
+\doxysubsubsection{\texorpdfstring{SetPosition()}{SetPosition()}}
+{\footnotesize\ttfamily void Dragon\+::\+Set\+Position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classVector3}{Vector3}}}]{pos\+\_\+ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Sets the position of the \mbox{\hyperlink{classDragon}{Dragon}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos\+\_\+} & The new position of the \mbox{\hyperlink{classDragon}{Dragon}} \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classIEntity_af0475048b09dc13ed6cf8e7c7be2ae6b}{I\+Entity}}.
+
+\mbox{\Hypertarget{classDragon_aed72082fab4bbd28be481f6473445ed6}\label{classDragon_aed72082fab4bbd28be481f6473445ed6}} 
+\index{Dragon@{Dragon}!Update@{Update}}
+\index{Update@{Update}!Dragon@{Dragon}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily void Dragon\+::\+Update (\begin{DoxyParamCaption}\item[{double}]{dt,  }\item[{std\+::vector$<$ \mbox{\hyperlink{classIEntity}{I\+Entity}} $\ast$ $>$}]{scheduler }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Updates the \mbox{\hyperlink{classDragon}{Dragon}}\textquotesingle{}s position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dt} & Delta time \\
+\hline
+{\em scheduler} & Vector containing all the entities in the system \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classIEntity_a9a8e8588fd85c7b0d813d60686d4dc2c}{I\+Entity}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/tonth005/\+Team-\/010-\/47-\/lab10/libs/transit/include/Dragon.\+h\item 
+/home/tonth005/\+Team-\/010-\/47-\/lab10/libs/transit/src/Dragon.\+cc\end{DoxyCompactItemize}

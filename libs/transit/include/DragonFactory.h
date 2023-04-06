@@ -1,20 +1,20 @@
-#ifndef PIRATE_FACTORY_H_
-#define PIRATE_FACTORY_H_
+#ifndef DRAGON_FACTORY_H_
+#define DRAGON_FACTORY_H_
 
 #include <vector>
 
 #include "IEntityFactory.h"
-#include "Pirate.h"
+#include "Dragon.h"
 
 /**
- *@brief Pirate Factory to produce Pirates class.
+ *@brief Dragon Factory to produce Dragons class.
  **/
-class PirateFactory : public IEntityFactory {
+class DragonFactory : public IEntityFactory {
  public:
   /**
    * @brief Destructor for IEntityFactory class.
    **/
-  virtual ~PirateFactory() {}
+  virtual ~DragonFactory() {}
 
   /**
    * @brief Creates entity using the given JSON object, if possible.

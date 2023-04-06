@@ -1,13 +1,12 @@
-#include "Pirate.h"
-#include "Parrot.h"
+#include "Dragon.h"
 
 #include <cmath>
 #include <limits>
 
-#include "AstarStrategy.h"
+#include "BeelineStrategy.h"
 
 
-Pirate::Pirate(JsonObject& obj) : details(obj){
+Dragon::Dragon(JsonObject& obj) : details(obj){
     JsonArray pos(obj["position"]);
     position = {pos[0], pos[1], pos[2]};
     JsonArray dir(obj["direction"]);
@@ -20,28 +19,26 @@ Pirate::Pirate(JsonObject& obj) : details(obj){
     srand (time(NULL));
 }
 
-Pirate::~Pirate() {
+Dragon::~Dragon() {
     delete toRandomPosition;
     delete parrot;
 
 }
 
-void Pirate::findDestination(){
-    destination = {((rand()%2900)-1400), 0, (rand()%1600 -800)};
+void Dragon::findDestination(){
+    destination = {((rand()%2900)-1400), 700, (rand()%1600 -800)};
     available = false;
-    toRandomPosition = new AstarStrategy(position, destination, graph);
+    toRandomPosition = new BeelineStrategy(position, destination);
 }
 
-void Pirate::Update(double dt, std::vector<IEntity*> scheduler) {
+void Dragon::Update(double dt, std::vector<IEntity*> scheduler) {
 
     if(available)
         findDestination();
 
     if(toRandomPosition){
         toRandomPosition->Move(this, dt);
-        parrot->SetPosition({position.x, position.y, position.z});
-        parrot->SetDirection(direction);
-
+        Rotate(8);
         if (toRandomPosition->IsCompleted())
         {
             delete(toRandomPosition);
@@ -51,7 +48,7 @@ void Pirate::Update(double dt, std::vector<IEntity*> scheduler) {
     }
 }
 
-void Pirate::Rotate(double angle) {
+void Dragon::Rotate(double angle) {
     Vector3 dirTmp = direction;
   direction.x = dirTmp.x * std::cos(angle) - dirTmp.z * std::sin(angle);
   direction.z = dirTmp.x * std::sin(angle) + dirTmp.z * std::cos(angle);

@@ -50,32 +50,14 @@
     {
         "command": "CreateEntity",
       	"params": {
-            "type": "pirate",
-            "name": "Pirate-OG",
-            "mesh": "assets/model/human.glb",
-            "position": [100, 270, 100],
-            "scale": [0.005, 0.005, 0.005],
+            "type": "Dragon",
+            "name": "ITS A DRAGON!!!!!!",
+            "mesh": "assets/model/dragon.glb",
+            "position": [100, 700, 100],
+            "scale": [0.7, 0.7, 0.7],
             "rotation": [0, 0, 0, 0],
             "direction": [1,0,0],
-            "speed": 10.0,
-            "radius": 1.0,
-            "start": 2.0,
-            "duration": 2.0,
-            "offset": [0, -0.5, 0]
-    	  }
-    },
-
-    {
-        "command": "CreateEntity",
-      	"params": {
-            "type": "parrot",
-            "name": "Parrot-OG",
-            "mesh": "assets/model/parrot.glb",
-            "position": [100, 270, 100],
-            "scale": [0.005, 0.005, 0.005],
-            "rotation": [0, 0, 0, 0],
-            "direction": [1,0,0],
-            "speed": 10.0,
+            "speed": 50.0,
             "radius": 1.0,
             "start": 2.0,
             "duration": 2.0,

@@ -8,23 +8,21 @@
 
 
 Pirate::Pirate(JsonObject& obj) : details(obj){
-    std::cout << "started making the parrot";
+    JsonArray pos(obj["position"]);
+    position = {pos[0], pos[1], pos[2]};
+    JsonArray dir(obj["direction"]);
+    direction = {dir[0], dir[1], dir[2]};
 
-  JsonArray pos(obj["position"]);
-  position = {pos[0], pos[1], pos[2]};
-  JsonArray dir(obj["direction"]);
-  direction = {dir[0], dir[1], dir[2]};
+    speed = obj["speed"];
 
-  speed = obj["speed"];
-
-  available = true;
+    available = true;
 
     srand (time(NULL));
-
-    parrot = new Parrot(obj);
 }
 
 Pirate::~Pirate() {
+    delete toRandomPosition;
+    delete parrot;
 
 }
 
@@ -41,6 +39,9 @@ void Pirate::Update(double dt, std::vector<IEntity*> scheduler) {
 
     if(toRandomPosition){
         toRandomPosition->Move(this, dt);
+        parrot->SetPosition({position.x, position.y, position.z});
+        parrot->SetDirection(direction);
+
         if (toRandomPosition->IsCompleted())
         {
             delete(toRandomPosition);

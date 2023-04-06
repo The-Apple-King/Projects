@@ -33,26 +33,26 @@ QUIZ Questions UDP Socket Programming
   in the 'hints' struct passed to the system call?
    - ( ) AF_INET
    - ( ) AF_INET6
-   - ( ) AF_UNSPEC
+   - (X) AF_UNSPEC
    - ( ) AI_PASSIVE
 
   If we will be using 'getaddrinfo()' in preparation for using a UDP
   socket, which value do we use for the 'ai_socktype' field in the
   'hints' struct passed to the system call?
    - ( ) SOCK_STREAM
-   - ( ) SOCK_DGRAM
+   - (X) SOCK_DGRAM
    - ( ) SOCK_UDP
    - ( ) SOCK_PUPPET
 
   What is the native endianness of all of the CSE Labs machines?
-   - ( ) Little Endian
+   - (X) Little Endian
    - ( ) Big Endian
    - ( ) Medium Endian
    - ( ) West Endian
 
    What is the expected endianness of all binary data sent on the Internet?
    - ( ) Little Endian
-   - ( ) Big Endian
+   - (X) Big Endian
    - ( ) Medium Endian
    - ( ) West Endian
 
@@ -62,7 +62,7 @@ QUIZ Questions UDP Socket Programming
    - ( ) 'getaddrinfo()' opens file descriptors, and 'freeaddrinfo()' will close
          them for us.
    - ( ) Trick question: We can really just use 'free()' on this pointer.
-   - ( ) 'getaddrinfo()' returns a linked list of structs, and 'freeaddrinfo()'
+   - (X) 'getaddrinfo()' returns a linked list of structs, and 'freeaddrinfo()'
          frees the memory that was allocated for the list
    - ( ) This is needed to inform the computer at the address that it will no
          longer receive any connection requests from our code.

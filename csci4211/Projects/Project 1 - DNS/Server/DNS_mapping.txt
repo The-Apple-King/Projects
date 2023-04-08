@@ -1,0 +1,4 @@
+google.com,142.250.190.78
+www.nowhere.no,172.64.80.1
+www.google.com,142.251.32.4
+thisisnotarealwebsite.notpossible,Host not found

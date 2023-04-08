@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="04d6e2d9-0a30-45cf-bd62-de44e7ca7982" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../../../Project 2 - Reliable Data Transfer.zip" beforeDir="false" />
-    </list>
+    <list default="true" id="04d6e2d9-0a30-45cf-bd62-de44e7ca7982" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,7 +22,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../go back n" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../go_back_n" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -63,17 +61,29 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
+        <line-breakpoint enabled="true" type="java-field">
+          <url>file://$PROJECT_DIR$/simulator.java</url>
+          <line>6</line>
+          <properties field="nsim" class="simulator" />
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/B.java</url>
-          <line>26</line>
-          <option name="timeStamp" value="24" />
+          <url>file://$PROJECT_DIR$/simulator.java</url>
+          <line>67</line>
+          <option name="timeStamp" value="27" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
+        <PinnedItemInfo parentTag="simulator" memberName="nsim" />
         <PinnedItemInfo parentTag="event" memberName="pkt" />
       </pinned-members>
     </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="sim.nsim" language="JAVA" custom="sun.instrument.InstrumentationImpl" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

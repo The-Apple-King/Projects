@@ -38,35 +38,25 @@ int run_piped_command(strvec_t *tokens, int *pipes, int n_pipes, int in_idx, int
 
     if(in_idx != -1){// set input if we need to
         if(dup2(pipes[in_idx], STDIN_FILENO) == -1){
-            if(close(pipes[in_idx]) == -1){
-                return -1;
-            }
-            if(close(pipes[out_idx]) == -1){
-                return -1;
-            }
+            // if closes fail it doesn't change the outcome
+            close(pipes[in_idx]);
+            close(pipes[out_idx]);
             return -1;
         }
     }
     if(out_idx != -1){// set output if we need to 
         if(dup2(pipes[out_idx], STDOUT_FILENO) == -1){
-            if(close(pipes[in_idx]) == -1){
-                return -1;
-            }
-            if(close(pipes[out_idx]) == -1){
-                return -1;
-            }
+            // if closes fail it doesn't change the outcome
+            close(pipes[in_idx]);
+            close(pipes[out_idx]);
             return -1;
         }
     }
 
     // run command
     if(run_command(tokens) == -1){
-        if(close(pipes[in_idx]) == -1){
-                return -1;
-            }
-        if(close(pipes[out_idx]) == -1){
-                return -1;
-            }
+        close(pipes[in_idx]);
+        close(pipes[out_idx]);
         return -1;
     }
 
@@ -148,7 +138,10 @@ int run_pipelined_commands(strvec_t *tokens) {
             
         // branch off into a child and call run_piped_command
         pid_t child_pid = fork();
-        if (child_pid == 0)
+        if(child_pid < 0){
+            perror("fork failed");
+            return -1;
+        } else if (child_pid == 0)
         {   
             // run the last command
             int ret_val = run_piped_command(cmd, fd, n_pipes, input, output);

@@ -23,8 +23,37 @@ const char *files[] = {
 // port: Port to connect to
 // Returns a new TCP socket file descriptor on success or -1 on error
 int connect_to_server(const char *host, const char *port) {
-    // TODO Not yet implemented
-    return -1;
+    struct addrinfo hints, *result;
+    int sockfd, s;
+    
+    //set important fields
+    memset(&hints, 0, sizeof(struct addrinfo));
+    hints.ai_family = AF_UNSPEC; /* Allow IPv4 or IPv6 */
+    hints.ai_socktype = SOCK_STREAM; /* TCP socket */
+    
+    //error check addrinfo
+    s = getaddrinfo(host, port, &hints, &result);
+    if (s != 0) {
+        fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(s));
+        return -1;
+    }
+    
+    //create a socket
+    sockfd = socket(result->ai_family, result->ai_socktype, result->ai_protocol);
+    if(sockfd == -1){
+        perror("socket");
+        return -1;
+    }
+    //connect to socket
+    if (connect(sockfd, result->ai_addr, result->ai_addrlen) == -1) {
+        perror("connect");
+        return -1;
+    }
+    
+    // if we connect with our socket we free get addrinfo as we don't need to update it
+    // and then return the socket 
+    freeaddrinfo(result);
+    return sockfd;
 }
 
 // Writes an HTTP request to a TCP socket
@@ -32,8 +61,28 @@ int connect_to_server(const char *host, const char *port) {
 // file: Name of the file to request from server
 // Returns 0 on success or -1 on error
 int write_http_request(int sock_fd, const char *file) {
-    // TODO Not yet implemented
-    return -1;
+    char request[1024];
+    int len;
+    
+    //snprintf writes a string to a buffer in the format of printf
+    len = snprintf(request, sizeof(request), "GET /%s HTTP/1.1\r\n"
+                    "Host: localhost\r\n"
+                    "Connection: close\r\n\r\n", file);
+
+    // if we didn't save the string correctly err out
+    if (len < 0 || len >= sizeof(request)) {
+        perror("snprintf");
+        return -1;
+    }
+    
+    // write to socket
+    if (write(sock_fd, request, len) != len) {
+        perror("write");
+        return -1;
+    }
+    
+    // we get this far we succeeded 
+    return 0;
 }
 
 // Reads an HTTP response from a TCP socket

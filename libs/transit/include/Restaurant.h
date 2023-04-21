@@ -15,15 +15,23 @@ class Restaurant : public IEntity {
 
   JsonObject GetDetails() const { return details; }
 
+  Vector3 GetDestination() const { return destination; }
+
+  Vector3 GetDirection() const { return direction; }
+
+  float GetSpeed() const { return speed; }
+
   Vector3 GetPosition() const { return position; }
 
   void SetPosition(Vector3 pos_) { position = pos_; }
 
  private:
   JsonObject details;
+  Vector3 destination;
+  Vector3 direction;
   Vector3 position;
   bool available;
-
+  float speed;
 } ;
 
 #endif

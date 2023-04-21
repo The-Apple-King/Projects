@@ -71,6 +71,11 @@
 
     <div><input type="button" value="Add Human" onclick="addHuman()" style="margin-top: 10px;"></div>
 
+    <div><input type="button" value="Canes" onclick="canesOrder()" style="margin-top: 10px;"></div>
+
+    <div><input type="button" value="Chipotle" onclick="chipotleOrder()" style="margin-top: 10px;"></div>
+
+    <div><input type="button" value="Chic-Fil-A" onclick="chifilaOrder()" style="margin-top: 10px;"></div>
 
     <div id="nameError"></div>
 
@@ -83,6 +88,8 @@
         var helicopterID = 1;
 
         var humanID = 1;
+
+        var restaurantID = 1;
 
         // This method is called when the document is loaded
         $(document).ready(function () {
@@ -188,6 +195,61 @@
                 });
                 humanID += 1;
         }
+
+        function canesOrder() {
+            api.sendCommand("CreateEntity", {
+                "type": "Restaurant",
+                "name": "Canes"+restaurantID,
+                "mesh": "assets/model/flag.glb",
+                "position": [-500, 250, 450],
+                "scale": [0.005, 0.005, 0.005],
+                "rotation": [0, 0, 0, 0],
+                "direction": [1,0,0],
+                "speed": 0,
+                "radius": 1.0,
+                "start": 2.0,
+                "duration": 2.0,
+                "offset": [0, -0.5, 0]
+                });
+                restaurantID += 1;
+        }
+
+        function chifilaOrder() {
+            api.sendCommand("CreateEntity", {
+                "type": "Restaurant",
+                "name": "Chic-Fil-A"+restaurantID,
+                "mesh": "assets/model/flag.glb",
+                "position": [250, 250, 50],
+                "scale": [0.005, 0.005, 0.005],
+                "rotation": [0, 0, 0, 0],
+                "direction": [1,0,0],
+                "speed": 0,
+                "radius": 1.0,
+                "start": 2.0,
+                "duration": 2.0,
+                "offset": [0, -0.5, 0]
+                });
+                restaurantID += 1;
+        }
+
+        function chipotleOrder() {
+            api.sendCommand("CreateEntity", {
+                "type": "Restaurant",
+                "name": "Chipotle"+restaurantID,
+                "mesh": "assets/model/human.glb",
+                "position": [625, 250, -250],
+                "scale": [0.005, 0.005, 0.005],
+                "rotation": [0, 0, 0, 0],
+                "direction": [1,0,0],
+                "speed": 0,
+                "radius": 1.0,
+                "start": 2.0,
+                "duration": 2.0,
+                "offset": [0, -0.5, 0]
+                });
+                restaurantID += 1;
+        }
+
     </script>
 </body>
 

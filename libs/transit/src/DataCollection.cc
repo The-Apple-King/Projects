@@ -24,7 +24,7 @@ void SimulationDataCollector::outputDataToCSV(std::string filename) {
     // Write the data rows
     for (size_t i = 0; i < collectedData.size(); i++)
     {
-        collectedData[i].toString(&outputFile);
+        outputFile << collectedData[i].toString();
     }
 
     // Close the file

@@ -2,14 +2,15 @@
 #define DATA_H
 
 #include <string>
-#include "vector3.h"
+#include "math/vector3.h"
+#include <sstream>
 
 class Data {
 public:
     // constructor should also save all data
     Data(Vector3 start, Vector3 end, double distance, std::string strategy, std::string deliveryType);
 
-    std::string toString(std::ofstream& stream) const;
+    std::string toString();
 
 private:
     // any data we want to save

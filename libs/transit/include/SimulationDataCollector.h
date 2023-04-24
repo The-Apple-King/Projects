@@ -3,12 +3,13 @@
 
 #include <vector>
 #include <string>
+#include "Data.h"
 
 class SimulationDataCollector {
 public:
     static SimulationDataCollector& getInstance();
 
-    void collectData(double data);
+    void collectData(Data data);
 
     void outputDataToCSV(std::string fileName);
 
@@ -17,7 +18,7 @@ private:
     SimulationDataCollector(SimulationDataCollector const&) = delete; // Delete copy constructor
     void operator=(SimulationDataCollector const&) = delete; // Delete assignment operator
 
-    std::vector<double> collectedData;
+    std::vector<Data> collectedData;
 };
 
 #endif /* SIMULATION_DATA_COLLECTOR_H */

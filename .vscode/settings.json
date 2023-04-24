@@ -54,7 +54,8 @@
         "string.h": "c",
         "batt.h": "c",
         "algorithm": "cpp",
-        "wait.h": "c"
+        "wait.h": "c",
+        "connection_queue.h": "c"
     },
     "java.project.sourcePaths": [
         "csci1913/labs/lab9",
@@ -69,5 +70,6 @@
         "csci1913\\Homework\\Project3"
     ],
     "github-enterprise.uri": "https://github.umn.edu/swear041/projects.git",
-    "C_Cpp.errorSquiggles": "disabled"
+    "C_Cpp.errorSquiggles": "disabled",
+    "python.analysis.typeCheckingMode": "basic"
 }

@@ -72,10 +72,16 @@ int write_http_response(int fd, const char *resource_path) {
         perror("fopen");
         return -1;
     }
-
+    
     // Send 200 OK response headers
-    sprintf(buf, "HTTP/1.1 200 OK\r\nContent-Length: %ld\r\nContent-Type: %s\r\n\r\n", st.st_size, get_mime_type(resource_path));
-    write(fd, buf, strlen(buf));
+    if(sprintf(buf, "HTTP/1.1 200 OK\r\nContent-Length: %ld\r\nContent-Type: %s\r\n\r\n", st.st_size, get_mime_type(resource_path)) < 0){
+        perror("sprintf");
+        return -1;
+    }
+    if(write(fd, buf, strlen(buf)) == -1){
+        perror("write");
+        return -1;
+    }
 
     // Send the file contents
     remaining_bytes = st.st_size;
@@ -99,7 +105,10 @@ int write_http_response(int fd, const char *resource_path) {
     }
 
     // Close the file
-    fclose(resource_file);
+    if(fclose(resource_file) != 0){
+        perror("fclose");
+        return -1;
+    }
 
     return 0;
 }

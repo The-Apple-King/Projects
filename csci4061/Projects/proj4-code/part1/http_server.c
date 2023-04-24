@@ -32,7 +32,10 @@ int main(int argc, char **argv) {
     // setup sig handler
     struct sigaction sa;
     sa.sa_handler = handle_sigint;
-    sigemptyset(&sa.sa_mask);
+    if(sigemptyset(&sa.sa_mask) != 0){
+        perror("sigemptyset");
+        return -1;
+    }
     sa.sa_flags = 0;
 
     if (sigaction(SIGINT, &sa, NULL) == -1) {
@@ -42,7 +45,10 @@ int main(int argc, char **argv) {
 
     //create getaddrinfo stuff
     struct addrinfo hints, *res;
-    memset(&hints, 0, sizeof(hints));
+    if(memset(&hints, 0, sizeof(hints)) == NULL){
+        perror("memset");
+        return -1;
+    }
     hints.ai_family = AF_UNSPEC;
     hints.ai_socktype = SOCK_STREAM;
     hints.ai_flags = AI_PASSIVE;
@@ -80,7 +86,7 @@ int main(int argc, char **argv) {
         struct sockaddr_storage client_addr;
         socklen_t client_addrlen = sizeof(client_addr);
         int client_sockfd = accept(sockfd, (struct sockaddr *)&client_addr, &client_addrlen);
-        if (client_sockfd == -1) {
+        if (client_sockfd == -1 && errno != EINTR) {
             perror("accept");
             close(sockfd);
             return -1;

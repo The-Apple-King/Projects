@@ -2,12 +2,11 @@
 #include "Data.h"
 #include <fstream>
 
+
 SimulationDataCollector& SimulationDataCollector::getInstance() {
     static SimulationDataCollector instance;
     return instance;
 }
-
-// none of these work, they are more of templates, we use data class to print and collect data
 
 void SimulationDataCollector::collectData(Data trip) {
     // Add data to the internal data vector

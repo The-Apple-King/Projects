@@ -9,7 +9,7 @@ class SimulationDataCollector {
 public:
     static SimulationDataCollector& getInstance();
 
-    void collectData(Data data);
+    void collectData(Data* data);
 
     void outputDataToCSV(std::string fileName);
 
@@ -18,7 +18,7 @@ private:
     SimulationDataCollector(SimulationDataCollector const&) = delete; // Delete copy constructor
     void operator=(SimulationDataCollector const&) = delete; // Delete assignment operator
 
-    std::vector<Data> collectedData;
+    std::vector<Data*> collectedData;
 };
 
 #endif /* SIMULATION_DATA_COLLECTOR_H */

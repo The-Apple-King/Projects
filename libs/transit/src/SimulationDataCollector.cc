@@ -1,31 +1,29 @@
-// #include "SimulationDataCollector.h"
-// #include "Data.h"
-// #include <fstream>
+#include "SimulationDataCollector.h"
+#include "Data.h"
+#include <fstream>
 
-// SimulationDataCollector& SimulationDataCollector::getInstance() {
-//     static SimulationDataCollector instance;
-//     return instance;
-// }
+SimulationDataCollector& SimulationDataCollector::getInstance() {
+    static SimulationDataCollector instance;
+    return instance;
+}
 
-// // none of these work, they are more of templates, we use data class to print and collect data
+void SimulationDataCollector::collectData(Data* trip) {
+    // Add data to the internal data vector
+    collectedData.push_back(trip);
+}
 
-// void SimulationDataCollector::collectData(int simulationId, double simulationValue) {
-//     // Add data to the internal data vector
-//     data.emplace_back(simulationId, simulationValue);
-// }
+void SimulationDataCollector::outputDataToCSV(std::string filename) {
+    // Open the file for writing
+    std::ofstream outputFile(filename);
 
-// void SimulationDataCollector::outputDataToFile(std::string filename) const {
-//     // Open the file for writing
-//     std::ofstream outputFile(filename);
+    // Write the header row
+    outputFile << "Simulation ID,Simulation Value\n";
 
-//     // Write the header row
-//     outputFile << "Simulation ID,Simulation Value\n";
+    // Write the data rows
+    for (int i = 0; i < collectedData.size(); i ++) {
+        outputFile << collectedData[i].toString();
+    }
 
-//     // Write the data rows
-//     for (const auto& d : data) {
-//         outputFile << d.simulationId << "," << d.simulationValue << "\n";
-//     }
-
-//     // Close the file
-//     outputFile.close();
-// }
+    // Close the file
+    outputFile.close();
+}

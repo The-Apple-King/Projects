@@ -6,6 +6,9 @@
 #include "HumanFactory.h"
 #include "DragonFactory.h"
 #include "RestaurantFactory.h"
+#include "SimulationDataCollector.h"
+#include "Data.h"
+
 
 SimulationModel::SimulationModel(IController& controller)
     : controller(controller) {
@@ -64,6 +67,13 @@ void SimulationModel::ScheduleTrip(JsonObject& details) {
       break;
     }
   }
+
+  // ************ Collect Data on a trip******************************
+  Data *trip = new Data(Vector3(start[0], start[1], start[2]), Vector3(end[0], end[1], end[2]), 10, details["search"],"defaul");
+  data.collectData(trip);
+  // ************ Collect Data on a trip******************************
+
+
   controller.SendEventToView("TripScheduled", details);
 }
 

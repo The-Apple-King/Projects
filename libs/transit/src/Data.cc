@@ -14,7 +14,7 @@ std::string Data::toString(){
   stream << moneyMade << ",";
   stream << distanceFlown << ",";
   stream << restaurantName << ",";
-  stream << mealName << ",";
+  stream << mealName << "\n";
   // stream << deliveryType << "\n"; deliveryType is not defined yet
   return stream.str();
 }

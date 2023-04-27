@@ -64,6 +64,12 @@ class SimulationModel {
    */
   void AddFactory(IEntityFactory* factory);
 
+  /**
+   * @brief print out data to a csv named output.csv
+   * 
+   */
+  void printData();
+
  protected:
   IController& controller;
   std::vector<IEntity*> entities;

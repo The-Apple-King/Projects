@@ -23,10 +23,7 @@ SimulationDataCollector *SimulationDataCollector::getInstance()
 
 void SimulationDataCollector::collectData(Data* trip) {
     // Add data to the internal data vector
-    //this->collecter[0] = trip;
-    std::cout << "Before" << std::endl;
     collectedData.push_back(trip);
-    std::cout << "After" << std::endl;
 }
 
 void SimulationDataCollector::outputDataToCSV(std::string filename) {
@@ -34,7 +31,7 @@ void SimulationDataCollector::outputDataToCSV(std::string filename) {
     std::ofstream outputFile(filename);
 
     // Write the header row
-    outputFile << "Start x,y,z,End x,y,z,strategy,delivery\n";
+        outputFile << "Start x,y,z,End x,y,z,Distance,Strategy,Type of Delivery\n";
 
     // Write the data rows
         for (int i = 0; i < collectedData.size()-1; i ++) {

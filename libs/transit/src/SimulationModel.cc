@@ -70,9 +70,14 @@ void SimulationModel::ScheduleTrip(JsonObject& details) {
   }
 
   // ************ Collect Data on a trip******************************
-  Data *trip = new Data(Vector3(10.0, 10.0, 10.0), Vector3(3.0, 3.0, 3.0), 10.0, "default", "default");
+  std::string detai = "details";
+  std::string detail = "detail";
+  double dista = 100;
+
+  Data *trip = new Data(Vector3(0,0,0), Vector3(0,0,0), dista, detai, detail);
   data->collectData(trip);
-  data->outputDataToCSV("output.csv");
+  // testing code to check if it actually outputs
+  // data->outputDataToCSV("output.csv");
   // ************ Collect Data on a trip******************************
 
 
@@ -89,4 +94,8 @@ void SimulationModel::Update(double dt) {
 
 void SimulationModel::AddFactory(IEntityFactory* factory) {
   compFactory->AddFactory(factory);
+}
+
+void SimulationModel::printData() {
+  data->outputDataToCSV("output.csv");
 }

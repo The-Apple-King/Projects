@@ -21,9 +21,9 @@ SimulationDataCollector *SimulationDataCollector::getInstance()
     return singleton_;
 }
 
-void SimulationDataCollector::collectData(Data* trip) {
+void SimulationDataCollector::collectData(Data* data) {
     // Add data to the internal data vector
-    collectedData.push_back(trip);
+    collectedData.push_back(data);
 }
 
 void SimulationDataCollector::outputDataToCSV(std::string filename) {

@@ -142,6 +142,7 @@ class Drone : public IEntity {
   IEntity* nearestEntity = nullptr;
   IStrategy* toRobot = nullptr;
   IStrategy* toFinalDestination = nullptr;
+  str::string mealCarried = "none";
 };
 
 #endif

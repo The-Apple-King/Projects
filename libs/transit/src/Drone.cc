@@ -119,3 +119,13 @@ void Drone::Jump(double height) {
     }
   }
 }
+
+void Drone::pickUpMeal(str::string mealName) {
+   mealCarried = mealName;
+}
+
+str::string Drone::dropOffMeal() {
+   str::string droppedOffMealName = mealCarried;
+   mealCarried = "none";
+   return droppedOffMealName;
+}

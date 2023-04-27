@@ -22,7 +22,7 @@ public:
      * @param mealName name of the meal the drone is carrying
      */
 
-    Data(Vector3 start, Vector3 end, double distance, std::string strategy, double moneyMade, double distanceFlown, str::string restaurantName, str:string mealName);
+    Data(std::string droneName, Vector3 start, Vector3 end, double distance, std::string strategy, double moneyMade, double distanceFlown, std::string restaurantName, std::string mealName);
 
     /**
      * @brief formats the data from the object into a csv friendly format
@@ -33,15 +33,15 @@ public:
 
 private:
     // any data we want to save
-    str::string droneName; // what drone performed this trip?
+    std::string droneName; // what drone performed this trip?
     Vector3 start; // start position
     Vector3 end; // end position
     double distance; // distance traveled
     std::string strategy; // movement strategy
     double moneyMade; // how much money has been made?
     double distanceFlown; // how far did we fly on this trip?
-    str::string restaurantName; // what's the name of this restaurant?
-    str::string mealName; // what was the name of the meal we took?
+    std::string restaurantName; // what's the name of this restaurant?
+    std::string mealName; // what was the name of the meal we took?
 
 };
 

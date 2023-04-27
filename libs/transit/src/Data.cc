@@ -3,7 +3,7 @@
 #include <sstream>
 
 
-Data::Data(str::string droneName, Vector3 start, Vector3 end, double distance, std::string strategy, double moneyMade, double distanceFlown, str::string restaurantName, str:string mealName) : start(start), end(end), distance(distance), strategy(strategy), moneyMade(moneyMade), distanceFlown(distanceFlown), restaurantName(restaurantName), mealName(mealName) {}
+Data::Data(std::string droneName, Vector3 start, Vector3 end, double distance, std::string strategy, double moneyMade, double distanceFlown, std::string restaurantName, std::string mealName) : start(start), end(end), distance(distance), strategy(strategy), moneyMade(moneyMade), distanceFlown(distanceFlown), restaurantName(restaurantName), mealName(mealName) {}
 
 std::string Data::toString(){
   std::ostringstream stream;

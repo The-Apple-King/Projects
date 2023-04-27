@@ -34,7 +34,7 @@ void SimulationDataCollector::outputDataToCSV(std::string filename) {
         outputFile << "Start x,y,z,End x,y,z,Distance,Strategy,Type of Delivery\n";
 
     // Write the data rows
-        for (int i = 0; i < collectedData.size()-1; i ++) {
+        for (int i = 0; i < collectedData.size(); i ++) {
             outputFile << collectedData.at(i)->toString();
         }
     

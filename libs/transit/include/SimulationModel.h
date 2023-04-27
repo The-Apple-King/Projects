@@ -70,7 +70,7 @@ class SimulationModel {
   std::vector<IEntity*> scheduler;
   const IGraph* graph;
   CompositeFactory* compFactory;
-  SimulationDataCollector data;
+  SimulationDataCollector* data;
 };
 
 #endif

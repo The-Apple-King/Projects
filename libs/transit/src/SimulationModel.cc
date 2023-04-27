@@ -19,6 +19,7 @@ SimulationModel::SimulationModel(IController& controller)
   AddFactory(new HumanFactory());
   AddFactory(new DragonFactory());
   AddFactory(new RestaurantFactory());
+  data = SimulationDataCollector::getInstance();
 }
 
 SimulationModel::~SimulationModel() {
@@ -69,8 +70,9 @@ void SimulationModel::ScheduleTrip(JsonObject& details) {
   }
 
   // ************ Collect Data on a trip******************************
-  Data *trip = new Data(Vector3(start[0], start[1], start[2]), Vector3(end[0], end[1], end[2]), 10, details["search"],"defaul");
-  data.collectData(trip);
+  Data *trip = new Data(Vector3(10.0, 10.0, 10.0), Vector3(3.0, 3.0, 3.0), 10.0, "default", "default");
+  data->collectData(trip);
+  data->outputDataToCSV("output.csv");
   // ************ Collect Data on a trip******************************
 
 

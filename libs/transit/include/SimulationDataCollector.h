@@ -7,7 +7,7 @@
 
 class SimulationDataCollector {
 public:
-    static SimulationDataCollector& getInstance();
+    static SimulationDataCollector* getInstance();
 
     void collectData(Data* data);
 
@@ -18,7 +18,10 @@ private:
     SimulationDataCollector(SimulationDataCollector const&) = delete; // Delete copy constructor
     void operator=(SimulationDataCollector const&) = delete; // Delete assignment operator
 
+protected:
     std::vector<Data*> collectedData;
+    static SimulationDataCollector* singleton_;
 };
+
 
 #endif /* SIMULATION_DATA_COLLECTOR_H */

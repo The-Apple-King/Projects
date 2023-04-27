@@ -3,6 +3,7 @@
 #include "WebServer.h"
 #include "SimulationModel.h"
 #include "routing_api.h"
+#include "SimulationDataCollector.h"
 
 //--------------------  Controller ----------------------------
 
@@ -21,6 +22,10 @@ public:
         //std::cout << cmd << ": " << data << std::endl;
         if (cmd == "CreateEntity") {
             model.CreateEntity(data);
+        }
+        else if(cmd == "outputDataToCSV"){
+            std::cout << "we have called output data" << std::endl;
+            model.printData();
         }
         else if (cmd == "ScheduleTrip") {
             model.ScheduleTrip(data);

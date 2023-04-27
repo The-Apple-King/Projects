@@ -11,6 +11,7 @@ public:
     /**
      * @brief Construct a new Data:: Data object
      * 
+     * @param droneName name of the drone
      * @param start start location of a trip
      * @param end end location of a trip
      * @param distance distance traveled by the drone
@@ -32,6 +33,7 @@ public:
 
 private:
     // any data we want to save
+    str::string droneName; // what drone performed this trip?
     Vector3 start; // start position
     Vector3 end; // end position
     double distance; // distance traveled

@@ -20,3 +20,4 @@ std::string Data::toString(){
   // stream << deliveryType << "\n"; deliveryType is not defined yet
   return stream.str();
 }
+

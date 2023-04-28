@@ -7,6 +7,8 @@
 #include "IStrategy.h"
 #include "math/vector3.h"
 #include <time.h>       /* time */
+#include "Data.h"
+#include "Robot.h"
 
 
 // Represents a drone in a physical system.
@@ -142,7 +144,8 @@ class Drone : public IEntity {
   IEntity* nearestEntity = nullptr;
   IStrategy* toRobot = nullptr;
   IStrategy* toFinalDestination = nullptr;
-  str::string mealCarried = "none";
+  std::string mealCarried = "none";
+  Data* trip;
 };
 
 #endif

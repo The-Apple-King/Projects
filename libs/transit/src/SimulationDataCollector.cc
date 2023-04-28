@@ -31,7 +31,7 @@ void SimulationDataCollector::outputDataToCSV(std::string filename) {
     std::ofstream outputFile(filename);
 
     // Write the header row
-        outputFile << "Start x,y,z,End x,y,z,Distance,Strategy,Type of Delivery\n";
+        outputFile << "Drone Name,Start x,y,z,End x,y,z,Distance,Strategy,Money Made,Distance Flown,Restaurant Name,Meal Name\n";
 
     // Write the data rows
         for (int i = 0; i < collectedData.size(); i ++) {

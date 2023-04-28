@@ -6,6 +6,7 @@
 #include "IEntity.h"
 #include "math/vector3.h"
 #include "util/json.h"
+#include "Data.h"
 
 /**
  * @class Robot
@@ -109,6 +110,20 @@ class Robot : public IEntity {
    */
   void Rotate(double angle);
 
+  /**
+   * @brief adds a pointer to the trip to the robot so that drone can keep track of it
+   * 
+   * @param data trip data
+   */
+  void setData(Data* data);
+
+  /**
+   * @brief Get the Data object
+   * 
+   */
+  Data* getData();
+
+
  private:
   JsonObject details;
   Vector3 position;
@@ -117,6 +132,7 @@ class Robot : public IEntity {
   float speed;
   bool available;
   std::string strategyName;
+  Data* trip;
 };
 
 #endif  // ROBOT_H

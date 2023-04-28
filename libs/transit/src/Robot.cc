@@ -18,3 +18,9 @@ void Robot::Rotate(double angle) {
   direction.x = dirTmp.x * std::cos(angle) - dirTmp.z * std::sin(angle);
   direction.z = dirTmp.x * std::sin(angle) + dirTmp.z * std::cos(angle);
 }
+
+void Robot::setData(Data *data) {
+  this->trip = data;
+}
+
+Data* Robot::getData() {return this->trip;}

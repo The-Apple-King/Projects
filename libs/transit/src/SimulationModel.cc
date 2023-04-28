@@ -50,7 +50,14 @@ void SimulationModel::CreateEntity(JsonObject& entity) {
 
 /// Schedules a trip for an object in the scene
 void SimulationModel::ScheduleTrip(JsonObject& details) {
+  // variables to save data for collection
+  std::string tripName, droneName, strategy;
+  double distance, moneyMade;
+  Vector3 startPos, endPos;
+  // *****************************************
+
   std::string name = details["name"];
+  tripName = name;
   JsonArray start = details["start"];
   JsonArray end = details["end"];
   std::cout << name << ": " << start << " --> " << end << std::endl;
@@ -65,23 +72,24 @@ void SimulationModel::ScheduleTrip(JsonObject& details) {
       entity->SetDestination(Vector3(end[0], end[1], end[2]));
       entity->SetStrategyName(strategyName);
       scheduler.push_back(entity);
+
+      // collect data **************************
+      strategy = strategyName;
+      startPos = entity->GetPosition();
+      endPos = Vector3(end[0], end[1], end[2]);
+      distance = startPos.Distance(endPos);
+      droneName = "TEMP NAME";
+      std::string detai = "details";
+      std::string detail = "detail";
+      double distanceFlown = 0;
+      // moneymade needs a formula***********
+      Data *trip = new Data(droneName, tripName, startPos, endPos, distance, strategy, distanceFlown,  distance, detail, detai);
+      data->collectData(trip);
+      // ******************************************
+      dynamic_cast<Robot *>(entity)->setData(trip);
       break;
     }
   }
-
-  // ************ Collect Data on a trip******************************
-  std::string detai = "details";
-  std::string detail = "detail";
-  double dista = 100;
-
-  //string, start, end, double, string, double, string, string
-  Data *trip = new Data(detail, Vector3(0,0,0), Vector3(0,0,0), dista, detai, dista,  dista, detail, detai);
-  data->collectData(trip);
-  // testing code to check if it actually outputs
-  // data->outputDataToCSV("output.csv");
-  // ************ Collect Data on a trip******************************
-
-
   controller.SendEventToView("TripScheduled", details);
 }
 

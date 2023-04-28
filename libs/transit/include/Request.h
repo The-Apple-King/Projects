@@ -6,3 +6,5 @@ class Request{
         Request();
     //TO BE DECIDED
 };
+
+#endif

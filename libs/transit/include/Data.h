@@ -14,15 +14,15 @@ public:
      * @param strategy movement strategy used
      * @param moneyMade how much money we made
      * @param distanceFlown how much the drone flew on this recorded tripConstruct a new Data:: Data object
-     * 
      * @param droneName name of the drone
+     * @param tripName name that the trip was given
      * @param start start location of a trip
      * @param end end location of a trip
      * @param restaurantName name of restaurant we are performing an order for
      * @param mealName name of the meal the drone is carrying
      */
 
-    Data(std::string droneName, Vector3 start, Vector3 end, double distance, std::string strategy, double moneyMade, double distanceFlown, std::string restaurantName, std::string mealName);
+    Data(std::string droneName, std::string tripName, Vector3 start, Vector3 end, double distance, std::string strategy, double moneyMade, double distanceFlown, std::string restaurantName, std::string mealName);
     // string, start, end, double, string, double, double, string, string
 
 
@@ -32,6 +32,14 @@ public:
      * @return std::string string containing data to output
      */
     std::string toString();
+
+    void incrementDistance(double distance){
+        this->distance += distance;
+    }
+
+    void nameOfDrone(std::string name){
+        droneName = name;
+    }
 
 private:
     // any data we want to save

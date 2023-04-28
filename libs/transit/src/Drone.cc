@@ -11,6 +11,7 @@
 #include "JumpDecorator.h"
 #include "SpinDecorator.h"
 
+
 Drone::Drone(JsonObject& obj) : details(obj) {
   JsonArray pos(obj["position"]);
   position = {pos[0], pos[1], pos[2]};
@@ -48,6 +49,11 @@ void Drone::GetNearestEntity(std::vector<IEntity*> scheduler) {
     available = false;
     pickedUp = false;
 
+    //set name of data
+    trip = dynamic_cast<Robot *>(nearestEntity)->getData();
+    trip->nameOfDrone(this->GetDetails()["name"]);
+    
+
     destination = nearestEntity->GetPosition();
     Vector3 finalDestination = nearestEntity->GetDestination();
 
@@ -74,6 +80,7 @@ void Drone::Update(double dt, std::vector<IEntity*> scheduler) {
 
   if (toRobot) {
     toRobot->Move(this, dt);
+    // trip->incrementDistance(this->speed*dt);
 
     if (toRobot->IsCompleted()) {
       delete toRobot;
@@ -82,6 +89,7 @@ void Drone::Update(double dt, std::vector<IEntity*> scheduler) {
     }
   } else if (toFinalDestination) {
     toFinalDestination->Move(this, dt);
+    // trip->incrementDistance(this->speed*dt);
 
     if (nearestEntity && pickedUp) {
       nearestEntity->SetPosition(position);
@@ -120,12 +128,12 @@ void Drone::Jump(double height) {
   }
 }
 
-void Drone::pickUpMeal(str::string mealName) {
-   mealCarried = mealName;
-}
+// void Drone::pickUpMeal(std::string mealName) {
+//    mealCarried = mealName;
+// }
 
-str::string Drone::dropOffMeal() {
-   str::string droppedOffMealName = mealCarried;
-   mealCarried = "none";
-   return droppedOffMealName;
-}
+// std::string Drone::dropOffMeal() {
+//    std::string droppedOffMealName = mealCarried;
+//    mealCarried = "none";
+//    return droppedOffMealName;
+// }

@@ -74,7 +74,8 @@ void SimulationModel::ScheduleTrip(JsonObject& details) {
   std::string detail = "detail";
   double dista = 100;
 
-  Data *trip = new Data(Vector3(0,0,0), Vector3(0,0,0), dista, detai, detail);
+  //string, start, end, double, string, double, string, string
+  Data *trip = new Data(detail, Vector3(0,0,0), Vector3(0,0,0), dista, detai, dista,  dista, detail, detai);
   data->collectData(trip);
   // testing code to check if it actually outputs
   // data->outputDataToCSV("output.csv");

@@ -33,10 +33,20 @@ public:
      */
     std::string toString();
 
+    /**
+     * @brief increases distance by an amount specified, used to count distance the drone travels
+     * 
+     * @param distance the amount to increase distance by
+     */
     void incrementDistance(double distance){
         this->distance += distance;
     }
 
+    /**
+     * @brief used to set name of drone in drone
+     * 
+     * @param name the name of the drone
+     */
     void nameOfDrone(std::string name){
         droneName = name;
     }

@@ -9,20 +9,22 @@ class Data {
 
 public:
     /**
-     * @brief Construct a new Data:: Data object
+     * @brief 
+     * @param distance distance traveled by the drone
+     * @param strategy movement strategy used
+     * @param moneyMade how much money we made
+     * @param distanceFlown how much the drone flew on this recorded tripConstruct a new Data:: Data object
      * 
      * @param droneName name of the drone
      * @param start start location of a trip
      * @param end end location of a trip
-     * @param distance distance traveled by the drone
-     * @param strategy movement strategy used
-     * @param moneyMade how much money we made
-     * @param distanceFlown how much the drone flew on this recorded trip
      * @param restaurantName name of restaurant we are performing an order for
      * @param mealName name of the meal the drone is carrying
      */
 
     Data(std::string droneName, Vector3 start, Vector3 end, double distance, std::string strategy, double moneyMade, double distanceFlown, std::string restaurantName, std::string mealName);
+    // string, start, end, double, string, double, double, string, string
+
 
     /**
      * @brief formats the data from the object into a csv friendly format

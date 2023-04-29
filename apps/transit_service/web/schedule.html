@@ -67,11 +67,11 @@
             </div>
         </div>
     </div>
-    <div><input type="button" value="Schedule Trip" onclick="schedule()"></div>
+    <div><input type="button" value="Schedule Trip" onclick="schedule(1)"></div>
 
     <div><input type="button" value="Add Human" onclick="addHuman()" style="margin-top: 10px;"></div>
     <div><input type="button" value="Print Data" onclick="printData()" style="margin-top: 10px;"></div>
-    <div><input type="button" value="Order Food" onclick="orderFood()" style="margin-top: 10px;"></div>
+    <div><input type="button" value="Order Food" onclick="schedule(0)" style="margin-top: 10px;"></div>
     </div>
     <div class="indent">Order Food
         <select id="restaurant-Name">
@@ -134,7 +134,9 @@
         }
 
         // This function schedules a trip and sends the command to the web sockets api.
-        function schedule() {
+        function schedule(orderType) {
+
+            
             var errorDiv = document.getElementById("nameError");
             var searchStrat = document.getElementById("search-strategy").value;
             errorDiv.innerHTML = "";
@@ -142,12 +144,29 @@
             if (name == "") {
                 errorDiv.innerHTML += '<p style="color: red">[!] Error, missing name...</p>'
             }
-            if (trip.length < 2) {
+            if (trip.length < 2 && orderType == 1) {
                 errorDiv.innerHTML += '<p style="color: red">[!] Error, missing pickup and drop off location ...</p>'
             }
-            if (name != "" && trip.length >= 2) {
-                var start = [trip[0][0] / ($("#map").width()), 1.0, trip[0][1] / ($("#map").height())];
-                var end = [trip[trip.length - 1][0] / ($("#map").width()), 1.0, trip[trip.length - 1][1] / ($("#map").height())];
+            if (trip.length < 1 && orderType == 0) {
+                errorDiv.innerHTML += '<p style="color: red">[!] Error, missing drop off location ...</p>'
+            }
+            if (name != "" && ((trip.length >= 2 && orderType == 1) || (trip.length >=1 && orderType == 0))) {
+                //if uber
+                if(orderType == 1){
+                    var start = [trip[0][0] / ($("#map").width()), 1.0, trip[0][1] / ($("#map").height())];
+                    var end = [trip[trip.length - 1][0] / ($("#map").width()), 1.0, trip[trip.length - 1][1] / ($("#map").height())];
+                }
+                // if food
+                else{
+                    if(restaurantOrder == "Canes"){
+                        start = [1000, 0, 1000];
+                    }else if(restaurantOrder == "chipotle"){
+                        start = [500, 0, 500];
+                    } else if (restaurantOrder == "chick-fil-a"){
+                        start = [-1000, 0, -1000];
+                    }
+                    var end = [trip[0][0] / ($("#map").width()), 1.0, trip[0][1] / ($("#map").height())];
+                }
                 console.log(start);
                 var scale = 0.705;
                 var min = { x: -2030.950927734375, y: 220.99996948242188, z: -1184.1085205078125 };
@@ -162,9 +181,10 @@
                     "direction": [1, 0, 0],
                     "speed": 30.0,
                     "radius": 1.0,
-                    "rotation": [0, 0, 0, 0]
+                    "rotation": [0, 0, 0, 0],
+                    "order": orderType
                 });
-                api.sendCommand("ScheduleTrip", { name: name, type:"uber", start: [trip[0][0], trip[0][1]], end: [(min.x + (max.x - min.x) * end[0]) * scale, 254.665 * end[1], (min.z + (max.z - min.z) * end[2]) * scale], search: searchStrat });
+                api.sendCommand("ScheduleTrip", { name: name, type:orderType, start: [trip[0][0], trip[0][1]], end: [(min.x + (max.x - min.x) * end[0]) * scale, 254.665 * end[1], (min.z + (max.z - min.z) * end[2]) * scale], search: searchStrat });
                 var details = name + ": ";
                 for (var i = 0; i < trip.length; i++) {
                     if (i != 0) {
@@ -203,37 +223,6 @@
 
         function printData(){
             api.sendCommand("outputDataToCSV", {});
-        }
-
-        function orderFood(){
-            var errorDiv = document.getElementById("nameError");
-            errorDiv.innerHTML = "";
-            var name = $("#name").val();
-            if (name == "") {
-                errorDiv.innerHTML += '<p style="color: red">[!] Error, missing name...</p>'
-            }
-            if (trip.length < 1) {
-                errorDiv.innerHTML += '<p style="color: red">[!] Error, missing drop off location ...</p>'
-            }
-            var restaurantOrder = document.getElementById("restaurant-Name").value;
-            var scale = 0.705;
-            var min = { x: -2030.950927734375, y: 220.99996948242188, z: -1184.1085205078125 };
-            var max = { x: 2249.523193359375, y: 286.9197998046875, z: 1261.8768310546875 };
-
-            if(restaurantOrder == "Canes"){
-                start = [100, 100, 0];
-            }else if(restaurantOrder == "chipotle"){
-                start = [50, 150, 0];
-            } else if (restaurantOrder == "chick-fil-a"){
-                start = [150, 50, 0];
-            }
-            var destination = [(min.x + (max.x - min.x) * end[0]) * scale, 254.665 * end[1], (min.z + (max.z - min.z) * end[2]) * scale];
-            api.sendCommand("foodOrder", {
-                name: name,
-                type: "food",
-                start: [trip[0][0], trip[0][1]],
-                end: [(min.x + (max.x - min.x) * end[0]) * scale, 254.665 * end[1], (min.z + (max.z - min.z) * end[2]) * scale],
-                search: searchStrat });
         }
 
     </script>

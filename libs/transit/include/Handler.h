@@ -4,6 +4,7 @@
 #include <string>
 #include "IEntity.h"
 #include "Drone.h"
+#include "Robot.h"
 
 /**
  * @brief Handler class interface to allow creation of new handlers.
@@ -11,6 +12,13 @@
  */
 class Handler{
     public:
+        /**
+         * @brief Construct a new Handler object
+         * 
+         */
+        Handler(){
+            next_handler = nullptr;
+        }
 
         /**
          * @brief Function to handle the request that is passed.
@@ -24,7 +32,7 @@ class Handler{
          * 
          * @param handler 
          */
-        virtual void set_next_handler(Handler* handler) = 0;
+        virtual void set_next_handler(Handler* handler) {next_handler = handler; };
 
        
     private:

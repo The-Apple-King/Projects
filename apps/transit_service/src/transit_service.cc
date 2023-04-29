@@ -30,9 +30,6 @@ public:
         else if (cmd == "ScheduleTrip") {
             model.ScheduleTrip(data);
         }
-        else if (cmd == "restaurantOrder") {
-            model.ScheduleTrip(data);
-        }
         else if (cmd == "ping") {
             returnValue["response"] = data;
         }

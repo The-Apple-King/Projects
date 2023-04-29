@@ -10,6 +10,8 @@
 #include "DijkstraStrategy.h"
 #include "JumpDecorator.h"
 #include "SpinDecorator.h"
+#include "Handler.h"
+
 
 Drone::Drone(JsonObject& obj) : details(obj) {
   JsonArray pos(obj["position"]);
@@ -20,6 +22,8 @@ Drone::Drone(JsonObject& obj) : details(obj) {
   speed = obj["speed"];
 
   available = true;
+  name = "drone1";
+  handler = new Drone1Uber();
 }
 
 Drone::~Drone() {
@@ -31,16 +35,8 @@ Drone::~Drone() {
 }
 
 void Drone::GetNearestEntity(std::vector<IEntity*> scheduler) {
-  float minDis = std::numeric_limits<float>::max();
-  for (auto entity : scheduler) {
-    if (entity->GetAvailability()) {
-      float disToEntity = this->position.Distance(entity->GetPosition());
-      if (disToEntity <= minDis) {
-        minDis = disToEntity;
-        nearestEntity = entity;
-      }
-    }
-  }
+
+  handler->handle_request(*this, scheduler);
 
   if (nearestEntity) {
       // set availability to the nearest entity
@@ -118,14 +114,4 @@ void Drone::Jump(double height) {
       goUp = true;
     }
   }
-}
-
-void Drone::pickUpMeal(str::string mealName) {
-   mealCarried = mealName;
-}
-
-str::string Drone::dropOffMeal() {
-   str::string droppedOffMealName = mealCarried;
-   mealCarried = "none";
-   return droppedOffMealName;
 }

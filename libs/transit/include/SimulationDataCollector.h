@@ -33,7 +33,7 @@ public:
      * @brief not implemented but should cycle through collectedData and determine info
      * 
      */
-    void organizeData();
+    std::string organizeData();
 
 private:
     SimulationDataCollector(); // Private constructor to prevent direct instantiation

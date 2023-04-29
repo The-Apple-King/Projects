@@ -164,7 +164,7 @@
                     "radius": 1.0,
                     "rotation": [0, 0, 0, 0]
                 });
-                api.sendCommand("ScheduleTrip", { name: name, start: [trip[0][0], trip[0][1]], end: [(min.x + (max.x - min.x) * end[0]) * scale, 254.665 * end[1], (min.z + (max.z - min.z) * end[2]) * scale], search: searchStrat });
+                api.sendCommand("ScheduleTrip", { name: name, type:"uber", start: [trip[0][0], trip[0][1]], end: [(min.x + (max.x - min.x) * end[0]) * scale, 254.665 * end[1], (min.z + (max.z - min.z) * end[2]) * scale], search: searchStrat });
                 var details = name + ": ";
                 for (var i = 0; i < trip.length; i++) {
                     if (i != 0) {
@@ -216,21 +216,24 @@
                 errorDiv.innerHTML += '<p style="color: red">[!] Error, missing drop off location ...</p>'
             }
             var restaurantOrder = document.getElementById("restaurant-Name").value;
+            var scale = 0.705;
+            var min = { x: -2030.950927734375, y: 220.99996948242188, z: -1184.1085205078125 };
+            var max = { x: 2249.523193359375, y: 286.9197998046875, z: 1261.8768310546875 };
 
             if(restaurantOrder == "Canes"){
-                start = []
+                start = [100, 100, 0];
             }else if(restaurantOrder == "chipotle"){
-
+                start = [50, 150, 0];
             } else if (restaurantOrder == "chick-fil-a"){
-
+                start = [150, 50, 0];
             }
-            var destination = [trip[0][0] / ($("#map").width()), 1.0, trip[0][1] / ($("#map").height())];
+            var destination = [(min.x + (max.x - min.x) * end[0]) * scale, 254.665 * end[1], (min.z + (max.z - min.z) * end[2]) * scale];
             api.sendCommand("foodOrder", {
-                type: "robot",
                 name: name,
-                restaurant: restaurantOrder,
-                stop: destination
-            })
+                type: "food",
+                start: [trip[0][0], trip[0][1]],
+                end: [(min.x + (max.x - min.x) * end[0]) * scale, 254.665 * end[1], (min.z + (max.z - min.z) * end[2]) * scale],
+                search: searchStrat });
         }
 
     </script>

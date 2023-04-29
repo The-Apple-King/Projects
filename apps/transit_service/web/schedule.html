@@ -70,32 +70,17 @@
     <div><input type="button" value="Schedule Trip" onclick="schedule()"></div>
 
     <div><input type="button" value="Add Human" onclick="addHuman()" style="margin-top: 10px;"></div>
-    <div><input type="button" value="Print data" onclick="printData()" style="margin-top: 10px;"></div>
+    <div><input type="button" value="Print Data" onclick="printData()" style="margin-top: 10px;"></div>
+    <div><input type="button" value="Order Food" onclick="orderFood()" style="margin-top: 10px;"></div>
     </div>
-    <div class="indent">Canes Menu:
-        <select id="search-strategy">
-            <option value="astar">None</option>
-            <option value="astar">3 Piece</option>
-            <option value="dfs">4 Piece</option>
-            <option value="dijkstra">6 Piece</option>
+    <div class="indent">Order Food
+        <select id="restaurant-Name">
+            <option value="astar">Canes</option>
+            <option value="astar">Chipotle</option>
+            <option value="dfs">chick-fil-a</option>
         </select>
     </div>
-    <div class="indent">Chic-Fil-A Menu:
-        <select id="search-strategy">
-            <option value="astar">None</option>
-            <option value="astar">Sandwich</option>
-            <option value="dfs">Nuggets</option>
-            <option value="dijkstra">Salad</option>
-        </select>
-    </div>
-    <div class="indent">Chipotle Menu:
-        <select id="search-strategy">
-            <option value="astar">None</option>
-            <option value="astar">Bowl</option>
-            <option value="dfs">Burrito</option>
-            <option value="dijkstra">Tacos</option>
-        </select>
-    </div>
+    
 
     <div id="nameError"></div>
 
@@ -218,6 +203,34 @@
 
         function printData(){
             api.sendCommand("outputDataToCSV", {});
+        }
+
+        function orderFood(){
+            var errorDiv = document.getElementById("nameError");
+            errorDiv.innerHTML = "";
+            var name = $("#name").val();
+            if (name == "") {
+                errorDiv.innerHTML += '<p style="color: red">[!] Error, missing name...</p>'
+            }
+            if (trip.length < 1) {
+                errorDiv.innerHTML += '<p style="color: red">[!] Error, missing drop off location ...</p>'
+            }
+            var restaurantOrder = document.getElementById("restaurant-Name").value;
+
+            if(restaurantOrder == "Canes"){
+                start = []
+            }else if(restaurantOrder == "chipotle"){
+
+            } else if (restaurantOrder == "chick-fil-a"){
+
+            }
+            var destination = [trip[0][0] / ($("#map").width()), 1.0, trip[0][1] / ($("#map").height())];
+            api.sendCommand("foodOrder", {
+                type: "robot",
+                name: name,
+                restaurant: restaurantOrder,
+                stop: destination
+            })
         }
 
     </script>

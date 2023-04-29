@@ -1,14 +1,17 @@
-#include "ClosestHandler.h"
+#include "Handler.h"
 
-void Handler1::handle_request(Request& request) {
-    if (can_handle_request(request)) {
-        // handle request
-    }
-    else if (next_handler != nullptr) {
-        next_handler->handle_request(request);
-    }
-}
+class ConcreteHandler : public Handler {
+    public:
+        void handle_request(Drone& drone, std::vector<IEntity*> scheduler) override {
+            if (drone.GetAvailability())
+            {
+                drone.GetNearestEntity(scheduler);
+            }
+            else{
+                next_handler->handle_request(drone, scheduler);
+            }
+        }
 
-bool Handler1::can_handle_request(Request& request){
-    // logic to determine if the closest drone is available
-}
+    private:
+        Handler* next_handler = nullptr;
+};

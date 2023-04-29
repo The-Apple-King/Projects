@@ -23,14 +23,15 @@ class Handler{
         /**
          * @brief Function to handle the request that is passed.
          * 
-         * @param request Request to process
+         * @param drone The drone requesting the delivery
+         * @param scheduler The list of available robots to assign to the delivery
          */
-        virtual void handle_request(Drone& drone, std::vector<IEntity*> scheduler) = 0;
+        virtual void handle_request(Drone* drone, std::vector<IEntity*> scheduler) = 0;
         
         /**
          * @brief Set the next handler object
          * 
-         * @param handler 
+         * @param handler The next handler in the chain of responsibility
          */
         virtual void set_next_handler(Handler* handler) {next_handler = handler; };
 

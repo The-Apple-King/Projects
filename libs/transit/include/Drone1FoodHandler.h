@@ -11,11 +11,17 @@ class Drone1Food : public Handler {
     public:
 
         /**
+         * @brief Construct a new Drone 1 Food object
+         * 
+         */
+        Drone1Food();
+
+        /**
          * @brief Function to handle the request that is passed.
          * 
          * @param request Request to process
          */
-        void handle_request(Drone& drone, std::vector<IEntity*> scheduler);
+        void handle_request(Drone* drone, std::vector<IEntity*> scheduler);
 
     private:
         Handler* next_handler;

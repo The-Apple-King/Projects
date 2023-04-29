@@ -35,7 +35,7 @@ std::string SimulationDataCollector::organizeData() {
     // number of trips made by each drone
     int tripsMade1, tripsMade2 = 0;
     // determine which restaurant got the most business
-    int rest1, rest2, rest3, uber = 0;
+    int canesOrders, chipotleOrders, chickfilaOrders, uber = 0;
     // determine number of times different strategies were used
      int astar, dfs, djikstra = 0;
     for (size_t i = 0; i < collectedData.size(); i++)
@@ -55,17 +55,17 @@ std::string SimulationDataCollector::organizeData() {
 
 
         // restaurant type test, also number of normal trips
-        if (collectedData[i]->getRestaurantName() == "RESTAURANT NAME")
+        if (collectedData[i]->getRestaurantName() == "canes")
         {
-            rest1 ++;
+            canesOrders ++;
         }
-        else if (collectedData[i]->getRestaurantName() == "RESTAURANT NAME")
+        else if (collectedData[i]->getRestaurantName() == "chipotle")
         {
-            rest2 ++;
+            chipotleOrders ++;
         }
-        else if (collectedData[i]->getRestaurantName() == "RESTAURANT NAME")
+        else if (collectedData[i]->getRestaurantName() == "chick-fil-a")
         {
-            rest3 ++;
+            chickfilaOrders ++;
         }
         else{ // not a restaurant
             uber++;
@@ -85,7 +85,31 @@ std::string SimulationDataCollector::organizeData() {
         }
     }
 
+    std::ofstream outputFile("output.txt");
 
+    // print furthest distances
+    if( dis1 > dis2){
+        outputFile << "Drone 1 went further at " << dis1 << "Drone 2 went only " << dis2 << std::endl;
+    } else {
+        outputFile << "Drone 2 went further at " << dis2 << "Drone 1 went only " << dis1 << std::endl;
+    }
+
+    // print number of trips
+    outputFile << "Drone 1 made " << tripsMade1 << " trips" << std::endl;
+    outputFile << "Drone 2 made " << tripsMade2 << " trips" << std::endl;
+
+    // print restaurant orders
+    outputFile << "Canes got " << canesOrders << " orders" << std::endl;
+    outputFile << "Chick-Fil-A got " << chickfilaOrders << " orders" << std::endl;
+    outputFile << "Chipotle got " << chipotleOrders << " orders" << std::endl;
+    outputFile << "Uber got " << uber << " orders" << std::endl;
+
+    // print strategy type
+    outputFile << "Astar was used " << astar << " times" << std::endl;
+    outputFile << "Depth First Search was used " << dfs << " times" << std::endl;
+    outputFile << "Djikstra's was used " << djikstra << " times" << std::endl;
+
+    outputFile.close();
 }
 
 void SimulationDataCollector::outputDataToCSV(std::string filename) {
@@ -105,5 +129,7 @@ void SimulationDataCollector::outputDataToCSV(std::string filename) {
 
     // Close the file
     outputFile.close();
+
+    organizeData();
 }
 

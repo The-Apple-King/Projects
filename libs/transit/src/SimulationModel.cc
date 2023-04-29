@@ -81,9 +81,8 @@ void SimulationModel::ScheduleTrip(JsonObject& details) {
       droneName = "TEMP NAME";
       std::string detai = "details";
       std::string detail = "detail";
-      double distanceFlown = 0;
       // moneymade needs a formula***********
-      Data *trip = new Data(droneName, tripName, startPos, endPos, distance, strategy, distanceFlown,  distance, detail, detai);
+      Data *trip = new Data(droneName, tripName, startPos, endPos, distance, strategy,  distance, detail);
       data->collectData(trip);
       // ******************************************
       dynamic_cast<Robot *>(entity)->setData(trip);

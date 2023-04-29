@@ -1,14 +1,13 @@
 #ifndef DRONE1FOOD_H_
 #define DRONE1FOOD_H_
 
-#include <string>
 #include "Handler.h"
 
 /**
  * @brief Handler class interface to allow creation of new handlers.
  * 
  */
-class Drone1Food : public Handler{
+class Drone1Food : public Handler {
     public:
 
         /**

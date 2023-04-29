@@ -1,8 +1,9 @@
 #ifndef HANDLER_H_
-#define HANDKER_H_
+#define HANDLER_H_
 
-#include "Request.h"
 #include <string>
+#include "IEntity.h"
+#include "Drone.h"
 
 /**
  * @brief Handler class interface to allow creation of new handlers.
@@ -12,28 +13,11 @@ class Handler{
     public:
 
         /**
-         * @brief Checks to see if the handler can handle, if not pass request onto next handler
-         * 
-         * @param request 
-         * @return true if the handler can handle it
-         * @return false if the handler can't handle it
-         */
-        virtual bool can_handle_request(Request& request) = 0;
-
-        /**
          * @brief Function to handle the request that is passed.
          * 
          * @param request Request to process
          */
-        virtual void handle_request(Request& request) = 0;
-
-        /**
-         * @brief Get the next handler object
-         * 
-         * @return Handler* 
-         */
-       
-        virtual Handler* get_next_handler() = 0;
+        virtual void handle_request(Drone& drone, std::vector<IEntity*> scheduler) = 0;
         
         /**
          * @brief Set the next handler object
@@ -44,10 +28,7 @@ class Handler{
 
        
     private:
-        Request* request;
         Handler* next_handler;
-        
-        
 
 };
 

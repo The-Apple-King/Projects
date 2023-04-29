@@ -25,6 +25,68 @@ public:
     Data(std::string droneName, std::string tripName, Vector3 start, Vector3 end, double distance, std::string strategy, double moneyMade, double distanceFlown, std::string restaurantName, std::string mealName);
     // string, start, end, double, string, double, double, string, string
 
+    /**
+     * @brief Get the Name object
+     * 
+     * @return std::string 
+     */
+    std::string getName(){return droneName;}
+
+    /**
+     * @brief Get the Start object
+     * 
+     * @return Vector3 
+     */
+    Vector3 getStart(){return start;}
+
+    /**
+     * @brief Get the End object
+     * 
+     * @return Vector3 
+     */
+    Vector3 getEnd() {return end;}
+
+    /**
+     * @brief Get the Distance object
+     * 
+     * @return double 
+     */
+    double getDistance(){return distance;}
+
+    /**
+     * @brief Get the Strategy object
+     * 
+     * @return std::string 
+     */
+    std::string getStrategy(){return strategy;}
+
+    /**
+     * @brief Get the Money Made object
+     * 
+     * @return double 
+     */
+    double getMoneyMade(){return moneyMade;}
+
+    /**
+     * @brief Get the Distance Flown object
+     * 
+     * @return double 
+     */
+    double getDistanceFlown(){return distanceFlown;}
+
+    /**
+     * @brief Get the Restaurant Name object
+     * 
+     * @return std::string 
+     */
+    std::string getRestaurantName(){return restaurantName;}
+
+    /**
+     * @brief Get the Meal Name object
+     * 
+     * @return std::string 
+     */
+    std::string getMealName(){return mealName;}
 
     /**
      * @brief formats the data from the object into a csv friendly format

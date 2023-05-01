@@ -2,10 +2,11 @@
 #define DRONE_H_
 
 #include <vector>
-
 #include "IEntity.h"
 #include "IStrategy.h"
 #include "math/vector3.h"
+#include "Handler.h"
+#include "Drone1UberHandler.h"
 #include <time.h>       /* time */
 #include "Data.h"
 #include "Robot.h"
@@ -81,6 +82,13 @@ class Drone : public IEntity {
   void GetNearestEntity(std::vector<IEntity*> scheduler);
 
   /**
+   * @brief return name of drone
+   * 
+   * @return std::string name of drone
+   */
+  std::string GetName(){ return name;}
+
+  /**
    * @brief Updates the drone's position
    * @param dt Delta time
    * @param scheduler Vector containing all the entities in the system
@@ -110,6 +118,13 @@ class Drone : public IEntity {
    * @param col_ The new color of the drone
    */
   void SetColor(std::string col_) { color = col_; }
+
+  /**
+   * @brief Set the Nearest Entity object
+   * 
+   * @param nearest nearest entity object
+   */
+  void SetNearestEntity(IEntity* nearest){ nearestEntity = nearest;}
 
   /**
    * @brief Rotates the drone
@@ -144,8 +159,8 @@ class Drone : public IEntity {
   IEntity* nearestEntity = nullptr;
   IStrategy* toRobot = nullptr;
   IStrategy* toFinalDestination = nullptr;
-  std::string mealCarried = "none";
-  Data* trip;
+  std::string name;
+  Handler* handler;
 };
 
 #endif

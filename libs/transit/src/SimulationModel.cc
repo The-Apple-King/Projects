@@ -87,6 +87,18 @@ void SimulationModel::ScheduleTrip(JsonObject& details) {
       break;
     }
   }
+
+  // ************ Collect Data on a trip******************************
+  std::string detai = "details";
+  std::string detail = "detail";
+  double dista = 100;
+
+  //string, start, end, double, string, double, string, string
+  Data *trip = new Data(detail, Vector3(0,0,0), Vector3(0,0,0), dista, detai, dista,  dista, detail, detai);
+  data->collectData(trip);
+  // ************ Collect Data on a trip******************************
+
+
   controller.SendEventToView("TripScheduled", details);
 }
 
@@ -105,3 +117,4 @@ void SimulationModel::AddFactory(IEntityFactory* factory) {
 void SimulationModel::printData() {
   data->outputDataToCSV("output.csv");
 }
+

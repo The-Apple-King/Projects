@@ -5,8 +5,6 @@
 #include "IEntity.h"
 #include "IStrategy.h"
 #include "math/vector3.h"
-#include "Handler.h"
-#include "Drone1UberHandler.h"
 #include <time.h>       /* time */
 #include "Data.h"
 #include "Robot.h"
@@ -161,7 +159,6 @@ class Drone : public IEntity {
   IStrategy* toFinalDestination = nullptr;
   Data* trip;
   std::string name;
-  Handler* handler;
 };
 
 #endif

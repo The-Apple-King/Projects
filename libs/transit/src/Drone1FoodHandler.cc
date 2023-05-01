@@ -21,7 +21,6 @@ void Drone1Food::handle_request(std::vector<Drone*> drones,
           }
         }
       }
-      break;
     }
   }
   if (next_handler != nullptr) {

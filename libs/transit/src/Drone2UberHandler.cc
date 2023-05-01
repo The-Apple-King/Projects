@@ -4,7 +4,6 @@ Drone2Uber::Drone2Uber() { next_handler = nullptr; }
 
 void Drone2Uber::handle_request(std::vector<Drone*> drones,
                                 std::vector<IEntity*> scheduler) {
-  bool setJob = false;
   for (size_t i = 0; i < drones.size(); i++) {
     if (drones[i]->GetName() == "Drone2" && drones[i]->GetAvailability()) {
       float minDis = std::numeric_limits<float>::max();
@@ -21,7 +20,6 @@ void Drone2Uber::handle_request(std::vector<Drone*> drones,
           }
         }
       }
-      setJob = true;
     }
   }
   if (next_handler != nullptr && !setJob) {

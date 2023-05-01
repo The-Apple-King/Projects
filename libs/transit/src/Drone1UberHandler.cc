@@ -5,7 +5,9 @@ Drone1Uber::Drone1Uber() { next_handler = new Drone2Food(); }
 
 IEntity* Drone1Uber::handle_request(std::string name, Vector3 pos,
                                     std::vector<IEntity*> scheduler) {
-  if (name == "drone1") {
+            std::cout << "returning entity, " << entity << std::endl;
+
+  if (name == "Drone1") {
     float minDis = std::numeric_limits<float>::max();
     for (auto entity : scheduler) {
       if (entity->GetAvailability()) {

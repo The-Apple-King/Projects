@@ -21,6 +21,7 @@ Drone::Drone(JsonObject& obj) : details(obj) {
 
   available = true;
   handler = new Drone1Uber();
+  name = "Drone1";
 }
 
 Drone::~Drone() {
@@ -33,9 +34,6 @@ Drone::~Drone() {
 
 void Drone::GetNearestEntity(std::vector<IEntity*> scheduler) {
   nearestEntity = handler->handle_request(name, position, scheduler);
-  if(nearestEntity){
-    std::cout << "nearest entity, " << nearestEntity << std::endl;
-  }
   if (nearestEntity) {
       // set availability to the nearest entity
     nearestEntity->SetAvailability(false);

@@ -21,7 +21,7 @@ public:
      */
 
     Data(std::string droneName, std::string tripName, Vector3 start, Vector3 end, double distance, std::string strategy, std::string restaurantName);
-    // string, start, end, double, string, double, double, string, string
+    // string, string, start, end, double, string, double, string
 
     /**
      * @brief Get the Name object

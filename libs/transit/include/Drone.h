@@ -159,6 +159,7 @@ class Drone : public IEntity {
   IEntity* nearestEntity = nullptr;
   IStrategy* toRobot = nullptr;
   IStrategy* toFinalDestination = nullptr;
+  Data* trip;
   std::string name;
   Handler* handler;
 };

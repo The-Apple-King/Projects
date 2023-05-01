@@ -77,28 +77,17 @@ void SimulationModel::ScheduleTrip(JsonObject& details) {
       endPos = Vector3(end[0], end[1], end[2]);
       distance = startPos.Distance(endPos);
       droneName = "TEMP NAME";
-      std::string detai = "details";
       std::string detail = "detail";
       // moneymade needs a formula***********
       Data *trip = new Data(droneName, tripName, startPos, endPos, distance, strategy, detail);
+      // string, string, start, end, double, string, string
+
       data->collectData(trip);
       // ******************************************
       dynamic_cast<Robot *>(entity)->setData(trip);
       break;
     }
   }
-
-  // ************ Collect Data on a trip******************************
-  std::string detai = "details";
-  std::string detail = "detail";
-  double dista = 100;
-
-  //string, start, end, double, string, double, string, string
-  Data *trip = new Data(detail, Vector3(0,0,0), Vector3(0,0,0), dista, detai, dista,  dista, detail, detai);
-  data->collectData(trip);
-  // ************ Collect Data on a trip******************************
-
-
   controller.SendEventToView("TripScheduled", details);
 }
 

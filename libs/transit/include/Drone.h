@@ -2,14 +2,11 @@
 #define DRONE_H_
 
 #include <vector>
-#include "Handler.h"
-#include "Drone1FoodHandler.h"
-#include "Drone2FoodHandler.h"
-#include "Drone1UberHandler.h"
-#include "Drone2UberHandler.h"
 #include "IEntity.h"
 #include "IStrategy.h"
 #include "math/vector3.h"
+#include "Handler.h"
+#include "Drone1UberHandler.h"
 #include <time.h>       /* time */
 
 
@@ -161,7 +158,7 @@ class Drone : public IEntity {
   IStrategy* toRobot = nullptr;
   IStrategy* toFinalDestination = nullptr;
   std::string name;
-  Handler* handler = nullptr;
+  Handler* handler;
 };
 
 #endif

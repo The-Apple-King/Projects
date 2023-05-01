@@ -1,7 +1,6 @@
 #ifndef DRONE1UBER_H_
 #define DRONE1UBER_H_
 
-#include <string>
 #include "Handler.h"
 
 /**
@@ -22,7 +21,7 @@ class Drone1Uber : public Handler{
          * 
          * @param request Request to process
          */
-        void handle_request(Drone* drone, std::vector<IEntity*> scheduler);
+        IEntity* handle_request(std::string name, Vector3 pos, std::vector<IEntity*> scheduler);
 
     private:
         Handler* next_handler;

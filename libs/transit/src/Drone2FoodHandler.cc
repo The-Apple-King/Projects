@@ -1,29 +1,31 @@
 #include "Drone2FoodHandler.h"
+#include "Drone1FoodHandler.h"
 
 Drone2Food::Drone2Food(){
-  next_handler = new Drone1Food();
+  next_handler = dynamic_cast<Handler*>(new Drone1Food());
 }
 
-void Drone2Food::handle_request(Drone* drone, std::vector<IEntity*> scheduler) {
-  if (drone->GetName() == "drone2") {
+IEntity* Drone2Food::handle_request(std::string name, Vector3 pos,
+                                    std::vector<IEntity*> scheduler) {
+  if (name == "drone2") {
     float minDis = std::numeric_limits<float>::max();
     for (auto entity : scheduler) {
       if (entity->GetAvailability()) {
         Robot* temp = dynamic_cast<Robot*>(entity);
-        if (!temp->getOrderType()) {  // if food
-          float disToEntity =
-              drone->GetPosition().Distance(entity->GetPosition());
+        if (temp != nullptr && !temp->getOrderType()) {  // if food
+          float disToEntity = pos.Distance(entity->GetPosition());
           if (disToEntity <= minDis) {
             minDis = disToEntity;
-            drone->SetNearestEntity(entity);
+            return entity;
           }
         }
       }
     }
-
-  } else {
-    if (next_handler != nullptr) {
-      next_handler->handle_request(drone, scheduler);
-    }
+  }
+  if (next_handler != nullptr) {
+    return next_handler->handle_request(name, pos, scheduler);
+  }
+  else{
+    return nullptr;
   }
 }

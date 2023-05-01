@@ -7,13 +7,8 @@ Robot::Robot(JsonObject &obj) : details(obj) {
   direction = {dir[0], dir[1], dir[2]};
   speed = obj["speed"];
   available = true;
-  if (obj["order"] = 1)
-  {
-    uber = true;
-  }
-  else{
-    uber = false;
-  }
+  uber = obj["order"];
+  
   
 }
 

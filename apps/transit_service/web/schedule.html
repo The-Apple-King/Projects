@@ -67,11 +67,11 @@
             </div>
         </div>
     </div>
-    <div><input type="button" value="Schedule Trip" onclick="schedule(1)"></div>
+    <div><input type="button" value="Schedule Trip" onclick="schedule(true)"></div>
 
     <div><input type="button" value="Add Human" onclick="addHuman()" style="margin-top: 10px;"></div>
     <div><input type="button" value="Print Data" onclick="printData()" style="margin-top: 10px;"></div>
-    <div><input type="button" value="Order Food" onclick="schedule(0)" style="margin-top: 10px;"></div>
+    <div><input type="button" value="Order Food" onclick="schedule(false)" style="margin-top: 10px;"></div>
     </div>
     <div class="indent">Order Food
         <select id="restaurant-Name">
@@ -144,15 +144,15 @@
             if (name == "") {
                 errorDiv.innerHTML += '<p style="color: red">[!] Error, missing name...</p>'
             }
-            if (trip.length < 2 && orderType == 1) {
+            if (trip.length < 2 && orderType == true) {
                 errorDiv.innerHTML += '<p style="color: red">[!] Error, missing pickup and drop off location ...</p>'
             }
-            if (trip.length < 1 && orderType == 0) {
+            if (trip.length < 1 && orderType == false) {
                 errorDiv.innerHTML += '<p style="color: red">[!] Error, missing drop off location ...</p>'
             }
-            if (name != "" && ((trip.length >= 2 && orderType == 1) || (trip.length >=1 && orderType == 0))) {
+            if (name != "" && ((trip.length >= 2 && orderType == true) || (trip.length >=1 && orderType == 0))) {
                 //if uber
-                if(orderType == 1){
+                if(orderType == true){
                     var start = [trip[0][0] / ($("#map").width()), 1.0, trip[0][1] / ($("#map").height())];
                     var end = [trip[trip.length - 1][0] / ($("#map").width()), 1.0, trip[trip.length - 1][1] / ($("#map").height())];
                 }

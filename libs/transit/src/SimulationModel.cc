@@ -96,3 +96,4 @@ void SimulationModel::AddFactory(IEntityFactory* factory) {
 void SimulationModel::printData() {
   data->outputDataToCSV("output.csv");
 }
+

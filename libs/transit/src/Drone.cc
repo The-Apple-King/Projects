@@ -10,8 +10,6 @@
 #include "DijkstraStrategy.h"
 #include "JumpDecorator.h"
 #include "SpinDecorator.h"
-#include "Handler.h"
-
 
 Drone::Drone(JsonObject& obj) : details(obj) {
   JsonArray pos(obj["position"]);
@@ -22,7 +20,6 @@ Drone::Drone(JsonObject& obj) : details(obj) {
   speed = obj["speed"];
 
   available = true;
-  name = "drone1";
   handler = new Drone1Uber();
 }
 
@@ -35,9 +32,10 @@ Drone::~Drone() {
 }
 
 void Drone::GetNearestEntity(std::vector<IEntity*> scheduler) {
-
-  handler->handle_request(*this, scheduler);
-
+  nearestEntity = handler->handle_request(name, position, scheduler);
+  if(nearestEntity){
+    std::cout << "nearest entity, " << nearestEntity << std::endl;
+  }
   if (nearestEntity) {
       // set availability to the nearest entity
     nearestEntity->SetAvailability(false);
@@ -115,3 +113,4 @@ void Drone::Jump(double height) {
     }
   }
 }
+

@@ -8,6 +8,7 @@ Drone2Food::Drone2Food() {
 
 void Drone2Food::handle_request(std::vector<Drone*> drones,
                                     std::vector<IEntity*> scheduler) {
+  bool assignedATask = false;
   for (size_t i = 0; i < drones.size(); i++) {
     if (drones[i]->GetName() == "Drone2" && drones[i]->GetAvailability()) {
       float minDis = std::numeric_limits<float>::max();
@@ -17,15 +18,19 @@ void Drone2Food::handle_request(std::vector<Drone*> drones,
           if (temp != nullptr && !temp->getOrderType()) {  // if food
             float disToEntity = drones[i]->GetPosition().Distance(entity->GetPosition());
             if (disToEntity <= minDis) {
+              assignedATask = true;
               minDis = disToEntity;
               drones[i]->SetNearestEntity(entity);
             }
           }
         }
       }
+      if (drones[i]->GetNearestEntity()) {
+        setTrip(drones[i]);
+      }
     }
   }
-  if (next_handler != nullptr) {
+  if (next_handler != nullptr && !assignedATask) {
     next_handler->handle_request(drones, scheduler);
   }
 }

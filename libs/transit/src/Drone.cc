@@ -11,7 +11,6 @@
 #include "JumpDecorator.h"
 #include "SpinDecorator.h"
 
-
 Drone::Drone(JsonObject& obj) : details(obj) {
   JsonArray pos(obj["position"]);
   position = {pos[0], pos[1], pos[2]};
@@ -33,46 +32,13 @@ Drone::~Drone() {
   delete toFinalDestination;
 }
 
-void Drone::GetNearestEntity(std::vector<IEntity*> scheduler) {
-  if (nearestEntity) {
-      // set availability to the nearest entity
-    nearestEntity->SetAvailability(false);
-    available = false;
-    pickedUp = false;
-
-    //set name of data
-    trip = dynamic_cast<Robot *>(nearestEntity)->getData();
-    trip->nameOfDrone(this->GetDetails()["name"]);
-    std::cout << "the name of this drone is" << this->GetDetails()["name"] << std::endl;
-    
-
-    destination = nearestEntity->GetPosition();
-    Vector3 finalDestination = nearestEntity->GetDestination();
-
-    toRobot = new BeelineStrategy(position, destination);
-
-    std::string strat = nearestEntity->GetStrategyName();
-    if (strat == "astar")
-      toFinalDestination =
-        new JumpDecorator(new AstarStrategy(destination, finalDestination, graph));
-    else if (strat == "dfs")
-      toFinalDestination =
-        new SpinDecorator(new JumpDecorator(new DfsStrategy(destination, finalDestination, graph)));
-    else if (strat == "dijkstra")
-      toFinalDestination =
-        new JumpDecorator(new SpinDecorator(new DijkstraStrategy(destination, finalDestination, graph)));
-    else
-      toFinalDestination = new BeelineStrategy(destination, finalDestination);
-  }
+IEntity* Drone::GetNearestEntity() {
+  return nearestEntity;
 }
 
 void Drone::Update(double dt, std::vector<IEntity*> scheduler) {
-  if (available)
-    GetNearestEntity(scheduler);
-
   if (toRobot) {
     toRobot->Move(this, dt);
-    // trip->incrementDistance(this->speed*dt);
 
     if (toRobot->IsCompleted()) {
       delete toRobot;
@@ -81,7 +47,6 @@ void Drone::Update(double dt, std::vector<IEntity*> scheduler) {
     }
   } else if (toFinalDestination) {
     toFinalDestination->Move(this, dt);
-    // trip->incrementDistance(this->speed*dt);
 
     if (nearestEntity && pickedUp) {
       nearestEntity->SetPosition(position);
@@ -94,6 +59,12 @@ void Drone::Update(double dt, std::vector<IEntity*> scheduler) {
       nearestEntity = nullptr;
       available = true;
       pickedUp = false;
+
+      // add trip to vector here
+      trip = dynamic_cast<Robot*>(nearestEntity)->getData();
+      trip->nameOfDrone(this->GetDetails()["name"]);
+      std::cout << "the name of this drone is" << this->GetDetails()["name"]
+                << std::endl;
     }
   }
 }
@@ -119,4 +90,3 @@ void Drone::Jump(double height) {
     }
   }
 }
-

@@ -5,10 +5,13 @@
 #include "IEntity.h"
 #include "Robot.h"
 #include "Drone.h"
-#include "BeelineStrategy.h"
+#include "IStrategy.h"
 #include "AstarStrategy.h"
-#include "DijkstraStrategy.h"
+#include "BeelineStrategy.h"
 #include "DfsStrategy.h"
+#include "DijkstraStrategy.h"
+#include "JumpDecorator.h"
+#include "SpinDecorator.h"
 
 /**
  * @brief Handler class interface to allow creation of new handlers.
@@ -38,6 +41,12 @@ class Handler{
          * @param handler The next handler in the chain of responsibility
          */
         virtual void set_next_handler(Handler* handler) {next_handler = handler; };
+
+        /**
+         * @brief Set the data needed to make drones move
+         * 
+         */
+        void setTrip(Drone* drone);
 
        
     private:

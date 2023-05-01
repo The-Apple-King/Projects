@@ -1,14 +1,15 @@
 #ifndef DRONE_H_
 #define DRONE_H_
 
+#include <time.h> /* time */
+
 #include <vector>
+
+#include "Data.h"
 #include "IEntity.h"
 #include "IStrategy.h"
-#include "math/vector3.h"
-#include <time.h>       /* time */
-#include "Data.h"
 #include "Robot.h"
-
+#include "math/vector3.h"
 
 // Represents a drone in a physical system.
 // Drones move using euler integration based on a specified
@@ -77,14 +78,21 @@ class Drone : public IEntity {
    * @brief Gets the nearest entity in the scheduler
    * @param scheduler Vector containing all the entities in the system
    */
-  void GetNearestEntity(std::vector<IEntity*> scheduler);
+  IEntity* GetNearestEntity();
 
   /**
    * @brief return name of drone
-   * 
+   *
    * @return std::string name of drone
    */
-  std::string GetName(){ return name;}
+  std::string GetName() { return name; }
+
+  /**
+   * @brief Get the Graph object
+   * 
+   * @return IGraph* 
+   */
+  const IGraph* GetGraph(){ return graph;}
 
   /**
    * @brief Updates the drone's position
@@ -119,10 +127,38 @@ class Drone : public IEntity {
 
   /**
    * @brief Set the Nearest Entity object
-   * 
+   *
    * @param nearest nearest entity object
    */
-  void SetNearestEntity(IEntity* nearest){ nearestEntity = nearest;}
+  void SetNearestEntity(IEntity* nearest) { nearestEntity = nearest; }
+
+  /**
+   * @brief Set the value of available
+   *
+   * @param val the value of available
+   */
+  void SetAvailablility(bool val) { available = val; }
+
+  /**
+   * @brief Set the value of picked up
+   *
+   * @param val wether object picked up
+   */
+  void SetPickedUp(bool val) { pickedUp = val; }
+
+  /**
+   * @brief Set the first half of the trip
+   *
+   * @param strat strategy to move to destination
+   */
+  void SetToRobot(IStrategy* strat) { toRobot = strat; }
+
+  /**
+   * @brief Set the final half of the trip
+   *
+   * @param strat strategy to move to destination
+   */
+  void SetToFinalDestination(IStrategy* strat) { toFinalDestination = strat; }
 
   /**
    * @brief Rotates the drone

@@ -15,7 +15,7 @@ void Drone2Uber::handle_request(std::vector<Drone*> drones,
             float disToEntity =
                 drones[i]->GetPosition().Distance(entity->GetPosition());
             if (disToEntity <= minDis) {
-              std::cout <<
+              std::cout << "made it to drone 2 uber if" << std::endl;
               assignedATask = true;
               minDis = disToEntity;
               drones[i]->SetNearestEntity(entity);

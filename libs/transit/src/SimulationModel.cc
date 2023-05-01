@@ -101,10 +101,10 @@ void SimulationModel::ScheduleTrip(JsonObject& details) {
 
 /// Updates the simulation
 void SimulationModel::Update(double dt) {
+  handleTrips();
   for (int i = 0; i < entities.size(); i++) {
     entities[i]->Update(dt, scheduler);
     controller.UpdateEntity(*entities[i]);
-    handleTrips();
   }
 }
 

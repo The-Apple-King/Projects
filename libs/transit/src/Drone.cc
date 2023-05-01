@@ -20,6 +20,9 @@ Drone::Drone(JsonObject& obj) : details(obj) {
   speed = obj["speed"];
 
   available = true;
+  handler = new Drone1Uber();
+  name = obj["name"].ToString();
+  name = name.substr(1, name.size() - 2);
 }
 
 Drone::~Drone() {
@@ -31,17 +34,7 @@ Drone::~Drone() {
 }
 
 void Drone::GetNearestEntity(std::vector<IEntity*> scheduler) {
-  float minDis = std::numeric_limits<float>::max();
-  for (auto entity : scheduler) {
-    if (entity->GetAvailability()) {
-      float disToEntity = this->position.Distance(entity->GetPosition());
-      if (disToEntity <= minDis) {
-        minDis = disToEntity;
-        nearestEntity = entity;
-      }
-    }
-  }
-
+  nearestEntity = handler->handle_request(name, position, scheduler);
   if (nearestEntity) {
       // set availability to the nearest entity
     nearestEntity->SetAvailability(false);
@@ -120,12 +113,3 @@ void Drone::Jump(double height) {
   }
 }
 
-void Drone::pickUpMeal(str::string mealName) {
-   mealCarried = mealName;
-}
-
-str::string Drone::dropOffMeal() {
-   str::string droppedOffMealName = mealCarried;
-   mealCarried = "none";
-   return droppedOffMealName;
-}

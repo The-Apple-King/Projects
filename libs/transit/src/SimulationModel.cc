@@ -5,7 +5,6 @@
 #include "RobotFactory.h"
 #include "HumanFactory.h"
 #include "DragonFactory.h"
-#include "RestaurantFactory.h"
 #include "SimulationDataCollector.h"
 #include "Data.h"
 
@@ -18,7 +17,6 @@ SimulationModel::SimulationModel(IController& controller)
   AddFactory(new HelicopterFactory());
   AddFactory(new HumanFactory());
   AddFactory(new DragonFactory());
-  AddFactory(new RestaurantFactory());
   data = SimulationDataCollector::getInstance();
 }
 
@@ -77,8 +75,6 @@ void SimulationModel::ScheduleTrip(JsonObject& details) {
   //string, start, end, double, string, double, string, string
   Data *trip = new Data(detail, Vector3(0,0,0), Vector3(0,0,0), dista, detai, dista,  dista, detail, detai);
   data->collectData(trip);
-  // testing code to check if it actually outputs
-  // data->outputDataToCSV("output.csv");
   // ************ Collect Data on a trip******************************
 
 
@@ -100,3 +96,4 @@ void SimulationModel::AddFactory(IEntityFactory* factory) {
 void SimulationModel::printData() {
   data->outputDataToCSV("output.csv");
 }
+

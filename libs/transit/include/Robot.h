@@ -71,6 +71,14 @@ class Robot : public IEntity {
   std::string GetStrategyName() const { return strategyName; }
 
   /**
+   * @brief Get the Order Type object
+   * 
+   * @return true uber trip
+   * @return false food order
+   */
+  bool getOrderType(){ return uber; }
+
+  /**
    * @brief Set the Strategy Name
    *
    * @param strategyName_ Strategy name
@@ -117,6 +125,7 @@ class Robot : public IEntity {
   float speed;
   bool available;
   std::string strategyName;
+  bool uber;
 };
 
 #endif  // ROBOT_H

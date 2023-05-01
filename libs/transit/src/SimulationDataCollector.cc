@@ -25,31 +25,29 @@ void SimulationDataCollector::collectData(Data* data) {
     collectedData.push_back(data);
 }
 
-std::string SimulationDataCollector::organizeData() {
+void SimulationDataCollector::organizeData() {
     // can put these all into one loop later
 
     // determine which drone went further
-    int dis1, dis2 = 0;
+    int dis1 = 0, dis2 = 0;
     // determine which drone made more
-    int mon1, mon2 = 0;
+    int mon1 = 0, mon2 = 0;
     // number of trips made by each drone
-    int tripsMade1, tripsMade2 = 0;
+    int tripsMade1 = 0, tripsMade2 = 0;
     // determine which restaurant got the most business
-    int canesOrders, chipotleOrders, chickfilaOrders, uber = 0;
+    int canesOrders = 0, chipotleOrders = 0, chickfilaOrders =0, uber = 0;
     // determine number of times different strategies were used
-     int astar, dfs, djikstra = 0;
+     int astar = 0, dfs = 0, djikstra = 0;
     for (size_t i = 0; i < collectedData.size(); i++)
     {
-        if (collectedData[i]->getName() == "drone1")
+        if (collectedData[i]->getName() == "Drone1")
         {
             dis1 += collectedData[i]->getDistance();
-            mon1 += collectedData[i]->getMoneyMade();
             tripsMade1 ++;
         }
-        else if (collectedData[i]->getName() == "drone2")
+        else if (collectedData[i]->getName() == "Drone2")
         {
-            dis1 += collectedData[i]->getDistance();
-            mon2 += collectedData[i]->getMoneyMade();
+            dis2 += collectedData[i]->getDistance();
             tripsMade2 ++;
         }
 
@@ -89,9 +87,9 @@ std::string SimulationDataCollector::organizeData() {
 
     // print furthest distances
     if( dis1 > dis2){
-        outputFile << "Drone 1 went further at " << dis1 << "Drone 2 went only " << dis2 << std::endl;
+        outputFile << "Drone 1 went further at " << dis1 << ", Drone 2 went only " << dis2 << std::endl;
     } else {
-        outputFile << "Drone 2 went further at " << dis2 << "Drone 1 went only " << dis1 << std::endl;
+        outputFile << "Drone 2 went further at " << dis2 << ", Drone 1 went only " << dis1 << std::endl;
     }
 
     // print number of trips
@@ -114,12 +112,11 @@ std::string SimulationDataCollector::organizeData() {
 
 void SimulationDataCollector::outputDataToCSV(std::string filename) {
     // Open the file for writing
+    this->organizeData();
     std::ofstream outputFile(filename);
 
     // Write the header row
-    outputFile << "Drone Name,Start x,y,z,End x,y,z,Distance,Strategy,Money Made,Distance Flown,Restaurant Name,Meal Name\n";
-
-    outputFile << organizeData();
+    outputFile << "Drone Name,Start x,y,z,End x,y,z,Distance,Strategy,Restaurant Name\n";
 
     // Write the data rows
     for (int i = 0; i < collectedData.size(); i ++) {

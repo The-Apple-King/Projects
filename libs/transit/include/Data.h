@@ -20,7 +20,7 @@ public:
      * @param restaurantName name of restaurant we are performing an order for
      */
 
-    Data(std::string droneName, std::string tripName, Vector3 start, Vector3 end, double distance, std::string strategy, double moneyMade, std::string restaurantName);
+    Data(std::string droneName, std::string tripName, Vector3 start, Vector3 end, double distance, std::string strategy, std::string restaurantName);
     // string, start, end, double, string, double, double, string, string
 
     /**
@@ -59,14 +59,6 @@ public:
     std::string getStrategy(){return strategy;}
 
     /**
-     * @brief Get the Money Made object
-     * 
-     * @return double 
-     */
-    double getMoneyMade(){return moneyMade;}
-
-
-    /**
      * @brief Get the Restaurant Name object
      * 
      * @return std::string 
@@ -97,7 +89,6 @@ private:
     Vector3 end; // end position
     double distance; // distance traveled
     std::string strategy; // movement strategy
-    double moneyMade; // how much money has been made?
     std::string restaurantName; // what's the name of this restaurant?
 
 };

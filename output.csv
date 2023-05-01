@@ -1,3 +1,4 @@
-Drone Name,Start x,y,z,End x,y,z,Distance,Strategy,Money Made,Distance Flown,Restaurant Name,Meal Name
-Drone1,617.221,254.665,-394.686,792.25,254.665,-403.308,175.241,astar,0,175.241,detail,details
-Drone2,704.735,254.665,-351.576,596.097,254.665,-216.496,173.346,astar,0,173.346,detail,details
+Drone Name,Start x,y,z,End x,y,z,Distance,Strategy,Restaurant Name
+Drone2,780.179,254.665,-440.671,-1380.52,254.665,849.77,2516.71,astar,detail
+Drone1,719.824,254.665,-285.473,116.277,254.665,-124.527,624.638,dfs,detail
+Drone2,357.696,254.665,-515.396,547.813,254.665,-279.725,302.796,dfs,detail

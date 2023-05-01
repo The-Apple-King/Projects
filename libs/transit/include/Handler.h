@@ -4,7 +4,11 @@
 #include <string>
 #include "IEntity.h"
 #include "Robot.h"
-class Drone;
+#include "Drone.h"
+#include "BeelineStrategy.h"
+#include "AstarStrategy.h"
+#include "DijkstraStrategy.h"
+#include "DfsStrategy.h"
 
 /**
  * @brief Handler class interface to allow creation of new handlers.
@@ -26,7 +30,7 @@ class Handler{
          * @param drone The drone requesting the delivery
          * @param scheduler The list of available robots to assign to the delivery
          */
-        virtual IEntity* handle_request(std::string name, Vector3 pos, std::vector<IEntity*> scheduler) = 0;
+        virtual void handle_request(std::vector<Drone*> drones, std::vector<IEntity*> scheduler) = 0;
         
         /**
          * @brief Set the next handler object

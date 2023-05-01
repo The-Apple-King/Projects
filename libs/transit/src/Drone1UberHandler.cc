@@ -1,30 +1,31 @@
 #include "Drone1UberHandler.h"
+
 #include "Drone2FoodHandler.h"
 
 Drone1Uber::Drone1Uber() { next_handler = new Drone2Food(); }
 
-IEntity* Drone1Uber::handle_request(std::string name, Vector3 pos,
+void Drone1Uber::handle_request(std::vector<Drone*> drones,
                                     std::vector<IEntity*> scheduler) {
-
-  if (name == "Drone1") {
-    float minDis = std::numeric_limits<float>::max();
-    for (auto entity : scheduler) {
-      if (entity->GetAvailability()) {
-        Robot* temp = dynamic_cast<Robot*>(entity);
-        if (temp != nullptr && temp->getOrderType()) {  // if uber
-          float disToEntity = pos.Distance(entity->GetPosition());
-          if (disToEntity <= minDis) {
-            minDis = disToEntity;
-            return entity;
+  for (size_t i = 0; i < drones.size(); i++) {
+    if (drones[i]->GetName() == "Drone1" && drones[i]->GetAvailability()) {
+      float minDis = std::numeric_limits<float>::max();
+      for (auto entity : scheduler) {
+        if (entity->GetAvailability()) {
+          Robot* temp = dynamic_cast<Robot*>(entity);
+          if (temp != nullptr && temp->getOrderType()) {  // if uber
+            float disToEntity =
+                drones[i]->GetPosition().Distance(entity->GetPosition());
+            if (disToEntity <= minDis) {
+              std::cout << "inside of the if" << std::endl;
+              minDis = disToEntity;
+              drones[i]->SetNearestEntity(entity);
+            }
           }
         }
       }
     }
   }
   if (next_handler != nullptr) {
-    return next_handler->handle_request(name, pos, scheduler);
-  }
-  else{
-    return nullptr;
+    next_handler->handle_request(drones, scheduler);
   }
 }

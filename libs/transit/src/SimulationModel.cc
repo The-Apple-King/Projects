@@ -18,6 +18,8 @@ SimulationModel::SimulationModel(IController& controller)
   AddFactory(new HumanFactory());
   AddFactory(new DragonFactory());
   data = SimulationDataCollector::getInstance();
+
+  handler = new Drone1Uber();
 }
 
 SimulationModel::~SimulationModel() {
@@ -44,6 +46,12 @@ void SimulationModel::CreateEntity(JsonObject& entity) {
   // Call AddEntity to add it to the view
   controller.AddEntity(*myNewEntity);
   entities.push_back(myNewEntity);
+
+  //add drones to vector
+  if(type == "drone"){
+    drones.push_back(dynamic_cast<Drone*>(myNewEntity));
+    std::cout << "drone was added" << std::endl;
+  }
 }
 
 /// Schedules a trip for an object in the scene
@@ -96,6 +104,7 @@ void SimulationModel::Update(double dt) {
   for (int i = 0; i < entities.size(); i++) {
     entities[i]->Update(dt, scheduler);
     controller.UpdateEntity(*entities[i]);
+    handleTrips();
   }
 }
 
@@ -105,5 +114,9 @@ void SimulationModel::AddFactory(IEntityFactory* factory) {
 
 void SimulationModel::printData() {
   data->outputDataToCSV("output.csv");
+}
+
+void SimulationModel::handleTrips() {
+  handler->handle_request(drones, scheduler);
 }
 

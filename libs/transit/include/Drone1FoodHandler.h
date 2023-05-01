@@ -21,7 +21,7 @@ class Drone1Food : public Handler {
          * 
          * @param request Request to process
          */
-        IEntity* handle_request(std::string name, Vector3 pos, std::vector<IEntity*> scheduler);
+        void handle_request(std::vector<Drone*> drones, std::vector<IEntity*> scheduler);
 
     private:
         Handler* next_handler;

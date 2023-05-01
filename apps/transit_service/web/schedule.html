@@ -68,16 +68,16 @@
         </div>
     </div>
     <div><input type="button" value="Schedule Trip" onclick="schedule(true)"></div>
+    <div><input type="button" value="Order Food" onclick="schedule(false)" style="margin-top: 10px;"></div>
 
     <div><input type="button" value="Add Human" onclick="addHuman()" style="margin-top: 10px;"></div>
     <div><input type="button" value="Print Data" onclick="printData()" style="margin-top: 10px;"></div>
-    <div><input type="button" value="Order Food" onclick="schedule(false)" style="margin-top: 10px;"></div>
     </div>
     <div class="indent">Order Food
         <select id="restaurant-Name">
-            <option value="astar">Canes</option>
-            <option value="astar">Chipotle</option>
-            <option value="dfs">chick-fil-a</option>
+            <option value="Canes">Canes</option>
+            <option value="Chipotle">Chipotle</option>
+            <option value="Chick-Fil-A">Chick-Fil-A</option>
         </select>
     </div>
     
@@ -139,6 +139,7 @@
             
             var errorDiv = document.getElementById("nameError");
             var searchStrat = document.getElementById("search-strategy").value;
+            var restaurantOrder = document.getElementById("restaurant-Name").value;
             errorDiv.innerHTML = "";
             var name = $("#name").val();
             if (name == "") {
@@ -155,42 +156,52 @@
                 if(orderType == true){
                     var start = [trip[0][0] / ($("#map").width()), 1.0, trip[0][1] / ($("#map").height())];
                     var end = [trip[trip.length - 1][0] / ($("#map").width()), 1.0, trip[trip.length - 1][1] / ($("#map").height())];
+                    var robotSpawn = start;
                 }
                 // if food
                 else{
                     if(restaurantOrder == "Canes"){
-                        start = [1000, 0, 1000];
+                        start = [750, 300, 0];
                     }else if(restaurantOrder == "chipotle"){
-                        start = [500, 0, 500];
+                        start = [250, 500, 0];
                     } else if (restaurantOrder == "chick-fil-a"){
-                        start = [-1000, 0, -1000];
+                        start = [250, 250, 0];
                     }
                     var end = [trip[0][0] / ($("#map").width()), 1.0, trip[0][1] / ($("#map").height())];
+                    var robotSpawn = end;
                 }
                 console.log(start);
                 var scale = 0.705;
                 var min = { x: -2030.950927734375, y: 220.99996948242188, z: -1184.1085205078125 };
                 var max = { x: 2249.523193359375, y: 286.9197998046875, z: 1261.8768310546875 };
+                
 
                 api.sendCommand("CreateEntity", {
                     "type": "robot",
                     "name": name,
                     "mesh": "assets/model/robot.glb",
-                    "position": [(min.x + (max.x - min.x) * start[0]) * scale, 254.665 * start[1], (min.z + (max.z - min.z) * start[2]) * scale],
+                    "position": [(min.x + (max.x - min.x) * robotSpawn[0]) * scale, 254.665 * robotSpawn[1], (min.z + (max.z - min.z) * robotSpawn[2]) * scale],
                     "scale": [0.25, 0.25, 0.25],
                     "direction": [1, 0, 0],
                     "speed": 30.0,
                     "radius": 1.0,
                     "rotation": [0, 0, 0, 0],
-                    "order": orderType
+                    "order": orderType,
+                    "restaurant": restaurantOrder
                 });
                 api.sendCommand("ScheduleTrip", { name: name, type:orderType, start: [trip[0][0], trip[0][1]], end: [(min.x + (max.x - min.x) * end[0]) * scale, 254.665 * end[1], (min.z + (max.z - min.z) * end[2]) * scale], search: searchStrat });
                 var details = name + ": ";
-                for (var i = 0; i < trip.length; i++) {
-                    if (i != 0) {
-                        details += " ---> ";
+                if(orderType){
+                    for (var i = 0; i < trip.length; i++) {
+                        if (i != 0) {
+                            details += " ---> ";
+                        }
+                        details += "(" + trip[i][0].toFixed(1) + ", " + trip[i][1].toFixed(1) + ")";
                     }
-                    details += "(" + trip[i][0].toFixed(1) + ", " + trip[i][1].toFixed(1) + ")";
+                }else {
+                    details += "(" + restaurantOrder + start[0].toFixed(1) + ", " + start[1].toFixed(1) + ")";
+                    details += " ---> ";
+                    details += "(" + (end[0] * scale).toFixed(1) + ", " + (end[1] *scale).toFixed(1) + ")";
 
                 }
                 $("#list").append("<p class='trip'>" + details + "</p>");

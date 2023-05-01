@@ -9,6 +9,8 @@
 #include "graph.h"
 #include "SimulationDataCollector.h"
 #include "Data.h"
+#include "Handler.h"
+#include "Drone1UberHandler.h"
 using namespace routing;
 
 //--------------------  Model ----------------------------
@@ -70,6 +72,12 @@ class SimulationModel {
    */
   void printData();
 
+  /**
+   * @brief sets the nearest entity of drones based on chain of command rules
+   * 
+   */
+  void handleTrips();
+
  protected:
   IController& controller;
   std::vector<IEntity*> entities;
@@ -77,6 +85,8 @@ class SimulationModel {
   const IGraph* graph;
   CompositeFactory* compFactory;
   SimulationDataCollector* data;
+  std::vector<Drone*> drones;
+  Handler* handler;
 };
 
 #endif

@@ -7,7 +7,7 @@ Drone1Food::Drone1Food(){
 
 IEntity* Drone1Food::handle_request(std::string name, Vector3 pos,
                                     std::vector<IEntity*> scheduler) {
-  if (name == "drone1") {
+  if (name == "Drone1") {
     float minDis = std::numeric_limits<float>::max();
     for (auto entity : scheduler) {
       if (entity->GetAvailability()) {

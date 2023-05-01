@@ -21,7 +21,8 @@ Drone::Drone(JsonObject& obj) : details(obj) {
 
   available = true;
   handler = new Drone1Uber();
-  name = "Drone1";
+  name = obj["name"].ToString();
+  name = name.substr(1, name.size() - 2);
 }
 
 Drone::~Drone() {

@@ -30,10 +30,10 @@ public:
     void outputDataToCSV(std::string fileName);
 
     /**
-     * @brief not implemented but should cycle through collectedData and determine info
+     * @brief looks through data collected and outputs it to a txt file with interesting info
      * 
      */
-    std::string organizeData();
+    void organizeData();
 
 private:
     SimulationDataCollector(); // Private constructor to prevent direct instantiation

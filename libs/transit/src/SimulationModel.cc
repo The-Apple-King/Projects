@@ -5,7 +5,6 @@
 #include "RobotFactory.h"
 #include "HumanFactory.h"
 #include "DragonFactory.h"
-#include "RestaurantFactory.h"
 #include "SimulationDataCollector.h"
 #include "Data.h"
 
@@ -18,7 +17,6 @@ SimulationModel::SimulationModel(IController& controller)
   AddFactory(new HelicopterFactory());
   AddFactory(new HumanFactory());
   AddFactory(new DragonFactory());
-  AddFactory(new RestaurantFactory());
   data = SimulationDataCollector::getInstance();
 }
 

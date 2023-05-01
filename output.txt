@@ -1,0 +1,10 @@
+Drone 2 went further at 0, Drone 1 went only 0
+Drone 1 made 0 trips
+Drone 2 made 0 trips
+Canes got 0 orders
+Chick-Fil-A got 0 orders
+Chipotle got 0 orders
+Uber got 4 orders
+Astar was used 3 times
+Depth First Search was used 1 times
+Djikstra's was used 0 times

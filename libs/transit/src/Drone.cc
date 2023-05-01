@@ -52,6 +52,7 @@ void Drone::GetNearestEntity(std::vector<IEntity*> scheduler) {
     //set name of data
     trip = dynamic_cast<Robot *>(nearestEntity)->getData();
     trip->nameOfDrone(this->GetDetails()["name"]);
+    std::cout << this->GetDetails()["name"] << std::endl;
     
 
     destination = nearestEntity->GetPosition();

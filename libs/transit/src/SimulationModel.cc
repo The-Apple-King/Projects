@@ -1,13 +1,12 @@
 #include "SimulationModel.h"
 
+#include "Data.h"
+#include "DragonFactory.h"
 #include "DroneFactory.h"
 #include "HelicopterFactory.h"
-#include "RobotFactory.h"
 #include "HumanFactory.h"
-#include "DragonFactory.h"
+#include "RobotFactory.h"
 #include "SimulationDataCollector.h"
-#include "Data.h"
-
 
 SimulationModel::SimulationModel(IController& controller)
     : controller(controller) {
@@ -47,8 +46,8 @@ void SimulationModel::CreateEntity(JsonObject& entity) {
   controller.AddEntity(*myNewEntity);
   entities.push_back(myNewEntity);
 
-  //add drones to vector
-  if(type == "drone"){
+  // add drones to vector
+  if (type == "drone") {
     drones.push_back(dynamic_cast<Drone*>(myNewEntity));
     std::cout << "drone was added" << std::endl;
   }
@@ -87,12 +86,13 @@ void SimulationModel::ScheduleTrip(JsonObject& details) {
       droneName = "TEMP NAME";
       std::string detail = "detail";
       // moneymade needs a formula***********
-      Data *trip = new Data(droneName, tripName, startPos, endPos, distance, strategy, detail);
+      Data* trip = new Data(droneName, tripName, startPos, endPos, distance,
+                            strategy, detail);
       // string, string, start, end, double, string, string
 
       data->collectData(trip);
       // ******************************************
-      dynamic_cast<Robot *>(entity)->setData(trip);
+      dynamic_cast<Robot*>(entity)->setData(trip);
       break;
     }
   }
@@ -112,11 +112,8 @@ void SimulationModel::AddFactory(IEntityFactory* factory) {
   compFactory->AddFactory(factory);
 }
 
-void SimulationModel::printData() {
-  data->outputDataToCSV("output.csv");
-}
+void SimulationModel::printData() { data->outputDataToCSV("output.csv"); }
 
 void SimulationModel::handleTrips() {
   handler->handle_request(drones, scheduler);
 }
-

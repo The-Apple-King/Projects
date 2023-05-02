@@ -81,21 +81,21 @@ class Drone : public IEntity {
    */
   std::string GetName() { return name; }
 
-  Data* GetData(){ return trip; }
+  Data* GetData() { return trip; }
 
   /**
    * @brief returns the nearest entity
-   * 
-   * @return IEntity* 
+   *
+   * @return IEntity*
    */
-  IEntity* GetNearestEntity() {return nearestEntity;}
+  IEntity* GetNearestEntity() { return nearestEntity; }
 
   /**
    * @brief Get the Graph object
-   * 
-   * @return IGraph* 
+   *
+   * @return IGraph*
    */
-  const IGraph* GetGraph(){ return graph;}
+  const IGraph* GetGraph() { return graph; }
 
   /**
    * @brief Updates the drone's position
@@ -140,11 +140,11 @@ class Drone : public IEntity {
    *
    * @param val the value of available
    */
-  void SetAvailability(bool val) { 
-    available = val; 
+  void SetAvailability(bool val) {
+    available = val;
     std::cout << "we updated avail to " << val << std::endl;
     std::cout << "its new val is " << available << std::endl;
-    }
+  }
 
   /**
    * @brief Set the value of picked up
@@ -155,10 +155,10 @@ class Drone : public IEntity {
 
   /**
    * @brief Set the data stored in drone
-   * 
+   *
    * @param data the data object
    */
-  void SetData(Data* data){ trip = data;}
+  void SetData(Data* data) { trip = data; }
 
   /**
    * @brief Set the first half of the trip

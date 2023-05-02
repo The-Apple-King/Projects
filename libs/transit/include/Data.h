@@ -81,6 +81,10 @@ public:
         droneName = name;
     }
 
+    void setRestaurant(std::string restaurant ){
+        restaurantName = restaurant;
+    }
+
 private:
     // any data we want to save
     std::string droneName; // what drone performed this trip?

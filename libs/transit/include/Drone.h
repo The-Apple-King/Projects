@@ -81,6 +81,8 @@ class Drone : public IEntity {
    */
   std::string GetName() { return name; }
 
+  Data* GetData(){ return trip; }
+
   /**
    * @brief returns the nearest entity
    * 
@@ -138,7 +140,7 @@ class Drone : public IEntity {
    *
    * @param val the value of available
    */
-  void SetAvailablility(bool val) { 
+  void SetAvailability(bool val) { 
     available = val; 
     std::cout << "we updated avail to " << val << std::endl;
     std::cout << "its new val is " << available << std::endl;
@@ -150,6 +152,13 @@ class Drone : public IEntity {
    * @param val wether object picked up
    */
   void SetPickedUp(bool val) { pickedUp = val; }
+
+  /**
+   * @brief Set the data stored in drone
+   * 
+   * @param data the data object
+   */
+  void SetData(Data* data){ trip = data;}
 
   /**
    * @brief Set the first half of the trip
@@ -183,7 +192,6 @@ class Drone : public IEntity {
    */
   Drone(const Drone& drone) = delete;
   Drone& operator=(const Drone& drone) = delete;
-  bool available;
   Data* trip;
 
  private:
@@ -192,6 +200,7 @@ class Drone : public IEntity {
   Vector3 direction;
   std::string color = "None";  // None means default color
   float jumpHeight = 0;
+  bool available;
   bool goUp = true;  // jump helper
   Vector3 destination;
   float speed;

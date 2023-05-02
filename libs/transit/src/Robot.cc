@@ -24,6 +24,8 @@ void Robot::Rotate(double angle) {
 
 void Robot::setData(Data *data) {
   this->trip = data;
+  this->trip->setRestaurant(details["restaurant"]);
+  std::cout << this->trip->getRestaurantName() << std::endl;
 }
 
 Data* Robot::getData() {return this->trip;}

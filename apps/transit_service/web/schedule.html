@@ -157,18 +157,19 @@
                     var start = [trip[0][0] / ($("#map").width()), 1.0, trip[0][1] / ($("#map").height())];
                     var end = [trip[trip.length - 1][0] / ($("#map").width()), 1.0, trip[trip.length - 1][1] / ($("#map").height())];
                     var robotSpawn = start;
+                    restaurantOrder = "";
                 }
                 // if food
                 else{
                     if(restaurantOrder == "Canes"){
-                        start = [750, 300, 0];
-                    }else if(restaurantOrder == "chipotle"){
-                        start = [250, 500, 0];
-                    } else if (restaurantOrder == "chick-fil-a"){
-                        start = [250, 250, 0];
+                        end = [500 / ($("#map").width()), 0, 200 / ($("#map").height())];
+                    }else if(restaurantOrder == "Chipotle"){
+                        end = [550 / ($("#map").width()), 0, 300 / ($("#map").height())];
+                    } else if (restaurantOrder == "Chick-Fil-A"){
+                        end = [400 / ($("#map").width()), 0, 300 / ($("#map").height())];
                     }
-                    var end = [trip[0][0] / ($("#map").width()), 1.0, trip[0][1] / ($("#map").height())];
-                    var robotSpawn = end;
+                    var start = [trip[0][0] / ($("#map").width()), 1.0, trip[0][1] / ($("#map").height())];
+                    var robotSpawn = start;
                 }
                 console.log(start);
                 var scale = 0.705;

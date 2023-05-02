@@ -53,15 +53,15 @@ void SimulationDataCollector::organizeData() {
 
 
         // restaurant type test, also number of normal trips
-        if (collectedData[i]->getRestaurantName() == "canes")
+        if (collectedData[i]->getRestaurantName() == "Canes")
         {
             canesOrders ++;
         }
-        else if (collectedData[i]->getRestaurantName() == "chipotle")
+        else if (collectedData[i]->getRestaurantName() == "Chipotle")
         {
             chipotleOrders ++;
         }
-        else if (collectedData[i]->getRestaurantName() == "chick-fil-a")
+        else if (collectedData[i]->getRestaurantName() == "Chick-Fil-A")
         {
             chickfilaOrders ++;
         }

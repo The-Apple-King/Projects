@@ -4,14 +4,13 @@ void Handler::setTrip(Drone* drone) {
   IEntity* nearestEntity = drone->GetNearestEntity();
 
   // add trip to vector here
-      drone->trip = dynamic_cast<Robot*>(nearestEntity)->getData();
-      drone->trip->nameOfDrone(drone->GetDetails()["name"]);
+      drone->SetData(dynamic_cast<Robot*>(nearestEntity)->getData());
+      drone->GetData()->nameOfDrone(drone->GetDetails()["name"]);
       std::cout << "the name of this drone is" << drone->GetDetails()["name"]
                 << std::endl;
   //std::cout << nearestEntity << std::endl;
 
   drone->SetAvailability(false);
-  drone->available = false;
   std::cout << "drone available: " << drone->GetAvailability() << std::endl;
   nearestEntity->SetAvailability(false);
   //std::cout << "nearest entity available: " << nearestEntity->GetAvailability() << std::endl;

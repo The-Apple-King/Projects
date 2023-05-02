@@ -38,7 +38,6 @@ void Drone::Update(double dt, std::vector<IEntity*> scheduler) {
     toRobot->Move(this, dt);
 
     if (toRobot->IsCompleted()) {
-    // std::cout << "to torobot" << std::endl;
       delete toRobot;
       toRobot = nullptr;
       pickedUp = true;
@@ -46,7 +45,7 @@ void Drone::Update(double dt, std::vector<IEntity*> scheduler) {
   } else if (toFinalDestination) {
     toFinalDestination->Move(this, dt);
 
-    if (nearestEntity && pickedUp) {
+    if (nearestEntity && pickedUp && trip->getRestaurantName() == "") {
       nearestEntity->SetPosition(position);
       nearestEntity->SetDirection(direction);
     }
@@ -55,7 +54,6 @@ void Drone::Update(double dt, std::vector<IEntity*> scheduler) {
       delete toFinalDestination;
       toFinalDestination = nullptr;
       nearestEntity = nullptr;
-      std::cout << "finished" << std::endl;
       available = true;
       pickedUp = false;
     }

@@ -162,11 +162,11 @@
                 // if food
                 else{
                     if(restaurantOrder == "Canes"){
-                        end = [500 / ($("#map").width()), 0, 200 / ($("#map").height())];
+                        end = [500 / ($("#map").width()), 1.0, 200 / ($("#map").height())];
                     }else if(restaurantOrder == "Chipotle"){
-                        end = [550 / ($("#map").width()), 0, 300 / ($("#map").height())];
+                        end = [550 / ($("#map").width()), 1.0, 300 / ($("#map").height())];
                     } else if (restaurantOrder == "Chick-Fil-A"){
-                        end = [400 / ($("#map").width()), 0, 300 / ($("#map").height())];
+                        end = [400 / ($("#map").width()), 1.0, 300 / ($("#map").height())];
                     }
                     var start = [trip[0][0] / ($("#map").width()), 1.0, trip[0][1] / ($("#map").height())];
                     var robotSpawn = start;
@@ -202,7 +202,7 @@
                 }else {
                     details += "(" + restaurantOrder + start[0].toFixed(1) + ", " + start[1].toFixed(1) + ")";
                     details += " ---> ";
-                    details += "(" + (end[0] * scale).toFixed(1) + ", " + (end[1] *scale).toFixed(1) + ")";
+                    details += "(" + (end[0]).toFixed(1) + ", " + (end[1]).toFixed(1) + ")";
 
                 }
                 $("#list").append("<p class='trip'>" + details + "</p>");

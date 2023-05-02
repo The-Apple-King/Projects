@@ -2,7 +2,7 @@
 
 #include "Drone2FoodHandler.h"
 
-Drone1Uber::Drone1Uber() { next_handler = new Drone2Food(); }
+Drone1Uber::Drone1Uber() { next_handler = new Drone2Food; }
 
 void Drone1Uber::handle_request(std::vector<Drone *> drones,
                                 std::vector<IEntity *> scheduler) {

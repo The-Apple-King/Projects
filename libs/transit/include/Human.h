@@ -72,11 +72,10 @@ class Human : public IEntity {
 
   /**
    * @brief finds another random destination to move to
-   * 
    */
   void findDestination();
 
- /**
+  /**
    * @brief Updates the human's position
    * @param dt Delta time
    * @param scheduler Vector containing all the entities in the system
@@ -131,4 +130,4 @@ class Human : public IEntity {
   IStrategy* toRandomPosition = nullptr;
 };
 
-#endif
+#endif  // HUMAN_H_

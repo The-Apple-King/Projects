@@ -12,8 +12,8 @@
 // velocity and direction.
 /**
  * @class Helicopter
- * @brief Represents a helicopter in a physical system. Helicopters move using euler
- * integration based on a specified velocity and direction.
+ * @brief Represents a helicopter in a physical system. Helicopters move using
+ * euler integration based on a specified velocity and direction.
  */
 class Helicopter : public IEntity {
  public:
@@ -72,11 +72,10 @@ class Helicopter : public IEntity {
 
   /**
    * @brief finds another random destination to move to
-   * 
    */
   void findDestination();
 
- /**
+  /**
    * @brief Updates the helicopter's position
    * @param dt Delta time
    * @param scheduler Vector containing all the entities in the system
@@ -131,4 +130,4 @@ class Helicopter : public IEntity {
   IStrategy* toRandomPosition = nullptr;
 };
 
-#endif
+#endif  // HELICOPTER_H_

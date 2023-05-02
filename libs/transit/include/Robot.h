@@ -3,10 +3,10 @@
 
 #include <vector>
 
+#include "Data.h"
 #include "IEntity.h"
 #include "math/vector3.h"
 #include "util/json.h"
-#include "Data.h"
 
 /**
  * @class Robot
@@ -73,11 +73,11 @@ class Robot : public IEntity {
 
   /**
    * @brief Get the Order Type object
-   * 
+   *
    * @return true uber trip
    * @return false food order
    */
-  bool getOrderType(){ return uber; }
+  bool getOrderType() { return uber; }
 
   /**
    * @brief Set the Strategy Name
@@ -119,18 +119,18 @@ class Robot : public IEntity {
   void Rotate(double angle);
 
   /**
-   * @brief adds a pointer to the trip to the robot so that drone can keep track of it
-   * 
+   * @brief adds a pointer to the trip to the robot so that drone can keep track
+   * of it
+   *
    * @param data trip data
    */
   void setData(Data* data);
 
   /**
    * @brief Get the Data object
-   * 
+   *
    */
   Data* getData();
-
 
  private:
   JsonObject details;

@@ -5,27 +5,25 @@
 
 /**
  * @brief Handler class interface to allow creation of new handlers.
- * 
+ *
  */
-class Drone1Uber : public Handler{
-    public:
+class Drone1Uber : public Handler {
+ public:
+  /**
+   * @brief Construct a new Drone 1 Uber object
+   */
+  Drone1Uber();
 
-        /**
-         * @brief Construct a new Drone 1 Uber object
-         * 
-         */
-        Drone1Uber();
+  /**
+   * @brief Function to handle the request that is passed.
+   *
+   * @param request Request to process
+   */
+  void handle_request(std::vector<Drone*> drones,
+                      std::vector<IEntity*> scheduler);
 
-        /**
-         * @brief Function to handle the request that is passed.
-         * 
-         * @param request Request to process
-         */
-        void handle_request(std::vector<Drone*> drones, std::vector<IEntity*> scheduler);
-
-    private:
-        Handler* next_handler;
-
+ private:
+  Handler* next_handler;
 };
 
-#endif
+#endif  // DRONE1UBER_H_

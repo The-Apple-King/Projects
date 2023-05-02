@@ -3,11 +3,11 @@
 
 #include <vector>
 
-#include "IEntityFactory.h"
 #include "Human.h"
+#include "IEntityFactory.h"
 
 /**
- *@brief Human Factory to produce Humans class.
+ * @brief Human Factory to produce Humans class.
  **/
 class HumanFactory : public IEntityFactory {
  public:
@@ -18,11 +18,12 @@ class HumanFactory : public IEntityFactory {
 
   /**
    * @brief Creates entity using the given JSON object, if possible.
+   *
    * @param entity - JsonObject to be used to create the new entity.
-   * @return Entity that was created if it was created successfully, or a
-   *nullpointer if creation failed.
+   * @return Entity that was created if it was created successfully, or a null
+   *pointer if creation failed.
    **/
-  IEntity* CreateEntity(JsonObject& entity);
+  IEntity* CreateEntity(JsonObject& entity) override;
 };
 
-#endif
+#endif  // HUMAN_FACTORY_H_

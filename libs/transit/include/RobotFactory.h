@@ -7,7 +7,7 @@
 #include "Robot.h"
 
 /**
- *@brief Drone Factory to produce Drones class.
+ * @brief Drone Factory to produce Drones class.
  **/
 class RobotFactory : public IEntityFactory {
  public:
@@ -18,11 +18,12 @@ class RobotFactory : public IEntityFactory {
 
   /**
    * @brief Creates entity using the given JSON object, if possible.
-   * @param entity - JsonObject to be used to create the new entity.
+   *
+   * @param entity JsonObject to be used to create the new entity.
    * @return Entity that was created if it was created successfully, or a
-   *nullpointer if creation failed.
+   *         nullpointer if creation failed.
    **/
   IEntity* CreateEntity(JsonObject& entity);
 };
 
-#endif
+#endif  // ROBOT_FACTORY_H_

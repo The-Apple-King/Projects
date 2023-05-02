@@ -2,9 +2,7 @@
 
 #include "Drone1FoodHandler.h"
 
-Drone2Food::Drone2Food() {
-  next_handler = dynamic_cast<Handler*>(new Drone1Food());
-}
+Drone2Food::Drone2Food() { next_handler = new Drone1Food; }
 
 void Drone2Food::handle_request(std::vector<Drone*> drones,
                                 std::vector<IEntity*> scheduler) {

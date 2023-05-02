@@ -2,15 +2,15 @@
 #define SIMULATION_MODEL_H_
 
 #include "CompositeFactory.h"
+#include "Data.h"
 #include "Drone.h"
+#include "Drone1UberHandler.h"
+#include "Handler.h"
 #include "IController.h"
 #include "IEntity.h"
 #include "Robot.h"
-#include "graph.h"
 #include "SimulationDataCollector.h"
-#include "Data.h"
-#include "Handler.h"
-#include "Drone1UberHandler.h"
+#include "graph.h"
 using namespace routing;
 
 //--------------------  Model ----------------------------
@@ -68,13 +68,13 @@ class SimulationModel {
 
   /**
    * @brief print out data to a csv named output.csv
-   * 
+   *
    */
   void printData();
 
   /**
    * @brief sets the nearest entity of drones based on chain of command rules
-   * 
+   *
    */
   void handleTrips();
 
@@ -89,4 +89,4 @@ class SimulationModel {
   Handler* handler;
 };
 
-#endif
+#endif  // SIMULATION_MODEL_H_

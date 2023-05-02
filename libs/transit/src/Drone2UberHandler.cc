@@ -31,7 +31,5 @@ void Drone2Uber::handle_request(std::vector<Drone*> drones,
   }
   if (next_handler != nullptr && !assignedATask) {
     next_handler->handle_request(drones, scheduler);
-  } else {
-    return;
   }
 }

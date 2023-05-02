@@ -211,4 +211,4 @@ class Drone : public IEntity {
   std::string name;
 };
 
-#endif
+#endif  // DRONE_H_

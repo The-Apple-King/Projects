@@ -156,4 +156,4 @@ class IEntity {
   const IGraph* graph;
 };
 
-#endif
+#endif  // ENTITY_H_

@@ -24,7 +24,7 @@ class Dragon : public IEntity {
   Dragon(JsonObject& obj);
 
   /**
-   * @brief Destructor
+   * @brief Destructor of Dragon
    */
   ~Dragon();
 
@@ -72,11 +72,11 @@ class Dragon : public IEntity {
 
   /**
    * @brief finds another random destination to move to
-   * 
+   *
    */
   void findDestination();
 
- /**
+  /**
    * @brief Updates the Dragon's position
    * @param dt Delta time
    * @param scheduler Vector containing all the entities in the system
@@ -132,4 +132,4 @@ class Dragon : public IEntity {
   IEntity* parrot = nullptr;
 };
 
-#endif
+#endif  // DRAGON_H_

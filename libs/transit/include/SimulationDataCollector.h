@@ -1,49 +1,51 @@
-#ifndef SIMULATION_DATA_COLLECTOR_H
-#define SIMULATION_DATA_COLLECTOR_H
+#ifndef SIMULATION_DATA_COLLECTOR_H_
+#define SIMULATION_DATA_COLLECTOR_H_
 
-#include <vector>
 #include <string>
+#include <vector>
+
 #include "Data.h"
 
 class SimulationDataCollector {
-public:
+ public:
+  /**
+   * @brief Singleton constructor
+   *
+   * @return SimulationDataCollector*
+   */
+  static SimulationDataCollector* getInstance();
 
-    /**
-     * @brief singleton constructor
-     * 
-     * @return SimulationDataCollector* 
-     */
-    static SimulationDataCollector* getInstance();
+  /**
+   * @brief Adds a Data object to vector collected data
+   *
+   * @param data The data object containing trip info
+   */
+  void collectData(Data* data);
 
-    /**
-     * @brief adds a Data object to vector collected data 
-     * 
-     * @param data the data object containing trip info
-     */
-    void collectData(Data* data);
+  /**
+   * @brief Prints the data to a CSV file
+   *
+   * @param fileName The name of the file to output to
+   */
+  void outputDataToCSV(std::string fileName);
 
-    /**
-     * @brief prints the data to a csv
-     * 
-     * @param fileName the name of the file to output to
-     */
-    void outputDataToCSV(std::string fileName);
+  /**
+   * @brief Looks through data collected and outputs it to a TXT file with
+   * interesting info
+   */
+  void organizeData();
 
-    /**
-     * @brief looks through data collected and outputs it to a txt file with interesting info
-     * 
-     */
-    void organizeData();
+ private:
+  SimulationDataCollector();  // Private constructor to prevent direct
+                              // instantiation
+  SimulationDataCollector(SimulationDataCollector const&) =
+      delete;  // Delete copy constructor
+  void operator=(SimulationDataCollector const&) =
+      delete;  // Delete assignment operator
 
-private:
-    SimulationDataCollector(); // Private constructor to prevent direct instantiation
-    SimulationDataCollector(SimulationDataCollector const&) = delete; // Delete copy constructor
-    void operator=(SimulationDataCollector const&) = delete; // Delete assignment operator
-
-protected:
-    std::vector<Data*> collectedData;
-    static SimulationDataCollector* singleton_;
+ protected:
+  std::vector<Data*> collectedData;
+  static SimulationDataCollector* singleton_;
 };
 
-
-#endif /* SIMULATION_DATA_COLLECTOR_H */
+#endif  // SIMULATION_DATA_COLLECTOR_H_

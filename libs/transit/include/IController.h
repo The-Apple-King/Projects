@@ -59,4 +59,4 @@ class IController {
                                const JsonObject& details) = 0;
 };
 
-#endif
+#endif  // CONTROLLER_H_

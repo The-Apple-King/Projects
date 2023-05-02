@@ -3,8 +3,8 @@
 
 #include <vector>
 
-#include "IEntityFactory.h"
 #include "Drone.h"
+#include "IEntityFactory.h"
 
 /**
  *@brief Drone Factory to produce Drones class.
@@ -25,4 +25,4 @@ class DroneFactory : public IEntityFactory {
   IEntity* CreateEntity(JsonObject& entity);
 };
 
-#endif
+#endif  // DRONE_FACTORY_H_

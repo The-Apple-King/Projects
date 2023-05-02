@@ -1,19 +1,18 @@
 #include "BeelineStrategy.h"
+
 #include "Drone.h"
 
 BeelineStrategy::BeelineStrategy(Vector3 position, Vector3 destination)
-  : position(position), destination(destination) {}
+    : position(position), destination(destination) {}
 
 void BeelineStrategy::Move(IEntity* entity, double dt) {
-  if (IsCompleted())
-    return;
+  if (IsCompleted()) return;
 
   Vector3 dir = (destination - position).Unit();
 
   position = position + dir * entity->GetSpeed() * dt;
   entity->SetPosition(position);
   entity->SetDirection(dir);
-
 }
 
 bool BeelineStrategy::IsCompleted() {

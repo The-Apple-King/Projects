@@ -9,60 +9,59 @@
 class Data {
  public:
   /**
-   * @brief
-   * @param distance distance traveled by the drone
-   * @param strategy movement strategy used
-   * @param moneyMade how much money we made
+   * @brief Creates a data object to store information from the simulation
+   *
    * @param droneName name of the drone
    * @param tripName name that the trip was given
    * @param start start location of a trip
    * @param end end location of a trip
+   * @param distance distance traveled by the drone
+   * @param strategy movement strategy used
    * @param restaurantName name of restaurant we are performing an order for
    */
-
   Data(std::string droneName, std::string tripName, Vector3 start, Vector3 end,
        double distance, std::string strategy, std::string restaurantName);
   // string, string, start, end, double, string, double, string
 
   /**
-   * @brief Get the Name object
+   * @brief Get the Name of the drone
    *
    * @return std::string
    */
   std::string getName() { return droneName; }
 
   /**
-   * @brief Get the Start object
+   * @brief Get the start position of the drone
    *
-   * @return Vector3
+   * @return Vector3 location of the drone at the start of the trip
    */
   Vector3 getStart() { return start; }
 
   /**
-   * @brief Get the End object
+   * @brief Get the End position of the drone
    *
-   * @return Vector3
+   * @return Vector3 location of the drone at the end of the trip
    */
   Vector3 getEnd() { return end; }
 
   /**
-   * @brief Get the Distance object
+   * @brief Get the distance that the drone has traveled
    *
-   * @return double
+   * @return double the distance traveled
    */
   double getDistance() { return distance; }
 
   /**
-   * @brief Get the Strategy object
+   * @brief Get the name of the movement strategy
    *
-   * @return std::string
+   * @return std::string the name of the strategy as a string
    */
   std::string getStrategy() { return strategy; }
 
   /**
-   * @brief Get the Restaurant Name object
+   * @brief Get the name of the restaurant
    *
-   * @return std::string
+   * @return std::string name of the restaurant as a string
    */
   std::string getRestaurantName() { return restaurantName; }
 
@@ -80,12 +79,17 @@ class Data {
    */
   void nameOfDrone(std::string name) { droneName = name; }
 
+  /**
+   * @brief Set the name of the restaurant
+   *
+   * @param restaurant the new restaurant name
+   */
   void setRestaurant(std::string restaurant) { restaurantName = restaurant; }
 
  private:
   // any data we want to save
-  std::string droneName;  // what drone performed this trip?
-  std::string tripName;
+  std::string droneName;       // what drone performed this trip?
+  std::string tripName;        // the name of the client
   Vector3 start;               // start position
   Vector3 end;                 // end position
   double distance;             // distance traveled
@@ -93,4 +97,4 @@ class Data {
   std::string restaurantName;  // what's the name of this restaurant?
 };
 
-#endif /* DATA_H */
+#endif  // DATA_H

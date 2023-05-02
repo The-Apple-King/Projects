@@ -83,7 +83,7 @@ This new feature didn't use a design pattern we added it on top of the existing 
  This new feature implements chain of command in order to determine which drone should take an order. Using chain of command allows us to implement more rules easily in the future by adding another link to the chain. The rules set up are Drone1 will prefer giving robots rides and Drone2 will prefer food orders. If there are none of the prefered orders available, but there are not prefered orders available the drone will take a less prefered order in order to finish tasks faster.
 
 # Sprint Retrospective
-Sprints are a good way to keep organized when writing code, but it becomes quite difficult to stay on top of things when you miss a meeting
+Sprints are a good way to keep organized when writing code, but it becomes quite difficult to stay on top of things when you miss a meeting. They are also difficult to write requirements for when the specifics of your project aren't fully understood which forces you to think about requirements before working. It also allows for more vague requirements at the beginning that become more specific near the end, as people meet and talk about their implementation.
 
 
 # Build and run in different environments

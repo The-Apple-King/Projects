@@ -19,6 +19,7 @@ Drone::Drone(JsonObject& obj) : details(obj) {
 
   speed = obj["speed"];
 
+  std::cout << "available" << std::endl;
   available = true;
   name = obj["name"].ToString();
   name = name.substr(1, name.size() - 2);
@@ -32,15 +33,12 @@ Drone::~Drone() {
   delete toFinalDestination;
 }
 
-IEntity* Drone::GetNearestEntity() {
-  return nearestEntity;
-}
-
 void Drone::Update(double dt, std::vector<IEntity*> scheduler) {
   if (toRobot) {
     toRobot->Move(this, dt);
 
     if (toRobot->IsCompleted()) {
+    // std::cout << "to torobot" << std::endl;
       delete toRobot;
       toRobot = nullptr;
       pickedUp = true;
@@ -57,14 +55,9 @@ void Drone::Update(double dt, std::vector<IEntity*> scheduler) {
       delete toFinalDestination;
       toFinalDestination = nullptr;
       nearestEntity = nullptr;
+      std::cout << "finished" << std::endl;
       available = true;
       pickedUp = false;
-
-      // add trip to vector here
-      trip = dynamic_cast<Robot*>(nearestEntity)->getData();
-      trip->nameOfDrone(this->GetDetails()["name"]);
-      std::cout << "the name of this drone is" << this->GetDetails()["name"]
-                << std::endl;
     }
   }
 }

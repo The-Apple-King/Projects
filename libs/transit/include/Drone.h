@@ -75,17 +75,18 @@ class Drone : public IEntity {
   bool GetAvailability() const { return available; }
 
   /**
-   * @brief Gets the nearest entity in the scheduler
-   * @param scheduler Vector containing all the entities in the system
-   */
-  IEntity* GetNearestEntity();
-
-  /**
    * @brief return name of drone
    *
    * @return std::string name of drone
    */
   std::string GetName() { return name; }
+
+  /**
+   * @brief returns the nearest entity
+   * 
+   * @return IEntity* 
+   */
+  IEntity* GetNearestEntity() {return nearestEntity;}
 
   /**
    * @brief Get the Graph object
@@ -137,7 +138,11 @@ class Drone : public IEntity {
    *
    * @param val the value of available
    */
-  void SetAvailablility(bool val) { available = val; }
+  void SetAvailablility(bool val) { 
+    available = val; 
+    std::cout << "we updated avail to " << val << std::endl;
+    std::cout << "its new val is " << available << std::endl;
+    }
 
   /**
    * @brief Set the value of picked up
@@ -178,6 +183,8 @@ class Drone : public IEntity {
    */
   Drone(const Drone& drone) = delete;
   Drone& operator=(const Drone& drone) = delete;
+  bool available;
+  Data* trip;
 
  private:
   JsonObject details;
@@ -188,12 +195,10 @@ class Drone : public IEntity {
   bool goUp = true;  // jump helper
   Vector3 destination;
   float speed;
-  bool available;
   bool pickedUp;
   IEntity* nearestEntity = nullptr;
   IStrategy* toRobot = nullptr;
   IStrategy* toFinalDestination = nullptr;
-  Data* trip;
   std::string name;
 };
 

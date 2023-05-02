@@ -24,6 +24,7 @@ void Drone1Food::handle_request(std::vector<Drone*> drones,
         }
       }
       if (drones[i]->GetNearestEntity()) {
+        drones[i]->SetAvailability(false);
         setTrip(drones[i]);
       }
     }

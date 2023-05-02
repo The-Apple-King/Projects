@@ -8,8 +8,6 @@ Robot::Robot(JsonObject &obj) : details(obj) {
   speed = obj["speed"];
   available = true;
   uber = obj["order"];
-  
-  
 }
 
 JsonObject Robot::GetDetails() const { return details; }
@@ -28,4 +26,4 @@ void Robot::setData(Data *data) {
   std::cout << this->trip->getRestaurantName() << std::endl;
 }
 
-Data* Robot::getData() {return this->trip;}
+Data *Robot::getData() { return this->trip; }

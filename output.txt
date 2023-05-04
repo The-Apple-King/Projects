@@ -12,6 +12,9 @@ Why is it significantly interesting?
 How does it add to the existing work? 
 Which design pattern did you choose to implement it and why? 
 Instruction to use this new feature (if the new feature is not user interactable, please mention this as well)
+
+
+
 Sprint retrospective
 UML
 Create UML diagram depicting ONLY your new feature

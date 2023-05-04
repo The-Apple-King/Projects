@@ -51,22 +51,22 @@ The goal of the project is to visually simulate entities and relationships with 
 You will be able to schedule the robots for a ride or order food from a restaurant in this page http://127.0.0.1:8081/schedule.html. 
 
 ### Ride
-Type passenger name, select start and end destination, and press `Schedule Trip` button to schedule a trip. 
+To schedule a ride, type passenger name, select start and end destination, and then press `Schedule Trip` button to schedule a trip for your passenger. 
 
 ### Food
-Type client name, select your restaurant from the drop down menu and press `Order Food` button to send the drone to pick up the food and drop it off at the robot. 
+To order food delivery, type client name, select your restaurant from the drop down menu, and then press `Order Food` button to send the drone to pick up the food and drop it off at the robot. 
 
 ### People
-In order to add people to the simulation click the `add person` button to spawn another person to run around the map.
+In order to add people to the simulation, click on the `add person` button to spawn another person to run around the map.
 
-Now go to 3D Visualization page and select the view of the entities on top right corner.
+You can now go to the 3D Visualization page and select the view of the entities on the top right corner.
 
 ## 3D Visualization
 You will be able to watch the simulation of the drone and the passenger here http://127.0.0.1:8081.
 
-On top right corner, you can change your camera view into locking the entities.
+On the top right corner, you can change your camera view to lock onto the entities in the simulation.
 
-There are a few entities that exist to make the map more lively, a helicopter, a jogger, and a dragon. These move to a random point and then pick another point to move to.
+There are a few entities that exist to make the map more lively, such as a helicopter, a jogger, and a dragon. These move to a random points where you can then pick another point for it to move to.
 
 Drones are given jobs to do by the robots and the drones will pick up and drop off the robots or food at the destination specified.
 
@@ -87,7 +87,7 @@ This new feature didn't use a design pattern we added it on top of the existing 
  This new feature implements chain of command in order to determine which drone should take an order. Using chain of command allows us to implement more rules easily in the future by adding another link to the chain. The rules set up are Drone1 will prefer giving robots rides and Drone2 will prefer food orders. If there are none of the prefered orders available, but there are not prefered orders available the drone will take a less prefered order in order to finish tasks faster.
 
 # Sprint Retrospective
-Sprints are a good way to keep organized when writing code, but it becomes quite difficult to stay on top of things when you miss a meeting
+Sprints are a good way to keep organized when writing code, but it becomes quite difficult to stay on top of things when you miss a meeting. They are also difficult to write requirements for when the specifics of your project aren't fully understood which forces you to think about requirements before working. It also allows for more vague requirements at the beginning that become more specific near the end, as people meet and talk about their implementation.
 
 
 # Build and run in different environments

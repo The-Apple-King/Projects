@@ -47,10 +47,10 @@ Navigate to http://127.0.0.1:8081/schedule.html and you should see a page to sch
 You will be able to schedule the robots for a ride or order food from a restaurant in this page http://127.0.0.1:8081/schedule.html. 
 
 ### Ride
-Type passenger name, select start and end destination, and press `Schedule Trip` button to schedule a trip. 
+To schedule a ride, type passenger name, select start and end destination, and then press `Schedule Trip` button to schedule a trip for your passenger. 
 
 ### Food
-Type client name, select your restaurant from the drop down menu and press `Order Food` button to send the drone to pick up the food and drop it off at the robot. 
+To order food delivery, type client name, select your restaurant from the drop down menu, and then press `Order Food` button to send the drone to pick up the food and drop it off at the robot. 
 
 ### People
 In order to add people to the simulation click the `add person` button to spawn another person to run around the map.

@@ -1,7 +1,7 @@
 # CSCI 3081 Project - Drone Simulation System
 
 010-47
-Owen Swearingen, SWEAR041
+Owen Swearingen (SWEAR041), Khoa Tonthat (tonth005), 
 
 #### What is in this directory?
 <ul>
@@ -40,6 +40,10 @@ Navigate to http://127.0.0.1:8081 and you should see a visualization.
 Navigate to http://127.0.0.1:8081/schedule.html and you should see a page to schedule the trips.
 
 *Note: 8081 will depends on what port you used. If you use port 8082, then it will be http://127.0.0.1:8082 instead.*
+
+# Project Description
+
+The goal of the project is to visually simulate entities and relationships with the front-end consisting of javascript and the back-end implemented using C++. The simulation is presented on a visual graph and map which is correlated to the campus of the University of Minnesota. Within this simulation, the user is able to see the collection of entities along with their actions towards other entities and the environment. The scope of the entitiy relationships implemented are within a food delivery system as well as a uber-styled transportation system. 
 
 # Simulation
 

@@ -1,7 +1,7 @@
 # CSCI 3081 Project - Drone Simulation System
 
 010-47
-Owen Swearingen, SWEAR041
+Owen Swearingen (SWEAR041), Khoa Tonthat (tonth005), 
 
 #### What is in this directory?
 <ul>
@@ -41,28 +41,32 @@ Navigate to http://127.0.0.1:8081/schedule.html and you should see a page to sch
 
 *Note: 8081 will depends on what port you used. If you use port 8082, then it will be http://127.0.0.1:8082 instead.*
 
+# Project Description
+
+The goal of the project is to visually simulate entities and relationships with the front-end consisting of javascript and the back-end implemented using C++. The simulation is presented on a visual graph and map which is correlated to the campus of the University of Minnesota. Within this simulation, the user is able to see the collection of entities along with their actions towards other entities and the environment. The scope of the entitiy relationships implemented are within a food delivery system as well as a uber-styled transportation system. 
+
 # Simulation
 
 ## Schedule
 You will be able to schedule the robots for a ride or order food from a restaurant in this page http://127.0.0.1:8081/schedule.html. 
 
 ### Ride
-Type passenger name, select start and end destination, and press `Schedule Trip` button to schedule a trip. 
+To schedule a ride, type passenger name, select start and end destination, and then press `Schedule Trip` button to schedule a trip for your passenger. 
 
 ### Food
-Type client name, select your restaurant from the drop down menu and press `Order Food` button to send the drone to pick up the food and drop it off at the robot. 
+To order food delivery, type client name, select your restaurant from the drop down menu, and then press `Order Food` button to send the drone to pick up the food and drop it off at the robot. 
 
 ### People
-In order to add people to the simulation click the `add person` button to spawn another person to run around the map.
+In order to add people to the simulation, click on the `add person` button to spawn another person to run around the map.
 
-Now go to 3D Visualization page and select the view of the entities on top right corner.
+You can now go to the 3D Visualization page and select the view of the entities on the top right corner.
 
 ## 3D Visualization
 You will be able to watch the simulation of the drone and the passenger here http://127.0.0.1:8081.
 
-On top right corner, you can change your camera view into locking the entities.
+On the top right corner, you can change your camera view to lock onto the entities in the simulation.
 
-There are a few entities that exist to make the map more lively, a helicopter, a jogger, and a dragon. These move to a random point and then pick another point to move to.
+There are a few entities that exist to make the map more lively, such as a helicopter, a jogger, and a dragon. These move to a random points where you can then pick another point for it to move to.
 
 Drones are given jobs to do by the robots and the drones will pick up and drop off the robots or food at the destination specified.
 

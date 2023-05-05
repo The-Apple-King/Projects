@@ -6,6 +6,9 @@
 
 #include "Data.h"
 
+/**
+* @brief Collect data from the Simulation
+*/
 class SimulationDataCollector {
  public:
   /**

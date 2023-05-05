@@ -1,7 +1,7 @@
 # CSCI 3081 Project - Drone Simulation System
 
 010-47
-Owen Swearingen (SWEAR041), Khoa Tonthat (tonth005), Connor Trok (trok0008)
+Owen Swearingen (SWEAR041), Khoa Tonthat (tonth005), Connor Trok (trok0008), Alexander Tatley (tatle010)
 
 #### What is in this directory?
 <ul>

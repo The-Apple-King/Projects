@@ -1,7 +1,7 @@
 # CSCI 3081 Project - Drone Simulation System
 
 010-47
-Owen Swearingen (SWEAR041), Khoa Tonthat (tonth005), 
+Owen Swearingen (SWEAR041), Khoa Tonthat (tonth005), Connor Trok (trok0008)
 
 #### What is in this directory?
 <ul>
@@ -51,10 +51,10 @@ The goal of the project is to visually simulate entities and relationships with 
 You will be able to schedule the robots for a ride or order food from a restaurant in this page http://127.0.0.1:8081/schedule.html. 
 
 ### Ride
-To schedule a ride, type passenger name, select start and end destination, and then press `Schedule Trip` button to schedule a trip for your passenger. 
+To schedule a ride, type passenger name, select start and end destination, and then press the `Schedule Trip` button to schedule a trip for your passenger. 
 
 ### Food
-To order food delivery, type client name, select your restaurant from the drop down menu, and then press `Order Food` button to send the drone to pick up the food and drop it off at the robot. 
+To order food delivery, type client name, select your restaurant from the drop down menu, and then press the `Order Food` button to send the drone to pick up the food and drop it off at the robot. 
 
 ### People
 In order to add people to the simulation, click on the `add person` button to spawn another person to run around the map.
@@ -74,20 +74,24 @@ Drones are given jobs to do by the robots and the drones will pick up and drop o
 # New Features
 
 ## Restaurants
-In order to make the simulation more interesting we added food orders to the mix, this gives a completely new type of movement to the simulation and another type of order for drones to fulfil. 
+In order to make the simulation more interesting, we added food orders to the mix, giving the simulation a completely new type of movement, and another type of order for our drones to fulfill. 
 
-This new feature didn't use a design pattern we added it on top of the existing javascript used to schedule rides.
+This new feature didn't use a design pattern, as we just added it on top of the existing javascript used to schedule rides.
 
  ## Data Collection
- Every time a trip is completed a drone sends data to a singleton class in order to store and later output the data to a csv and txt file. Using singleton allows the entire simulation access to the same data making it easier to output and implement. output.csv collects all the data while output.txt saves sorted data in an easy to read through file. The stored data includes the name of the drone that completed the order, the name of the client, the start and ending positions of the drone, the distance flown, and the name of the restaurant if it was a food order.
+ Every time a trip is completed, a drone sends data to a singleton class in order to store and later output the data to a csv and txt file. Using singleton allows the entire simulation access to the same data, making it easier to output and implement. output.csv collects all the data, while output.txt saves sorted data in an easy to read through file. The stored data, output.csv, includes the name of the drone that completed the order, the name of the client, the start and ending positions of the drone, the distance flown, and the name of the restaurant if it was a food order.
 
- The output.txt file contains which drone went furthest, the number of trips for each drone, the orders and what they were for, and the movement strategies used in order to deliver the clients or their food to the destination.
+ The sorted output.txt file contains which drone went furthest, the number of trips for each drone, the orders and what they were for, and the movement strategies used in order to deliver the clients or their food to the destination.
 
  ## Specialized Drones
- This new feature implements chain of command in order to determine which drone should take an order. Using chain of command allows us to implement more rules easily in the future by adding another link to the chain. The rules set up are Drone1 will prefer giving robots rides and Drone2 will prefer food orders. If there are none of the prefered orders available, but there are not prefered orders available the drone will take a less prefered order in order to finish tasks faster.
+ This new feature implements chain of command in order to determine which drone should take an order. Using chain of command allows us to implement more rules easily in the future by adding another link to the chain. In this program, the rules are set up where Drone1 will prefer giving robots rides, and Drone2 will prefer food orders. If there are none of the prefered orders available but there are not prefered orders available, the drone will take a less prefered order in order to finish tasks faster.
+
+# UML Diagram
+![UML Diagram](UML.jpeg)
+
 
 # Sprint Retrospective
-Sprints are a good way to keep organized when writing code, but it becomes quite difficult to stay on top of things when you miss a meeting. They are also difficult to write requirements for when the specifics of your project aren't fully understood which forces you to think about requirements before working. It also allows for more vague requirements at the beginning that become more specific near the end, as people meet and talk about their implementation.
+Sprints are a good way to keep organized when writing code, but it becomes quite difficult to stay on top of things when you miss a meeting. They are also difficult to write requirements for when the specifics of your project aren't fully understood which forces people to think about requirements before working and writing code. This creates more vague requirements at the beginning that incrementally become more specific near the end, as people meet and talk about their implementation for the simulation.
 
 
 # Build and run in different environments

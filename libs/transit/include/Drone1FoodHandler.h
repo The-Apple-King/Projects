@@ -17,7 +17,8 @@ class Drone1Food : public Handler {
   /**
    * @brief Function to handle the request that is passed.
    *
-   * @param request Request to process
+   * @param drones The drone requesting the delivery
+   * @param scheduler The list of available robots to assign to the delivery
    */
   void handle_request(std::vector<Drone*> drones,
                       std::vector<IEntity*> scheduler);

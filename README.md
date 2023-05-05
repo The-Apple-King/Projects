@@ -87,7 +87,8 @@ This new feature didn't use a design pattern, as we just added it on top of the 
  This new feature implements chain of command in order to determine which drone should take an order. Using chain of command allows us to implement more rules easily in the future by adding another link to the chain. In this program, the rules are set up where Drone1 will prefer giving robots rides, and Drone2 will prefer food orders. If there are none of the prefered orders available but there are not prefered orders available, the drone will take a less prefered order in order to finish tasks faster.
 
 # UML Diagram
-![UML Diagram](https://lucid.app/lucidchart/b7f37bc3-154d-4633-b5de-134882bdf512/edit?invitationId=inv_302f4d90-5972-4abd-87f4-ede5494b56e8&page=0_0#)
+![UML Diagram](UML.jpeg)
+
 
 # Sprint Retrospective
 Sprints are a good way to keep organized when writing code, but it becomes quite difficult to stay on top of things when you miss a meeting. They are also difficult to write requirements for when the specifics of your project aren't fully understood which forces people to think about requirements before working and writing code. This creates more vague requirements at the beginning that incrementally become more specific near the end, as people meet and talk about their implementation for the simulation.

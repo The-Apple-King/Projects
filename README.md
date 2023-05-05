@@ -150,3 +150,11 @@ Sprints are a good way to keep organized when writing code, but it becomes quite
   4. Navigate to http://127.0.0.1:8081 and you should see a visualization.
 
   5. Navigate to http://127.0.0.1:8081/schedule.html and you should see a page to schedule the trips.
+
+
+# Homework 4 Submission Info
+### Youtube presentation
+https://youtu.be/gM8pqGPrJ9U
+
+### Docker Link
+https://hub.docker.com/repository/docker/theappleking/homework4/general

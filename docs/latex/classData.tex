@@ -1,0 +1,185 @@
+\hypertarget{classData}{}\doxysection{Data Class Reference}
+\label{classData}\index{Data@{Data}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classData_a157ad1af872ceef90eea98a6f735a70b}{Data}} (std\+::string drone\+Name, std\+::string trip\+Name, \mbox{\hyperlink{classVector3}{Vector3}} start, \mbox{\hyperlink{classVector3}{Vector3}} end, double distance, std\+::string strategy, std\+::string restaurant\+Name)
+\begin{DoxyCompactList}\small\item\em Creates a data object to store information from the simulation. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classData_aa43cfa5abd02924dc7a5942b5cc8e189}{get\+Name}} ()
+\begin{DoxyCompactList}\small\item\em Get the Name of the drone. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classVector3}{Vector3}} \mbox{\hyperlink{classData_a8d6708f6134268ab25e37b7edc690d1d}{get\+Start}} ()
+\begin{DoxyCompactList}\small\item\em Get the start position of the drone. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classVector3}{Vector3}} \mbox{\hyperlink{classData_a15897adbb2e8dd5980ad494feb81f409}{get\+End}} ()
+\begin{DoxyCompactList}\small\item\em Get the End position of the drone. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classData_afce844b276ab526daca27d7cdfd00540}{get\+Distance}} ()
+\begin{DoxyCompactList}\small\item\em Get the distance that the drone has traveled. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classData_a2bc9edefb02b0187a36b1ae110c5a3c0}{get\+Strategy}} ()
+\begin{DoxyCompactList}\small\item\em Get the name of the movement strategy. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classData_a353d510d49147a140e413e0ac7f740b2}{get\+Restaurant\+Name}} ()
+\begin{DoxyCompactList}\small\item\em Get the name of the restaurant. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classData_a1b73df417522eccf3a46877ae709c67d}{to\+String}} ()
+\begin{DoxyCompactList}\small\item\em formats the data from the object into a csv friendly format \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classData_a11a75a7b9140832302aa8d4a26653a49}{name\+Of\+Drone}} (std\+::string name)
+\begin{DoxyCompactList}\small\item\em used to set name of drone in drone \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classData_a44b96c8380dae337227756a0fed1b092}{set\+Restaurant}} (std\+::string restaurant)
+\begin{DoxyCompactList}\small\item\em Set the name of the restaurant. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classData_a157ad1af872ceef90eea98a6f735a70b}\label{classData_a157ad1af872ceef90eea98a6f735a70b}} 
+\index{Data@{Data}!Data@{Data}}
+\index{Data@{Data}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{Data()}{Data()}}
+{\footnotesize\ttfamily Data\+::\+Data (\begin{DoxyParamCaption}\item[{std\+::string}]{drone\+Name,  }\item[{std\+::string}]{trip\+Name,  }\item[{\mbox{\hyperlink{classVector3}{Vector3}}}]{start,  }\item[{\mbox{\hyperlink{classVector3}{Vector3}}}]{end,  }\item[{double}]{distance,  }\item[{std\+::string}]{strategy,  }\item[{std\+::string}]{restaurant\+Name }\end{DoxyParamCaption})}
+
+
+
+Creates a data object to store information from the simulation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em drone\+Name} & name of the drone \\
+\hline
+{\em trip\+Name} & name that the trip was given \\
+\hline
+{\em start} & start location of a trip \\
+\hline
+{\em end} & end location of a trip \\
+\hline
+{\em distance} & distance traveled by the drone \\
+\hline
+{\em strategy} & movement strategy used \\
+\hline
+{\em restaurant\+Name} & name of restaurant we are performing an order for \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classData_afce844b276ab526daca27d7cdfd00540}\label{classData_afce844b276ab526daca27d7cdfd00540}} 
+\index{Data@{Data}!getDistance@{getDistance}}
+\index{getDistance@{getDistance}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{getDistance()}{getDistance()}}
+{\footnotesize\ttfamily double Data\+::get\+Distance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the distance that the drone has traveled. 
+
+\begin{DoxyReturn}{Returns}
+double the distance traveled 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classData_a15897adbb2e8dd5980ad494feb81f409}\label{classData_a15897adbb2e8dd5980ad494feb81f409}} 
+\index{Data@{Data}!getEnd@{getEnd}}
+\index{getEnd@{getEnd}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{getEnd()}{getEnd()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classVector3}{Vector3}} Data\+::get\+End (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the End position of the drone. 
+
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classVector3}{Vector3}} location of the drone at the end of the trip 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classData_aa43cfa5abd02924dc7a5942b5cc8e189}\label{classData_aa43cfa5abd02924dc7a5942b5cc8e189}} 
+\index{Data@{Data}!getName@{getName}}
+\index{getName@{getName}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{getName()}{getName()}}
+{\footnotesize\ttfamily std\+::string Data\+::get\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the Name of the drone. 
+
+\begin{DoxyReturn}{Returns}
+std\+::string 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classData_a353d510d49147a140e413e0ac7f740b2}\label{classData_a353d510d49147a140e413e0ac7f740b2}} 
+\index{Data@{Data}!getRestaurantName@{getRestaurantName}}
+\index{getRestaurantName@{getRestaurantName}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{getRestaurantName()}{getRestaurantName()}}
+{\footnotesize\ttfamily std\+::string Data\+::get\+Restaurant\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the name of the restaurant. 
+
+\begin{DoxyReturn}{Returns}
+std\+::string name of the restaurant as a string 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classData_a8d6708f6134268ab25e37b7edc690d1d}\label{classData_a8d6708f6134268ab25e37b7edc690d1d}} 
+\index{Data@{Data}!getStart@{getStart}}
+\index{getStart@{getStart}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{getStart()}{getStart()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classVector3}{Vector3}} Data\+::get\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the start position of the drone. 
+
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classVector3}{Vector3}} location of the drone at the start of the trip 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classData_a2bc9edefb02b0187a36b1ae110c5a3c0}\label{classData_a2bc9edefb02b0187a36b1ae110c5a3c0}} 
+\index{Data@{Data}!getStrategy@{getStrategy}}
+\index{getStrategy@{getStrategy}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{getStrategy()}{getStrategy()}}
+{\footnotesize\ttfamily std\+::string Data\+::get\+Strategy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the name of the movement strategy. 
+
+\begin{DoxyReturn}{Returns}
+std\+::string the name of the strategy as a string 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classData_a11a75a7b9140832302aa8d4a26653a49}\label{classData_a11a75a7b9140832302aa8d4a26653a49}} 
+\index{Data@{Data}!nameOfDrone@{nameOfDrone}}
+\index{nameOfDrone@{nameOfDrone}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{nameOfDrone()}{nameOfDrone()}}
+{\footnotesize\ttfamily void Data\+::name\+Of\+Drone (\begin{DoxyParamCaption}\item[{std\+::string}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+used to set name of drone in drone 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & the name of the drone \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classData_a44b96c8380dae337227756a0fed1b092}\label{classData_a44b96c8380dae337227756a0fed1b092}} 
+\index{Data@{Data}!setRestaurant@{setRestaurant}}
+\index{setRestaurant@{setRestaurant}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{setRestaurant()}{setRestaurant()}}
+{\footnotesize\ttfamily void Data\+::set\+Restaurant (\begin{DoxyParamCaption}\item[{std\+::string}]{restaurant }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the name of the restaurant. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em restaurant} & the new restaurant name \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classData_a1b73df417522eccf3a46877ae709c67d}\label{classData_a1b73df417522eccf3a46877ae709c67d}} 
+\index{Data@{Data}!toString@{toString}}
+\index{toString@{toString}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily std\+::string Data\+::to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+formats the data from the object into a csv friendly format 
+
+\begin{DoxyReturn}{Returns}
+std\+::string string containing data to output 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/swearingeno/.\+local/\+Projects/csci3081\+W/\+Labs/\+Team-\/010-\/47-\/lab10/libs/transit/include/Data.\+h\item 
+/home/swearingeno/.\+local/\+Projects/csci3081\+W/\+Labs/\+Team-\/010-\/47-\/lab10/libs/transit/src/Data.\+cc\end{DoxyCompactItemize}

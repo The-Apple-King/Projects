@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: SimulationModel Class Reference</title>
+<title>Ride Share and Delivery Simulation: SimulationModel Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,8 +21,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">Ride Share and Delivery Simulation
    </div>
+   <div id="projectbrief">Simulate Rideshare and Food delivery services.</div>
   </td>
  </tr>
  </tbody>
@@ -78,12 +79,7 @@ $(function() {
 Collaboration diagram for SimulationModel:</div>
 <div class="dyncontent">
 <div class="center"><img src="classSimulationModel__coll__graph.png" border="0" usemap="#SimulationModel_coll__map" alt="Collaboration graph"/></div>
-<map name="SimulationModel_coll__map" id="SimulationModel_coll__map">
-<area shape="rect" title="Class SimulationModel handling the transit simulation. it can communicate with the controller." alt="" coords="80,171,212,197"/>
-<area shape="rect" href="classCompositeFactory.html" title="Factory method for composite class. Inherits from IEntityFactory." alt="" coords="5,81,145,108"/>
-<area shape="rect" href="classIEntityFactory.html" title="Composite Factory Interface." alt="" coords="19,5,131,32"/>
-<area shape="rect" href="classIController.html" title="class for IController used for transit service. Uses the Model View" alt="" coords="170,81,261,108"/>
-</map>
+<!-- MAP 0 -->
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -96,7 +92,7 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulationModel.html#ad7ea1a37e0992bc0704ac5cb01a59bf4">~SimulationModel</a> ()</td></tr>
 <tr class="memdesc:ad7ea1a37e0992bc0704ac5cb01a59bf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. <br /></td></tr>
 <tr class="separator:ad7ea1a37e0992bc0704ac5cb01a59bf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7595badfb368bcf5673f98b3f229dc0f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulationModel.html#a7595badfb368bcf5673f98b3f229dc0f">SetGraph</a> (const IGraph *graph)</td></tr>
+<tr class="memitem:a7595badfb368bcf5673f98b3f229dc0f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulationModel.html#a7595badfb368bcf5673f98b3f229dc0f">SetGraph</a> (const <a class="el" href="classrouting_1_1IGraph.html">IGraph</a> *graph)</td></tr>
 <tr class="memdesc:a7595badfb368bcf5673f98b3f229dc0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Graph for the <a class="el" href="classSimulationModel.html" title="Class SimulationModel handling the transit simulation. it can communicate with the controller.">SimulationModel</a>.  <a href="classSimulationModel.html#a7595badfb368bcf5673f98b3f229dc0f">More...</a><br /></td></tr>
 <tr class="separator:a7595badfb368bcf5673f98b3f229dc0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0529fb427560a2bde9b8cb62f82e6baf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulationModel.html#a0529fb427560a2bde9b8cb62f82e6baf">CreateEntity</a> (JsonObject &amp;entity)</td></tr>
@@ -111,6 +107,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a44215da18f82ad591ead5085f6da13f0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulationModel.html#a44215da18f82ad591ead5085f6da13f0">AddFactory</a> (<a class="el" href="classIEntityFactory.html">IEntityFactory</a> *factory)</td></tr>
 <tr class="memdesc:a44215da18f82ad591ead5085f6da13f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add new factory into the simulation.  <a href="classSimulationModel.html#a44215da18f82ad591ead5085f6da13f0">More...</a><br /></td></tr>
 <tr class="separator:a44215da18f82ad591ead5085f6da13f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adce63e3dee8849badaa43d37a036bf04"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulationModel.html#adce63e3dee8849badaa43d37a036bf04">printData</a> ()</td></tr>
+<tr class="memdesc:adce63e3dee8849badaa43d37a036bf04"><td class="mdescLeft">&#160;</td><td class="mdescRight">print out data to a csv named output.csv  <a href="classSimulationModel.html#adce63e3dee8849badaa43d37a036bf04">More...</a><br /></td></tr>
+<tr class="separator:adce63e3dee8849badaa43d37a036bf04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c1d7f934db1d632330d97140540d704"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulationModel.html#a5c1d7f934db1d632330d97140540d704">handleTrips</a> ()</td></tr>
+<tr class="memdesc:a5c1d7f934db1d632330d97140540d704"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the nearest entity of drones based on chain of command rules  <a href="classSimulationModel.html#a5c1d7f934db1d632330d97140540d704">More...</a><br /></td></tr>
+<tr class="separator:a5c1d7f934db1d632330d97140540d704"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -124,11 +126,20 @@ std::vector&lt; <a class="el" href="classIEntity.html">IEntity</a> * &gt;&#160;<
 std::vector&lt; <a class="el" href="classIEntity.html">IEntity</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>scheduler</b></td></tr>
 <tr class="separator:ae3a085ca8d1dfa63f79aa57bb0598e52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afcef95308f9d635f6ab37f8fb0eb7ba7"><td class="memItemLeft" align="right" valign="top"><a id="afcef95308f9d635f6ab37f8fb0eb7ba7"></a>
-const IGraph *&#160;</td><td class="memItemRight" valign="bottom"><b>graph</b></td></tr>
+const <a class="el" href="classrouting_1_1IGraph.html">IGraph</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>graph</b></td></tr>
 <tr class="separator:afcef95308f9d635f6ab37f8fb0eb7ba7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aef89ec45aa188da7b9d7afa10320294f"><td class="memItemLeft" align="right" valign="top"><a id="aef89ec45aa188da7b9d7afa10320294f"></a>
 <a class="el" href="classCompositeFactory.html">CompositeFactory</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>compFactory</b></td></tr>
 <tr class="separator:aef89ec45aa188da7b9d7afa10320294f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8efb05eee4fd716bd345a64eef7600b5"><td class="memItemLeft" align="right" valign="top"><a id="a8efb05eee4fd716bd345a64eef7600b5"></a>
+<a class="el" href="classSimulationDataCollector.html">SimulationDataCollector</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>data</b></td></tr>
+<tr class="separator:a8efb05eee4fd716bd345a64eef7600b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf62b4b8264f92a6c9946d95750c48bc"><td class="memItemLeft" align="right" valign="top"><a id="aaf62b4b8264f92a6c9946d95750c48bc"></a>
+std::vector&lt; <a class="el" href="classDrone.html">Drone</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>drones</b></td></tr>
+<tr class="separator:aaf62b4b8264f92a6c9946d95750c48bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cc06adfdd69a9cdf84eabafab7f87c5"><td class="memItemLeft" align="right" valign="top"><a id="a4cc06adfdd69a9cdf84eabafab7f87c5"></a>
+<a class="el" href="classHandler.html">Handler</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>handler</b></td></tr>
+<tr class="separator:a4cc06adfdd69a9cdf84eabafab7f87c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class <a class="el" href="classSimulationModel.html" title="Class SimulationModel handling the transit simulation. it can communicate with the controller.">SimulationModel</a> handling the transit simulation. it can communicate with the controller. </p>
@@ -186,6 +197,44 @@ const IGraph *&#160;</td><td class="memItemRight" valign="bottom"><b>graph</b></
 
 </div>
 </div>
+<a id="a5c1d7f934db1d632330d97140540d704"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c1d7f934db1d632330d97140540d704">&#9670;&nbsp;</a></span>handleTrips()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimulationModel::handleTrips </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>sets the nearest entity of drones based on chain of command rules </p>
+
+</div>
+</div>
+<a id="adce63e3dee8849badaa43d37a036bf04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adce63e3dee8849badaa43d37a036bf04">&#9670;&nbsp;</a></span>printData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimulationModel::printData </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>print out data to a csv named output.csv </p>
+
+</div>
+</div>
 <a id="a68a4d4927ec49f6f362f7bfb07a96ddc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a68a4d4927ec49f6f362f7bfb07a96ddc">&#9670;&nbsp;</a></span>ScheduleTrip()</h2>
 
@@ -225,7 +274,7 @@ const IGraph *&#160;</td><td class="memItemRight" valign="bottom"><b>graph</b></
         <tr>
           <td class="memname">void SimulationModel::SetGraph </td>
           <td>(</td>
-          <td class="paramtype">const IGraph *&#160;</td>
+          <td class="paramtype">const <a class="el" href="classrouting_1_1IGraph.html">IGraph</a> *&#160;</td>
           <td class="paramname"><em>graph</em></td><td>)</td>
           <td></td>
         </tr>
@@ -275,8 +324,8 @@ const IGraph *&#160;</td><td class="memItemRight" valign="bottom"><b>graph</b></
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/tonth005/Team-010-47-lab10/libs/transit/include/<a class="el" href="SimulationModel_8h_source.html">SimulationModel.h</a></li>
-<li>/home/tonth005/Team-010-47-lab10/libs/transit/src/SimulationModel.cc</li>
+<li>/home/swearingeno/.local/Projects/csci3081W/Labs/Team-010-47-lab10/libs/transit/include/<a class="el" href="SimulationModel_8h_source.html">SimulationModel.h</a></li>
+<li>/home/swearingeno/.local/Projects/csci3081W/Labs/Team-010-47-lab10/libs/transit/src/SimulationModel.cc</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

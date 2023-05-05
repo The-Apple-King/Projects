@@ -1,0 +1,29 @@
+\hypertarget{classrouting_1_1IGraph}{}\doxysection{routing\+::I\+Graph Class Reference}
+\label{classrouting_1_1IGraph}\index{routing::IGraph@{routing::IGraph}}
+
+
+Inheritance diagram for routing\+::I\+Graph\+:
+% FIG 0
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classrouting_1_1IGraph_a36f08415a237539d932522855ab2cdbc}\label{classrouting_1_1IGraph_a36f08415a237539d932522855ab2cdbc}} 
+virtual const \mbox{\hyperlink{classrouting_1_1IGraphNode}{I\+Graph\+Node}} $\ast$ {\bfseries Get\+Node} (const std\+::string \&name) const =0
+\item 
+\mbox{\Hypertarget{classrouting_1_1IGraph_aadcd6b7f47b0a1a3ba85853a6cb9378a}\label{classrouting_1_1IGraph_aadcd6b7f47b0a1a3ba85853a6cb9378a}} 
+virtual const std\+::vector$<$ \mbox{\hyperlink{classrouting_1_1IGraphNode}{I\+Graph\+Node}} $\ast$ $>$ \& {\bfseries Get\+Nodes} () const =0
+\item 
+\mbox{\Hypertarget{classrouting_1_1IGraph_a60f73bac1c530940b82c48f39834319e}\label{classrouting_1_1IGraph_a60f73bac1c530940b82c48f39834319e}} 
+virtual \mbox{\hyperlink{structrouting_1_1BoundingBox}{Bounding\+Box}} {\bfseries Get\+Bounding\+Box} () const =0
+\item 
+\mbox{\Hypertarget{classrouting_1_1IGraph_a084c987e261fd1d50e99d32e48e04ca8}\label{classrouting_1_1IGraph_a084c987e261fd1d50e99d32e48e04ca8}} 
+virtual const \mbox{\hyperlink{classrouting_1_1IGraphNode}{I\+Graph\+Node}} $\ast$ {\bfseries Nearest\+Node} (std\+::vector$<$ float $>$ point, const \mbox{\hyperlink{classrouting_1_1DistanceFunction}{Distance\+Function}} \&distance) const =0
+\item 
+\mbox{\Hypertarget{classrouting_1_1IGraph_ad14525d112f720b9bef151ee2a5cce3f}\label{classrouting_1_1IGraph_ad14525d112f720b9bef151ee2a5cce3f}} 
+virtual const std\+::vector$<$ std\+::vector$<$ float $>$ $>$ {\bfseries Get\+Path} (std\+::vector$<$ float $>$ src, std\+::vector$<$ float $>$ dest, const \mbox{\hyperlink{classrouting_1_1RoutingStrategy}{Routing\+Strategy}} \&strategy) const =0
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/swearingeno/.\+local/\+Projects/csci3081\+W/\+Labs/\+Team-\/010-\/47-\/lab10/libs/routing/include/graph.\+h\end{DoxyCompactItemize}

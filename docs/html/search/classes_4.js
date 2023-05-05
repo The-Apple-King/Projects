@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['helicopter_93',['Helicopter',['../classHelicopter.html',1,'']]],
-  ['helicopterfactory_94',['HelicopterFactory',['../classHelicopterFactory.html',1,'']]],
-  ['human_95',['Human',['../classHuman.html',1,'']]],
-  ['humanfactory_96',['HumanFactory',['../classHumanFactory.html',1,'']]]
+  ['equal_5fto_258',['equal_to',['../structequal__to.html',1,'']]],
+  ['euclideandistance_259',['EuclideanDistance',['../classrouting_1_1EuclideanDistance.html',1,'routing']]]
 ];

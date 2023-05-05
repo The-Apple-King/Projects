@@ -1,0 +1,513 @@
+\hypertarget{classJsonValue}{}\doxysection{Json\+Value Class Reference}
+\label{classJsonValue}\index{JsonValue@{JsonValue}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classJsonValue_aba2587eefca1ad50f946b0202bda7767}\label{classJsonValue_aba2587eefca1ad50f946b0202bda7767}} 
+\mbox{\hyperlink{classJsonValue_aba2587eefca1ad50f946b0202bda7767}{Json\+Value}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classJsonValue_a2d7247fb598a73e869860ad2761592d0}{Json\+Value}} (picojson\+::value val)
+\begin{DoxyCompactList}\small\item\em Create a \mbox{\hyperlink{classJsonValue}{Json\+Value}} from an existing picojson\+::value (creates a copy) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classJsonValue_a1d750ede997f52ad5d14b017defee161}{Json\+Value}} (double d)
+\begin{DoxyCompactList}\small\item\em Create a \mbox{\hyperlink{classJsonValue}{Json\+Value}} from a double. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classJsonValue_a4cef343451fd40dc75e16b85cac05c99}{Json\+Value}} (int i)
+\begin{DoxyCompactList}\small\item\em Create a \mbox{\hyperlink{classJsonValue}{Json\+Value}} from an int. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classJsonValue_a93b339fa11278516bae0d59474eb63ad}{Json\+Value}} (const std\+::string \&s)
+\begin{DoxyCompactList}\small\item\em Create a \mbox{\hyperlink{classJsonValue}{Json\+Value}} from a string. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classJsonValue_a455c595b6d1990de28075dc85674acd0}{Json\+Value}} (const char $\ast$s)
+\begin{DoxyCompactList}\small\item\em Create a \mbox{\hyperlink{classJsonValue}{Json\+Value}} from a string literal. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classJsonValue_a3e344ebc5c812a4486cbd11f981a5e6d}{Json\+Value}} (bool b)
+\begin{DoxyCompactList}\small\item\em Create a \mbox{\hyperlink{classJsonValue}{Json\+Value}} from a bool. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classJsonValue_a757a47963e35343a77d0928521eddfc1}{Json\+Value}} (const Json\+Object \&o)
+\begin{DoxyCompactList}\small\item\em Create a \mbox{\hyperlink{classJsonValue}{Json\+Value}} from a Json\+Object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classJsonValue_a0fd64eab24f02b6899d13d8f7d75aa78}{Json\+Value}} (const Json\+Array \&a)
+\begin{DoxyCompactList}\small\item\em Create a \mbox{\hyperlink{classJsonValue}{Json\+Value}} from a Json\+Array. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classJsonValue_a74f1a775887186f223860164220678c0}\label{classJsonValue_a74f1a775887186f223860164220678c0}} 
+\mbox{\hyperlink{classJsonValue_a74f1a775887186f223860164220678c0}{$\sim$\+Json\+Value}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classJsonValue_ae833dcb93c1c5e1f67c31884ec3ab3eb}{Json\+Value}} (const \mbox{\hyperlink{classJsonValue}{Json\+Value}} \&other)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classJsonValue}{Json\+Value}} \& \mbox{\hyperlink{classJsonValue_a66df776cb87a83d3964c10c45351e260}{operator=}} (const \mbox{\hyperlink{classJsonValue}{Json\+Value}} \&other)
+\begin{DoxyCompactList}\small\item\em Copy operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classJsonValue_a4e4559eb88c75fa0a2e492708f34b4d8}{Json\+Value}} (\mbox{\hyperlink{classJsonValue}{Json\+Value}} \&\&other)
+\begin{DoxyCompactList}\small\item\em Move constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classJsonValue}{Json\+Value}} \& \mbox{\hyperlink{classJsonValue_a820291c934f1f8345d996f5c3f1d68fd}{operator=}} (\mbox{\hyperlink{classJsonValue}{Json\+Value}} \&\&other) noexcept
+\begin{DoxyCompactList}\small\item\em Move operator. \end{DoxyCompactList}\item 
+picojson\+::value \& \mbox{\hyperlink{classJsonValue_aa591279bb852dbbf3e92615151527d02}{Get\+Value}} ()
+\item 
+const picojson\+::value \& \mbox{\hyperlink{classJsonValue_af0f42c365666143c9066b76769c1f856}{Get\+Value}} () const
+\item 
+\mbox{\hyperlink{classJsonValue_a5adbd9efe19dfefa399d6d4a1edc2c0e}{operator double}} () const
+\item 
+\mbox{\hyperlink{classJsonValue}{Json\+Value}} \& \mbox{\hyperlink{classJsonValue_af612c8e9cac06f39c6eb495e753964a4}{operator=}} (double d)
+\begin{DoxyCompactList}\small\item\em Set this value to a double. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classJsonValue_ac77dc06159f53b782242ceff2e36786e}{operator float}} () const
+\item 
+\mbox{\hyperlink{classJsonValue}{Json\+Value}} \& \mbox{\hyperlink{classJsonValue_a6632d003bd1b213760d861aacaffcc63}{operator=}} (float f)
+\begin{DoxyCompactList}\small\item\em Set this value to a float. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classJsonValue_a94509ed7e39dcf31ba0a526c0fc605f6}{operator int}} () const
+\item 
+\mbox{\hyperlink{classJsonValue}{Json\+Value}} \& \mbox{\hyperlink{classJsonValue_ad8c84773479a90d77cd04a1927b56cb3}{operator=}} (int i)
+\begin{DoxyCompactList}\small\item\em Set this value to an int. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classJsonValue_aaf9ccde13c2b95194650b9088b542130}{operator std\+::string}} () const
+\item 
+\mbox{\hyperlink{classJsonValue}{Json\+Value}} \& \mbox{\hyperlink{classJsonValue_a9ed14a7a669ea9dc0c0223d184868aed}{operator=}} (const std\+::string \&s)
+\begin{DoxyCompactList}\small\item\em Set this value to a string. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classJsonValue}{Json\+Value}} \& \mbox{\hyperlink{classJsonValue_abc17de00ccad31503eaacd120f504c3a}{operator=}} (const char $\ast$s)
+\begin{DoxyCompactList}\small\item\em Set this value to a string. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classJsonValue_aad78c6241ba242e3099abb00939907ce}{operator bool}} () const
+\item 
+\mbox{\hyperlink{classJsonValue}{Json\+Value}} \& \mbox{\hyperlink{classJsonValue_a74d32efb2bc57864cc0bde1941bb69a8}{operator=}} (bool b)
+\begin{DoxyCompactList}\small\item\em Set this value to a bool. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classJsonValue_aeb147690e64904a7aac7d113e7b2594b}{operator Json\+Object}} () const
+\item 
+\mbox{\hyperlink{classJsonValue}{Json\+Value}} \& \mbox{\hyperlink{classJsonValue_a7f27ea3b06fefb92c16b3c23b2724ed7}{operator=}} (const Json\+Object \&o)
+\begin{DoxyCompactList}\small\item\em Set this value to a Json\+Object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classJsonValue_a56f50c0471170d5b0ca1865c7510b0b5}{operator Json\+Array}} () const
+\item 
+\mbox{\hyperlink{classJsonValue}{Json\+Value}} \& \mbox{\hyperlink{classJsonValue_afd8c4fb44efadc3e82fadda5d6bc17b1}{operator=}} (const Json\+Array \&a)
+\begin{DoxyCompactList}\small\item\em Set this value to a Json\+Array. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classJsonValue_adecc4df229453b2c16717aa40982b20a}{To\+String}} () const
+\begin{DoxyCompactList}\small\item\em Serialize this to valid J\+S\+ON text. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classJsonValue}{Json\+Value}} \mbox{\hyperlink{classJsonValue_ae8ff2d8788b1dc2334736084d06a9a59}{From\+Reference}} (picojson\+::value \&v)
+\begin{DoxyCompactList}\small\item\em Create a a \mbox{\hyperlink{classJsonValue}{Json\+Value}} using a reference to an existing picojson\+::value. Instead of creating a copy of the picojson\+::value, this just stores a reference to it. This is only needed for internal use. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classJsonValue_abcbd90557d8511b299679580bf49e0f0}\label{classJsonValue_abcbd90557d8511b299679580bf49e0f0}} 
+{\footnotesize template$<$class T $>$ }\\T {\bfseries Get} () const
+\item 
+\mbox{\Hypertarget{classJsonValue_a3ca4f381e697a96acf315b76b8d5616f}\label{classJsonValue_a3ca4f381e697a96acf315b76b8d5616f}} 
+{\footnotesize template$<$class T $>$ }\\void {\bfseries Set} (const T \&t)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classJsonValue_a4d5fe1b7c7c78ed86cf0e2eb0a92045b}\label{classJsonValue_a4d5fe1b7c7c78ed86cf0e2eb0a92045b}} 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+union \{\\
+\>picojson::value {\bfseries v}\\
+\>std::reference\_wrapper$<$ picojson::value $>$ {\bfseries ref}\\
+\}; \\
+
+\end{tabbing}\item 
+\mbox{\Hypertarget{classJsonValue_a3e6524a230dd611fd8b0117c08233a9c}\label{classJsonValue_a3e6524a230dd611fd8b0117c08233a9c}} 
+bool {\bfseries is\+Ref} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classJsonValue_a2d7247fb598a73e869860ad2761592d0}\label{classJsonValue_a2d7247fb598a73e869860ad2761592d0}} 
+\index{JsonValue@{JsonValue}!JsonValue@{JsonValue}}
+\index{JsonValue@{JsonValue}!JsonValue@{JsonValue}}
+\doxysubsubsection{\texorpdfstring{JsonValue()}{JsonValue()}\hspace{0.1cm}{\footnotesize\ttfamily [1/10]}}
+{\footnotesize\ttfamily Json\+Value\+::\+Json\+Value (\begin{DoxyParamCaption}\item[{picojson\+::value}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Create a \mbox{\hyperlink{classJsonValue}{Json\+Value}} from an existing picojson\+::value (creates a copy) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & picojson\+:value to copy \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classJsonValue_a1d750ede997f52ad5d14b017defee161}\label{classJsonValue_a1d750ede997f52ad5d14b017defee161}} 
+\index{JsonValue@{JsonValue}!JsonValue@{JsonValue}}
+\index{JsonValue@{JsonValue}!JsonValue@{JsonValue}}
+\doxysubsubsection{\texorpdfstring{JsonValue()}{JsonValue()}\hspace{0.1cm}{\footnotesize\ttfamily [2/10]}}
+{\footnotesize\ttfamily Json\+Value\+::\+Json\+Value (\begin{DoxyParamCaption}\item[{double}]{d }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Create a \mbox{\hyperlink{classJsonValue}{Json\+Value}} from a double. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em d} & a double \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classJsonValue_a4cef343451fd40dc75e16b85cac05c99}\label{classJsonValue_a4cef343451fd40dc75e16b85cac05c99}} 
+\index{JsonValue@{JsonValue}!JsonValue@{JsonValue}}
+\index{JsonValue@{JsonValue}!JsonValue@{JsonValue}}
+\doxysubsubsection{\texorpdfstring{JsonValue()}{JsonValue()}\hspace{0.1cm}{\footnotesize\ttfamily [3/10]}}
+{\footnotesize\ttfamily Json\+Value\+::\+Json\+Value (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Create a \mbox{\hyperlink{classJsonValue}{Json\+Value}} from an int. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & an int \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classJsonValue_a93b339fa11278516bae0d59474eb63ad}\label{classJsonValue_a93b339fa11278516bae0d59474eb63ad}} 
+\index{JsonValue@{JsonValue}!JsonValue@{JsonValue}}
+\index{JsonValue@{JsonValue}!JsonValue@{JsonValue}}
+\doxysubsubsection{\texorpdfstring{JsonValue()}{JsonValue()}\hspace{0.1cm}{\footnotesize\ttfamily [4/10]}}
+{\footnotesize\ttfamily Json\+Value\+::\+Json\+Value (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Create a \mbox{\hyperlink{classJsonValue}{Json\+Value}} from a string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & a string \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classJsonValue_a455c595b6d1990de28075dc85674acd0}\label{classJsonValue_a455c595b6d1990de28075dc85674acd0}} 
+\index{JsonValue@{JsonValue}!JsonValue@{JsonValue}}
+\index{JsonValue@{JsonValue}!JsonValue@{JsonValue}}
+\doxysubsubsection{\texorpdfstring{JsonValue()}{JsonValue()}\hspace{0.1cm}{\footnotesize\ttfamily [5/10]}}
+{\footnotesize\ttfamily Json\+Value\+::\+Json\+Value (\begin{DoxyParamCaption}\item[{const char $\ast$}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Create a \mbox{\hyperlink{classJsonValue}{Json\+Value}} from a string literal. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & a string literal \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classJsonValue_a3e344ebc5c812a4486cbd11f981a5e6d}\label{classJsonValue_a3e344ebc5c812a4486cbd11f981a5e6d}} 
+\index{JsonValue@{JsonValue}!JsonValue@{JsonValue}}
+\index{JsonValue@{JsonValue}!JsonValue@{JsonValue}}
+\doxysubsubsection{\texorpdfstring{JsonValue()}{JsonValue()}\hspace{0.1cm}{\footnotesize\ttfamily [6/10]}}
+{\footnotesize\ttfamily Json\+Value\+::\+Json\+Value (\begin{DoxyParamCaption}\item[{bool}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Create a \mbox{\hyperlink{classJsonValue}{Json\+Value}} from a bool. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & a bool \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classJsonValue_a757a47963e35343a77d0928521eddfc1}\label{classJsonValue_a757a47963e35343a77d0928521eddfc1}} 
+\index{JsonValue@{JsonValue}!JsonValue@{JsonValue}}
+\index{JsonValue@{JsonValue}!JsonValue@{JsonValue}}
+\doxysubsubsection{\texorpdfstring{JsonValue()}{JsonValue()}\hspace{0.1cm}{\footnotesize\ttfamily [7/10]}}
+{\footnotesize\ttfamily Json\+Value\+::\+Json\+Value (\begin{DoxyParamCaption}\item[{const Json\+Object \&}]{o }\end{DoxyParamCaption})}
+
+
+
+Create a \mbox{\hyperlink{classJsonValue}{Json\+Value}} from a Json\+Object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em o} & a Json\+Object \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classJsonValue_a0fd64eab24f02b6899d13d8f7d75aa78}\label{classJsonValue_a0fd64eab24f02b6899d13d8f7d75aa78}} 
+\index{JsonValue@{JsonValue}!JsonValue@{JsonValue}}
+\index{JsonValue@{JsonValue}!JsonValue@{JsonValue}}
+\doxysubsubsection{\texorpdfstring{JsonValue()}{JsonValue()}\hspace{0.1cm}{\footnotesize\ttfamily [8/10]}}
+{\footnotesize\ttfamily Json\+Value\+::\+Json\+Value (\begin{DoxyParamCaption}\item[{const Json\+Array \&}]{a }\end{DoxyParamCaption})}
+
+
+
+Create a \mbox{\hyperlink{classJsonValue}{Json\+Value}} from a Json\+Array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & a Json\+Array \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classJsonValue_ae833dcb93c1c5e1f67c31884ec3ab3eb}\label{classJsonValue_ae833dcb93c1c5e1f67c31884ec3ab3eb}} 
+\index{JsonValue@{JsonValue}!JsonValue@{JsonValue}}
+\index{JsonValue@{JsonValue}!JsonValue@{JsonValue}}
+\doxysubsubsection{\texorpdfstring{JsonValue()}{JsonValue()}\hspace{0.1cm}{\footnotesize\ttfamily [9/10]}}
+{\footnotesize\ttfamily Json\+Value\+::\+Json\+Value (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classJsonValue}{Json\+Value}} \&}]{other }\end{DoxyParamCaption})}
+
+
+
+Copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & another \mbox{\hyperlink{classJsonValue}{Json\+Value}} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classJsonValue_a4e4559eb88c75fa0a2e492708f34b4d8}\label{classJsonValue_a4e4559eb88c75fa0a2e492708f34b4d8}} 
+\index{JsonValue@{JsonValue}!JsonValue@{JsonValue}}
+\index{JsonValue@{JsonValue}!JsonValue@{JsonValue}}
+\doxysubsubsection{\texorpdfstring{JsonValue()}{JsonValue()}\hspace{0.1cm}{\footnotesize\ttfamily [10/10]}}
+{\footnotesize\ttfamily Json\+Value\+::\+Json\+Value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classJsonValue}{Json\+Value}} \&\&}]{other }\end{DoxyParamCaption})}
+
+
+
+Move constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & another \mbox{\hyperlink{classJsonValue}{Json\+Value}} \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classJsonValue_ae8ff2d8788b1dc2334736084d06a9a59}\label{classJsonValue_ae8ff2d8788b1dc2334736084d06a9a59}} 
+\index{JsonValue@{JsonValue}!FromReference@{FromReference}}
+\index{FromReference@{FromReference}!JsonValue@{JsonValue}}
+\doxysubsubsection{\texorpdfstring{FromReference()}{FromReference()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classJsonValue}{Json\+Value}} Json\+Value\+::\+From\+Reference (\begin{DoxyParamCaption}\item[{picojson\+::value \&}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Create a a \mbox{\hyperlink{classJsonValue}{Json\+Value}} using a reference to an existing picojson\+::value. Instead of creating a copy of the picojson\+::value, this just stores a reference to it. This is only needed for internal use. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & a picojson\+::value to create a reference to \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the new \mbox{\hyperlink{classJsonValue}{Json\+Value}} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classJsonValue_aa591279bb852dbbf3e92615151527d02}\label{classJsonValue_aa591279bb852dbbf3e92615151527d02}} 
+\index{JsonValue@{JsonValue}!GetValue@{GetValue}}
+\index{GetValue@{GetValue}!JsonValue@{JsonValue}}
+\doxysubsubsection{\texorpdfstring{GetValue()}{GetValue()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily picojson\+::value\& Json\+Value\+::\+Get\+Value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+The underlying picojson\+::value 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classJsonValue_af0f42c365666143c9066b76769c1f856}\label{classJsonValue_af0f42c365666143c9066b76769c1f856}} 
+\index{JsonValue@{JsonValue}!GetValue@{GetValue}}
+\index{GetValue@{GetValue}!JsonValue@{JsonValue}}
+\doxysubsubsection{\texorpdfstring{GetValue()}{GetValue()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const picojson\+::value\& Json\+Value\+::\+Get\+Value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+The underlying picojson\+::value 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classJsonValue_aad78c6241ba242e3099abb00939907ce}\label{classJsonValue_aad78c6241ba242e3099abb00939907ce}} 
+\index{JsonValue@{JsonValue}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!JsonValue@{JsonValue}}
+\doxysubsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily Json\+Value\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+Converts this to a bool 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classJsonValue_a5adbd9efe19dfefa399d6d4a1edc2c0e}\label{classJsonValue_a5adbd9efe19dfefa399d6d4a1edc2c0e}} 
+\index{JsonValue@{JsonValue}!operator double@{operator double}}
+\index{operator double@{operator double}!JsonValue@{JsonValue}}
+\doxysubsubsection{\texorpdfstring{operator double()}{operator double()}}
+{\footnotesize\ttfamily Json\+Value\+::operator double (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+Converts this to a double 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classJsonValue_ac77dc06159f53b782242ceff2e36786e}\label{classJsonValue_ac77dc06159f53b782242ceff2e36786e}} 
+\index{JsonValue@{JsonValue}!operator float@{operator float}}
+\index{operator float@{operator float}!JsonValue@{JsonValue}}
+\doxysubsubsection{\texorpdfstring{operator float()}{operator float()}}
+{\footnotesize\ttfamily Json\+Value\+::operator float (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+Converts this to a float 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classJsonValue_a94509ed7e39dcf31ba0a526c0fc605f6}\label{classJsonValue_a94509ed7e39dcf31ba0a526c0fc605f6}} 
+\index{JsonValue@{JsonValue}!operator int@{operator int}}
+\index{operator int@{operator int}!JsonValue@{JsonValue}}
+\doxysubsubsection{\texorpdfstring{operator int()}{operator int()}}
+{\footnotesize\ttfamily Json\+Value\+::operator int (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+Converts this to an int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classJsonValue_a56f50c0471170d5b0ca1865c7510b0b5}\label{classJsonValue_a56f50c0471170d5b0ca1865c7510b0b5}} 
+\index{JsonValue@{JsonValue}!operator JsonArray@{operator JsonArray}}
+\index{operator JsonArray@{operator JsonArray}!JsonValue@{JsonValue}}
+\doxysubsubsection{\texorpdfstring{operator JsonArray()}{operator JsonArray()}}
+{\footnotesize\ttfamily Json\+Value\+::operator Json\+Array (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\begin{DoxyReturn}{Returns}
+Converts this to a Json\+Array 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classJsonValue_aeb147690e64904a7aac7d113e7b2594b}\label{classJsonValue_aeb147690e64904a7aac7d113e7b2594b}} 
+\index{JsonValue@{JsonValue}!operator JsonObject@{operator JsonObject}}
+\index{operator JsonObject@{operator JsonObject}!JsonValue@{JsonValue}}
+\doxysubsubsection{\texorpdfstring{operator JsonObject()}{operator JsonObject()}}
+{\footnotesize\ttfamily Json\+Value\+::operator Json\+Object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\begin{DoxyReturn}{Returns}
+Converts this to a Json\+Object 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classJsonValue_aaf9ccde13c2b95194650b9088b542130}\label{classJsonValue_aaf9ccde13c2b95194650b9088b542130}} 
+\index{JsonValue@{JsonValue}!operator std::string@{operator std::string}}
+\index{operator std::string@{operator std::string}!JsonValue@{JsonValue}}
+\doxysubsubsection{\texorpdfstring{operator std::string()}{operator std::string()}}
+{\footnotesize\ttfamily Json\+Value\+::operator std\+::string (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+Converts this to a string 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classJsonValue_a74d32efb2bc57864cc0bde1941bb69a8}\label{classJsonValue_a74d32efb2bc57864cc0bde1941bb69a8}} 
+\index{JsonValue@{JsonValue}!operator=@{operator=}}
+\index{operator=@{operator=}!JsonValue@{JsonValue}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/10]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classJsonValue}{Json\+Value}}\& Json\+Value\+::operator= (\begin{DoxyParamCaption}\item[{bool}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set this value to a bool. 
+
+\begin{DoxyReturn}{Returns}
+this 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classJsonValue_abc17de00ccad31503eaacd120f504c3a}\label{classJsonValue_abc17de00ccad31503eaacd120f504c3a}} 
+\index{JsonValue@{JsonValue}!operator=@{operator=}}
+\index{operator=@{operator=}!JsonValue@{JsonValue}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/10]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classJsonValue}{Json\+Value}}\& Json\+Value\+::operator= (\begin{DoxyParamCaption}\item[{const char $\ast$}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set this value to a string. 
+
+\begin{DoxyReturn}{Returns}
+this 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classJsonValue_afd8c4fb44efadc3e82fadda5d6bc17b1}\label{classJsonValue_afd8c4fb44efadc3e82fadda5d6bc17b1}} 
+\index{JsonValue@{JsonValue}!operator=@{operator=}}
+\index{operator=@{operator=}!JsonValue@{JsonValue}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [3/10]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classJsonValue}{Json\+Value}}\& Json\+Value\+::operator= (\begin{DoxyParamCaption}\item[{const Json\+Array \&}]{a }\end{DoxyParamCaption})}
+
+
+
+Set this value to a Json\+Array. 
+
+\begin{DoxyReturn}{Returns}
+this 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classJsonValue_a7f27ea3b06fefb92c16b3c23b2724ed7}\label{classJsonValue_a7f27ea3b06fefb92c16b3c23b2724ed7}} 
+\index{JsonValue@{JsonValue}!operator=@{operator=}}
+\index{operator=@{operator=}!JsonValue@{JsonValue}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [4/10]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classJsonValue}{Json\+Value}}\& Json\+Value\+::operator= (\begin{DoxyParamCaption}\item[{const Json\+Object \&}]{o }\end{DoxyParamCaption})}
+
+
+
+Set this value to a Json\+Object. 
+
+\begin{DoxyReturn}{Returns}
+this 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classJsonValue_a66df776cb87a83d3964c10c45351e260}\label{classJsonValue_a66df776cb87a83d3964c10c45351e260}} 
+\index{JsonValue@{JsonValue}!operator=@{operator=}}
+\index{operator=@{operator=}!JsonValue@{JsonValue}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [5/10]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classJsonValue}{Json\+Value}}\& Json\+Value\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classJsonValue}{Json\+Value}} \&}]{other }\end{DoxyParamCaption})}
+
+
+
+Copy operator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & another \mbox{\hyperlink{classJsonValue}{Json\+Value}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+this 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classJsonValue_a9ed14a7a669ea9dc0c0223d184868aed}\label{classJsonValue_a9ed14a7a669ea9dc0c0223d184868aed}} 
+\index{JsonValue@{JsonValue}!operator=@{operator=}}
+\index{operator=@{operator=}!JsonValue@{JsonValue}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [6/10]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classJsonValue}{Json\+Value}}\& Json\+Value\+::operator= (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set this value to a string. 
+
+\begin{DoxyReturn}{Returns}
+this 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classJsonValue_af612c8e9cac06f39c6eb495e753964a4}\label{classJsonValue_af612c8e9cac06f39c6eb495e753964a4}} 
+\index{JsonValue@{JsonValue}!operator=@{operator=}}
+\index{operator=@{operator=}!JsonValue@{JsonValue}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [7/10]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classJsonValue}{Json\+Value}}\& Json\+Value\+::operator= (\begin{DoxyParamCaption}\item[{double}]{d }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set this value to a double. 
+
+\begin{DoxyReturn}{Returns}
+this 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classJsonValue_a6632d003bd1b213760d861aacaffcc63}\label{classJsonValue_a6632d003bd1b213760d861aacaffcc63}} 
+\index{JsonValue@{JsonValue}!operator=@{operator=}}
+\index{operator=@{operator=}!JsonValue@{JsonValue}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [8/10]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classJsonValue}{Json\+Value}}\& Json\+Value\+::operator= (\begin{DoxyParamCaption}\item[{float}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set this value to a float. 
+
+\begin{DoxyReturn}{Returns}
+this 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classJsonValue_ad8c84773479a90d77cd04a1927b56cb3}\label{classJsonValue_ad8c84773479a90d77cd04a1927b56cb3}} 
+\index{JsonValue@{JsonValue}!operator=@{operator=}}
+\index{operator=@{operator=}!JsonValue@{JsonValue}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [9/10]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classJsonValue}{Json\+Value}}\& Json\+Value\+::operator= (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set this value to an int. 
+
+\begin{DoxyReturn}{Returns}
+this 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classJsonValue_a820291c934f1f8345d996f5c3f1d68fd}\label{classJsonValue_a820291c934f1f8345d996f5c3f1d68fd}} 
+\index{JsonValue@{JsonValue}!operator=@{operator=}}
+\index{operator=@{operator=}!JsonValue@{JsonValue}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [10/10]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classJsonValue}{Json\+Value}}\& Json\+Value\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classJsonValue}{Json\+Value}} \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Move operator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & another \mbox{\hyperlink{classJsonValue}{Json\+Value}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+this 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classJsonValue_adecc4df229453b2c16717aa40982b20a}\label{classJsonValue_adecc4df229453b2c16717aa40982b20a}} 
+\index{JsonValue@{JsonValue}!ToString@{ToString}}
+\index{ToString@{ToString}!JsonValue@{JsonValue}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily std\+::string Json\+Value\+::\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Serialize this to valid J\+S\+ON text. 
+
+\begin{DoxyReturn}{Returns}
+This as a serialized J\+S\+O\+N-\/formatted string. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/swearingeno/.\+local/\+Projects/csci3081\+W/\+Labs/\+Team-\/010-\/47-\/lab10/libs/transit/include/util/json.\+h\end{DoxyCompactItemize}

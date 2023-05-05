@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['icontroller_97',['IController',['../classIController.html',1,'']]],
-  ['ientity_98',['IEntity',['../classIEntity.html',1,'']]],
-  ['ientityfactory_99',['IEntityFactory',['../classIEntityFactory.html',1,'']]],
-  ['istrategy_100',['IStrategy',['../classIStrategy.html',1,'']]]
+  ['fstack_260',['FStack',['../classrouting_1_1FStack.html',1,'routing']]],
+  ['fstack_3c_20string_20_3e_261',['FStack&lt; string &gt;',['../classrouting_1_1FStack.html',1,'routing']]]
 ];

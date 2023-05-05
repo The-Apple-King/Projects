@@ -11,8 +11,7 @@ Represents a robot in a physical system.
 
 
 
-Inheritance diagram for Robot\+:
-\nopagebreak
+Inheritance diagram for Robot\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -22,13 +21,7 @@ Inheritance diagram for Robot\+:
 
 
 Collaboration diagram for Robot\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=128pt]{classRobot__coll__graph}
-\end{center}
-\end{figure}
+% FIG 0
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -51,6 +44,8 @@ float \mbox{\hyperlink{classRobot_ad199885470ae6e1109153526c21473c5}{Get\+Speed}
 \begin{DoxyCompactList}\small\item\em Gets the robot\textquotesingle{}s speed. \end{DoxyCompactList}\item 
 std\+::string \mbox{\hyperlink{classRobot_a7ddaea08f503f78b1e17e28dfa451531}{Get\+Strategy\+Name}} () const
 \begin{DoxyCompactList}\small\item\em Get the Strategy Name. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classRobot_add62429c792e1dd1ddd48fcc9dae5741}{get\+Order\+Type}} ()
+\begin{DoxyCompactList}\small\item\em Get the Order Type object. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRobot_a59c7dbc7346f86df3941c5dad9b12507}{Set\+Strategy\+Name}} (std\+::string strategy\+Name\+\_\+)
 \begin{DoxyCompactList}\small\item\em Set the Strategy Name. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRobot_a2ef6424fa88e43973ade3fddb4ec649b}{Set\+Availability}} (bool choice)
@@ -62,7 +57,11 @@ void \mbox{\hyperlink{classRobot_aaa0e41dbf57cb4040c0319b93c5a008c}{Set\+Directi
 void \mbox{\hyperlink{classRobot_a557af09ca03132837bc6574bca6fbe05}{Set\+Destination}} (\mbox{\hyperlink{classVector3}{Vector3}} des\+\_\+)
 \begin{DoxyCompactList}\small\item\em Sets the robot\textquotesingle{}s destination. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRobot_a1cb405ec49d47c46f3aa87fde1415b59}{Rotate}} (double angle)
-\begin{DoxyCompactList}\small\item\em Rotates the robot. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Rotates the robot. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRobot_ab232111354a22f5e838e5e30268deb99}{set\+Data}} (\mbox{\hyperlink{classData}{Data}} $\ast$data)
+\begin{DoxyCompactList}\small\item\em adds a pointer to the trip to the robot so that drone can keep track of it \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classData}{Data}} $\ast$ \mbox{\hyperlink{classRobot_a06a1cd9fec7eb3779b5219ee7aff0518}{get\+Data}} ()
+\begin{DoxyCompactList}\small\item\em Get the \mbox{\hyperlink{classData}{Data}} object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
@@ -106,6 +105,16 @@ The robot\textquotesingle{}s availability
 
 
 Reimplemented from \mbox{\hyperlink{classIEntity_a90348881691a37d5c3d63265ed3463b1}{I\+Entity}}.
+
+\mbox{\Hypertarget{classRobot_a06a1cd9fec7eb3779b5219ee7aff0518}\label{classRobot_a06a1cd9fec7eb3779b5219ee7aff0518}} 
+\index{Robot@{Robot}!getData@{getData}}
+\index{getData@{getData}!Robot@{Robot}}
+\doxysubsubsection{\texorpdfstring{getData()}{getData()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classData}{Data}} $\ast$ Robot\+::get\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the \mbox{\hyperlink{classData}{Data}} object. 
 
 \mbox{\Hypertarget{classRobot_abe629d465798403a706f574b33284659}\label{classRobot_abe629d465798403a706f574b33284659}} 
 \index{Robot@{Robot}!GetDestination@{GetDestination}}
@@ -158,6 +167,21 @@ The robot\textquotesingle{}s direction
 
 Implements \mbox{\hyperlink{classIEntity_aa99a8fef8b22195a5113c38ef51f086d}{I\+Entity}}.
 
+\mbox{\Hypertarget{classRobot_add62429c792e1dd1ddd48fcc9dae5741}\label{classRobot_add62429c792e1dd1ddd48fcc9dae5741}} 
+\index{Robot@{Robot}!getOrderType@{getOrderType}}
+\index{getOrderType@{getOrderType}!Robot@{Robot}}
+\doxysubsubsection{\texorpdfstring{getOrderType()}{getOrderType()}}
+{\footnotesize\ttfamily bool Robot\+::get\+Order\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the Order Type object. 
+
+\begin{DoxyReturn}{Returns}
+true uber trip 
+
+false food order 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classRobot_a0505da0b08d679a828c005879da63b16}\label{classRobot_a0505da0b08d679a828c005879da63b16}} 
 \index{Robot@{Robot}!GetPosition@{GetPosition}}
 \index{GetPosition@{GetPosition}!Robot@{Robot}}
@@ -247,6 +271,21 @@ Sets the robot\textquotesingle{}s availability.
 
 Reimplemented from \mbox{\hyperlink{classIEntity_adf3acdf4764f5ff25f89d7814e39551c}{I\+Entity}}.
 
+\mbox{\Hypertarget{classRobot_ab232111354a22f5e838e5e30268deb99}\label{classRobot_ab232111354a22f5e838e5e30268deb99}} 
+\index{Robot@{Robot}!setData@{setData}}
+\index{setData@{setData}!Robot@{Robot}}
+\doxysubsubsection{\texorpdfstring{setData()}{setData()}}
+{\footnotesize\ttfamily void Robot\+::set\+Data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classData}{Data}} $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+adds a pointer to the trip to the robot so that drone can keep track of it 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & trip data \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classRobot_a557af09ca03132837bc6574bca6fbe05}\label{classRobot_a557af09ca03132837bc6574bca6fbe05}} 
 \index{Robot@{Robot}!SetDestination@{SetDestination}}
 \index{SetDestination@{SetDestination}!Robot@{Robot}}
@@ -327,5 +366,5 @@ Reimplemented from \mbox{\hyperlink{classIEntity_a933def05f85783fddbf05e8257cc88
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-/home/tonth005/\+Team-\/010-\/47-\/lab10/libs/transit/include/Robot.\+h\item 
-/home/tonth005/\+Team-\/010-\/47-\/lab10/libs/transit/src/Robot.\+cc\end{DoxyCompactItemize}
+/home/swearingeno/.\+local/\+Projects/csci3081\+W/\+Labs/\+Team-\/010-\/47-\/lab10/libs/transit/include/Robot.\+h\item 
+/home/swearingeno/.\+local/\+Projects/csci3081\+W/\+Labs/\+Team-\/010-\/47-\/lab10/libs/transit/src/Robot.\+cc\end{DoxyCompactItemize}

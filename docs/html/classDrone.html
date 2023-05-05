@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: Drone Class Reference</title>
+<title>Ride Share and Delivery Simulation: Drone Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,8 +21,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">Ride Share and Delivery Simulation
    </div>
+   <div id="projectbrief">Simulate Rideshare and Food delivery services.</div>
   </td>
  </tr>
  </tbody>
@@ -63,6 +64,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="classDrone-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Drone Class Reference</div>  </div>
@@ -122,9 +124,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a479442805072af27a7ee628ed59d621e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrone.html#a479442805072af27a7ee628ed59d621e">GetAvailability</a> () const</td></tr>
 <tr class="memdesc:a479442805072af27a7ee628ed59d621e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the availability of the drone.  <a href="classDrone.html#a479442805072af27a7ee628ed59d621e">More...</a><br /></td></tr>
 <tr class="separator:a479442805072af27a7ee628ed59d621e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21d9dc799ee8a6c10b579fcab401bd57"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrone.html#a21d9dc799ee8a6c10b579fcab401bd57">GetNearestEntity</a> (std::vector&lt; <a class="el" href="classIEntity.html">IEntity</a> * &gt; scheduler)</td></tr>
-<tr class="memdesc:a21d9dc799ee8a6c10b579fcab401bd57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the nearest entity in the scheduler.  <a href="classDrone.html#a21d9dc799ee8a6c10b579fcab401bd57">More...</a><br /></td></tr>
-<tr class="separator:a21d9dc799ee8a6c10b579fcab401bd57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c33a6f49d3f029723bf476827a4a2e1"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrone.html#a1c33a6f49d3f029723bf476827a4a2e1">GetName</a> ()</td></tr>
+<tr class="memdesc:a1c33a6f49d3f029723bf476827a4a2e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">return name of drone  <a href="classDrone.html#a1c33a6f49d3f029723bf476827a4a2e1">More...</a><br /></td></tr>
+<tr class="separator:a1c33a6f49d3f029723bf476827a4a2e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4032d7e73d47376c8d170e8ef95f954"><td class="memItemLeft" align="right" valign="top"><a id="ac4032d7e73d47376c8d170e8ef95f954"></a>
+<a class="el" href="classData.html">Data</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>GetData</b> ()</td></tr>
+<tr class="separator:ac4032d7e73d47376c8d170e8ef95f954"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90a099aa62f80006cc7bada9bd6fd0ba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classIEntity.html">IEntity</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrone.html#a90a099aa62f80006cc7bada9bd6fd0ba">GetNearestEntity</a> ()</td></tr>
+<tr class="memdesc:a90a099aa62f80006cc7bada9bd6fd0ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the nearest entity  <a href="classDrone.html#a90a099aa62f80006cc7bada9bd6fd0ba">More...</a><br /></td></tr>
+<tr class="separator:a90a099aa62f80006cc7bada9bd6fd0ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7f21376bc4aeb6724a87c674fcd88d3"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classrouting_1_1IGraph.html">IGraph</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrone.html#ae7f21376bc4aeb6724a87c674fcd88d3">GetGraph</a> ()</td></tr>
+<tr class="memdesc:ae7f21376bc4aeb6724a87c674fcd88d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Graph object.  <a href="classDrone.html#ae7f21376bc4aeb6724a87c674fcd88d3">More...</a><br /></td></tr>
+<tr class="separator:ae7f21376bc4aeb6724a87c674fcd88d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6798b0bd297ca7a930016cd2dda0b7ff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrone.html#a6798b0bd297ca7a930016cd2dda0b7ff">Update</a> (double dt, std::vector&lt; <a class="el" href="classIEntity.html">IEntity</a> * &gt; scheduler)</td></tr>
 <tr class="memdesc:a6798b0bd297ca7a930016cd2dda0b7ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the drone's position.  <a href="classDrone.html#a6798b0bd297ca7a930016cd2dda0b7ff">More...</a><br /></td></tr>
 <tr class="separator:a6798b0bd297ca7a930016cd2dda0b7ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -140,6 +151,24 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a779efec4ba4b8b90635656c0a4c313f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrone.html#a779efec4ba4b8b90635656c0a4c313f9">SetColor</a> (std::string col_)</td></tr>
 <tr class="memdesc:a779efec4ba4b8b90635656c0a4c313f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the color of the drone.  <a href="classDrone.html#a779efec4ba4b8b90635656c0a4c313f9">More...</a><br /></td></tr>
 <tr class="separator:a779efec4ba4b8b90635656c0a4c313f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b2496f2df91e6d6721573a84b07fa87"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrone.html#a4b2496f2df91e6d6721573a84b07fa87">SetNearestEntity</a> (<a class="el" href="classIEntity.html">IEntity</a> *nearest)</td></tr>
+<tr class="memdesc:a4b2496f2df91e6d6721573a84b07fa87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Nearest Entity object.  <a href="classDrone.html#a4b2496f2df91e6d6721573a84b07fa87">More...</a><br /></td></tr>
+<tr class="separator:a4b2496f2df91e6d6721573a84b07fa87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada8b0eacc88b75113f64a408af8476c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrone.html#ada8b0eacc88b75113f64a408af8476c5">SetAvailability</a> (bool val)</td></tr>
+<tr class="memdesc:ada8b0eacc88b75113f64a408af8476c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the value of available.  <a href="classDrone.html#ada8b0eacc88b75113f64a408af8476c5">More...</a><br /></td></tr>
+<tr class="separator:ada8b0eacc88b75113f64a408af8476c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c68598e0367df40d64bfbf1a129d237"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrone.html#a8c68598e0367df40d64bfbf1a129d237">SetPickedUp</a> (bool val)</td></tr>
+<tr class="memdesc:a8c68598e0367df40d64bfbf1a129d237"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the value of picked up.  <a href="classDrone.html#a8c68598e0367df40d64bfbf1a129d237">More...</a><br /></td></tr>
+<tr class="separator:a8c68598e0367df40d64bfbf1a129d237"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad97eb27d09bdb30ccab1d90461560189"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrone.html#ad97eb27d09bdb30ccab1d90461560189">SetData</a> (<a class="el" href="classData.html">Data</a> *data)</td></tr>
+<tr class="memdesc:ad97eb27d09bdb30ccab1d90461560189"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the data stored in drone.  <a href="classDrone.html#ad97eb27d09bdb30ccab1d90461560189">More...</a><br /></td></tr>
+<tr class="separator:ad97eb27d09bdb30ccab1d90461560189"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7794cf4f55325a3f825ea96d7877f550"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrone.html#a7794cf4f55325a3f825ea96d7877f550">SetToRobot</a> (<a class="el" href="classIStrategy.html">IStrategy</a> *strat)</td></tr>
+<tr class="memdesc:a7794cf4f55325a3f825ea96d7877f550"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the first half of the trip.  <a href="classDrone.html#a7794cf4f55325a3f825ea96d7877f550">More...</a><br /></td></tr>
+<tr class="separator:a7794cf4f55325a3f825ea96d7877f550"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49cd9f86cb935218ce114b03f94eea00"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrone.html#a49cd9f86cb935218ce114b03f94eea00">SetToFinalDestination</a> (<a class="el" href="classIStrategy.html">IStrategy</a> *strat)</td></tr>
+<tr class="memdesc:a49cd9f86cb935218ce114b03f94eea00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the final half of the trip.  <a href="classDrone.html#a49cd9f86cb935218ce114b03f94eea00">More...</a><br /></td></tr>
+<tr class="separator:a49cd9f86cb935218ce114b03f94eea00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad698b0fac61fecdd01dffea6762a3710"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrone.html#ad698b0fac61fecdd01dffea6762a3710">Rotate</a> (double angle)</td></tr>
 <tr class="memdesc:ad698b0fac61fecdd01dffea6762a3710"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotates the drone.  <a href="classDrone.html#ad698b0fac61fecdd01dffea6762a3710">More...</a><br /></td></tr>
 <tr class="separator:ad698b0fac61fecdd01dffea6762a3710"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -171,12 +200,15 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <tr class="memitem:a933def05f85783fddbf05e8257cc8880 inherit pub_methods_classIEntity"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIEntity.html#a933def05f85783fddbf05e8257cc8880">SetStrategyName</a> (std::string strategyName_)</td></tr>
 <tr class="memdesc:a933def05f85783fddbf05e8257cc8880 inherit pub_methods_classIEntity"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Strategy Name.  <a href="classIEntity.html#a933def05f85783fddbf05e8257cc8880">More...</a><br /></td></tr>
 <tr class="separator:a933def05f85783fddbf05e8257cc8880 inherit pub_methods_classIEntity"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf3acdf4764f5ff25f89d7814e39551c inherit pub_methods_classIEntity"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIEntity.html#adf3acdf4764f5ff25f89d7814e39551c">SetAvailability</a> (bool choice)</td></tr>
-<tr class="memdesc:adf3acdf4764f5ff25f89d7814e39551c inherit pub_methods_classIEntity"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the availability of the entity.  <a href="classIEntity.html#adf3acdf4764f5ff25f89d7814e39551c">More...</a><br /></td></tr>
-<tr class="separator:adf3acdf4764f5ff25f89d7814e39551c inherit pub_methods_classIEntity"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b8b8eb627e8945fdc997f7a9d457df0 inherit pub_methods_classIEntity"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIEntity.html#a6b8b8eb627e8945fdc997f7a9d457df0">SetGraph</a> (const IGraph *graph)</td></tr>
+<tr class="memitem:a6b8b8eb627e8945fdc997f7a9d457df0 inherit pub_methods_classIEntity"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIEntity.html#a6b8b8eb627e8945fdc997f7a9d457df0">SetGraph</a> (const <a class="el" href="classrouting_1_1IGraph.html">IGraph</a> *graph)</td></tr>
 <tr class="memdesc:a6b8b8eb627e8945fdc997f7a9d457df0 inherit pub_methods_classIEntity"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the graph object used by the entity in the simulation.  <a href="classIEntity.html#a6b8b8eb627e8945fdc997f7a9d457df0">More...</a><br /></td></tr>
 <tr class="separator:a6b8b8eb627e8945fdc997f7a9d457df0 inherit pub_methods_classIEntity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a98a0c4706d492a442ce4681c896b246c"><td class="memItemLeft" align="right" valign="top"><a id="a98a0c4706d492a442ce4681c896b246c"></a>
+<a class="el" href="classData.html">Data</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>trip</b></td></tr>
+<tr class="separator:a98a0c4706d492a442ce4681c896b246c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -185,7 +217,7 @@ Additional Inherited Members</h2></td></tr>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>id</b></td></tr>
 <tr class="separator:adb3b46323a3c0269c5f108305a36737c inherit pro_attribs_classIEntity"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d4d1c3d5da8a816fe03522cd0b4fcb3 inherit pro_attribs_classIEntity"><td class="memItemLeft" align="right" valign="top"><a id="a5d4d1c3d5da8a816fe03522cd0b4fcb3"></a>
-const IGraph *&#160;</td><td class="memItemRight" valign="bottom"><b>graph</b></td></tr>
+const <a class="el" href="classrouting_1_1IGraph.html">IGraph</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>graph</b></td></tr>
 <tr class="separator:a5d4d1c3d5da8a816fe03522cd0b4fcb3 inherit pro_attribs_classIEntity"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -368,29 +400,87 @@ const IGraph *&#160;</td><td class="memItemRight" valign="bottom"><b>graph</b></
 
 </div>
 </div>
-<a id="a21d9dc799ee8a6c10b579fcab401bd57"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a21d9dc799ee8a6c10b579fcab401bd57">&#9670;&nbsp;</a></span>GetNearestEntity()</h2>
+<a id="ae7f21376bc4aeb6724a87c674fcd88d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7f21376bc4aeb6724a87c674fcd88d3">&#9670;&nbsp;</a></span>GetGraph()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void Drone::GetNearestEntity </td>
+          <td class="memname">const <a class="el" href="classrouting_1_1IGraph.html">IGraph</a>* Drone::GetGraph </td>
           <td>(</td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="classIEntity.html">IEntity</a> * &gt;&#160;</td>
-          <td class="paramname"><em>scheduler</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Gets the nearest entity in the scheduler. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">scheduler</td><td>Vector containing all the entities in the system </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Get the Graph object. </p>
+<dl class="section return"><dt>Returns</dt><dd>IGraph* </dd></dl>
+
+</div>
+</div>
+<a id="a1c33a6f49d3f029723bf476827a4a2e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c33a6f49d3f029723bf476827a4a2e1">&#9670;&nbsp;</a></span>GetName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Drone::GetName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>return name of drone </p>
+<dl class="section return"><dt>Returns</dt><dd>std::string name of drone </dd></dl>
+
+</div>
+</div>
+<a id="a90a099aa62f80006cc7bada9bd6fd0ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90a099aa62f80006cc7bada9bd6fd0ba">&#9670;&nbsp;</a></span>GetNearestEntity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classIEntity.html">IEntity</a>* Drone::GetNearestEntity </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>returns the nearest entity </p>
+<dl class="section return"><dt>Returns</dt><dd>IEntity* </dd></dl>
 
 </div>
 </div>
@@ -526,6 +616,42 @@ const IGraph *&#160;</td><td class="memItemRight" valign="bottom"><b>graph</b></
 
 </div>
 </div>
+<a id="ada8b0eacc88b75113f64a408af8476c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada8b0eacc88b75113f64a408af8476c5">&#9670;&nbsp;</a></span>SetAvailability()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Drone::SetAvailability </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the value of available. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">val</td><td>the value of available </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented from <a class="el" href="classIEntity.html#adf3acdf4764f5ff25f89d7814e39551c">IEntity</a>.</p>
+
+</div>
+</div>
 <a id="a779efec4ba4b8b90635656c0a4c313f9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a779efec4ba4b8b90635656c0a4c313f9">&#9670;&nbsp;</a></span>SetColor()</h2>
 
@@ -559,6 +685,40 @@ const IGraph *&#160;</td><td class="memItemRight" valign="bottom"><b>graph</b></
 </dl>
 
 <p>Reimplemented from <a class="el" href="classIEntity.html#a61b62fe1126f473d8ebb524c70c57a39">IEntity</a>.</p>
+
+</div>
+</div>
+<a id="ad97eb27d09bdb30ccab1d90461560189"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad97eb27d09bdb30ccab1d90461560189">&#9670;&nbsp;</a></span>SetData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Drone::SetData </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classData.html">Data</a> *&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the data stored in drone. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>the data object </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -634,6 +794,74 @@ const IGraph *&#160;</td><td class="memItemRight" valign="bottom"><b>graph</b></
 
 </div>
 </div>
+<a id="a4b2496f2df91e6d6721573a84b07fa87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b2496f2df91e6d6721573a84b07fa87">&#9670;&nbsp;</a></span>SetNearestEntity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Drone::SetNearestEntity </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classIEntity.html">IEntity</a> *&#160;</td>
+          <td class="paramname"><em>nearest</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the Nearest Entity object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nearest</td><td>nearest entity object </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8c68598e0367df40d64bfbf1a129d237"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c68598e0367df40d64bfbf1a129d237">&#9670;&nbsp;</a></span>SetPickedUp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Drone::SetPickedUp </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the value of picked up. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">val</td><td>wether object picked up </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a00150938e8dbfceaf81c9fb59994f6ef"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a00150938e8dbfceaf81c9fb59994f6ef">&#9670;&nbsp;</a></span>SetPosition()</h2>
 
@@ -667,6 +895,74 @@ const IGraph *&#160;</td><td class="memItemRight" valign="bottom"><b>graph</b></
 </dl>
 
 <p>Reimplemented from <a class="el" href="classIEntity.html#af0475048b09dc13ed6cf8e7c7be2ae6b">IEntity</a>.</p>
+
+</div>
+</div>
+<a id="a49cd9f86cb935218ce114b03f94eea00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49cd9f86cb935218ce114b03f94eea00">&#9670;&nbsp;</a></span>SetToFinalDestination()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Drone::SetToFinalDestination </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classIStrategy.html">IStrategy</a> *&#160;</td>
+          <td class="paramname"><em>strat</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the final half of the trip. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">strat</td><td>strategy to move to destination </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a7794cf4f55325a3f825ea96d7877f550"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7794cf4f55325a3f825ea96d7877f550">&#9670;&nbsp;</a></span>SetToRobot()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Drone::SetToRobot </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classIStrategy.html">IStrategy</a> *&#160;</td>
+          <td class="paramname"><em>strat</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the first half of the trip. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">strat</td><td>strategy to move to destination </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -718,8 +1014,8 @@ const IGraph *&#160;</td><td class="memItemRight" valign="bottom"><b>graph</b></
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/tonth005/Team-010-47-lab10/libs/transit/include/<a class="el" href="Drone_8h_source.html">Drone.h</a></li>
-<li>/home/tonth005/Team-010-47-lab10/libs/transit/src/Drone.cc</li>
+<li>/home/swearingeno/.local/Projects/csci3081W/Labs/Team-010-47-lab10/libs/transit/include/<a class="el" href="Drone_8h_source.html">Drone.h</a></li>
+<li>/home/swearingeno/.local/Projects/csci3081W/Labs/Team-010-47-lab10/libs/transit/src/Drone.cc</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

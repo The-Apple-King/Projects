@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: IEntity Class Reference</title>
+<title>Ride Share and Delivery Simulation: IEntity Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,8 +21,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">Ride Share and Delivery Simulation
    </div>
+   <div id="projectbrief">Simulate Rideshare and Food delivery services.</div>
   </td>
  </tr>
  </tbody>
@@ -87,6 +88,12 @@ Inheritance diagram for IEntity:</div>
 <area shape="rect" href="classRobot.html" title="Represents a robot in a physical system." alt="" coords="393,80,453,107"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for IEntity:</div>
+<div class="dyncontent">
+<div class="center"><img src="classIEntity__coll__graph.png" border="0" usemap="#IEntity_coll__map" alt="Collaboration graph"/></div>
+<!-- MAP 0 -->
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -134,7 +141,7 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <tr class="memitem:a9a8e8588fd85c7b0d813d60686d4dc2c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIEntity.html#a9a8e8588fd85c7b0d813d60686d4dc2c">Update</a> (double dt, std::vector&lt; <a class="el" href="classIEntity.html">IEntity</a> * &gt; scheduler)</td></tr>
 <tr class="memdesc:a9a8e8588fd85c7b0d813d60686d4dc2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the entity's position in the physical system.  <a href="classIEntity.html#a9a8e8588fd85c7b0d813d60686d4dc2c">More...</a><br /></td></tr>
 <tr class="separator:a9a8e8588fd85c7b0d813d60686d4dc2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b8b8eb627e8945fdc997f7a9d457df0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIEntity.html#a6b8b8eb627e8945fdc997f7a9d457df0">SetGraph</a> (const IGraph *graph)</td></tr>
+<tr class="memitem:a6b8b8eb627e8945fdc997f7a9d457df0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIEntity.html#a6b8b8eb627e8945fdc997f7a9d457df0">SetGraph</a> (const <a class="el" href="classrouting_1_1IGraph.html">IGraph</a> *graph)</td></tr>
 <tr class="memdesc:a6b8b8eb627e8945fdc997f7a9d457df0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the graph object used by the entity in the simulation.  <a href="classIEntity.html#a6b8b8eb627e8945fdc997f7a9d457df0">More...</a><br /></td></tr>
 <tr class="separator:a6b8b8eb627e8945fdc997f7a9d457df0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af0475048b09dc13ed6cf8e7c7be2ae6b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIEntity.html#af0475048b09dc13ed6cf8e7c7be2ae6b">SetPosition</a> (<a class="el" href="classVector3.html">Vector3</a> pos_)</td></tr>
@@ -162,7 +169,7 @@ Protected Attributes</h2></td></tr>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>id</b></td></tr>
 <tr class="separator:adb3b46323a3c0269c5f108305a36737c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d4d1c3d5da8a816fe03522cd0b4fcb3"><td class="memItemLeft" align="right" valign="top"><a id="a5d4d1c3d5da8a816fe03522cd0b4fcb3"></a>
-const IGraph *&#160;</td><td class="memItemRight" valign="bottom"><b>graph</b></td></tr>
+const <a class="el" href="classrouting_1_1IGraph.html">IGraph</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>graph</b></td></tr>
 <tr class="separator:a5d4d1c3d5da8a816fe03522cd0b4fcb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -505,7 +512,7 @@ const IGraph *&#160;</td><td class="memItemRight" valign="bottom"><b>graph</b></
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classDrone.html#ad698b0fac61fecdd01dffea6762a3710">Drone</a>, <a class="el" href="classDragon.html#aa70bfd4f03330b9adb5dec234d2e0c7a">Dragon</a>, <a class="el" href="classHelicopter.html#ad1211b18d9db476bfa2c61afead9ffb8">Helicopter</a>, <a class="el" href="classHuman.html#ae54d09dd1b0fcc89543897d2f25b2f00">Human</a>, and <a class="el" href="classRobot.html#a1cb405ec49d47c46f3aa87fde1415b59">Robot</a>.</p>
+<p>Reimplemented in <a class="el" href="classDrone.html#ad698b0fac61fecdd01dffea6762a3710">Drone</a>, <a class="el" href="classRobot.html#a1cb405ec49d47c46f3aa87fde1415b59">Robot</a>, <a class="el" href="classDragon.html#aa70bfd4f03330b9adb5dec234d2e0c7a">Dragon</a>, <a class="el" href="classHelicopter.html#ad1211b18d9db476bfa2c61afead9ffb8">Helicopter</a>, and <a class="el" href="classHuman.html#ae54d09dd1b0fcc89543897d2f25b2f00">Human</a>.</p>
 
 </div>
 </div>
@@ -541,7 +548,7 @@ const IGraph *&#160;</td><td class="memItemRight" valign="bottom"><b>graph</b></
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classRobot.html#a2ef6424fa88e43973ade3fddb4ec649b">Robot</a>.</p>
+<p>Reimplemented in <a class="el" href="classDrone.html#ada8b0eacc88b75113f64a408af8476c5">Drone</a>, and <a class="el" href="classRobot.html#a2ef6424fa88e43973ade3fddb4ec649b">Robot</a>.</p>
 
 </div>
 </div>
@@ -665,7 +672,7 @@ const IGraph *&#160;</td><td class="memItemRight" valign="bottom"><b>graph</b></
         <tr>
           <td class="memname">void IEntity::SetGraph </td>
           <td>(</td>
-          <td class="paramtype">const IGraph *&#160;</td>
+          <td class="paramtype">const <a class="el" href="classrouting_1_1IGraph.html">IGraph</a> *&#160;</td>
           <td class="paramname"><em>graph</em></td><td>)</td>
           <td></td>
         </tr>
@@ -807,7 +814,7 @@ const IGraph *&#160;</td><td class="memItemRight" valign="bottom"><b>graph</b></
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/tonth005/Team-010-47-lab10/libs/transit/include/<a class="el" href="IEntity_8h_source.html">IEntity.h</a></li>
+<li>/home/swearingeno/.local/Projects/csci3081W/Labs/Team-010-47-lab10/libs/transit/include/<a class="el" href="IEntity_8h_source.html">IEntity.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

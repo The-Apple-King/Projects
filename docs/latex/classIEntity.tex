@@ -11,14 +11,17 @@ Represents an entity in a physical system.
 
 
 
-Inheritance diagram for I\+Entity\+:
-\nopagebreak
+Inheritance diagram for I\+Entity\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classIEntity__inherit__graph}
 \end{center}
 \end{figure}
+
+
+Collaboration diagram for I\+Entity\+:
+% FIG 0
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -52,7 +55,7 @@ virtual void \mbox{\hyperlink{classIEntity_adf3acdf4764f5ff25f89d7814e39551c}{Se
 \begin{DoxyCompactList}\small\item\em Sets the availability of the entity. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classIEntity_a9a8e8588fd85c7b0d813d60686d4dc2c}{Update}} (double dt, std\+::vector$<$ \mbox{\hyperlink{classIEntity}{I\+Entity}} $\ast$ $>$ scheduler)
 \begin{DoxyCompactList}\small\item\em Updates the entity\textquotesingle{}s position in the physical system. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classIEntity_a6b8b8eb627e8945fdc997f7a9d457df0}{Set\+Graph}} (const I\+Graph $\ast$graph)
+void \mbox{\hyperlink{classIEntity_a6b8b8eb627e8945fdc997f7a9d457df0}{Set\+Graph}} (const \mbox{\hyperlink{classrouting_1_1IGraph}{I\+Graph}} $\ast$graph)
 \begin{DoxyCompactList}\small\item\em Sets the graph object used by the entity in the simulation. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classIEntity_af0475048b09dc13ed6cf8e7c7be2ae6b}{Set\+Position}} (\mbox{\hyperlink{classVector3}{Vector3}} pos\+\_\+)
 \begin{DoxyCompactList}\small\item\em Sets the position of the entity. \end{DoxyCompactList}\item 
@@ -73,7 +76,7 @@ virtual void \mbox{\hyperlink{classIEntity_a4e8eb64a324e1196be039c5e2a293b7a}{Ju
 int {\bfseries id}
 \item 
 \mbox{\Hypertarget{classIEntity_a5d4d1c3d5da8a816fe03522cd0b4fcb3}\label{classIEntity_a5d4d1c3d5da8a816fe03522cd0b4fcb3}} 
-const I\+Graph $\ast$ {\bfseries graph}
+const \mbox{\hyperlink{classrouting_1_1IGraph}{I\+Graph}} $\ast$ {\bfseries graph}
 \end{DoxyCompactItemize}
 
 
@@ -268,7 +271,7 @@ Rotate the entity.
 \end{DoxyParams}
 
 
-Reimplemented in \mbox{\hyperlink{classDrone_ad698b0fac61fecdd01dffea6762a3710}{Drone}}, \mbox{\hyperlink{classDragon_aa70bfd4f03330b9adb5dec234d2e0c7a}{Dragon}}, \mbox{\hyperlink{classHelicopter_ad1211b18d9db476bfa2c61afead9ffb8}{Helicopter}}, \mbox{\hyperlink{classHuman_ae54d09dd1b0fcc89543897d2f25b2f00}{Human}}, and \mbox{\hyperlink{classRobot_a1cb405ec49d47c46f3aa87fde1415b59}{Robot}}.
+Reimplemented in \mbox{\hyperlink{classDrone_ad698b0fac61fecdd01dffea6762a3710}{Drone}}, \mbox{\hyperlink{classRobot_a1cb405ec49d47c46f3aa87fde1415b59}{Robot}}, \mbox{\hyperlink{classDragon_aa70bfd4f03330b9adb5dec234d2e0c7a}{Dragon}}, \mbox{\hyperlink{classHelicopter_ad1211b18d9db476bfa2c61afead9ffb8}{Helicopter}}, and \mbox{\hyperlink{classHuman_ae54d09dd1b0fcc89543897d2f25b2f00}{Human}}.
 
 \mbox{\Hypertarget{classIEntity_adf3acdf4764f5ff25f89d7814e39551c}\label{classIEntity_adf3acdf4764f5ff25f89d7814e39551c}} 
 \index{IEntity@{IEntity}!SetAvailability@{SetAvailability}}
@@ -287,7 +290,7 @@ Sets the availability of the entity.
 \end{DoxyParams}
 
 
-Reimplemented in \mbox{\hyperlink{classRobot_a2ef6424fa88e43973ade3fddb4ec649b}{Robot}}.
+Reimplemented in \mbox{\hyperlink{classDrone_ada8b0eacc88b75113f64a408af8476c5}{Drone}}, and \mbox{\hyperlink{classRobot_a2ef6424fa88e43973ade3fddb4ec649b}{Robot}}.
 
 \mbox{\Hypertarget{classIEntity_a61b62fe1126f473d8ebb524c70c57a39}\label{classIEntity_a61b62fe1126f473d8ebb524c70c57a39}} 
 \index{IEntity@{IEntity}!SetColor@{SetColor}}
@@ -350,7 +353,7 @@ Reimplemented in \mbox{\hyperlink{classDrone_a102651f93957b1dbe8199cbd30a9e26f}{
 \index{IEntity@{IEntity}!SetGraph@{SetGraph}}
 \index{SetGraph@{SetGraph}!IEntity@{IEntity}}
 \doxysubsubsection{\texorpdfstring{SetGraph()}{SetGraph()}}
-{\footnotesize\ttfamily void I\+Entity\+::\+Set\+Graph (\begin{DoxyParamCaption}\item[{const I\+Graph $\ast$}]{graph }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void I\+Entity\+::\+Set\+Graph (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classrouting_1_1IGraph}{I\+Graph}} $\ast$}]{graph }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -424,4 +427,4 @@ Reimplemented in \mbox{\hyperlink{classDrone_a6798b0bd297ca7a930016cd2dda0b7ff}{
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-/home/tonth005/\+Team-\/010-\/47-\/lab10/libs/transit/include/I\+Entity.\+h\end{DoxyCompactItemize}
+/home/swearingeno/.\+local/\+Projects/csci3081\+W/\+Labs/\+Team-\/010-\/47-\/lab10/libs/transit/include/I\+Entity.\+h\end{DoxyCompactItemize}

@@ -55,7 +55,8 @@ class Tutorial (object):
     dst_mac = str(packet.dst)
     
     # save src to input port in dictionary
-    self.mac_to_port[src_mac] = event.port
+    if src_mac not in self.mac_to_port:
+      self.mac_to_port[src_mac] = event.port
     log.debug("Installing flow...")
     msg = of.ofp_flow_mod()
 

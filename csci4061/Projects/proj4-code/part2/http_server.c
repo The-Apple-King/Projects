@@ -36,22 +36,27 @@ void *handle_requests(void* queue){
         if(read_http_request(client_sockfd, buf) == -1){
             perror("read");
             close(client_sockfd);
+            pthread_exit(NULL);
         }
 
         // save full path to full_path
         char full_path[BUFSIZE];
         if(snprintf(full_path, BUFSIZE, "%s%s", serve_dir, buf) < 0){
             perror("snprintf");
+            close(client_sockfd);
             pthread_exit(NULL);
         }
 
         //write request
         if(write_http_response(client_sockfd, full_path) == -1){
             perror("write_http_response");
+            close(client_sockfd);
+            pthread_exit(NULL);
         }
 
         if(close(client_sockfd) == -1){
             perror("close");
+            close(client_sockfd);
             pthread_exit(NULL);
         }
     }
@@ -80,12 +85,16 @@ int main(int argc, char **argv) {
     sa.sa_handler = handle_sigint;
     if(sigemptyset(&sa.sa_mask) != 0){
         perror("sigemptyset");
+        connection_queue_shutdown(&queue);
+        connection_queue_free(&queue);
         return -1;
     }
     sa.sa_flags = 0;
 
     if (sigaction(SIGINT, &sa, NULL) == -1) {
         perror("sigaction");
+        connection_queue_shutdown(&queue);
+        connection_queue_free(&queue);
         return -1;
     }
 
@@ -93,6 +102,8 @@ int main(int argc, char **argv) {
     struct addrinfo hints, *res;
     if(memset(&hints, 0, sizeof(hints)) == NULL){
         perror("memset");
+        connection_queue_shutdown(&queue);
+        connection_queue_free(&queue);
         return -1;
     }
     hints.ai_family = AF_UNSPEC;
@@ -101,7 +112,9 @@ int main(int argc, char **argv) {
     int status = getaddrinfo(NULL, port, &hints, &res);
     if (status != 0)
     {
-        gai_strerror(status);
+        fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(status));
+        connection_queue_shutdown(&queue);
+        connection_queue_free(&queue);
         return -1;
     }
     
@@ -109,6 +122,9 @@ int main(int argc, char **argv) {
     int sockfd = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
     if(sockfd == -1){
         perror("socket");
+        freeaddrinfo(res);
+        connection_queue_shutdown(&queue);
+        connection_queue_free(&queue);
         return -1;
     }
 
@@ -116,25 +132,42 @@ int main(int argc, char **argv) {
     if(bind(sockfd, res->ai_addr, res->ai_addrlen) == -1){
         perror("bind");
         close(sockfd);
+        freeaddrinfo(res);
+        connection_queue_shutdown(&queue);
+        connection_queue_free(&queue);
         return -1;
     }
     
+    //we never use res after this
+    if (res != NULL) {
+        freeaddrinfo(res);
+    } else {
+        fprintf(stderr, "res is NULL\n");
+    }
+
     //listen for connect requests, Max reasonable num for backlog
     if(listen(sockfd, SOMAXCONN) == -1){
         perror("listen");
         close(sockfd);
+        connection_queue_shutdown(&queue);
+        connection_queue_free(&queue);
         return -1;
     }
-
 
     // set mask for threads
     sigset_t new_mask, old_mask;
     if(sigfillset(&new_mask) != 0){
         perror("sigfillset");
+        close(sockfd);
+        connection_queue_shutdown(&queue);
+        connection_queue_free(&queue);
         return -1;
     }
     if(sigprocmask(SIG_SETMASK, &new_mask, &old_mask) != 0){
         perror("set mask for threads");
+        close(sockfd);
+        connection_queue_shutdown(&queue);
+        connection_queue_free(&queue);
         return -1;
     }
 
@@ -147,6 +180,9 @@ int main(int argc, char **argv) {
         error = pthread_create(&threads[i], NULL, handle_requests, (void*)&queue);
         if (error != 0){
             fprintf(stderr, "pthread_create: %s\n", strerror(error));
+            close(sockfd);
+            connection_queue_shutdown(&queue);
+            connection_queue_free(&queue);
             return -1;
         }
     }
@@ -154,6 +190,9 @@ int main(int argc, char **argv) {
     // restore old mask
     if(sigprocmask(SIG_SETMASK, &old_mask, NULL) != 0){
         perror("restore sigmask");
+        close(sockfd);
+        connection_queue_shutdown(&queue);
+        connection_queue_free(&queue);
         return -1;
     }
 
@@ -167,17 +206,25 @@ int main(int argc, char **argv) {
         if (client_sockfd == -1 && errno != EINTR) {
             perror("accept");
             close(sockfd);
+            connection_queue_shutdown(&queue);
+            connection_queue_free(&queue);
             return -1;
         }
 
         // add file descriptor for socket to queue
         if(connection_enqueue(&queue, client_sockfd) == -1){
             perror("enqueue");
+            close(sockfd);
+            connection_queue_shutdown(&queue);
+            connection_queue_free(&queue);
             return -1;
         }
     }
     if(connection_queue_shutdown(&queue) == -1){
         perror("shutdown");
+        close(sockfd);
+        connection_queue_shutdown(&queue);
+        connection_queue_free(&queue);
         return -1;
     }
     
@@ -188,10 +235,19 @@ int main(int argc, char **argv) {
         error = pthread_join(threads[i], NULL);
         if (error != 0){
             fprintf(stderr, "pthread_create: %s\n", strerror(error));
+            close(sockfd);
+            connection_queue_free(&queue);
             return -1;
         }
     }
-    
+
+    // start closing server down
+    if (close(sockfd) == -1) {
+      perror("close");
+      connection_queue_free(&queue);
+    }
+
+    //free queue
     if(connection_queue_free(&queue) == -1){
         perror("queue free");
         return -1;

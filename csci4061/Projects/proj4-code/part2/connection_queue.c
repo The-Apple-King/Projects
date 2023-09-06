@@ -16,10 +16,13 @@ int connection_queue_init(connection_queue_t *queue) {
     }
     if (pthread_cond_init(&queue->queue_full, NULL)!= 0){
         perror("cond init");
+        pthread_mutex_destroy(&queue->lock);
         return -1;
     }
     if (pthread_cond_init(&queue->queue_empty, NULL)!= 0){
         perror("cond init");
+        pthread_mutex_destroy(&queue->lock);
+        pthread_cond_destroy(&queue->queue_full);
         return -1;
     }
     return 0;
@@ -34,6 +37,7 @@ int connection_enqueue(connection_queue_t *queue, int connection_fd) {
     while(queue->length == 5){
         if (pthread_cond_wait(&queue->queue_full, &queue->lock) != 0){
             perror("cond wait");
+            pthread_mutex_unlock(&queue->lock);
             return -1;
         }
     }
@@ -52,6 +56,7 @@ int connection_enqueue(connection_queue_t *queue, int connection_fd) {
 
     if (pthread_cond_signal(&queue->queue_empty) != 0){
         perror("cond signal");
+        pthread_mutex_unlock(&queue->lock);
         return -1;
     }
     if (pthread_mutex_unlock(&queue->lock) != 0){
@@ -69,6 +74,7 @@ int connection_dequeue(connection_queue_t *queue) {
     while(queue->length == 0){
         if (pthread_cond_wait(&queue->queue_empty, &queue->lock) != 0){
             perror("cond wait");
+            pthread_mutex_unlock(&queue->lock);
             return -1;
         }
     }
@@ -87,6 +93,7 @@ int connection_dequeue(connection_queue_t *queue) {
 
     if (pthread_cond_signal(&queue->queue_full) != 0){
         perror("cond signal");
+        pthread_mutex_unlock(&queue->lock);
         return -1;
     }
     if (pthread_mutex_unlock(&queue->lock) != 0){

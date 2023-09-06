@@ -41,6 +41,7 @@ int read_http_request(int fd, char *resource_name) {
         return -1;
     }
     
+    // Copy the resource name to the output parameter
     strcpy(resource_name, second_word);
     
     return 0;
@@ -76,10 +77,12 @@ int write_http_response(int fd, const char *resource_path) {
     // Send 200 OK response headers
     if(sprintf(buf, "HTTP/1.1 200 OK\r\nContent-Length: %ld\r\nContent-Type: %s\r\n\r\n", st.st_size, get_mime_type(resource_path)) < 0){
         perror("sprintf");
+        fclose(resource_file);
         return -1;
     }
     if(write(fd, buf, strlen(buf)) == -1){
         perror("write");
+        fclose(resource_file);
         return -1;
     }
 
@@ -90,10 +93,11 @@ int write_http_response(int fd, const char *resource_path) {
         if (read_bytes == 0) {
             if (feof(resource_file)) {
                 break; // End of file
-            }
+            } else {
             perror("fread");
             fclose(resource_file);
             return -1;
+            }
         }
         sent_bytes = write(fd, buf, read_bytes);
         if (sent_bytes < 0) {

@@ -71,5 +71,6 @@
     ],
     "github-enterprise.uri": "https://github.umn.edu/swear041/projects.git",
     "C_Cpp.errorSquiggles": "disabled",
-    "python.analysis.typeCheckingMode": "basic"
+    "python.analysis.typeCheckingMode": "basic",
+    "cmake.configureOnOpen": true
 }

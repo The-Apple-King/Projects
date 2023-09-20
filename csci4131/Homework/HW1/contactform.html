@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <title>Contact Page</title>
+        <h1>Send us Your Contact Info</h1>
+    </head>
+    <body>
+        <form action="/contact" method="get">
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div>
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date">
+            </div>
+            <div>
+                <label for="dropdown">Type of business:</label>
+                <select id="dropdown" name="dropdown">
+                    <option value="Buyer">Buyer</option>
+                    <option value="Seller">Seller</option>
+                </select>
+            </div>
+            <div>
+                <input type="checkbox" id="subscribe" name="subscribe">
+                <label for="subscribe">Subscribe to our newsletter</label>
+            </div>
+            <div>
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+    </body>
+</html>
+
+<!-- 
+    named contactform.html
+    title
+    html form, should send a get request when submitted
+    
+    fields should have name attribute
+    fields should have a label with a for and id attribute
+        a name field -- required
+        an email imput field -- required and should validate it using type
+        a date selection field -- type date
+        a dropdown box
+        a checkbox
+        a sumbit button
+
+ -->

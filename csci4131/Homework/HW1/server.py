@@ -1,22 +1,18 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 def server(url):
-    """
-    url is a *PARTIAL* URL. If the browser requests `http://localhost:4131/contact?name=joe`
-    then the `url` parameter will have the value "/contact?name=joe". (so the schema and 
-    authority will not be included, but the full path, any query, and any anchor will be included)
-
-    This function is called each time another program/computer makes a request to this website.
-    The URL represents the requested file.
-
-    This function should return a string.
-    """
-
-    ######
-    # TODO: Hey student! This is the function you need to change! Don't miss it!
-    ######
-
-    return "I didn't do the server part yet. Oh no!"
+    if(url.find("/contact") == 0 ):
+        print("contact", url)
+        return open("contactform.html").read()
+    elif(url.find("/testimonies") == 0):
+        print("testimonies", url)
+        return open("testimonies.html").read()
+    elif(url.find("/main") == 0 or (url.find("/") == 0 and len(url) == 1)):
+        print("mainpage", url)
+        return open("mainpage.html").read()
+    else:
+        print("404", url)
+        return open("404.html").read()
     
 
 # You shouldn't need to change content below this. It would be best if you just left it alone.

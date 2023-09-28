@@ -1,17 +1,25 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 def server(url):
-    if(url.find("/contact") == 0 ):
-        print("contact", url)
+    # if there is a ? we only take the path else take the whole thing
+    endOfPath = url.find('?')
+    if(endOfPath != -1):
+        path = url[0:endOfPath]
+    else:
+        path = url
+
+    # navigate to the correct page based on url
+    if(path == "/contact"):
+        print("contact", path)
         return open("contactform.html").read()
-    elif(url.find("/testimonies") == 0):
-        print("testimonies", url)
+    elif(path == "/testimonies"):
+        print("testimonies", path)
         return open("testimonies.html").read()
-    elif(url.find("/main") == 0 or (url.find("/") == 0 and len(url) == 1)):
-        print("mainpage", url)
+    elif(path == "/main" or (path == "/" and len(path) == 1)):
+        print("mainpage", path)
         return open("mainpage.html").read()
     else:
-        print("404", url)
+        print("404", path)
         return open("404.html").read()
     
 

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ICE</title>
+    <script>
+        window.addEventListener("load", ()=> {
+            const left = document.getElementById("left")
+            const right = document.getElementById("right")
+            const plus = document.getElementById("plus")
+            const ans = document.getElementById("ans")
+            console.log(left);
+            plus.addEventListener("click", ()=> {
+                ans.innerText = Number(left.value) + Number(right.value);
+            })
+            minus.addEventListener("click", ()=> {
+                ans.innerText = Number(left.value) - Number(right.value);
+            })
+            mult.addEventListener("click", ()=> {
+                ans.innerText = Number(left.value) * Number(right.value);
+            })
+            divide.addEventListener("click", ()=> {
+                ans.innerText = Number(left.value) / Number(right.value);
+            })
+        })
+    </script>
+</head>
+<body>
+    <input id="left" type="text">
+    <button id="plus"> + </button>
+    <button id="minus"> - </button>
+    <button id="mult"> * </button>
+    <button id="divide"> / </button>
+    <input id="right" type="text">
+    =
+    <span id="ans"></span>
+</body>
+</html>

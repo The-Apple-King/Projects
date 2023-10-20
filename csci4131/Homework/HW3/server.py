@@ -64,31 +64,31 @@ def server_POST(url: str, body: str) -> tuple[str | bytes, str, int]:
     The second is the content-type. The third is the HTTP Status Code for the response
     """
 
-    endOfPath = url.find('?')
-    parameters = ""
-    if(endOfPath != -1):
-        path = url[0:endOfPath]
-        parameters = url[endOfPath+1:]
-        print("parameters", parameters)
-    else:
-        path = url
+    print("\n\nurl: ", url, "body: ", body, "\n\n" )
+    
 
-    if(path == "/contact"):
+    if(url == "/contact"):
     #deal with url parameters
-        if(parameters != ""):
+        if(body != ""):
             print("\nwe have parameters\n")
-            parameters = parameters.split("&")
-            print(parameters)
+            body = body.split("&")
+            print(body)
             newContact = {}
-            for param in parameters:
+            for param in body:
                 param = urllib.parse.unquote(param, encoding='utf-8', errors='replace')
                 curParam = param.split("=")
                 newContact[curParam[0]] = curParam[1]
-            if len(parameters) <= 5:
+            if len(body) <= 5:
                 newContact["subscribe"] = "off"
             contacts.append(newContact)
-    print("contact", path)
-    return open("static/html/contactform.html").read(), "text/html", 201
+        else:
+            #if something wrong??
+            return 401
+        print("contact", url)
+        return open("static/html/contactform.html").read(), "text/html", 201
+    else:
+        print("404", url)
+        return open("static/html/404.html").read(), "text/html", 404
 
 def createAdmin():
     # Start building the HTML content

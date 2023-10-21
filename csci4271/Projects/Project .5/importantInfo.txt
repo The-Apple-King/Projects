@@ -1,0 +1,34 @@
+vulnerability is a safety vulnerability
+1 planned vulnerability 3 known vulnerabilites
+
+
+describing ideas will give partial credit
+fully explaining one will give full credit
+
+The idea is to audit the code, write a report on it then create an attack.
+
+mentioned unexpected or broken bcbasic code to work
+there are exploits that work outside gdb
+
+written
+report including 2–4 pages
+one-inch margins
+times new roman
+10 points high
+double spaced
+should include a figure
+labeled with your name and UMN email address, as well as the
+names and addresses of the other members of your group.
+
+
+As a final appendix to your report (a separate last page), write between one sentence
+and one page describing the software and/or AI tools that assisted you in any of the phases
+of the project. If you chose not to use any special tools, this could be a single sentence like
+“The only tools I used were GDB and the spellchecker in Google Docs.” But we would like
+to hear more details if you found other tools to be useful. We won’t reduce the credit you
+get for the body of the report if you say, to take an extreme example, that you were able
+to get a large language model to do the whole project for you by using the right prompts.
+But we are interested in these information to inform how we adjust the project for future
+versions of the course.
+
+

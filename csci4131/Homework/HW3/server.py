@@ -46,8 +46,17 @@ def server_GET(url: str) -> tuple[str | bytes, str, int]:
     elif(path == "/css/main.css"):
         print("css", "css/main.css")
         return open("static/css/main.css").read(), "text/css", 200
+    elif(path == "/css/main.dark.css"):
+        print("css", "css/main.dark.css")
+        return open("static/css/main.dark.css").read(), "text/css", 200
     elif(path == "/images/main"):
         return open("static/images/salesman.jpg", "rb").read(), "image/jpeg", 200
+    elif(path == "/js/main.js"):
+        return open("static/js/main.js").read(), "text/javascript", 200
+    elif(path == "/js/table.js"):
+        return open("static/js/table.js").read(), "text/javascript", 200
+    elif(path == "/js/contact.js"):
+        return open("static/js/contact.js").read(), "text/javascript", 200
     else:
         print("404", path)
         return open("static/html/404.html").read(), "text/html", 404
@@ -70,20 +79,22 @@ def server_POST(url: str, body: str) -> tuple[str | bytes, str, int]:
     if(url == "/contact"):
     #deal with url parameters
         if(body != ""):
-            print("\nwe have parameters\n")
-            body = body.split("&")
-            print(body)
             newContact = {}
-            for param in body:
-                param = urllib.parse.unquote(param, encoding='utf-8', errors='replace')
-                curParam = param.split("=")
-                newContact[curParam[0]] = curParam[1]
-            if len(body) <= 5:
+            print("\nwe have parameters\n")
+            print(body)
+            print("name" in body and "&email" in body and "&date" in body and "&dropdown" in body)
+            if "subscribe" not in body:
                 newContact["subscribe"] = "off"
-            contacts.append(newContact)
-        else:
-            #if something wrong??
-            return 401
+            if "name" in body and "&email" in body and "&date" in body and "&dropdown" in body:
+                body = body.split("&")
+                for param in body:
+                    param = urllib.parse.unquote(param, encoding='utf-8', errors='replace')
+                    curParam = param.split("=")
+                    newContact[curParam[0]] = curParam[1]
+                contacts.append(newContact)
+            else:
+                #if something wrong??
+                return open("static/html/contactform.html").read(), "text/html", 401
         print("contact", url)
         return open("static/html/contactform.html").read(), "text/html", 201
     else:
@@ -99,6 +110,8 @@ def createAdmin():
         <title>The Snake Oil Salesman</title>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="../css/main.css">
+        <link rel="stylesheet" href="../css/main.dark.css">
+        <script src="../js/main.js"></script>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap');
         </style>
@@ -109,6 +122,7 @@ def createAdmin():
             <a href="/contact">Contact</a>
             <a href="/testimonies">Testimonies</a>
             <a href="/admin/contactlog">Contact Log</a>
+            <a id="theme-toggle" href="#">Dark Mode Toggle</a>
         </div> 
         <h1>Contact Log</h1>
         <table>

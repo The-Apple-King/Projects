@@ -1,4 +1,4 @@
-body {
+body.dark-mode {
     padding-top: 50px;
     background-color: olivedrab;
     display: flex;
@@ -8,8 +8,8 @@ body {
 }
 
 /* navigation bar */
-.navbar {
-    background-color: rgb(115, 65, 25);
+body.dark-mode .navbar {
+    background-color: rgb(0, 65, 25);
     width: 100vw;
     display: flex;
     justify-content: space-between;
@@ -18,38 +18,30 @@ body {
     margin-bottom: 2vm;
 }
   
-.navbar a {
+body.dark-mode .navbar a {
     color: #f2f2f2;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
     margin-left: 30px;
     margin-right: 30px;
-    background-color: rgb(155, 95, 45);
+    background-color: rgb(0, 95, 45);
 }
   
-.navbar a:hover {
+body.dark-mode .navbar a:hover {
     background-color: #3a3a3a;
     color: olivedrab;
 }
   
-.navbar a.active {
+body.dark-mode .navbar a.active {
     background-color: olive;
     color: white;
 }
 
 
-/* testimonials specific */
-/* need to have two reviews side by side using flex only */
-.allreviews {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-}
-
-.review {
+body.dark-mode .review {
     background-color: darkgoldenrod;
-    border-color: rgb(155, 95, 45);
+    border-color: rgb(0, 95, 45);
     border: 3px solid;
     border-collapse: collapse;
     border-radius: 5px;
@@ -58,13 +50,7 @@ body {
     width: 45%;
 }
 
-.reviewer-name {
-    text-align: right;
-    font-weight: bold;
-    font-style: italic;
-}
-
-iframe {
+body.dark-mode iframe {
     background-color: darkgoldenrod;
     border-radius: 5px;
     padding: 5px;
@@ -72,7 +58,7 @@ iframe {
 }
 
 
-form {
+body.dark-mode form {
     background-color: darkgoldenrod;
     border-radius: 5px;
     padding: 10px;
@@ -80,43 +66,23 @@ form {
     width: 45%;
 }
 
-.formfield {
-    margin: 5px;
-    padding: 5px;
-}
-
-.submit {
-    text-align: right;
-}
-
 /* admincontactlog */
-tr:nth-child(even) {
+body.dark-mode tr:nth-child(even) {
     background-color: olive;
 }
 
-tr:nth-child(odd) {
-    background-color: rgb(155, 95, 45);;
+body.dark-mode tr:nth-child(odd) {
+    background-color: rgb(0, 95, 45);;
 }
 
-table, th, td {
+body.dark-mode table, th, td {
     text-align: center;
     border: 3px solid;
     border-collapse: collapse;
     border-color: brown;
 }
 
-th, td {
-    min-width: 150px;
-  }
-
-/* mainpage */
-h1 {
-    font-family: 'Finger Paint', sans-serif;
-    font-size: 4em;
-    text-align: center;
-}
-
-.content {
+body.dark-mode .content {
     background-color: darkgoldenrod;
     border-radius: 5px;
     padding: 10px;
@@ -124,22 +90,10 @@ h1 {
     width: 50%;
 }
 
-li {
-    padding-left: 5px;
-    padding: 2px;
-}
-
-em {
+body.dark-mode em {
     color: purple;
 }
 
-strong {
+body.dark-mode strong {
     color: yellow;
-}
-
-img {
-    width: 75%;
-    height: auto;
-    text-align: center;
-    margin-bottom: 10px;
 }

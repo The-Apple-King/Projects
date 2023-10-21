@@ -3,6 +3,9 @@
         <title>Contact Page</title>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="../css/main.css">
+        <link rel="stylesheet" href="../css/main.dark.css">
+        <script src="../js/main.js"></script>
+        <script src="../js/contact.js"></script>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap');
         </style>
@@ -13,6 +16,7 @@
             <a class="active" href="/contact">Contact</a>
             <a href="/testimonies">Testimonies</a>
             <a href="/admin/contactlog">Contact Log</a>
+            <a id="theme-toggle" href="#">Dark Mode Toggle</a>
         </div> 
         <h1>Send us Your Contact Info</h1>
         <form action="/contact" method="post">
@@ -26,7 +30,7 @@
             </div>
             <div class=formfield>
                 <label for="date">Date:</label>
-                <input type="date" id="date" name="date">
+                <input type="date" id="date" name="date" required>
             </div>
             <div class=formfield>
                 <label for="dropdown">Type of business:</label>
@@ -38,6 +42,9 @@
             <div class=formfield>
                 <label for="subscribe">Subscribe to our newsletter</label>
                 <input type="checkbox" id="subscribe" name="subscribe">
+            </div>
+            <div class="formfield">
+                <div id="price"></div>
             </div>
             <div class=formfield>
                 <div class="submit">

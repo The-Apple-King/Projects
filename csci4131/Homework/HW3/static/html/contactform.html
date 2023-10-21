@@ -35,13 +35,14 @@
             <div class=formfield>
                 <label for="dropdown">Type of business:</label>
                 <select id="dropdown" name="dropdown">
-                    <option value="Buyer">Buyer</option>
-                    <option value="Seller">Seller</option>
+                    <option value="5ml">5ml of Snake Oil</option>
+                    <option value="Gallon">Gallon of Snake Oil</option>
+                    <option value="Barrel">Barrel of Snake Oil</option>
                 </select>
             </div>
             <div class=formfield>
-                <label for="subscribe">Subscribe to our newsletter</label>
-                <input type="checkbox" id="subscribe" name="subscribe">
+                <label for="seller">Already a distributor?</label>
+                <input type="checkbox" id="seller" name="seller">
             </div>
             <div class="formfield">
                 <div id="price"></div>
@@ -54,19 +55,3 @@
         </form>
     </body>
 </html>
-
-<!-- 
-    named contactform.html
-    title
-    html form, should send a get request when submitted
-    
-    fields should have name attribute
-    fields should have a label with a for and id attribute
-        a name field -- required
-        an email imput field -- required and should validate it using type
-        a date selection field -- type date
-        a dropdown box
-        a checkbox
-        a sumbit button
-
- -->

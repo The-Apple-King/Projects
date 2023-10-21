@@ -3,8 +3,8 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import urllib
 
 contacts = [
-    {"name": "Owen", "email": "swear041@umn.edu", "date": "2023-10-11", "dropdown": "Seller", "subscribe": "on"},
-    {"name": "test", "email": "test@umn.edu", "date": "2023-10-11", "dropdown": "Buyer", "subscribe": "off"}
+    {"name": "Owen", "email": "swear041@umn.edu", "date": "2023-10-11", "dropdown": "Seller", "seller": "on"},
+    {"name": "test", "email": "test@umn.edu", "date": "2023-10-11", "dropdown": "Buyer", "seller": "off"}
     ]
 
 # PUT YOUR GLOBAL VARIABLES AND HELPER FUNCTIONS HERE.
@@ -83,8 +83,8 @@ def server_POST(url: str, body: str) -> tuple[str | bytes, str, int]:
             print("\nwe have parameters\n")
             print(body)
             print("name" in body and "&email" in body and "&date" in body and "&dropdown" in body)
-            if "subscribe" not in body:
-                newContact["subscribe"] = "off"
+            if "seller" not in body:
+                newContact["seller"] = "off"
             if "name" in body and "&email" in body and "&date" in body and "&dropdown" in body:
                 body = body.split("&")
                 for param in body:
@@ -112,6 +112,7 @@ def createAdmin():
         <link rel="stylesheet" href="../css/main.css">
         <link rel="stylesheet" href="../css/main.dark.css">
         <script src="../js/main.js"></script>
+        <script src="../js/table.js"></script>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap');
         </style>
@@ -121,24 +122,25 @@ def createAdmin():
             <a href="/main">Home</a>
             <a href="/contact">Contact</a>
             <a href="/testimonies">Testimonies</a>
-            <a href="/admin/contactlog">Contact Log</a>
+            <a class="active" href="/admin/contactlog">Contact Log</a>
             <a id="theme-toggle" href="#">Dark Mode Toggle</a>
         </div> 
         <h1>Contact Log</h1>
-        <table>
+        <table id="table">
             <tr>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Date</th>
-                <th>Buyer or Seller</th>
-                <th>Subscribed to Newsletter</th>
+                <th>Time Until Delivery</th>
+                <th>Amount</th>
+                <th>Distributor</th>
             </tr>
     """
 
     # Populate the table with contact data
+    row = 0
     for contact in contacts:
         # Customize the checkbox label as needed
-        checkbox_label = "Yes" if contact["subscribe"] == "on" else "No"
+        checkbox_label = "Yes" if contact["seller"] == "on" else "No"
 
         # Create a mailto link for the email field
         email_link = f'<a href="mailto:{contact["email"]}">{contact["email"]}</a>'
@@ -148,9 +150,10 @@ def createAdmin():
             <tr>
                 <td>{contact["name"]}</td>
                 <td>{email_link}</td>
-                <td>{contact["date"]}</td>
+                <td><div class="date">{contact["date"]}</div><div class="countdown"><div></td>
                 <td>{contact["dropdown"]}</td>
                 <td>{checkbox_label}</td>
+                <td><button onclick="deleteRow(this)">Delete</button></td>
             </tr>
         """
 

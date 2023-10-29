@@ -20,13 +20,12 @@ window.addEventListener('load', function() {
           
             countdownDiv.innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
             
-            console.log(row);
             if (distance < 0) {
                 countdownDiv.innerHTML = "<b>Passed</b>";
                 clearInterval(rowTimer);
             }
-            row.rowTimer = rowTimer;
         }, 1000);
+        row.rowTimer = rowTimer;
     }
 });
 

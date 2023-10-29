@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>TEMPLATE</title>
+    <script>
+        async function getDogImage(breed) {
+            const url = "https://dog.ceo/api/breed/"+breed+"/images/random";
+            const response = await fetch(url);
+            if (response.ok) {
+                const json = await response.json();
+                return json.message;
+            } else {
+                console.log("no doggo today");
+                throw "doggo failed"
+            }
+        }
+        async function drawDogImage() {
+          const breed = document.getElementById("breeds").value
+          document.getElementById("img").src = await getDogImage(breed)
+        }
+        window.addEventListener("load", ()=>{
+          document.getElementById("go").addEventListener("click", drawDogImage)
+          // ADD YOUR CODE HERE!
+          // TASK, use https://dog.ceo/dog-api/documentation/ to get the list of all breeds.
+          // loop over it (hint -- it's not a list!, this might help: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in )
+          // the create a new "option" element for each breed and add it to the select (https://www.w3schools.com/jsref/met_node_appendchild.asp might help.)
+        })
+    </script>
+  </head>
+  <body>
+    <select id="breeds">
+      <!-- YOU WILL NEED TO DELETE THE BELOW ELEMENT. -->
+      <option>hound</option>
+    </select>
+    <button id="go">go</button>
+    <img id="img">
+  </body>
+</html>

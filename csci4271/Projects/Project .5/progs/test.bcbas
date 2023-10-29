@@ -1,0 +1,51 @@
+
+x = 5
+y = x
+
+
+print "x is "
+print x
+
+
+println "."
+println "This message is on its own line."
+
+
+x = x + 1
+y = y * y
+print "x + y is now "
+sum = x + y
+print sum
+println ""
+
+
+a[0] = 0
+a[1] = 1
+a[2] = 2
+a[3] = 3
+
+
+elt = a[3]
+print "a[3] is "
+print elt
+println ""
+
+
+clear a
+
+
+size = length a
+print "a's length is now "
+print size
+println ""
+
+
+if y > 10 then goto 100
+println "This message is skipped if y is large"
+100 println "This message is always printed"
+
+
+goto 200
+println "This message is always skipped"
+200 println "This message is also always printed."
+

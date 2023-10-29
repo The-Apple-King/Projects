@@ -80,9 +80,6 @@ def server_POST(url: str, body: str) -> tuple[str | bytes, str, int]:
     #deal with url parameters
         if(body != ""):
             newContact = {}
-            print("\nwe have parameters\n")
-            print(body)
-            print("name" in body and "&email" in body and "&date" in body and "&dropdown" in body)
             if "seller" not in body:
                 newContact["seller"] = "off"
             if "name" in body and "&email" in body and "&date" in body and "&dropdown" in body:
@@ -93,13 +90,71 @@ def server_POST(url: str, body: str) -> tuple[str | bytes, str, int]:
                     newContact[curParam[0]] = curParam[1]
                 contacts.append(newContact)
             else:
-                #if something wrong??
-                return open("static/html/contactform.html").read(), "text/html", 401
+                #if something wrong
+                return errorPage(), "text/html", 400
+        else:
+            return errorPage(), "text/html", 400
+
         print("contact", url)
-        return open("static/html/contactform.html").read(), "text/html", 201
+        return success(), "text/html", 201
     else:
         print("404", url)
         return open("static/html/404.html").read(), "text/html", 404
+
+def success():
+    html_content = """
+    <!DOCTYPE html>
+        <head>
+            <title>Error Page not found</title>
+            <meta charset="UTF-8">
+            <link rel="stylesheet" href="../css/main.css">
+            <link rel="stylesheet" href="../css/main.dark.css">
+            <script src="../js/main.js"></script>
+            <style>
+                @import url('https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap');
+            </style>
+        </head>
+        <body>
+            <div class="navbar">
+                <a href="/main">Home</a>
+                <a href="/contact">Order</a>
+                <a href="/testimonies">Testimonies</a>
+                <a href="/admin/contactlog">Order Log</a>
+                <a id="theme-toggle" href="">Dark Mode Toggle</a>
+            </div>
+            <h1>You Have Successfully Bought Snake Oil!</h1>
+            <p>If you would like to buy more <a href="mainpage.html">click here</a> to return to the main page.</p>
+        </body>
+    </html>"""
+    return html_content
+
+def errorPage():
+    html_content = """
+    <!DOCTYPE html>
+        <head>
+            <title>Error Page not found</title>
+            <meta charset="UTF-8">
+            <link rel="stylesheet" href="../css/main.css">
+            <link rel="stylesheet" href="../css/main.dark.css">
+            <script src="../js/main.js"></script>
+            <style>
+                @import url('https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap');
+            </style>
+        </head>
+        <body>
+            <div class="navbar">
+                <a href="/main">Home</a>
+                <a href="/contact">Order</a>
+                <a href="/testimonies">Testimonies</a>
+                <a href="/admin/contactlog">Order Log</a>
+                <a id="theme-toggle" href="">Dark Mode Toggle</a>
+            </div>
+            <h1>400 Error Something Went Wrong</h1>
+            <p>If you would like to buy some of my snake oil <a href="mainpage.html">click here</a> to return to the main page.</p>
+        </body>
+    </html>"""
+    return html_content
+     
 
 def createAdmin():
     # Start building the HTML content
@@ -120,9 +175,9 @@ def createAdmin():
     <body>
         <div class="navbar">
             <a href="/main">Home</a>
-            <a href="/contact">Contact</a>
+            <a href="/contact">Order</a>
             <a href="/testimonies">Testimonies</a>
-            <a class="active" href="/admin/contactlog">Contact Log</a>
+            <a class="active" href="/admin/contactlog">Order Log</a>
             <a id="theme-toggle" href="#">Dark Mode Toggle</a>
         </div> 
         <h1>Contact Log</h1>

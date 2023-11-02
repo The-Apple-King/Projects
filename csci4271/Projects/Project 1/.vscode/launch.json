@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "debug bcimgview",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "/home/swearingeno/.local/Projects/csci4271/Projects/Project 1/bcimgview",
+        "args": ["sample-images/goldy5.bcprog"],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder}",
+        "environment": [],
+        "externalConsole": false,
+        "MIMode": "gdb",
+        "miDebuggerPath": "/usr/bin/gdb",
+        "setupCommands": [
+          {
+            "description": "Enable pretty-printing for gdb",
+            "text": "-enable-pretty-printing",
+            "ignoreFailures": true
+          }
+        ],
+        "preLaunchTask": "bcbasic"
+      }
+    ]
+  }

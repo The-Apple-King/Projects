@@ -1,12 +1,17 @@
 {
     "version": "0.2.0",
     "configurations": [
+
       {
         "name": "debug bcimgview",
         "type": "cppdbg",
         "request": "launch",
         "program": "/home/swearingeno/.local/Projects/csci4271/Projects/Project 1/bcimgview",
-        "args": ["sample-images/goldy5.bcprog"],
+        // "args": ["-c", "sample-images/colors250.bcflat"],
+        // "args": ["-c", "crashes/crash1.bcflat"],
+        // "args": ["-c", "attacks/repeatingTags.bcflat"],
+        // "args": ["-c", "attacks/formatString.bcflat", ">", "ex.txt"],
+        // "args": ["-c", "attacks/intOverflowBCR.bcr"], // works
         "stopAtEntry": false,
         "cwd": "${workspaceFolder}",
         "environment": [],
@@ -20,7 +25,7 @@
             "ignoreFailures": true
           }
         ],
-        "preLaunchTask": "bcbasic"
+        "preLaunchTask": "bcimgview"
       }
     ]
   }

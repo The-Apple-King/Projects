@@ -155,7 +155,7 @@ int process_tagged_data(FILE *fh, struct image_info *info) {
             format_problem = "tag too large";
             return 0;
         }
-        if (!memcmp(ident, "TIME", 4)) {
+        if (!memcmp(ident, "TIME", 4)) { //why even do this you could just put it up there with data and save like 8 bytes
             /* Creation time information */
             if (size != 8) {
                 format_problem = "wrong size for TIME";
@@ -189,10 +189,10 @@ int process_tagged_data(FILE *fh, struct image_info *info) {
 int read_raw_data(FILE *fh, struct image_info *info) {
     int row, col;
     size_t num_read;
-    unsigned char *p = info->pixels;
+    unsigned char *p = info->pixels; // p somehow overwrites the data stored in the info object
 
     for (row = 0; row < info->height; row++) {
-        for (col = 0; col < info->width - 8; col += 8) {
+        for (col = 0; col < info->width - 8; col += 8) { // we can set these to be huge and overwrite it
             num_read = fread(p, 3, 8, fh);
             if (num_read != 8) {
                 format_problem = "short read of raw data";
@@ -269,7 +269,7 @@ struct image_info *parse_bcraw(FILE *fh) {
     height = read_u64_bigendian(fh);
     if (height == -1) return 0;
 
-    num_bytes = 3 * width * height;
+    num_bytes = 3 * width * height; // overflow here, more?
     pixels = xmalloc(num_bytes +
                      TRAILER_ALIGNMENT + sizeof(struct image_info));
     info_footer = trailer_location(pixels, num_bytes);

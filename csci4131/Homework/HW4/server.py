@@ -71,6 +71,7 @@ def server(method: str, url: str, body: Optional[str], headers: dict[str, str]) 
         elif(url == "/api/sale"):
             return f'{{"active": {str(sale).lower()}, "message": "{sale_text}"}}', 200, {"Content-Type": "application/json; charset=utf-8"}
         else:
+            print(url)
             return open("static/html/404.html").read(), 404, {"Content-Type": "text/html; charset=utf-8"}
 
     elif (method == "POST"):

@@ -15,7 +15,8 @@
                 "-g",
                 "-Og",
                 "-DDISABLE_GUI",
-                "/home/swearingeno/.local/Projects/csci4271/Projects/Project 1/bcimgview.c"
+                "/home/swearingeno/.local/Projects/csci4271/Projects/Project 1/bcimgview.c",
+                "-lm"
             ],
             "options": {
                 "cwd": "${fileDirname}"

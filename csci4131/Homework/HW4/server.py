@@ -48,17 +48,21 @@ def server(method: str, url: str, body: Optional[str], headers: dict[str, str]) 
         elif(url == "/main" or (url == "/" and len(url) == 1)):
             print("mainpage", url)
             return open("static/html/mainpage.html").read(), 200, {"Content-Type": "text/html; charset=utf-8"}
+        
+        
         elif(url == "/admin/contactlog"):
             if "Authorization" not in headers:
-                return "Unauthorized. Please provide credentials.", 401, {"WWW-Authenticate": 'Basic realm="User Visible Realm"'}
+                return "Unauthorized. Please provide credentials.", 401, {"Content-Type": "text/plain; charset=utf-8"}
             elif not authenticate(headers):
                 return "Invalid credentials", 403, {"Content-Type": "text/plain; charset=utf-8"}
             return createAdmin(), 200, {"Content-Type": "text/html; charset=utf-8"}
-        elif(url == "/css/main.css"):
+        elif(url == "/main.css"): # ask a question about this line and css in general
             print("css", "css/main.css")
             return open("static/css/main.css").read(), 200, {"Content-Type": "text/css; charset=utf-8"}
-        elif(url == "/css/main.dark.css"):
-            print("css", "css/main.dark.css")
+        
+        
+        elif(url == "/main.dark.css"):
+            print("css", "main.dark.css")
             return open("static/css/main.dark.css").read(), 200, {"Content-Type": "text/css; charset=utf-8"}
         elif(url == "/images/main"):
             return open("static/images/salesman.jpg", "rb").read(), 200, {"Content-Type": "image/jpeg; charset=utf-8"}
@@ -88,16 +92,14 @@ def server(method: str, url: str, body: Optional[str], headers: dict[str, str]) 
                         curParam = param.split("=")
                         newContact[curParam[0]] = curParam[1]
                     contacts.append(newContact)
-                newContact["id"] = next_id
-                next_id += 1
-            else:
-                return errorPage(), 200, {"Content-Type": "text/html; charset=utf-8"}
+                    newContact["id"] = next_id
+                    next_id += 1
+                    return success(), 201, {"Content-Type": "text/html; charset=utf-8"}
+            return errorPage(), 400, {"Content-Type": "text/html; charset=utf-8"}
 
-            print("contact", url)
-            return success(), 201, {"Content-Type": "text/html; charset=utf-8"}
         elif(url == "/api/sale"):
             if "Authorization" not in headers:
-                return "Unauthorized. Please provide credentials.", 401, {"WWW-Authenticate": 'Basic realm="User Visible Realm"'}
+                return "Unauthorized. Please provide credentials.", 401, {"Content-Type": "text/plain; charset=utf-8"}
             elif not authenticate(headers):
                 return "Invalid credentials", 403, {"Content-Type": "text/plain; charset=utf-8"}
             try:
@@ -118,20 +120,20 @@ def server(method: str, url: str, body: Optional[str], headers: dict[str, str]) 
             print("404", url)
             return open("static/html/404.html").read(), 404, {"Content-Type": "text/html; charset=utf-8"}
     elif(method == "DELETE"):
+
+
+
         if(url == "/api/contact"):
             if "Authorization" not in headers:
-                return "Unauthorized. Please provide credentials.", 401, {"WWW-Authenticate": 'Basic realm="User Visible Realm"'}
+                return "Unauthorized. Please provide credentials.", 401, {"Content-Type": "text/plain; charset=utf-8"}
             elif not authenticate(headers):
                 return "Invalid credentials", 403, {"Content-Type": "text/plain; charset=utf-8"}
             try:
                 if "Content-Type" not in headers or headers["Content-Type"] != "application/json":
                     return "Invalid Content-Type header. Please include 'Content-Type: application/json'", 400, {"Content-Type": "text/plain; charset=utf-8"}
-                
                 data = json.loads(body)
-                
                 if "id" not in data:
                     return "Missing 'id' property in the JSON data", 400, {"Content-Type": "text/plain; charset=utf-8"}
-                
                 contact_to_delete = None
                 for contact in contacts:
                     if contact["id"] == data["id"]:
@@ -157,8 +159,8 @@ def success():
         <head>
             <title>Error Page not found</title>
             <meta charset="UTF-8">
-            <link rel="stylesheet" href="../css/main.css">
-            <link rel="stylesheet" href="../css/main.dark.css">
+            <link rel="stylesheet" href="/main.css">
+            <link rel="stylesheet" href="/main.dark.css">
             <script src="../js/main.js"></script>
             <style>
                 @import url('https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap');
@@ -184,8 +186,8 @@ def errorPage():
         <head>
             <title>Error Page not found</title>
             <meta charset="UTF-8">
-            <link rel="stylesheet" href="../css/main.css">
-            <link rel="stylesheet" href="../css/main.dark.css">
+            <link rel="stylesheet" href="/main.css">
+            <link rel="stylesheet" href="/main.dark.css">
             <script src="../js/main.js"></script>
             <style>
                 @import url('https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap');
@@ -214,8 +216,8 @@ def createAdmin():
     <head>
         <title>The Snake Oil Salesman</title>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="../css/main.css">
-        <link rel="stylesheet" href="../css/main.dark.css">
+        <link rel="stylesheet" href="/main.css">
+        <link rel="stylesheet" href="/main.dark.css">
         <script src="../js/main.js"></script>
         <script src="../js/table.js"></script>
         <style>

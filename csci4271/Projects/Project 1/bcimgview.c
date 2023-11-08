@@ -162,7 +162,7 @@ int process_tagged_data(FILE *fh, struct image_info *info) {
                 return 0;
             }
             info->create_time = read_u64_bigendian(fh);
-        } else if (!memcmp(ident, "FRMT", 4)) {
+        } else if (!memcmp(ident, "FRMT", 4)) { // frmt will malloc data only tag that changes
             /* Format for file information printing */
             char *fmt_buf = xmalloc(size + 1);
             num_read = fread(fmt_buf, 1, size, fh);
@@ -315,7 +315,7 @@ int read_prog_data(FILE *fh, struct image_info *info) {
     /* Pass 1: multiples of 4 */
     row = 0;
     do {
-        unsigned char *row_start = p + row * 3 * info->width;
+        unsigned char *row_start = p + row * 3 * info->width; // will always start at pixels
         num_read = fread(row_start, info->width, 1, fh);
         if (num_read != 1) {
             format_problem = "short read of row";
@@ -326,7 +326,7 @@ int read_prog_data(FILE *fh, struct image_info *info) {
     /* Pass 2: odd multiples of 2 */
     row = 2;
     do {
-        unsigned char *row_start = p + row * 3 * info->width;
+        unsigned char *row_start = p + row * 3 * info->width; // math????
         num_read = fread(row_start, info->width, 1, fh);
         if (num_read != 1) {
             format_problem = "short read of row";
@@ -427,7 +427,7 @@ struct image_info *parse_bcprog(FILE *fh) {
 
     num_bytes = 3 * width * height;
     pixels = xmalloc(num_bytes +
-                     TRAILER_ALIGNMENT + sizeof(struct image_info));
+                     TRAILER_ALIGNMENT + sizeof(struct image_info)); // smthn interesting
     info_footer = trailer_location(pixels, num_bytes);
     info_footer->width = width;
     info_footer->height = height;
@@ -435,7 +435,7 @@ struct image_info *parse_bcprog(FILE *fh) {
     info_footer->create_time = -1;
     info_footer->cleanup = 0;
 
-    is_ok = process_tagged_data(fh, info_footer);
+    is_ok = process_tagged_data(fh, info_footer); // really only reads time then data?
     if (!is_ok) {
         free(pixels);
         return 0;
@@ -1373,14 +1373,14 @@ const unsigned short flat_codeword_info[8192] = {
 };
 
 /* Check some basic invariants over the flat_codeword_info table. */
-void check_codewords(void) {
+void check_codewords(void) { // i assume we are checking to make sure table hasn't been modified
     static int already_checked = 0;
     int i;
     if (already_checked)
         return;
     for (i = 0; i < 8192; i++) {
-        unsigned short cw_info = flat_codeword_info[i];
-        int diff = (signed char)(cw_info >> 8);
+        unsigned short cw_info = flat_codeword_info[i]; // each codeword goes into cw
+        int diff = (signed char)(cw_info >> 8); // cast codeword as char and rightshift 8???
         int repeat = (cw_info >> 4) & 0xf;
         int codelen = cw_info & 0xf;
         double expand = (repeat * 8.0) / codelen;
@@ -1410,7 +1410,7 @@ void decode_flat(unsigned char *comp_p, int *comp_size_inout,
     /* compressed data buffer, dynamically allocated */
     unsigned char *comp_buf;
     /* decompressed data buffer */
-    unsigned char uncomp_buf[EXPANSION * (FLATBUF + 1)];
+    unsigned char uncomp_buf[EXPANSION * (FLATBUF + 1)]; // reuses data from file?
     unsigned char last = state->last;
     unsigned int reg = state->reg;
     unsigned int reg_size = state->reg_size;
@@ -1425,13 +1425,13 @@ void decode_flat(unsigned char *comp_p, int *comp_size_inout,
     /* Pad the compressed input with two extra bytes, so that we don't
        read ahead into undefined data */
     assert(comp_size <= FLATBUF);
-    comp_buf = xmalloc(FLATBUF + 2);
+    comp_buf = xmalloc(FLATBUF + 2); // doesn't matter how long uses 102 bytes
     memcpy(comp_buf, comp_p, comp_size);
-    comp_buf[comp_size] = 0x00;
-    comp_buf[comp_size + 1] = 0x00;
+    comp_buf[comp_size] = 0x00; // just use a null terminator, could make our own null terminator
+    comp_buf[comp_size + 1] = 0x00; // end it with a null just in case?
 
-    p = comp_buf;
-    q = uncomp_buf;
+    p = comp_buf;   // seems to contain info after data tag from file
+    q = uncomp_buf; // reuse file data for ex the frmt section
 
     check_codewords();
     while (num_pixels < max_pixels && p < comp_buf + comp_size + 2) {
@@ -1523,21 +1523,21 @@ void decode_flat(unsigned char *comp_p, int *comp_size_inout,
    to decode_flat in one row. Returns 1 on success, 0 on an error. */
 int read_flat_data(FILE *fh, struct image_info *info) {
     int channel, y;
-    struct flat_decode_state state;
+    struct flat_decode_state state; //has default val, possible to use it to mess with state
     unsigned char buf[FLATBUF];
     unsigned char pixel_buf[3 * EXPANSION * FLATBUF];
     int buf_read_pos = 0;
     size_t num_read;
-    for (channel = 0; channel <= 2; channel++) {
-        for (y = 0; y < info->height; y++) {
-            unsigned char *row = info->pixels + 3 * y * info->width;
+    for (channel = 0; channel <= 2; channel++) { // run once per color
+        for (y = 0; y < info->height; y++) { // for the height 
+            unsigned char *row = info->pixels + 3 * y * info->width; // row = pixels + 3 * current height * width 
             unsigned char first;
             int x = 0;
             if (buf_read_pos > 0) {
                 /* Get the first byte already buffered */
                 first = buf[0];
                 memmove(buf, buf + 1, buf_read_pos - 1);
-                buf_read_pos--;
+                buf_read_pos--; 
             } else {
                 /* If the buffer is empty, read the first byte directly */
                 num_read = fread(&first, 1, 1, fh);
@@ -1576,7 +1576,7 @@ int read_flat_data(FILE *fh, struct image_info *info) {
                     return 0;
                 }
                 num_pixels = max_pixels;
-                decode_flat(buf, &comp_size, pixel_buf, &num_pixels, &state);
+                decode_flat(buf, &comp_size, pixel_buf, &num_pixels, &state); //comp size < 100, buf get copied from
                 assert(num_pixels > 0);
                 assert(num_pixels <= max_pixels + EXPANSION);
                 if (num_pixels > max_pixels) {
@@ -1653,7 +1653,7 @@ struct image_info *parse_bcflat(FILE *fh) {
         format_problem = "size too large compared to stack";
         return 0;
     }
-
+// size must be between 1 and 53509 so no overflow
     num_bytes = 3 * width * height;
     pixels = xmalloc(num_bytes +
                      TRAILER_ALIGNMENT + sizeof(struct image_info));

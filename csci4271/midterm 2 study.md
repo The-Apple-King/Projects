@@ -25,8 +25,10 @@ xss that involves a database is called persistent cross site scripting
 
 # php line initialize oxide string
 oxide("C= location_ox = <<$location_php>>;");
-if we send in a closing string, call a function and then close that we can make an attack 
->>; self_destruct(); #
+
+if we send in a closing string, call a function and then close that we can make an attack
+
+` >>; self_destruct(); #'
 
 php means injection attack
 
@@ -38,13 +40,7 @@ you cant replace temp files that can only be done by their owners
 
 how to make a race condition work in your favor or TOCTTOU
 
-# linux commands
-cp copy_src copy_dst : copies file 
-rm file : delets file
-mv new_name old_name : changes the name by moving a file
-chmod 0777 file : changes the permissions to a file
-chown username filename : changes the owner of the file
-chgrp group filename : changes the group of the file
+
 
 # xss
 
@@ -183,19 +179,22 @@ substitution-permutation network
 ## XSRF/CSRF
     an exploit where unauthorized commands are submitted from a user the web application trusts. like someone is logged into youtube and the victim goes to another website that uses their account to post a comment without telling the user.
 
-## setuid
-    a function which sets user id upon execution, similar to windows run as admin
-
 ## block cipher/stream cipher
     block ciphers convert plaintext to ciphertext block by block while stream ciphers do it byte by byte
 
 ## reference monitor
-
+    its a concept that referes to an idealized trusted component/system
+    complete mediation: every access checked
+    tamper proof: the reference monitor can't be tampered
+    simple: must be simpler to minimize vulnerabilities
 
 ## one time pad
-
+    theoretically unbreakable key idea: new key, truly random used each time same length as message. xor message with key, same at other end.
+    issue is that key must be true random, the source and dest must get the same key and each key can only be used once.
+    this is also not the best for encrypting large amounts of data as it doubles the size.
 
 ## CTR
+    counter mode a mode of operation for block ciphers that turns a block cipher into a stream cipher.
 
 
 ## random oracle
@@ -207,8 +206,16 @@ substitution-permutation network
 ## origin subject
 
 
-## hypervisor/paravirtualization
+## virtual machine design
+    Type 1 hypervisor: 'superkernel' underneath vm
+    hosted: regular OS underneath VMs
+    paravirtualization: modify kernels in VMs for ease of virtualization
 
+    hardware based is fastest and common no
+    partial translation original vmware
+    full emulation will allow for different cpu architechture
+
+    chromium uses vm as it keeps the browser kernal seperate from the rest of the machine.
 
 ## RSA
 
@@ -235,3 +242,50 @@ substitution-permutation network
 
 
 ## DES
+
+## permissions
+only file owner or root can change permissions
+* 7 = rwx
+* 6 = rw
+* 5 = rx
+* 4 = r
+* 0 - no access
+* sticky bit 01000
+* when 02000 but set new entries have parent's group
+* 04000 setuid bit newly exec'd process will take uid of its file owner, effective uid read is unchanged
+
+### linux commands
+* cp copy_src copy_dst : copies file 
+* rm file : delets file
+* mv new_name old_name : changes the name by moving a file
+* chmod 0777 file : changes the permissions to a file
+* chown username filename : changes the owner of the file
+* chgrp group filename : changes the group of the file
+* setuid a function which sets user id upon execution, similar to windows run as admin
+* chroot change root directory only available to root
+
+## CFAA
+    computer fraud and abuse act of 1986 
+    civil and criminal liability
+
+## /tmp files
+    unique required, unguessable better
+    mktemp(3) unsafe design func
+    must use 0_EXCL for atomnicity
+
+## Read it twice WOOT'12
+    only download signed apps, use a different signature while its being checked after install the desired app. this gets passed that check and installs anything with a fake signature
+
+## supervisor bit
+    all instructions available
+    user mode: no hardware or vm conttrol instructions
+    only way to switch to kernal mode is specified entry point
+
+## TCB
+    trusted computing base: minimize permissions of users so there is less chance to break security
+
+## SFI
+    Software-based fault isolation
+
+## System-call interposition
+    trusted process will check all syscalls to make sure they are allowed.

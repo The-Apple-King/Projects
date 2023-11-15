@@ -5,3 +5,4 @@
 **/*.iml
 Class exercises/*
 linalg-lecture-notes/*
+**/node_modules/*

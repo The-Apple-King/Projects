@@ -63,8 +63,8 @@ if __name__ == '__main__':
 
     # Create data network
     topo = AssignmentNetworks()
-    net = Mininet(topo=topo, link=TCLink, autoSetMacs=True,autoStaticArp=True)
-    #net = Mininet(controller=RemoteController,topo=topo, link=TCLink, autoSetMacs=True, autoStaticArp=True)
+    #net = Mininet(topo=topo, link=TCLink, autoSetMacs=True,autoStaticArp=True)
+    net = Mininet(controller=RemoteController,topo=topo, link=TCLink, autoSetMacs=True, autoStaticArp=True)
 
     # Run network
     net.start()

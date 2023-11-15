@@ -15,12 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with POX.  If not, see <http://www.gnu.org/licenses/>.
 
-"""
-This component is for use with the OpenFlow tutorial.
-It acts as a simple hub, but can be modified to act like an L2
-learning switch.
-It's quite similar to the one for NOX.  Credit where credit due. :)
-"""
+
+# Modifications to act like switch and handle packetin Owen Swearingen
 
 from pox.core import core
 import pox.openflow.libopenflow_01 as of
@@ -46,18 +42,24 @@ class Tutorial (object):
     # which switch port (keys are MACs, values are ports).
     self.mac_to_port = {}
 
+
+  '''
+  this is the beginning of code used to actually act like a switch and implement a learning algorithm *********************************************************
+  '''
+
   def act_like_switch (self, packet, packet_in, event):
     """
     Implement switch-like behavior.
     """
-
+    # source and destinations saved
     src_mac = str(packet.src)
     dst_mac = str(packet.dst)
     
     # save src to input port in dictionary
     if src_mac not in self.mac_to_port:
-      self.mac_to_port[src_mac] = event.port
-    log.debug("Installing flow...")
+        self.mac_to_port[src_mac] = event.port
+        print(src_mac, "mac addr saved to port", self.mac_to_port[src_mac])
+    print("switch ", event.dpid, "\n-----------------------------------------------------\nmac table", self.mac_to_port, "\n-----------------------------------------------------")
     msg = of.ofp_flow_mod()
 
     # Set fields to match received packet
@@ -65,14 +67,17 @@ class Tutorial (object):
 
     # Add an output action, and send -- similar to resend_packet()
     if dst_mac in self.mac_to_port:
-        log.debug("mac addr saved")
+        print("packet was sent to ", dst_mac, " through ", self.mac_to_port[dst_mac])
         msg.actions.append(of.ofp_action_output(port = self.mac_to_port[dst_mac]))
     else:
-        log.debug("mac addr not found")
+        print(dst_mac, "not found, flooding ports")
         # Flood the packet to all ports except the input port
         msg.actions.append(of.ofp_action_output(port = of.OFPP_FLOOD))
     # Send the flow mod message to the switch
     self.connection.send(msg)
+
+  def _handle_ConnectionUp(self, event):
+    print("Connected to switch with DPID", event.dpid)
    
 
 
@@ -83,14 +88,16 @@ class Tutorial (object):
 
     packet = event.parsed # This is the parsed packet data.
     if not packet.parsed:
-      log.warning("Ignoring incomplete packet")
-      return
+        log.warning("Ignoring incomplete packet")
+        return
 
     packet_in = event.ofp # The actual ofp_packet_in message.
 
     self.act_like_switch(packet, packet_in, event)
 
-
+'''
+this is the end of the section to implement a learning algorithm ******************************************************************************************
+'''
 
 def launch ():
   """

@@ -306,7 +306,7 @@ struct image_info *parse_bcraw(FILE *fh) {
    being read, they are re-ordered from the progressive on-disk order
    into a normal sequential order. Then, the pixels in each row are
    expanded from the 8-bit format to 24-bit format. */
-int read_prog_data(FILE *fh, struct image_info *info) {
+int read_prog_data(FILE *fh, struct image_info *info) { //pixels malloc 192 bytes, this reads 32 then 32 again 
     int row, col;
     size_t num_read;
     unsigned char *p = info->pixels;

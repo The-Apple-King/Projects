@@ -56,7 +56,7 @@ def server(method: str, url: str, body: Optional[str], headers: dict[str, str]) 
             elif not authenticate(headers):
                 return "Invalid credentials", 403, {"Content-Type": "text/plain; charset=utf-8"}
             return createAdmin(), 200, {"Content-Type": "text/html; charset=utf-8"}
-        elif(url == "/main.css"): # ask a question about this line and css in general
+        elif(url == "/main.css"):
             print("css", "css/main.css")
             return open("static/css/main.css").read(), 200, {"Content-Type": "text/css; charset=utf-8"}
         

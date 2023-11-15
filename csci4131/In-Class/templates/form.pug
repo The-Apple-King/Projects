@@ -1,0 +1,14 @@
+doctype html
+html
+    head 
+        meta(charset="utf-8")
+        title my cool form
+    body 
+        form(action="/" method="POST")
+            input(name="name" placeholder="name" type="text" required)
+            textarea(name="message", placeholder="text", cols="30", rows="10")
+            input(type="submit")
+        div
+            h3= posts[0].name
+            = posts[0].message
+        

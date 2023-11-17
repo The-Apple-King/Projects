@@ -1,0 +1,32 @@
+doctype html
+head
+  title Order Page
+  meta(charset='UTF-8')
+  script(src='../js/main.js')
+  script(src='../js/contact.js')
+include navbar
+h1 Order some Snake Oil
+form(action='/contact' method='post')
+  .formfield
+    label(for='name') Name:
+    input#name(type='text' name='name' required='')
+  .formfield
+    label(for='email') Email:
+    input#email(type='email' name='email' required='')
+  .formfield
+    label(for='date') Date:
+    input#date(type='date' name='date' required='')
+  .formfield
+    label(for='dropdown') Type of business:
+    select#dropdown(name='dropdown')
+      option(value='5ml') 5ml of Snake Oil
+      option(value='Gallon') Gallon of Snake Oil
+      option(value='Barrel') Barrel of Snake Oil
+  .formfield
+    label(for='seller') Already a distributor?
+    input#seller(type='checkbox' name='seller')
+  .formfield
+    #price
+  .formfield
+    .submit
+      input(type='submit' value='Submit' name='SubmitButton')

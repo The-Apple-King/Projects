@@ -1,0 +1,39 @@
+doctype html
+head
+  title The Snake Oil Salesman
+  meta(charset='UTF-8')
+  script(src='../js/main.js')
+  script(src='../js/table.js')
+include navbar
+.bannerControl
+  input#newBanner(type='text')
+  div
+    button(onclick='setBanner()') Set
+    button(onclick='deleteBanner()') Delete
+h1 Contact Log
+table#table
+  tr
+    th Name
+    th Email
+    th Time Until Delivery
+    th Amount
+    th Distributor
+  
+  if contacts.length
+    each contact in contacts
+      tr
+        td= contact.Name
+        td
+          a(href= "mailto:" + contact.Email)= contact.Email
+        td
+          if contact.Date
+            .date= contact.Date
+            .countdown
+        td= contact.Dropdown
+        td= contact.Checkbox
+        td
+          button(onclick=`deleteRow(this, ${contact.Id})`) Delete
+
+  else
+    tr
+      td(colspan="6") No sales available

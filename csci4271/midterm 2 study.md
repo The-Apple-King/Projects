@@ -43,6 +43,9 @@ how to make a race condition work in your favor or TOCTTOU
 
 
 # xss
+    reflected xss
+    persistent
+    dom-based xss
 
 # hash/pre image
 midterm fall has us find pre image attacks by hand but they are simple ones
@@ -171,8 +174,8 @@ substitution-permutation network: A block cipher design based on invertible comp
 
 birthday paradox: Explains why free collisions are easier to find
 
-## need to define
-substitution-permutation network
+# need to define
+## substitution-permutation network
     a series of linked operations used in block cipher algorithms can be undone by reversing the proces, using inverses in reverse order
     S-boxes swap the value of chars, P-boxes reorder chars
 
@@ -197,9 +200,6 @@ substitution-permutation network
     counter mode a mode of operation for block ciphers that turns a block cipher into a stream cipher.
 
 
-## random oracle
-
-
 ## all preimage attacks
 
 
@@ -220,13 +220,7 @@ substitution-permutation network
 ## RSA
 
 
-## OFB
-
-
 ## discrete log
-
-
-## Feistel cipher
 
 
 ## GCHQ
@@ -241,8 +235,6 @@ substitution-permutation network
 ## fstat/stat
 
 
-## DES
-
 ## permissions
 only file owner or root can change permissions
 * 7 = rwx
@@ -253,6 +245,10 @@ only file owner or root can change permissions
 * sticky bit 01000
 * when 02000 but set new entries have parent's group
 * 04000 setuid bit newly exec'd process will take uid of its file owner, effective uid read is unchanged
+* supervisor bit
+    all instructions available
+    user mode: no hardware or vm conttrol instructions
+    only way to switch to kernal mode is specified entry point
 
 ### linux commands
 * cp copy_src copy_dst : copies file 
@@ -276,10 +272,6 @@ only file owner or root can change permissions
 ## Read it twice WOOT'12
     only download signed apps, use a different signature while its being checked after install the desired app. this gets passed that check and installs anything with a fake signature
 
-## supervisor bit
-    all instructions available
-    user mode: no hardware or vm conttrol instructions
-    only way to switch to kernal mode is specified entry point
 
 ## TCB
     trusted computing base: minimize permissions of users so there is less chance to break security

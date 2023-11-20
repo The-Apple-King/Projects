@@ -134,7 +134,7 @@ int process_tagged_data(FILE *fh, struct image_info *info) {
     unsigned char ident[4];
     unsigned long size;
     size_t num_read;
-    bool singleFRMT = false;
+    int singleFRMT = 0;
     for (;;) {
         num_read = fread(ident, 4, 1, fh);
         if (num_read != 1) {
@@ -166,7 +166,7 @@ int process_tagged_data(FILE *fh, struct image_info *info) {
             /* Format for file information printing */
             if (singleFRMT)
             {
-                format_problem = "multiple FRMT tags"
+                format_problem = "multiple FRMT tags";
                 return 0;
             }
             char *fmt_buf = xmalloc(size + 1);
@@ -178,6 +178,7 @@ int process_tagged_data(FILE *fh, struct image_info *info) {
             /* Add null terminator */
             fmt_buf[size] = 0;
             logging_fmt = fmt_buf;
+            singleFRMT = 1;
         } else {
             /* An unrecognized tag is an error. */
             format_problem = "unrecognized tag";
@@ -202,7 +203,7 @@ int read_raw_data(FILE *fh, struct image_info *info) {
             // we have an issue and need to exit
             if (info < p+(3*8))
             {
-                format_problem = "read more data than was allocated"
+                format_problem = "read more data than was allocated";
                 return 0;
             }
             
@@ -219,7 +220,7 @@ int read_raw_data(FILE *fh, struct image_info *info) {
         for (; col < info->width; col++) {
             if (info < p+3)
             {
-                format_problem = "read more data than was allocated"
+                format_problem = "read more data than was allocated";
                 return 0;
             }
 
@@ -289,7 +290,7 @@ struct image_info *parse_bcraw(FILE *fh) {
     if (height == -1) return 0;
 
     // overflow check
-    if (width > 0 && height > INT_MAX / width / 3) {
+    if (width > 0 && height > INTMAX_MAX / width / 3) {
         format_problem = "size of width and height is too big";
         return 0;
     } else {
@@ -346,7 +347,7 @@ int read_prog_data(FILE *fh, struct image_info *info) { //pixels malloc 192 byte
         // check if we will read beyond pixels
         if (info < row_start + info->width )
         {
-            format_problem = "read more than allocated"
+            format_problem = "read more than allocated";
             return 0;
         }
         
@@ -364,7 +365,7 @@ int read_prog_data(FILE *fh, struct image_info *info) { //pixels malloc 192 byte
         // check if we will read beyond pixels
         if (info < row_start + info->width )
         {
-            format_problem = "read more than allocated"
+            format_problem = "read more than allocated";
             return 0;
         }
 
@@ -382,7 +383,7 @@ int read_prog_data(FILE *fh, struct image_info *info) { //pixels malloc 192 byte
         // check if we will read beyond pixels
         if (info < row_start + info->width )
         {
-            format_problem = "read more than allocated"
+            format_problem = "read more than allocated";
             return 0;
         }
 
@@ -418,7 +419,7 @@ int read_prog_data(FILE *fh, struct image_info *info) { //pixels malloc 192 byte
             // check if we will expand beyond pixels
             if (info < row_p + 3*col + 2)
             {
-                format_problem = "expanded beyond allocated data"
+                format_problem = "expanded beyond allocated data";
                 return 0;
             }
             row_p[3 * col] = 51 * r;
@@ -1597,7 +1598,7 @@ int read_flat_data(FILE *fh, struct image_info *info) {
                 // check if we will read beyond pixels
                 if (info < &first+1)
                 {
-                    format_problem = "read more than allocated"
+                    format_problem = "read more than allocated";
                     return 0;
                 }
 
@@ -1627,7 +1628,7 @@ int read_flat_data(FILE *fh, struct image_info *info) {
                     
                     if (info < buf + buf_read_pos + num_to_read)
                     {
-                        format_problem = "read more than allocated"
+                        format_problem = "read more than allocated";
                         return 0;
                     }
                     num_read = fread(buf + buf_read_pos, 1, num_to_read, fh);

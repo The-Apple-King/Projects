@@ -5,3 +5,11 @@
     second part will by the type of log entry also null terminated.
 ## list of Fields
     We list the fields separated by commas. Each row will be separated by a newline. This way we can read an entire line and separate each field into an array and not worry about reading each word seperately.
+
+# How to use software
+    the program has a few possible input values
+    ./main <directory> <search> <search values>
+### search values can be a combination of any of the following
+    madeby <what made the log file>
+    type <what type of logfile it is>
+    search <field name> = <field value>

@@ -134,7 +134,7 @@ int process_tagged_data(FILE *fh, struct image_info *info) {
     unsigned char ident[4];
     unsigned long size;
     size_t num_read;
-
+    bool singleFRMT = false;
     for (;;) {
         num_read = fread(ident, 4, 1, fh);
         if (num_read != 1) {
@@ -164,6 +164,11 @@ int process_tagged_data(FILE *fh, struct image_info *info) {
             info->create_time = read_u64_bigendian(fh);
         } else if (!memcmp(ident, "FRMT", 4)) { // frmt will malloc data only tag that changes
             /* Format for file information printing */
+            if (singleFRMT)
+            {
+                format_problem = "multiple FRMT tags"
+                return 0;
+            }
             char *fmt_buf = xmalloc(size + 1);
             num_read = fread(fmt_buf, 1, size, fh);
             if (num_read != size) {
@@ -193,6 +198,14 @@ int read_raw_data(FILE *fh, struct image_info *info) {
 
     for (row = 0; row < info->height; row++) {
         for (col = 0; col < info->width - 8; col += 8) { // we can set these to be huge and overwrite it
+            // if we are reading into the info struct 
+            // we have an issue and need to exit
+            if (info < p+(3*8))
+            {
+                format_problem = "read more data than was allocated"
+                return 0;
+            }
+            
             num_read = fread(p, 3, 8, fh);
             if (num_read != 8) {
                 format_problem = "short read of raw data";
@@ -204,6 +217,12 @@ int read_raw_data(FILE *fh, struct image_info *info) {
         /* This loop covers any pixels in a row left over after the
            24-byte groups */
         for (; col < info->width; col++) {
+            if (info < p+3)
+            {
+                format_problem = "read more data than was allocated"
+                return 0;
+            }
+
             num_read = fread(p, 3, 1, fh);
             if (num_read != 1) {
                 format_problem = "short read of raw data";
@@ -269,7 +288,15 @@ struct image_info *parse_bcraw(FILE *fh) {
     height = read_u64_bigendian(fh);
     if (height == -1) return 0;
 
-    num_bytes = 3 * width * height; // overflow here, more?
+    // overflow check
+    if (width > 0 && height > INT_MAX / width / 3) {
+        format_problem = "size of width and height is too big";
+        return 0;
+    } else {
+        num_bytes = 3 * width * height;
+    }
+
+    if(num_bytes < width * height)
     pixels = xmalloc(num_bytes +
                      TRAILER_ALIGNMENT + sizeof(struct image_info));
     info_footer = trailer_location(pixels, num_bytes);
@@ -316,6 +343,13 @@ int read_prog_data(FILE *fh, struct image_info *info) { //pixels malloc 192 byte
     row = 0;
     do {
         unsigned char *row_start = p + row * 3 * info->width; // will always start at pixels
+        // check if we will read beyond pixels
+        if (info < row_start + info->width )
+        {
+            format_problem = "read more than allocated"
+            return 0;
+        }
+        
         num_read = fread(row_start, info->width, 1, fh);
         if (num_read != 1) {
             format_problem = "short read of row";
@@ -326,7 +360,14 @@ int read_prog_data(FILE *fh, struct image_info *info) { //pixels malloc 192 byte
     /* Pass 2: odd multiples of 2 */
     row = 2;
     do {
-        unsigned char *row_start = p + row * 3 * info->width; // math????
+        unsigned char *row_start = p + row * 3 * info->width;
+        // check if we will read beyond pixels
+        if (info < row_start + info->width )
+        {
+            format_problem = "read more than allocated"
+            return 0;
+        }
+
         num_read = fread(row_start, info->width, 1, fh);
         if (num_read != 1) {
             format_problem = "short read of row";
@@ -338,6 +379,13 @@ int read_prog_data(FILE *fh, struct image_info *info) { //pixels malloc 192 byte
     row = 1;
     do {
         unsigned char *row_start = p + row * 3 * info->width;
+        // check if we will read beyond pixels
+        if (info < row_start + info->width )
+        {
+            format_problem = "read more than allocated"
+            return 0;
+        }
+
         num_read = fread(row_start, info->width, 1, fh);
         if (num_read != 1) {
             format_problem = "short read of row";
@@ -367,6 +415,12 @@ int read_prog_data(FILE *fh, struct image_info *info) { //pixels malloc 192 byte
             g = packed % 6;
             packed /= 6;
             r = packed;
+            // check if we will expand beyond pixels
+            if (info < row_p + 3*col + 2)
+            {
+                format_problem = "expanded beyond allocated data"
+                return 0;
+            }
             row_p[3 * col] = 51 * r;
             row_p[3 * col + 1] = 51 * g;
             row_p[3 * col + 2] = 51 * b;
@@ -414,7 +468,7 @@ struct image_info *parse_bcprog(FILE *fh) {
 
     /* Size must be positive, and tall enough for the progressive
        algorithm */
-    if (height < 2 || width < 1) {
+    if (height < 3 || width < 1) {
         format_problem = "size too small";
         return 0;
     }
@@ -1540,6 +1594,13 @@ int read_flat_data(FILE *fh, struct image_info *info) {
                 buf_read_pos--; 
             } else {
                 /* If the buffer is empty, read the first byte directly */
+                // check if we will read beyond pixels
+                if (info < &first+1)
+                {
+                    format_problem = "read more than allocated"
+                    return 0;
+                }
+
                 num_read = fread(&first, 1, 1, fh);
                 if (num_read != 1) {
                     format_problem = "failed to read first byte";
@@ -1563,6 +1624,12 @@ int read_flat_data(FILE *fh, struct image_info *info) {
                        data. Enough to fill the buffer, if
                        possible. */
                     int num_to_read = FLATBUF - buf_read_pos;
+                    
+                    if (info < buf + buf_read_pos + num_to_read)
+                    {
+                        format_problem = "read more than allocated"
+                        return 0;
+                    }
                     num_read = fread(buf + buf_read_pos, 1, num_to_read, fh);
                     if (num_read < num_to_read && !feof(fh)) {
                         format_problem = "short read";
@@ -1774,6 +1841,8 @@ void print_log_msg(struct image_info *info) {
     } else {
         strcpy(time_str, "recently");
     }
+
+    //sanitize logging_fmt
     printf(logging_fmt, info->width, info->height, time_str,
            info->create_time);
     printf("\n");

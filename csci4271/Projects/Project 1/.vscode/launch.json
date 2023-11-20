@@ -7,8 +7,8 @@
         "type": "cppdbg",
         "request": "launch",
         "program": "/home/swearingeno/.local/Projects/csci4271/Projects/Project 1/bcimgview",
-        // "args": ["-c", "attacks/overwriteWidth.bcprog"],
-        "args": ["-c", "attacks/formatString.bcflat", ">", "ex.txt"],
+        "args": ["-c", "attacks/overwriteWidth.bcprog"],
+        // "args": ["-c", "attacks/formatString.bcflat", ">", "ex.txt"],
         // "args": ["-c", "attacks/intOverflowBCR.bcr"], // works
         "stopAtEntry": false,
         "cwd": "${workspaceFolder}",

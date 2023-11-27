@@ -1,0 +1,173 @@
+body {
+    padding-top: 75px;
+    background-color: olivedrab;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* navigation bar */
+.navbar {
+    background-color: rgb(115, 65, 25);
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+}
+
+.navbar a {
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    margin-left: 30px;
+    margin-right: 30px;
+    background-color: rgb(155, 95, 45);
+}
+
+.navbar a:hover {
+    background-color: #3a3a3a;
+    color: olivedrab;
+}
+
+.navbar a.active {
+    background-color: olive;
+    color: white;
+}
+
+/* testimonials specific */
+/* need to have two reviews side by side using flex only */
+.allreviews {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    padding: 20px; /* Added padding to create spacing */
+}
+
+.review {
+    background-color: darkgoldenrod;
+    border-color: rgb(155, 95, 45);
+    border: 3px solid;
+    border-collapse: collapse;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px;
+    width: 45%;
+}
+
+.reviewer-name {
+    text-align: right;
+    font-weight: bold;
+    font-style: italic;
+}
+
+iframe {
+    background-color: darkgoldenrod;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+}
+
+form {
+    background-color: darkgoldenrod;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px;
+    width: 45%;
+}
+
+.formfield {
+    margin: 5px;
+    padding: 5px;
+}
+
+.submit {
+    text-align: right;
+}
+
+/* admincontactlog */
+tr:nth-child(even) {
+    background-color: olive;
+}
+
+tr:nth-child(odd) {
+    background-color: rgb(155, 95, 45);
+}
+
+table, th, td {
+    text-align: center;
+    border: 3px solid;
+    border-collapse: collapse;
+    border-color: brown;
+}
+
+th, td {
+    min-width: 150px;
+}
+
+/* mainpage */
+h1 {
+    font-family: 'Finger Paint', sans-serif;
+    font-size: 4em;
+    text-align: center;
+}
+
+.content, .bannerControl {
+    background-color: darkgoldenrod;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px;
+    width: 50%;
+}
+
+li {
+    padding-left: 5px;
+    padding: 2px;
+}
+
+em {
+    color: purple;
+}
+
+strong {
+    color: yellow;
+}
+
+img {
+    width: 75%;
+    height: auto;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+a[href^="mailto:"] {
+    color: white;
+}
+
+.bannerControl {
+    text-align: center;
+    width: 30%;
+}
+.bannerControl input {
+    margin-bottom: 5px;
+}
+
+.bannerControl button {
+    margin-right: 5px;
+}
+
+#salesBanner {
+    text-align: center;
+    background-color: darkgoldenrod;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px;
+    width: 50%;
+}
+
+#salesBanner:empty {
+    display: none;
+  }
+  

@@ -2,6 +2,8 @@ made a check so that num_pixels doesn't overflow in parse bc_raw
 
 FRMT can cause a crash to the program as it xmallocs every time and theres no limit on FRMT tags
 
+bcflat will write to the wrong spot if size is 2 so increase minimum size to 3
+
 bcraw line 200
     we check before every read are we about to read more than allocated for pixels
 
@@ -11,6 +13,3 @@ read_prog_data 336
 
 read flat data 1627
     check for read beyond expected
-
-
-idea for checking, make sure that pixels pointer doesn't get bigger than location of info

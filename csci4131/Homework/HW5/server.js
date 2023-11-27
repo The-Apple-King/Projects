@@ -54,6 +54,12 @@ app.get('/api/sale', (req, res) => {
 //POST requests
 app.post('/contact', (req, res) => {
     const { name, email, date, dropdown, checkbox } = req.body;
+
+    if (name === undefined || email === undefined) {
+        res.status(400).send("Required fields must be sent in");
+    } else if (name === "" || email === "") {
+        res.status(400).send("Required fields cannot be empty");
+    } else {
     const contact = {
         Name: name,
         Email: email,
@@ -63,8 +69,10 @@ app.post('/contact', (req, res) => {
         Id: next_id
     };
     contacts.push(contact);
+    console.log(contact);
     next_id++;
     res.render('success');
+}
 });
 
 app.post('/api/sale', auth, (req, res) => {
@@ -82,10 +90,28 @@ app.delete('/api/sale', auth, (req, res) => {
     res.json();
 });
 
-app.delete('/api/contact', auth, (req, res) => {    
-    contacts = contacts.filter(obj => obj.id !== req.body.Id);    
+app.delete('/api/contact', auth, (req, res) => {
+    const contactToDelete = contacts.find(obj => obj.Id === req.body.id);
+    if (!contactToDelete) {
+        return res.status(404).render('404');
+    }
+
+    // Use filter to create a new array without the contact to delete
+    const newContacts = contacts.filter(obj => obj.Id !== req.body.id);
+
+    // Check if the contact was found and deleted
+    if (newContacts.length === contacts.length) {
+        return res.status(404).render('404');
+    }
+
+    // Update the contacts array with the new array without the deleted contact
+    contacts = newContacts;
+
+    // Send success response
     res.send('Contact deleted successfully');
 });
+
+
 
 // Catch-all route for 404
 app.use((req, res) => {

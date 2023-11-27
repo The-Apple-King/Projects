@@ -46,12 +46,15 @@ async function deleteRow(button, id) {
         clearInterval(row.rowTimer);
         
         var table = row.parentNode;
-        
-        var newRow = table.insertRow();
-        var cell = newRow.insertCell(0);
-        cell.colSpan = 6;
-        cell.innerHTML = "No sales available";
         row.remove();
+        const rows = document.getElementById('table').getElementsByTagName('tr');
+        console.log(rows.length);
+        if(rows.length == 1){
+            var newRow = table.insertRow();
+            var cell = newRow.insertCell(0);
+            cell.colSpan = 6;
+            cell.innerHTML = "No sales available";
+        }
     }
 }
 

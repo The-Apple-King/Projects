@@ -1,0 +1,227 @@
+--- bcimgview.c	2023-11-29 02:11:34.969061921 -0600
++++ bcimgviewdefault.c	2023-11-29 02:11:34.936561930 -0600
+@@ -193,13 +193,6 @@ int read_raw_data(FILE *fh, struct image
+ 
+     for (row = 0; row < info->height; row++) {
+         for (col = 0; col < info->width - 8; col += 8) {
+-            // check if we will read beyond pixels
+-            if (info < p+(3*8) && (&info->pixels + sizeof(info->pixels)) > p+(3*8))
+-            {
+-                format_problem = "read more data than was allocated";
+-                return 0;
+-            }
+-            
+             num_read = fread(p, 3, 8, fh);
+             if (num_read != 8) {
+                 format_problem = "short read of raw data";
+@@ -211,12 +204,6 @@ int read_raw_data(FILE *fh, struct image
+         /* This loop covers any pixels in a row left over after the
+            24-byte groups */
+         for (; col < info->width; col++) {
+-            // check if we will read beyond pixels
+-            if (info < p+3  && (&info->pixels + sizeof(info->pixels)) > p+3)
+-            {
+-                format_problem = "read more data than was allocated";
+-                return 0;
+-            }
+             num_read = fread(p, 3, 1, fh);
+             if (num_read != 1) {
+                 format_problem = "short read of raw data";
+@@ -282,15 +269,7 @@ struct image_info *parse_bcraw(FILE *fh)
+     height = read_u64_bigendian(fh);
+     if (height == -1) return 0;
+ 
+-    // overflow check
+-    if ( width > 0 && height > 0 &&
+-        (width > INTMAX_MAX / height / 3 || height > INTMAX_MAX / width / 3)) {
+-        format_problem = "size of width and height is too big";
+-        return 0;
+-    } else {
+-        num_bytes = 3 * width * height;
+-    }
+-
++    num_bytes = 3 * width * height;
+     pixels = xmalloc(num_bytes +
+                      TRAILER_ALIGNMENT + sizeof(struct image_info));
+     info_footer = trailer_location(pixels, num_bytes);
+@@ -335,57 +314,37 @@ int read_prog_data(FILE *fh, struct imag
+     /* Step 1: decode progressive row ordering to sequential */
+     /* Pass 1: multiples of 4 */
+     row = 0;
+-    while (row < info->height) {
++    do {
+         unsigned char *row_start = p + row * 3 * info->width;
+-        // check if we will read beyond pixels
+-        if (info < row_start + info->width && (&info->pixels + sizeof(info->pixels)) > row_start + info->width)
+-        {
+-            format_problem = "read more than allocated";
+-            return 0;
+-        }
+-        
+         num_read = fread(row_start, info->width, 1, fh);
+         if (num_read != 1) {
+             format_problem = "short read of row";
+             return 0;
+         }
+         row += 4;
+-    } 
++    } while (row < info->height);
+     /* Pass 2: odd multiples of 2 */
+     row = 2;
+-    while (row < info->height) {
++    do {
+         unsigned char *row_start = p + row * 3 * info->width;
+-        // check if we will read beyond pixels
+-        if (info < row_start + info->width && (&info->pixels + sizeof(info->pixels)) > row_start + info->width)
+-        {
+-            format_problem = "read more than allocated";
+-            return 0;
+-        }
+         num_read = fread(row_start, info->width, 1, fh);
+         if (num_read != 1) {
+             format_problem = "short read of row";
+             return 0;
+         }
+         row += 4;
+-    }
++    } while (row < info->height);
+     /* Pass 3: odd rows */
+     row = 1;
+-    while (row < info->height) {
++    do {
+         unsigned char *row_start = p + row * 3 * info->width;
+-        // check if we will read beyond pixels
+-        if (info < row_start + info->width && (&info->pixels + sizeof(info->pixels)) > row_start + info->width)
+-        {
+-            format_problem = "read more than allocated";
+-            return 0;
+-        }
+-
+         num_read = fread(row_start, info->width, 1, fh);
+         if (num_read != 1) {
+             format_problem = "short read of row";
+             return 0;
+         }
+         row += 2;
+-    }
++    } while (row < info->height);
+ 
+     /* Step 2: decode 8-bit palette to 24-bit color */
+     for (row = 0; row < info->height; row++) {
+@@ -408,12 +367,6 @@ int read_prog_data(FILE *fh, struct imag
+             g = packed % 6;
+             packed /= 6;
+             r = packed;
+-            // check if we will expand beyond pixels
+-            if (info < row_p + 3*col + 2 && (&info->pixels + sizeof(info->pixels)) > row_p + 3*col + 2)
+-            {
+-                format_problem = "expanded beyond allocated data";
+-                return 0;
+-            }
+             row_p[3 * col] = 51 * r;
+             row_p[3 * col + 1] = 51 * g;
+             row_p[3 * col + 2] = 51 * b;
+@@ -1451,8 +1404,7 @@ void check_codewords(void) {
+    should point to the maximum number of pixels that should be
+    decompressed (i.e., before the end of a row), and on exit it will
+    hold the number that were actually decompressed. */
+-   // changed to int in order to return if it was successful or not
+-int decode_flat(unsigned char *comp_p, int *comp_size_inout,
++void decode_flat(unsigned char *comp_p, int *comp_size_inout,
+                  unsigned char *uncomp_p, int *pixels_inout,
+                  struct flat_decode_state *state) {
+     /* compressed data buffer, dynamically allocated */
+@@ -1506,11 +1458,6 @@ int decode_flat(unsigned char *comp_p, i
+         int repeat = (cw_info >> 4) & 0xf;
+         int i;
+         codelen = cw_info & 0xf;
+-        if((repeat * 8.0) / codelen > EXPANSION){
+-            format_problem = "used an invalid codeword";
+-            num_pixels = 0;
+-            return 0;
+-        }
+         if (codelen > (reg_size - padding_bits)) {
+             /* Here's the case where the next codeword extends into
+                the padding added earlier. Don't consume it yet. */
+@@ -1560,7 +1507,6 @@ int decode_flat(unsigned char *comp_p, i
+     state->reg = reg;
+     state->reg_size = reg_size;
+     state->last = last;
+-    return 1; // returns 1 if this function completed
+ }
+ 
+ /* Read and decompress all the compressed samples in a BCFLAT file
+@@ -1591,16 +1537,9 @@ int read_flat_data(FILE *fh, struct imag
+                 /* Get the first byte already buffered */
+                 first = buf[0];
+                 memmove(buf, buf + 1, buf_read_pos - 1);
+-                buf_read_pos--; 
++                buf_read_pos--;
+             } else {
+                 /* If the buffer is empty, read the first byte directly */
+-                // check if first reads into info or info->pixels
+-                if (info < &first+1 && &first+1 < info->pixels + sizeof(info->pixels))
+-                {
+-                    format_problem = "read more than allocated";
+-                    return 0;
+-                }
+-
+                 num_read = fread(&first, 1, 1, fh);
+                 if (num_read != 1) {
+                     format_problem = "failed to read first byte";
+@@ -1624,11 +1563,6 @@ int read_flat_data(FILE *fh, struct imag
+                        data. Enough to fill the buffer, if
+                        possible. */
+                     int num_to_read = FLATBUF - buf_read_pos;
+-                    if (info < buf + buf_read_pos + num_to_read && (&info->pixels + sizeof(info->pixels)) > buf + buf_read_pos + num_to_read)
+-                    {
+-                        format_problem = "read more than allocated";
+-                        return 0;
+-                    }
+                     num_read = fread(buf + buf_read_pos, 1, num_to_read, fh);
+                     if (num_read < num_to_read && !feof(fh)) {
+                         format_problem = "short read";
+@@ -1642,11 +1576,7 @@ int read_flat_data(FILE *fh, struct imag
+                     return 0;
+                 }
+                 num_pixels = max_pixels;
+-                // test if decode_flat runs into an issue
+-                int decoded = decode_flat(buf, &comp_size, pixel_buf, &num_pixels, &state);
+-                if(!decoded){
+-                    return 0;
+-                }
++                decode_flat(buf, &comp_size, pixel_buf, &num_pixels, &state);
+                 assert(num_pixels > 0);
+                 assert(num_pixels <= max_pixels + EXPANSION);
+                 if (num_pixels > max_pixels) {
+@@ -1844,30 +1774,6 @@ void print_log_msg(struct image_info *in
+     } else {
+         strcpy(time_str, "recently");
+     }
+-
+-    //sanitize logging_fmt
+-    int frmtSpec = 0;
+-    for (size_t i = 0; i < strlen(logging_fmt); i++) 
+-    {
+-    if (logging_fmt[i] == '%' && logging_fmt[i+1] != '%'){
+-        frmtSpec++;
+-        for (; i+1 < strlen(logging_fmt) && logging_fmt[i+1] != ' ' && logging_fmt[i+1] != '%'; i++) 
+-            {
+-                if (logging_fmt[i+1] == 'n') 
+-                {
+-                    frmtSpec = 10;
+-                    break;
+-                }
+-            }
+-        }
+-        if (frmtSpec > 4)
+-        {
+-            logging_fmt = "Displaying image of width %d and height %d from %s";
+-            break;
+-        }
+-    }
+-    
+-
+     printf(logging_fmt, info->width, info->height, time_str,
+            info->create_time);
+     printf("\n");

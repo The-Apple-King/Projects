@@ -7,9 +7,11 @@
         "type": "cppdbg",
         "request": "launch",
         "program": "/home/swearingeno/.local/Projects/csci4271/Projects/Project 1/bcimgview",
-        "args": ["-c", "attacks/overwriteWidth.bcprog"],
-        // "args": ["-c", "attacks/formatString.bcflat", ">", "ex.txt"],
-        // "args": ["-c", "attacks/intOverflowBCR.bcr"], // works
+        // "args": ["-c", "attacks/attack-1.bcraw"],
+        // "args": ["-c", "attacks/attack-2.bcprog"],
+        "args": ["-c", "attacks/attack-3.bcflat"], // fix this one here !!!!!!!!!!!!!!!!!!!
+        // "args": ["-c", "attacks/attack-4.bcraw"],
+        // "args": ["-c", "attacks/intOverflowBCR.bcraw"], // fix this one here !!!!!!!!!!!!!!!!!!!
         "stopAtEntry": false,
         "cwd": "${workspaceFolder}",
         "environment": [],

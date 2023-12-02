@@ -11,9 +11,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('resources'));
 
-let contacts = [];
-let next_id = 0;
-let sale_text = "test";
 let sale = true;
 
 //middleware
@@ -21,12 +18,6 @@ const auth = basicAuth({
     users: { 'admin': 'password' },
     challenge: true,
 });
-
-app.use((req, res, next) => {
-    console.log(`${req.method} ${req.url}`);
-    next();
-});
-
 
 // GET requests
 app.get(['/', '/main'], (req, res) => {
@@ -41,15 +32,21 @@ app.get('/testimonies', (req, res) => {
     res.render('testimonies');
 });
 
-app.get('/admin/contactlog', auth, (req, res) => {
+app.get('/admin/contactlog', auth, async (req, res) => {
+    const contacts = await data.getContacts();
     res.render('contactlog', { contacts });
 });
 
 
-app.get('/api/sale', (req, res) => {
-    res.json({ message: sale_text });
+app.get('/api/sale', async (req, res) => {
+    const sales = await data.getRecentSales();
+    res.json({ message: sales.saleMessage });
 });
 
+app.get('/admin/salelog', async (req, res) => {
+    const recentSales = await data.getRecentSales();
+    res.json(recentSales);
+});
 
 //POST requests
 app.post('/contact', (req, res) => {
@@ -60,25 +57,14 @@ app.post('/contact', (req, res) => {
     } else if (name === "" || email === "") {
         res.status(400).send("Required fields cannot be empty");
     } else {
-    const contact = {
-        Name: name,
-        Email: email,
-        Date: date,
-        Dropdown: dropdown,
-        Checkbox: (checkbox == true),
-        Id: next_id
-    };
-    contacts.push(contact);
-    console.log(contact);
-    next_id++;
+    data.addContact(name, email, date, dropdown, (checkbox== true));
     res.render('success');
 }
 });
 
 app.post('/api/sale', auth, (req, res) => {
-    sale_text = req.body.message;
-    sale = true;
-
+    data.addSale(req.body.saleMessage);
+    
     res.json({ message: sale_text });
 });
 

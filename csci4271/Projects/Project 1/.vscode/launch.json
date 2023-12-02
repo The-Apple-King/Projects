@@ -6,12 +6,13 @@
         "name": "debug bcimgview",
         "type": "cppdbg",
         "request": "launch",
-        "program": "/home/swearingeno/.local/Projects/csci4271/Projects/Project 1/bcimgview",
+        "program": "/home/swearingeno/.local/Projects/csci4271/Projects/Project 1/bcimgviewdefault",
         // "args": ["-c", "attacks/attack-1.bcraw"],
         // "args": ["-c", "attacks/attack-2.bcprog"],
-        "args": ["-c", "attacks/attack-3.bcflat"], // fix this one here !!!!!!!!!!!!!!!!!!!
+        // "args": ["-c", "attacks/attack-3.bcflat"], // fix this one here !!!!!!!!!!!!!!!!!!!
         // "args": ["-c", "attacks/attack-4.bcraw"],
         // "args": ["-c", "attacks/intOverflowBCR.bcraw"], // fix this one here !!!!!!!!!!!!!!!!!!!
+        "args": ["-c", "sample-images/colors250.bcflat"], // fix this one here !!!!!!!!!!!!!!!!!!!
         "stopAtEntry": false,
         "cwd": "${workspaceFolder}",
         "environment": [],

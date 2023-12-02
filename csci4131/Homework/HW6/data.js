@@ -13,17 +13,16 @@ var connPool = mysql.createPool({
 
 // later you can use connPool.awaitQuery(query, data) -- it will return a promise for the query results.
 
-async function addContact(data){
-    // you CAN change the parameters for this function. please do not change the parameters for any other function in this file.
-    await connPool.awaitQuery("insert into Contacts values (?, ?, ?, ?, ?)");
+async function addContact(name, email, time, amount, distributor) {
+  await connPool.awaitQuery("INSERT INTO ContactLog (name, email, time, amount, distributor) VALUES (?, ?, ?, ?, ?)", name, email, time, amount, distributor);
 }
 
 async function deleteContact(id){
-  await connPool.awaitQuery("delete from Contacts where id = ?", id);
+  await connPool.awaitQuery("delete from ContactLog where id = ?", id);
 }
 
 async function getContacts() {
-  let retval = await connPool.awaitQuery("select * from Contacts;")
+  let retval = await connPool.awaitQuery("select * from ContactLog;")
   return retval;
 }
 
@@ -36,7 +35,7 @@ async function endSale() {
 }
 
 async function getRecentSales() {
-  let retval = await connPool.awaitQuery("Select * from Sale");
+  let retval = await connPool.awaitQuery("SELECT saleMessage from Sale ORDER BY startTime DESC LIMIT 3");
   return retval;
 }
 

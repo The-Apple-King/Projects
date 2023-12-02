@@ -8,14 +8,14 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-o",
-                "/home/swearingeno/.local/Projects/csci4271/Projects/Project 1/bcimgview",
+                "/home/swearingeno/.local/Projects/csci4271/Projects/Project 1/bcimgviewdefault",
                 "-no-pie",
                 "-fno-stack-protector",
                 "-Wall",
                 "-g",
                 "-Og",
                 "-DDISABLE_GUI",
-                "/home/swearingeno/.local/Projects/csci4271/Projects/Project 1/bcimgview.c",
+                "/home/swearingeno/.local/Projects/csci4271/Projects/Project 1/bcimgviewdefault.c",
                 "-lm"
             ],
             "options": {

@@ -1,0 +1,12 @@
+Homework 4 https://www.gradescope.com/courses/603664/assignments/3633174/submissions/209977410#
+
+The major thing I lost points for was for failing to correctly implement authentication labeled 
+under the AUTH server code section. This caused me to lose 2 points for missing auth check, 3 for
+missing WWW-authenticate header and WWW-authenticate and 4 for headers dont specify basic auth.
+
+
+
+the following code needs to be readded in all places requiring authentication. If WWW-Authenticate is returned the web browser will prompt the user to enter in login data before returning the requested data.
+                return "Unauthorized. Please provide credentials.", 401, {"WWW-Authenticate": 'Basic realm="User Visible Realm"'}
+
+The solution can be verified by replacing the server code of HW4 and trying to access data that requires authentication like contact log, adding a sale, and deleting a contact

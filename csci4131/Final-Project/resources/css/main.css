@@ -1,0 +1,159 @@
+#createPost {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: rgb(25, 25, 25);
+    color: white;
+    border: 3px solid;
+    border-radius: 5px;
+}
+
+#editPost {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: rgb(25, 25, 25);
+    color: white;
+    border: 3px solid;
+    border-radius: 5px;
+}
+  
+.posts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.post {
+    background-color: rgb(25, 25, 25);
+    color: white;
+    border: 3px solid;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px;
+    position: relative;
+    width: 75%;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+}
+#edit {
+    margin-right: 15px;
+}
+
+.likes,
+.dislikes {
+    padding: 5px 10px;
+    display: inline-block;
+}
+
+.likes {
+    right: 60px;
+}
+
+.creator {
+    text-align: left;
+    font-weight: bold;
+}
+
+.content {
+    text-align: left;
+    padding-left: 20px;
+}
+
+#postButton {
+    position: fixed;
+    bottom: 0px;
+    right: 0px; 
+    margin: 10px;
+}
+
+label {
+    color:white;
+}
+
+.sort {
+    width: auto;
+    justify-content: right;
+    margin-right: 25px;
+    margin: 30px;
+}
+
+.user {
+    color: white;
+    padding-left: 25px;
+}
+
+.heading {
+    display: flex;
+    justify-content: space-between;
+}
+  
+
+div.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-top: 10px;
+}
+
+span.page-number {
+    background-color: #f0f0f0;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-top: 15px;
+    position:absolute;
+}
+
+.previous {
+    position: absolute;
+    margin-top: 15px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 5px;
+    text-decoration: none;
+    color:black;
+    left: 43%;
+}
+
+.next {
+    position: absolute;
+    margin-top: 15px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    text-decoration: none;
+    color:black;
+    right: 44%;
+}
+
+.Logo {
+    display: flex;
+    justify-content: center;
+}
+
+h1.logoTitle {
+    color:white;
+}
+
+img.logoImage {
+    margin-top: 10px;
+    margin-right: 5px;
+    width: 50px;
+    height: 50px;
+}
+
+#submit, #cancel {
+    margin: 10px 5px;
+}

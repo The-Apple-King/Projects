@@ -1,0 +1,14 @@
+.navbar
+    a(href='/main') Home
+    if user
+        a(href='javascript:void(0)', onclick='logout()') Logout
+        script.
+            function logout() {
+                var form = document.createElement('form');
+                form.action = '/logout';
+                form.method = 'post';
+                document.body.appendChild(form);
+                form.submit();
+            }
+    else
+        a(href='/login') Login

@@ -1,0 +1,71 @@
+doctype html
+head
+  title Main
+  meta(charset='UTF-8')
+  link(rel='stylesheet' href='/css/main.css')
+  link(rel='stylesheet' href='/css/default.css')
+  script(src='/js/main.js')
+body 
+  include navbar
+  div.Logo
+    img.logoImage(src="/images/hard drive.png", alt="webpage Logo")
+    h1.logoTitle The D: Drive
+  div.heading
+    if user != null
+      h2.user name: #{user.name}
+    else 
+      h2.user 
+    div.sort
+      label(for='sort') Sort By:
+      select#dropdown(name='sort')
+        option(value=0) Recent
+        option(value=1) Most Liked
+        option(value=2) Most Disliked
+
+  if posts.length
+    div.posts
+      each post in posts
+        div.post 
+          if user != null
+            if post.creator_id == user.id
+              div.edit
+                div(content=`${post.creator_id}, ${user.id}`)
+                button#edit(type="button" onclick=`editPost(${post.post_id}, "${post.content}")`) Edit
+                button#delete(onclick=`deletePost(${user.id}, ${post.post_id})`) Delete
+          div.creator 
+            = post.user_name 
+          div.content 
+            = post.content
+          div.actions
+            div.likes
+              = post.likes_count
+            button#like(onclick=`like(${true}, ${post.post_id})`) +
+            div.dislikes
+              = post.dislikes_count
+            button#dislike(onclick=`like(${false}, ${post.post_id})`) -
+  
+    div.pagination
+      if page >= 1
+        a.previous(href=`/main?page=${page - 1}&sortBy=${sortBy}`) Previous
+      span.page-number= page + 1
+      if page < Math.ceil(posts.length / 5)
+        a.next(href=`/main?page=${page + 1}&sortBy=${sortBy}`) Next
+  else 
+    div.no-posts no posts yet you could be the first!
+  #createPost
+      h2 Write a post
+      form(action="createPost", method="post") 
+        textarea(name="content", cols="50", rows="10" required)
+        br
+        button#submit(type="submit") Submit
+        button#cancel(type="cancel" onclick=`closePopup("createPost")`) Cancel
+  #editPost
+      h2 Edit a post
+      form(id="editPostForm", action="editPost", method="post") 
+        textarea(name="content", cols="50", rows="10" required)
+        input(type="hidden", name="post_id", value="")
+        br
+        button#submit(type="submit") Submit
+        button#cancel(type="cancel" onclick=`closePopup("editPost")`) Cancel
+
+  button#postButton Post

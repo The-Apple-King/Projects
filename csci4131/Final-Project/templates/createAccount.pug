@@ -1,0 +1,26 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    title Login
+    link(rel="stylesheet" href="/css/login.css")
+    link(rel="stylesheet" href="/css/default.css")
+    script(src="/js/login.js")
+  body
+    include navbar
+    
+    form.createAccount#createAccount(action="createAccount", method="post")
+      h1 Create new Account
+      div.Username
+        label(for="username") Username:
+        input(type="text", name="username", required)
+
+      div.Password
+        label(for="password") Password:
+        input(type="password", name="password", id="password", required)
+
+      div.buttons
+        button#submitNew(type="submit") Submit
+
+      .content If you already have an account click here to 
+        a#createNewAccount(href='/login') Login

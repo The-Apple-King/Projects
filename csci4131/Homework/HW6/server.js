@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const basicAuth = require('express-basic-auth')
+const data = require('./data.js');
 
 const app = express();
 const port = 4131;
@@ -11,7 +12,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('resources'));
 
-let sale = true;
 
 //middleware
 const auth = basicAuth({
@@ -33,14 +33,32 @@ app.get('/testimonies', (req, res) => {
 });
 
 app.get('/admin/contactlog', auth, async (req, res) => {
-    const contacts = await data.getContacts();
-    res.render('contactlog', { contacts });
+    let contacts = await data.getContacts();
+    console.log(contacts);
+    for (let i = 0; i < contacts.length; i++) {
+        const dateObject = new Date(contacts[i].time);
+        contacts[i].time = dateObject.toISOString().split('T')[0];
+    }
+    res.render('contactlog', { contacts } );
 });
 
 
 app.get('/api/sale', async (req, res) => {
-    const sales = await data.getRecentSales();
-    res.json({ message: sales.saleMessage });
+        const sales = await data.getRecentSales();
+        let val = -1;
+        for (let i = 0; i < sales.length; i++) { // find first sale that has not ended
+            // Check if endTime property is null
+            if (sales[i].endTime == null) {
+                val = i;
+                break;
+            }
+        }
+        if (val !== -1) { // if a sale hasn't ended return it
+            res.json({ message: sales[val].saleMessage });
+        }
+        else{ // if there is no sale then return empty string
+            res.json({ message: "" });
+        }
 });
 
 app.get('/admin/salelog', async (req, res) => {
@@ -50,50 +68,32 @@ app.get('/admin/salelog', async (req, res) => {
 
 //POST requests
 app.post('/contact', (req, res) => {
-    const { name, email, date, dropdown, checkbox } = req.body;
+    const { name, email, date, dropdown, distributor } = req.body;
 
     if (name === undefined || email === undefined) {
         res.status(400).send("Required fields must be sent in");
     } else if (name === "" || email === "") {
         res.status(400).send("Required fields cannot be empty");
     } else {
-    data.addContact(name, email, date, dropdown, (checkbox== true));
-    res.render('success');
-}
+        const vals = { name, email, date, dropdown, distributor: distributor == "on" };
+        data.addContact(Object.values(vals));
+        res.render('success');
+    }
 });
 
 app.post('/api/sale', auth, (req, res) => {
-    data.addSale(req.body.saleMessage);
-    
-    res.json({ message: sale_text });
+    data.addSale(req.body);
+    res.json();
 });
 
 //DELETE requests
 app.delete('/api/sale', auth, (req, res) => {
-    sale_text = "";
-    sale = false;
-
+    data.endSale();
     res.json();
 });
 
 app.delete('/api/contact', auth, (req, res) => {
-    const contactToDelete = contacts.find(obj => obj.Id === req.body.id);
-    if (!contactToDelete) {
-        return res.status(404).render('404');
-    }
-
-    // Use filter to create a new array without the contact to delete
-    const newContacts = contacts.filter(obj => obj.Id !== req.body.id);
-
-    // Check if the contact was found and deleted
-    if (newContacts.length === contacts.length) {
-        return res.status(404).render('404');
-    }
-
-    // Update the contacts array with the new array without the deleted contact
-    contacts = newContacts;
-
-    // Send success response
+    data.deleteContact(req.body.id);
     res.send('Contact deleted successfully');
 });
 

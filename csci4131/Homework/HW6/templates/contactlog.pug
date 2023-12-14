@@ -22,17 +22,18 @@ table#table
   if contacts.length
     each contact in contacts
       tr
-        td= contact.Name
+        td= contact.name
         td
-          a(href= "mailto:" + contact.Email)= contact.Email
+          a(href= "mailto:" + contact.email)= contact.email
         td
-          if contact.Date
-            .date= contact.Date
+          if contact.time
+            .date= contact.time
             .countdown
-        td= contact.Dropdown
-        td= contact.Checkbox
+        td= contact.amount
         td
-          button(onclick=`deleteRow(this, ${contact.Id})`) Delete
+          | #{contact.distributor ? 'Yes' : 'No'}
+        td
+          button(onclick=`deleteRow(this, ${contact.id})`) Delete
 
   else
     tr

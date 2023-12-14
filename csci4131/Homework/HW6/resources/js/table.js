@@ -1,25 +1,25 @@
 window.addEventListener('load', function() {
     const rows = document.getElementById('table').getElementsByTagName('tr');
-    if(rows.length == 1 && rows[0].cells.length > 1){
+    if (rows[1].cells[0].textContent.trim() !== "No sales available") {
         for (let i = 1; i < rows.length; i++) {
             const row = rows[i];
             const rowTimer = this.setInterval(function () {
                 var dateDiv = row.cells[2].querySelector(".date");
                 var countdownDiv = row.cells[2].querySelector(".countdown");
-                
-                var endDate = new Date(dateDiv.textContent.trim());
+
+                // Parse the date in the specified format
+                var endDate = new Date(dateDiv.textContent);
 
                 var distance = endDate - new Date().getTime();
-            
 
                 // format countdown from w3 schools
                 var days = Math.floor(distance / (1000 * 60 * 60 * 24));
                 var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
+
                 countdownDiv.innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
-                
+
                 if (distance < 0) {
                     countdownDiv.innerHTML = "<b>Passed</b>";
                     clearInterval(rowTimer);
@@ -29,6 +29,7 @@ window.addEventListener('load', function() {
         }
     }
 });
+
 
 
 
@@ -62,16 +63,18 @@ async function setBanner() {
     const inputElement = document.getElementById("newBanner");
     const inputValue = inputElement.value;
 
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({message: inputValue}),
-    };
-    const response = await fetch("/api/sale", options);
-    if(response.ok)
-        inputElement.value = "";
+    if(inputValue != "") {
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({saleMessage: inputValue}),
+        };
+        const response = await fetch("/api/sale", options);
+        if(response.ok)
+            inputElement.value = "";
+    }
 }
 
 async function deleteBanner() {

@@ -13,29 +13,31 @@ var connPool = mysql.createPool({
 
 // later you can use connPool.awaitQuery(query, data) -- it will return a promise for the query results.
 
-async function addContact(name, email, time, amount, distributor) {
-  await connPool.awaitQuery("INSERT INTO ContactLog (name, email, time, amount, distributor) VALUES (?, ?, ?, ?, ?)", name, email, time, amount, distributor);
+async function addContact(data) {
+  const query = "INSERT INTO Contact (name, email, time, amount, distributor) VALUES (?, ?, ?, ?, ?)";
+  await connPool.awaitQuery(query, data);
 }
 
+
 async function deleteContact(id){
-  await connPool.awaitQuery("delete from ContactLog where id = ?", id);
+  await connPool.awaitQuery("delete from Contact where id = ?", id);
 }
 
 async function getContacts() {
-  let retval = await connPool.awaitQuery("select * from ContactLog;")
+  let retval = await connPool.awaitQuery("select * from Contact;")
   return retval;
 }
 
-async function addSale(message) {
-    await connPool.awaitQuery("insert into Sale set ?", message);
+async function addSale(saleMessage) {
+    await connPool.awaitQuery("insert into Sale set ?", saleMessage);
 }
 
 async function endSale() {
-  await connPool.awaitQuery("update Sale SaleEnd = CURRENT_TIMESTAMP Where Active = true");
+  await connPool.awaitQuery("UPDATE Sale SET endTime = CURRENT_TIMESTAMP, active = 0 WHERE endTime IS NULL");
 }
 
 async function getRecentSales() {
-  let retval = await connPool.awaitQuery("SELECT saleMessage from Sale ORDER BY startTime DESC LIMIT 3");
+  let retval = await connPool.awaitQuery("SELECT * from Sale ORDER BY startTime DESC LIMIT 3");
   return retval;
 }
 

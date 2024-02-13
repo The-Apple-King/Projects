@@ -5,66 +5,198 @@
     "version": "0.2.0",
     "configurations": [
         
-        {
-            "name": "(Windows) Launch",
-            "type": "cppvsdbg",
-            "request": "launch",
-            "program": "enter program name, for example ${workspaceFolder}/a.exe",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${fileDirname}",
-            "environment": [],
-            "console": "externalTerminal"
-        },
 
         {
-            "name": "(gdb) Launch",
-            "type": "cppdbg",
+            "type": "java",
+            "name": "Launch CallTreeTests",
             "request": "launch",
-            "program": "enter program name, for example ${workspaceFolder}/a.exe",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${fileDirname}",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "miDebuggerPath": "/path/to/gdb",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                },
-                {
-                    "description":  "Set Disassembly Flavor to Intel",
-                    "text": "-gdb-set disassembly-flavor intel",
-                    "ignoreFailures": true
-                }
-            ]
+            "mainClass": "lab13.CallTreeTests",
+            "projectName": "repo-swear041_a631936a"
         },
         {
-            "name": "(gdb) Attach",
-            "type": "cppdbg",
-            "request": "attach",
-            "program": "enter program name, for example ${workspaceFolder}/a.exe",
-            "processId": "${command:pickProcess}",
-            "MIMode": "gdb",
-            "miDebuggerPath": "/path/to/gdb",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                },
-                {
-                    "description":  "Set Disassembly Flavor to Intel",
-                    "text": "-gdb-set disassembly-flavor intel",
-                    "ignoreFailures": true
-                }
-            ]
+            "type": "java",
+            "name": "Launch CallTreeNodeTests",
+            "request": "launch",
+            "mainClass": "lab13.CallTreeNodeTests",
+            "projectName": "repo-swear041_a631936a"
         },
         {
-            "name": "gcc.exe - Build and debug active file",
+            "type": "java",
+            "name": "Launch GibberisherMain",
+            "request": "launch",
+            "mainClass": "GibberisherMain",
+            "projectName": "projects_9450d42a"
+        },
+        {
+            "type": "java",
+            "name": "Launch GibberisherMain",
+            "request": "launch",
+            "mainClass": "GibberisherMain",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
+            "name": "Launch TrieTest",
+            "request": "launch",
+            "mainClass": "TrieTest",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
+            "name": "Launch TrieNodeTest",
+            "request": "launch",
+            "mainClass": "TrieNodeTest",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
+            "name": "Launch CharBagTest",
+            "request": "launch",
+            "mainClass": "CharBagTest",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
+            "name": "Launch LetterSampleTest",
+            "request": "launch",
+            "mainClass": "LetterSampleTest",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
+            "name": "Launch RepeatBlockQueueTest",
+            "request": "launch",
+            "mainClass": "lab12.RepeatBlockQueueTest",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
+            "name": "Launch RepeatBlockQueueNodeTest",
+            "request": "launch",
+            "mainClass": "lab12.RepeatBlockQueueNodeTest",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
+            "name": "Launch BraceCheckerTester",
+            "request": "launch",
+            "mainClass": "BraceCheckerTester",
+            "projectName": "projects_9450d42a"
+        },
+        {
+            "type": "java",
+            "name": "Launch GenericStackTester",
+            "request": "launch",
+            "mainClass": "GenericStackTester",
+            "projectName": "projects_9450d42a"
+        },
+        {
+            "type": "java",
+            "name": "Launch TestMyDate",
+            "request": "launch",
+            "mainClass": "TestMyDate",
+            "projectName": "projects_9450d42a"
+        },
+        {
+            "type": "java",
+            "name": "Launch TestMyDate",
+            "request": "launch",
+            "mainClass": "TestMyDate",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
+            "name": "Launch TestTuple",
+            "request": "launch",
+            "mainClass": "TestTuple",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
+            "name": "Launch Tournament",
+            "request": "launch",
+            "mainClass": "Tournament",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
+            "name": "Launch AITest",
+            "request": "launch",
+            "mainClass": "AITest",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
+            "name": "Launch Tester",
+            "request": "launch",
+            "mainClass": "Tester",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
+            "name": "Launch CardPileTest",
+            "request": "launch",
+            "mainClass": "CardPileTest",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
+            "name": "Launch HandTest",
+            "request": "launch",
+            "mainClass": "HandTest",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
+            "name": "Launch DeckTest",
+            "request": "launch",
+            "mainClass": "DeckTest",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
+            "name": "Launch CardTest",
+            "request": "launch",
+            "mainClass": "CardTest",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
+            "name": "Launch CraftingLibraryTest",
+            "request": "launch",
+            "mainClass": "CraftingLibraryTest",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
+            "name": "Launch CraftingItemTest",
+            "request": "launch",
+            "mainClass": "CraftingItemTest",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
+            "name": "Launch DrawFigure",
+            "request": "launch",
+            "mainClass": "DrawFigure",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
+            "name": "Launch ShapeUtilsTester",
+            "request": "launch",
+            "mainClass": "ShapeUtilsTester",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "type": "java",
+            "name": "Launch NimTester",
+            "request": "launch",
+            "mainClass": "NimTester",
+            "projectName": "repo-swear041_a631936a"
+        },
+        {
+            "name": "g++.exe - Build and debug active file",
             "type": "cppdbg",
             "request": "launch",
             "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
@@ -82,7 +214,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "C/C++: gcc.exe build active file"
+            "preLaunchTask": "C/C++: g++.exe build active file"
         }
     ]
 }

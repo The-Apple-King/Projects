@@ -3,3 +3,11 @@
 **/build/**
 **/dist/
 **/*.jar
+**/*.mli
+**/*.byte
+**/*.exe
+**/_build
+**/*.iml
+Class exercises/*
+linalg-lecture-notes/*
+**/node_modules/*

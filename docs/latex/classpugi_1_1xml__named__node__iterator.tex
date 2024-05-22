@@ -1,0 +1,62 @@
+\hypertarget{classpugi_1_1xml__named__node__iterator}{}\doxysection{pugi\+::xml\+\_\+named\+\_\+node\+\_\+iterator Class Reference}
+\label{classpugi_1_1xml__named__node__iterator}\index{pugi::xml\_named\_node\_iterator@{pugi::xml\_named\_node\_iterator}}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classpugi_1_1xml__named__node__iterator_a18fa0d610fea4d64271729abc0e28849}\label{classpugi_1_1xml__named__node__iterator_a18fa0d610fea4d64271729abc0e28849}} 
+typedef ptrdiff\+\_\+t {\bfseries difference\+\_\+type}
+\item 
+\mbox{\Hypertarget{classpugi_1_1xml__named__node__iterator_a8d98d8218ea9740ceb990ef2c1a456e2}\label{classpugi_1_1xml__named__node__iterator_a8d98d8218ea9740ceb990ef2c1a456e2}} 
+typedef \mbox{\hyperlink{classpugi_1_1xml__node}{xml\+\_\+node}} {\bfseries value\+\_\+type}
+\item 
+\mbox{\Hypertarget{classpugi_1_1xml__named__node__iterator_aebf72c68ded20cf483a10c6b94aa3f57}\label{classpugi_1_1xml__named__node__iterator_aebf72c68ded20cf483a10c6b94aa3f57}} 
+typedef \mbox{\hyperlink{classpugi_1_1xml__node}{xml\+\_\+node}} $\ast$ {\bfseries pointer}
+\item 
+\mbox{\Hypertarget{classpugi_1_1xml__named__node__iterator_a1c338c7a2aefe04b83f746a963df808b}\label{classpugi_1_1xml__named__node__iterator_a1c338c7a2aefe04b83f746a963df808b}} 
+typedef \mbox{\hyperlink{classpugi_1_1xml__node}{xml\+\_\+node}} \& {\bfseries reference}
+\item 
+\mbox{\Hypertarget{classpugi_1_1xml__named__node__iterator_ab7dad0df34f043a9458b2a6b309a227f}\label{classpugi_1_1xml__named__node__iterator_ab7dad0df34f043a9458b2a6b309a227f}} 
+typedef std\+::bidirectional\+\_\+iterator\+\_\+tag {\bfseries iterator\+\_\+category}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classpugi_1_1xml__named__node__iterator_a900cdc6c175bcb56b1c66c7c05d2202f}\label{classpugi_1_1xml__named__node__iterator_a900cdc6c175bcb56b1c66c7c05d2202f}} 
+{\bfseries xml\+\_\+named\+\_\+node\+\_\+iterator} (const \mbox{\hyperlink{classpugi_1_1xml__node}{xml\+\_\+node}} \&node, const char\+\_\+t $\ast$name)
+\item 
+\mbox{\Hypertarget{classpugi_1_1xml__named__node__iterator_aba57a74edd1a1007f926f7f59c5d3160}\label{classpugi_1_1xml__named__node__iterator_aba57a74edd1a1007f926f7f59c5d3160}} 
+bool {\bfseries operator==} (const \mbox{\hyperlink{classpugi_1_1xml__named__node__iterator}{xml\+\_\+named\+\_\+node\+\_\+iterator}} \&rhs) const
+\item 
+\mbox{\Hypertarget{classpugi_1_1xml__named__node__iterator_a4199ccf2f8e304c783aa5b726e6d7409}\label{classpugi_1_1xml__named__node__iterator_a4199ccf2f8e304c783aa5b726e6d7409}} 
+bool {\bfseries operator!=} (const \mbox{\hyperlink{classpugi_1_1xml__named__node__iterator}{xml\+\_\+named\+\_\+node\+\_\+iterator}} \&rhs) const
+\item 
+\mbox{\Hypertarget{classpugi_1_1xml__named__node__iterator_acb745be1655f3d987105c57d080c6906}\label{classpugi_1_1xml__named__node__iterator_acb745be1655f3d987105c57d080c6906}} 
+\mbox{\hyperlink{classpugi_1_1xml__node}{xml\+\_\+node}} \& {\bfseries operator$\ast$} () const
+\item 
+\mbox{\Hypertarget{classpugi_1_1xml__named__node__iterator_a98d8af19fe38464e04cdc135affb9185}\label{classpugi_1_1xml__named__node__iterator_a98d8af19fe38464e04cdc135affb9185}} 
+\mbox{\hyperlink{classpugi_1_1xml__node}{xml\+\_\+node}} $\ast$ {\bfseries operator-\/$>$} () const
+\item 
+\mbox{\Hypertarget{classpugi_1_1xml__named__node__iterator_ae8f6cb75908cc52e257cd54ae7cfb56b}\label{classpugi_1_1xml__named__node__iterator_ae8f6cb75908cc52e257cd54ae7cfb56b}} 
+const \mbox{\hyperlink{classpugi_1_1xml__named__node__iterator}{xml\+\_\+named\+\_\+node\+\_\+iterator}} \& {\bfseries operator++} ()
+\item 
+\mbox{\Hypertarget{classpugi_1_1xml__named__node__iterator_a41e2afe0ee62a2d06d0694052277e1f9}\label{classpugi_1_1xml__named__node__iterator_a41e2afe0ee62a2d06d0694052277e1f9}} 
+\mbox{\hyperlink{classpugi_1_1xml__named__node__iterator}{xml\+\_\+named\+\_\+node\+\_\+iterator}} {\bfseries operator++} (int)
+\item 
+\mbox{\Hypertarget{classpugi_1_1xml__named__node__iterator_a378a6c33c2ba1038b6697496211ddac9}\label{classpugi_1_1xml__named__node__iterator_a378a6c33c2ba1038b6697496211ddac9}} 
+const \mbox{\hyperlink{classpugi_1_1xml__named__node__iterator}{xml\+\_\+named\+\_\+node\+\_\+iterator}} \& {\bfseries operator-\/-\/} ()
+\item 
+\mbox{\Hypertarget{classpugi_1_1xml__named__node__iterator_af5b1c61a813276537774d60e32c6408c}\label{classpugi_1_1xml__named__node__iterator_af5b1c61a813276537774d60e32c6408c}} 
+\mbox{\hyperlink{classpugi_1_1xml__named__node__iterator}{xml\+\_\+named\+\_\+node\+\_\+iterator}} {\bfseries operator-\/-\/} (int)
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classpugi_1_1xml__named__node__iterator_a156d917a92815c7b593bd5ef19f6d5fb}\label{classpugi_1_1xml__named__node__iterator_a156d917a92815c7b593bd5ef19f6d5fb}} 
+class {\bfseries xml\+\_\+node}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/swearingeno/.\+local/\+Projects/csci3081\+W/\+Labs/\+Team-\/010-\/47-\/lab10/libs/routing/include/util/xml/pugixml.\+h\item 
+/home/swearingeno/.\+local/\+Projects/csci3081\+W/\+Labs/\+Team-\/010-\/47-\/lab10/libs/routing/src/util/xml/pugixml.\+cc\end{DoxyCompactItemize}

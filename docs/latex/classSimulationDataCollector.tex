@@ -1,0 +1,85 @@
+\hypertarget{classSimulationDataCollector}{}\doxysection{Simulation\+Data\+Collector Class Reference}
+\label{classSimulationDataCollector}\index{SimulationDataCollector@{SimulationDataCollector}}
+
+
+Collaboration diagram for Simulation\+Data\+Collector\+:
+% FIG 0
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classSimulationDataCollector_ad41e911968a02d61392b4e94195952be}{collect\+Data}} (\mbox{\hyperlink{classData}{Data}} $\ast$data)
+\begin{DoxyCompactList}\small\item\em Adds a \mbox{\hyperlink{classData}{Data}} object to vector collected data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSimulationDataCollector_acfcd5776c78e7f03f81e99dcadf71a44}{output\+Data\+To\+C\+SV}} (std\+::string file\+Name)
+\begin{DoxyCompactList}\small\item\em Prints the data to a C\+SV file. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classSimulationDataCollector_a65bb1c990bbd62c871522c9037f57038}\label{classSimulationDataCollector_a65bb1c990bbd62c871522c9037f57038}} 
+void \mbox{\hyperlink{classSimulationDataCollector_a65bb1c990bbd62c871522c9037f57038}{organize\+Data}} ()
+\begin{DoxyCompactList}\small\item\em Looks through data collected and outputs it to a T\+XT file with interesting info. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classSimulationDataCollector}{Simulation\+Data\+Collector}} $\ast$ \mbox{\hyperlink{classSimulationDataCollector_aeda16afbec2ea4654aec9c594f314e23}{get\+Instance}} ()
+\begin{DoxyCompactList}\small\item\em Singleton constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classSimulationDataCollector_a9cc0629ca2349a5dc22a9605c0040f35}\label{classSimulationDataCollector_a9cc0629ca2349a5dc22a9605c0040f35}} 
+std\+::vector$<$ \mbox{\hyperlink{classData}{Data}} $\ast$ $>$ {\bfseries collected\+Data}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classSimulationDataCollector_a22586ae02163b15940987508062ef430}\label{classSimulationDataCollector_a22586ae02163b15940987508062ef430}} 
+static \mbox{\hyperlink{classSimulationDataCollector}{Simulation\+Data\+Collector}} $\ast$ {\bfseries singleton\+\_\+} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classSimulationDataCollector_ad41e911968a02d61392b4e94195952be}\label{classSimulationDataCollector_ad41e911968a02d61392b4e94195952be}} 
+\index{SimulationDataCollector@{SimulationDataCollector}!collectData@{collectData}}
+\index{collectData@{collectData}!SimulationDataCollector@{SimulationDataCollector}}
+\doxysubsubsection{\texorpdfstring{collectData()}{collectData()}}
+{\footnotesize\ttfamily void Simulation\+Data\+Collector\+::collect\+Data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classData}{Data}} $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+Adds a \mbox{\hyperlink{classData}{Data}} object to vector collected data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The data object containing trip info \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classSimulationDataCollector_aeda16afbec2ea4654aec9c594f314e23}\label{classSimulationDataCollector_aeda16afbec2ea4654aec9c594f314e23}} 
+\index{SimulationDataCollector@{SimulationDataCollector}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!SimulationDataCollector@{SimulationDataCollector}}
+\doxysubsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSimulationDataCollector}{Simulation\+Data\+Collector}} $\ast$ Simulation\+Data\+Collector\+::get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Singleton constructor. 
+
+\begin{DoxyReturn}{Returns}
+Simulation\+Data\+Collector$\ast$ 
+\end{DoxyReturn}
+This is a safer way to create an instance. instance = new Singleton is dangeruous in case two instance threads wants to access at the same time\mbox{\Hypertarget{classSimulationDataCollector_acfcd5776c78e7f03f81e99dcadf71a44}\label{classSimulationDataCollector_acfcd5776c78e7f03f81e99dcadf71a44}} 
+\index{SimulationDataCollector@{SimulationDataCollector}!outputDataToCSV@{outputDataToCSV}}
+\index{outputDataToCSV@{outputDataToCSV}!SimulationDataCollector@{SimulationDataCollector}}
+\doxysubsubsection{\texorpdfstring{outputDataToCSV()}{outputDataToCSV()}}
+{\footnotesize\ttfamily void Simulation\+Data\+Collector\+::output\+Data\+To\+C\+SV (\begin{DoxyParamCaption}\item[{std\+::string}]{file\+Name }\end{DoxyParamCaption})}
+
+
+
+Prints the data to a C\+SV file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Name} & The name of the file to output to \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/swearingeno/.\+local/\+Projects/csci3081\+W/\+Labs/\+Team-\/010-\/47-\/lab10/libs/transit/include/Simulation\+Data\+Collector.\+h\item 
+/home/swearingeno/.\+local/\+Projects/csci3081\+W/\+Labs/\+Team-\/010-\/47-\/lab10/libs/transit/src/Simulation\+Data\+Collector.\+cc\end{DoxyCompactItemize}

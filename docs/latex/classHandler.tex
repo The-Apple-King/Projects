@@ -1,0 +1,104 @@
+\hypertarget{classHandler}{}\doxysection{Handler Class Reference}
+\label{classHandler}\index{Handler@{Handler}}
+
+
+\mbox{\hyperlink{classHandler}{Handler}} class interface to allow creation of new handlers.  
+
+
+
+
+{\ttfamily \#include $<$Handler.\+h$>$}
+
+
+
+Inheritance diagram for Handler\+:
+% FIG 0
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classHandler_a6eb353aae22778422bc71f6b00aad8be}{Handler}} ()
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{classHandler}{Handler}} object. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classHandler_adc8bcc015240fd75b7f2a3c032a77c58}{handle\+\_\+request}} (std\+::vector$<$ \mbox{\hyperlink{classDrone}{Drone}} $\ast$ $>$ drones, std\+::vector$<$ \mbox{\hyperlink{classIEntity}{I\+Entity}} $\ast$ $>$ scheduler)=0
+\begin{DoxyCompactList}\small\item\em Function to handle the request that is passed. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classHandler_a309a50609211d992d8f565fee9d910f4}{set\+\_\+next\+\_\+handler}} (\mbox{\hyperlink{classHandler}{Handler}} $\ast$handler)
+\begin{DoxyCompactList}\small\item\em Set the next handler object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classHandler_a1cfee08567b24f465f1c8906dcfe7b62}{set\+Trip}} (\mbox{\hyperlink{classDrone}{Drone}} $\ast$drone)
+\begin{DoxyCompactList}\small\item\em Sets the movement methods for the current trip. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{classHandler}{Handler}} class interface to allow creation of new handlers. 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classHandler_a6eb353aae22778422bc71f6b00aad8be}\label{classHandler_a6eb353aae22778422bc71f6b00aad8be}} 
+\index{Handler@{Handler}!Handler@{Handler}}
+\index{Handler@{Handler}!Handler@{Handler}}
+\doxysubsubsection{\texorpdfstring{Handler()}{Handler()}}
+{\footnotesize\ttfamily Handler\+::\+Handler (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a new \mbox{\hyperlink{classHandler}{Handler}} object. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classHandler_adc8bcc015240fd75b7f2a3c032a77c58}\label{classHandler_adc8bcc015240fd75b7f2a3c032a77c58}} 
+\index{Handler@{Handler}!handle\_request@{handle\_request}}
+\index{handle\_request@{handle\_request}!Handler@{Handler}}
+\doxysubsubsection{\texorpdfstring{handle\_request()}{handle\_request()}}
+{\footnotesize\ttfamily virtual void Handler\+::handle\+\_\+request (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{classDrone}{Drone}} $\ast$ $>$}]{drones,  }\item[{std\+::vector$<$ \mbox{\hyperlink{classIEntity}{I\+Entity}} $\ast$ $>$}]{scheduler }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Function to handle the request that is passed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em drone} & The drone requesting the delivery \\
+\hline
+{\em scheduler} & The list of available robots to assign to the delivery \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classDrone1Food_acf4d611968d048a2846e2b36afb2908d}{Drone1\+Food}}, \mbox{\hyperlink{classDrone1Uber_a89546a57a3771a5491ce4290f73f8f07}{Drone1\+Uber}}, \mbox{\hyperlink{classDrone2Food_aa8586d2578eacf6f5835e05b6f36ff2f}{Drone2\+Food}}, and \mbox{\hyperlink{classDrone2Uber_a40db03db9540feffc92013f6916928e7}{Drone2\+Uber}}.
+
+\mbox{\Hypertarget{classHandler_a309a50609211d992d8f565fee9d910f4}\label{classHandler_a309a50609211d992d8f565fee9d910f4}} 
+\index{Handler@{Handler}!set\_next\_handler@{set\_next\_handler}}
+\index{set\_next\_handler@{set\_next\_handler}!Handler@{Handler}}
+\doxysubsubsection{\texorpdfstring{set\_next\_handler()}{set\_next\_handler()}}
+{\footnotesize\ttfamily virtual void Handler\+::set\+\_\+next\+\_\+handler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classHandler}{Handler}} $\ast$}]{handler }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Set the next handler object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em handler} & The next handler in the chain of responsibility \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classHandler_a1cfee08567b24f465f1c8906dcfe7b62}\label{classHandler_a1cfee08567b24f465f1c8906dcfe7b62}} 
+\index{Handler@{Handler}!setTrip@{setTrip}}
+\index{setTrip@{setTrip}!Handler@{Handler}}
+\doxysubsubsection{\texorpdfstring{setTrip()}{setTrip()}}
+{\footnotesize\ttfamily void Handler\+::set\+Trip (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classDrone}{Drone}} $\ast$}]{drone }\end{DoxyParamCaption})}
+
+
+
+Sets the movement methods for the current trip. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em drone} & a pointer to the drone to set the movement of \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/swearingeno/.\+local/\+Projects/csci3081\+W/\+Labs/\+Team-\/010-\/47-\/lab10/libs/transit/include/Handler.\+h\item 
+/home/swearingeno/.\+local/\+Projects/csci3081\+W/\+Labs/\+Team-\/010-\/47-\/lab10/libs/transit/src/Handler.\+cc\end{DoxyCompactItemize}
